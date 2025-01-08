@@ -1,0 +1,91 @@
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    position: relative; /* To position the tooltip */
+}
+
+/* Styling for all anchor tags */
+.social-icons a {
+    color: #008a8a; /* Teal for social media icons */
+    font-size: 24px;
+    transition: color 0.3s ease;
+    text-decoration: none;
+}
+
+/* Hover effect for social media icons */
+.social-icons a:hover {
+    color: #2e2e2e; /* Dark color for hover */
+}
+
+/* Specific style for the playful Garmentik icon */
+.social-icons .playful-icon img {
+    width: 25px; /* Adjust size as needed */
+    height: 25px;
+    animation: float 3s ease-in-out infinite, bounce 1.5s infinite,
+        color-change 6s ease-in-out infinite, twirl 4s infinite,
+        pulse 2s infinite;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Playful hover effect for the Garmentik icon */
+.social-icons .playful-icon:hover img {
+    transform: rotate(1080deg) scale(1.5);
+    opacity: 1;
+}
+
+/* Floating animation */
+@keyframes float {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px); /* Adjust the height as needed */
+    }
+}
+
+/* Bouncing animation */
+@keyframes bounce {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px); /* Adjust the height as needed */
+    }
+}
+
+/* Color change animation */
+@keyframes color-change {
+    0%,
+    100% {
+        filter: hue-rotate(0deg);
+    }
+    50% {
+        filter: hue-rotate(180deg);
+    }
+}
+
+/* Twirl animation */
+@keyframes twirl {
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Pulse animation */
+@keyframes pulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}

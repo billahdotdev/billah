@@ -1,0 +1,54 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #ededed;
+    font-family: 'IBM Plex Mono';
+}
+
+.layout_wrapper {
+    width: 100%;
+    z-index: 2;
+    height: 100%;
+    border: solid 60px #fff;
+    position: fixed;
+}
+
+.layout_wrapper a,
+.layout_wrapper p {
+    font-weight: 500;
+    color: #101010;
+}
+
+.layout_wrapper a {
+    text-decoration: none;
+}
+
+.layout_wrapper .profile {
+    position: absolute;
+    left: 0px;
+    top: -30px;
+    transform: translateY(-50%);
+    font-size: 30px;
+}
+
+.layout_wrapper .pen {
+    position: absolute;
+    right: 0px;
+    line-height: 1em;
+    top: -30px;
+    transform: translateY(-50%);
+}
+
+.layout_wrapper .made {
+    font-size: 12px;
+    position: absolute;
+    left: 0px;
+    line-height: 1em;
+    bottom: -30px;
+    transform: translateY(50%);
+    color: #b9b8b8;
+}

@@ -1,0 +1,7 @@
+.pen_wrapper {
+    padding: 60px;
+    overflow-y: scroll;
+    z-index: 1;
+    position: relative;
+    height: 100%;
+}

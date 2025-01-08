@@ -1,0 +1,66 @@
+.more-about-me {
+    text-align: center;
+}
+
+.toggle-button {
+    font-size: 24px;
+    background: none;
+    border: 2px solid #0b0b0b;
+    border-radius: 50%;
+    margin-top: 30px;
+    width: 40px;
+    height: 40px;
+    color: #0b0b0b;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.toggle-button:hover {
+    background-color: rgba(11, 11, 11, 0.1);
+    transform: scale(1.1);
+}
+
+.more-about-me-content {
+    margin-top: 20px;
+    padding: 30px;
+    border-radius: 15px;
+    background: #f9f9f9; /* Light, clean background */
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1),
+        -10px -10px 20px rgba(255, 255, 255, 0.8); /* Soft, sophisticated shadow */
+    transition: all 0.3s ease; /* Smooth transition for interactive effect */
+    border: none; /* Removing any harsh border lines */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content for a balanced minimalist look */
+}
+
+.more-about-me-text,
+.more-about-me-text-2 {
+    font-size: 18px;
+    color: #444; /* Darker, slightly muted text color for a soft appearance */
+    line-height: 1.6;
+    text-align: center; /* Center the text for better alignment in minimalist design */
+    font-family: 'Helvetica', sans-serif; /* Clean, modern font for a minimalist look */
+    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.5),
+        -1px -1px 2px rgba(0, 0, 0, 0.1); /* Subtle text shadow for depth */
+}
+
+.more-about-me-text-2 {
+    margin-top: 20px;
+    font-size: 16px; /* Slightly smaller font for a more hierarchical look */
+    color: #555; /* Slightly lighter color to distinguish it from the main text */
+}
+
+.more-about-me-content:hover {
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.15),
+        -4px -4px 15px rgba(255, 255, 255, 0.9); /* More pronounced shadow effect on hover */
+    transform: scale(
+        1.02
+    ); /* Slight scale effect on hover for added interaction */
+}
+
+.more-about-me-content:active {
+    box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.15),
+        inset -4px -4px 8px rgba(255, 255, 255, 0.9); /* Inset effect when clicked for a pressed look */
+    transform: scale(1); /* Reset scaling on click */
+}

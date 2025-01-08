@@ -1,0 +1,19 @@
+/* Snippet.css */
+.snippet-container {
+    background-color: #2d2d2d;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    color: #f8f8f2;
+    overflow-x: auto;
+    max-width: 100%;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+pre {
+    margin: 0;
+    font-size: 16px;
+    font-family: 'IBM Plex Mono', serif;
+}

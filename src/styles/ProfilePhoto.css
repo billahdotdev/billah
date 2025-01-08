@@ -1,0 +1,52 @@
+:root {
+    --photo-diameter: 150px;
+    --border-thickness: 5px;
+    --border-color: teal;
+    --shadow-color: rgba(0, 128, 128, 0.3);
+}
+
+.profile-photo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.profile-photo {
+    width: var(--photo-diameter);
+    height: var(--photo-diameter);
+    border-radius: 50%;
+    border: var(--border-thickness) solid var(--border-color);
+    box-shadow: 0 4px 8px var(--shadow-color);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.profile-photo:hover {
+    transform: scale(1.15);
+    box-shadow: 0 8px 16px var(--shadow-color);
+}
+
+.profile-photo-container::before {
+    content: '';
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background-image: linear-gradient(
+        132deg,
+        #5ddcff,
+        rgb(0, 90, 128) 43%,
+        #4e00c2
+    );
+    position: absolute;
+    z-index: -1;
+    animation: spin 2.5s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
