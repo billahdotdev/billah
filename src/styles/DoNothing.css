@@ -1,7 +1,7 @@
 .do-nothing {
     position: relative;
     width: 100%;
-    height: auto;
+    height: 100vh; /* Make it 100% of the viewport height */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,6 +38,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center; /* Ensure it stays centered vertically */
+    height: 100%;
 }
 
 .heading {
@@ -46,9 +48,31 @@
     width: 100%;
     text-align: center;
 }
+
 .heading h1 {
     font-size: 50px;
     font-weight: bold;
     margin: 0;
     color: rgb(0, 78, 30);
+}
+
+/* Media Query for Smaller Screens */
+@media (max-width: 600px) {
+    .do-nothing {
+        height: 100vh; /* Ensure it occupies the full viewport height */
+    }
+
+    .heading h1 {
+        font-size: 40px; /* Adjust font size */
+    }
+
+    .timer {
+        font-size: 36px; /* Adjust timer font size */
+    }
+
+    .start-button,
+    .close-button {
+        padding: 8px 16px; /* Adjust button padding */
+        font-size: 14px; /* Adjust button font size */
+    }
 }
