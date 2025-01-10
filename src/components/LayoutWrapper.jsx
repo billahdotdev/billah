@@ -7,7 +7,7 @@ const LayoutWrapper = ({ children }) => {
             <a className="profile" href="https://billah.dev">
                 Masum Billah
             </a>
-            <p className="pen">Full-stack full Web Developer| Founder of GARMENTIK</p>
+            <p className="pen">Full-stack Web Developer| Founder of GARMENTIK</p>
             <p className="made">
                 Built by dreamers: Masum Billah. For dreamers. Deeply indebted
                 to the individuals who I learned from. 2025 v1.0 // no right
