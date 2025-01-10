@@ -57,34 +57,29 @@ const DoNothing = () => {
                 backgroundImage:
                     'url(https://images.unsplash.com/photo-1547628641-ec2098bb5812?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)',
             }}>
-            {' '}
             <audio
                 ref={soundRef}
                 src="https://dataup.sdasofia.org/MUSIC/nova-xr-musika/Nature%20sound%20of%20Relax/%20-%20Track08.mp3"
-                preload="auto"></audio>{' '}
+                preload="auto"></audio>
             <div className="heading">
-                {' '}
-                <h1>Do Nothing for 2 Minutes</h1>{' '}
-            </div>{' '}
+                <h1>Do Nothing for 2 Minutes</h1>
+            </div>
             <div className="content">
-                {' '}
                 {!isActive ? (
                     <button className="start-button" onClick={startTimer}>
-                        {' '}
-                        Start{' '}
+                        Start
                     </button>
                 ) : (
                     <div className="timer">
-                        {' '}
-                        <span>{formatTime(timeLeft)}</span>{' '}
+                        <span>{formatTime(timeLeft)}</span>
                         <button className="close-button" onClick={resetTimer}>
-                            {' '}
-                            X{' '}
-                        </button>{' '}
+                            X
+                        </button>
                     </div>
-                )}{' '}
-            </div>{' '}
+                )}
+            </div>
         </div>
     );
 };
+
 export default DoNothing;
