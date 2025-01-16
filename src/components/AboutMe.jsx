@@ -53,7 +53,7 @@ const AboutMe = () => {
                                         '_blank',
                                     )
                                 }>
-                                WEB DEVELOPMENT
+                                WEB DEV
                             </button>
                         </div>
                         <button className="button-back" onClick={handleClick}>
