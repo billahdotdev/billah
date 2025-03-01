@@ -11,6 +11,7 @@ const Component = () => {
         <h1>I'll build modern website for you.</h1>
         <a href="https://www.github.com/billahdotdev/" target="_blank" rel="noopener noreferrer">
           <button className="profile-button">Let's Work Together</button>
+          <p>I'll update my site ASAP</p>
         </a>
       </div>
     </div>
