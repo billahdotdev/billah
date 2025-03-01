@@ -8,7 +8,8 @@ const Component = () => {
         <img src={masum} alt="Masum" />
       </div>
       <div className="profile-intro">
-        <h1>I'll build your Web site as you want.</h1>
+        <h1>I'll build modern website for you.</h1>
+        <button className="profile-button">Let's work together!</button>
       </div>
     </div>
   );
