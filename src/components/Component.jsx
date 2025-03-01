@@ -1,10 +1,16 @@
 import '../styles/Component.css';
-const Component = ({ children }) => {
+import masum from '../assets/masum.jpg';
+
+const Component = () => {
   return (
-      <>
-      <div className="hello"><h1>I'm a Web developer from future!</h1></div>
-      
-      </>
+    <div className="profile-container">
+      <div className="profile-photo">
+        <img src={masum} alt="Masum" />
+      </div>
+      <div className="profile-intro">
+        <h1>I'm a Web developer from the future!</h1>
+      </div>
+    </div>
   );
 };
 
