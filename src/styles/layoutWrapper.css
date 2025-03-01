@@ -19,7 +19,7 @@ body {
 
 .layout_wrapper a,
 .layout_wrapper p {
-    font-weight: 500;
+    font-weight: 400;
     color: #101010;
 }
 
@@ -44,7 +44,7 @@ body {
 }
 
 .layout_wrapper .made {
-    font-size: 12px;
+    font-size: 8px;
     position: absolute;
     left: 0px;
     line-height: 1em;
