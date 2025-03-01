@@ -9,7 +9,9 @@ const Component = () => {
       </div>
       <div className="profile-intro">
         <h1>I'll build modern website for you.</h1>
-        <button className="profile-button">Let's work together!</button>
+        <a href="https://www.github.com/billahdotdev/" target="_blank" rel="noopener noreferrer">
+          <button className="profile-button">Let's Work Together</button>
+        </a>
       </div>
     </div>
   );
