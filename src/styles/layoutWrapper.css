@@ -19,7 +19,7 @@ body {
 
 .layout_wrapper a,
 .layout_wrapper p {
-    font-weight: 400;
+    font-weight: 500;
     color: #101010;
 }
 
@@ -32,7 +32,7 @@ body {
     left: 0px;
     top: -30px;
     transform: translateY(-50%);
-    font-size: 16px;
+    font-size: 12px;
 }
 
 .layout_wrapper .pen {
