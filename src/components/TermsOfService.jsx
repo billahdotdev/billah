@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import "../styles/Legal.css"
 
 const TermsOfService = () => {
@@ -5,7 +6,6 @@ const TermsOfService = () => {
     <div className="legal-container">
       <h1>Terms of Service</h1>
       <p>Last updated: {new Date().toLocaleDateString()}</p>
-      <h2>1. Terms</h2>
       <p>
         By accessing this website, you are agreeing to be bound by these Terms of Service, all applicable laws and
         regulations, and agree that you are responsible for compliance with any applicable local laws.
@@ -49,9 +49,16 @@ const TermsOfService = () => {
         These terms and conditions are governed by and construed in accordance with the laws of [Your Country] and you
         irrevocably submit to the exclusive jurisdiction of the courts in that State or location.
       </p>
+      <Link to="/" className="back-link">
+        Back to Home
+      </Link>
     </div>
   )
 }
 
 export default TermsOfService
+
+
+
+
 

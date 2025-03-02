@@ -1,3 +1,5 @@
+
+import { Link } from "react-router-dom"
 import "../styles/Legal.css"
 
 const PrivacyPolicy = () => {
@@ -31,9 +33,16 @@ const PrivacyPolicy = () => {
         For more information about our privacy practices, if you have questions, or if you would like to make a
         complaint, please contact us by e-mail at privacy@example.com.
       </p>
+      <Link to="/" className="back-link">
+        Back to Home
+      </Link>
     </div>
   )
 }
 
 export default PrivacyPolicy
+
+
+
+
 
