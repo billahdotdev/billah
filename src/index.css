@@ -1,74 +1,102 @@
-/* src/styles/index.css */
+@import url("https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/cascadia-code.min.css");
+:root {
+  --primary-color: #e0e5ec;
+  --text-color: #333;
+  --shadow-light: #ffffff;
+  --shadow-dark: #a3b1c6;
+  --accent-color: #016c66;
+  --accent-light: #8abdff;
+  --transition: all 0.3s ease;
+}
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-    background: #ededed;
-    font-family: 'Fira Code', monospace;
-    font-size: 16px; /* Base font size */
-    line-height: 1.6; /* Improved readability */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  font-family: "Cascadia Code", monospace;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  line-height: 1.6;
 }
 
 .container {
-    width: 90%; /* Adjust based on your layout */
-    max-width: 600px; /* Ensure it doesn't get too wide */
-    padding: 20px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
-h1 {
-    font-size: 2.5em;
-    margin-bottom: 1em;
+.section {
+  padding: 80px 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-p {
-    font-size: 1em;
-    margin-bottom: 0.5em;
+.section-title {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  position: relative;
+  display: inline-block;
 }
 
-button {
-    padding: 10px 20px;
-    font-size: 1em;
-    border: none;
-    border-radius: 5px;
-    background: #007bff;
-    color: white;
-    cursor: pointer;
-    transition: background 0.3s ease;
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 50px;
+  height: 4px;
+  background: var(--accent-color);
+  border-radius: 2px;
 }
 
-button:hover {
-    background: #0056b3;
+.neomorphic {
+  border-radius: 10px;
+  background: var(--primary-color);
+  box-shadow: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light);
 }
 
-/* Responsive Design */
+.neomorphic-inset {
+  border-radius: 10px;
+  background: var(--primary-color);
+  box-shadow: inset 5px 5px 10px var(--shadow-dark), inset -5px -5px 10px var(--shadow-light);
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  background: var(--primary-color);
+  color: var(--text-color);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light);
+}
+
+.btn:hover {
+  box-shadow: 3px 3px 6px var(--shadow-dark), -3px -3px 6px var(--shadow-light);
+}
+
+.btn:active {
+  box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+}
+
 @media (max-width: 768px) {
-    body {
-        font-size: 14px; /* Smaller font size for smaller screens */
-    }
+  .section {
+    padding: 60px 0;
+  }
 
-    .container {
-        padding: 10px; /* Adjust padding for smaller screens */
-    }
-
-    h1 {
-        font-size: 2em;
-    }
-
-    p {
-        font-size: 0.9em;
-    }
-
-    button {
-        width: 100%; /* Full-width buttons on smaller screens */
-    }
+  .section-title {
+    font-size: 2rem;
+  }
 }
+

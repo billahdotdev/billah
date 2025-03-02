@@ -1,0 +1,126 @@
+.learn-section {
+  padding: 4rem 0;
+  background-color: var(--primary-color);
+}
+
+.blog-container,
+.resources-container {
+  margin-top: 3rem;
+}
+
+.blog-title,
+.resources-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: var(--accent-color);
+}
+
+.blog-grid,
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.blog-card,
+.resource-card {
+  background-color: var(--primary-color);
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light);
+}
+
+.blog-card:hover,
+.resource-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
+}
+
+.blog-image {
+  height: 200px;
+  overflow: hidden;
+}
+
+.blog-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.blog-card:hover .blog-image img {
+  transform: scale(1.05);
+}
+
+.blog-content,
+.resource-card {
+  padding: 1.5rem;
+}
+
+.blog-date {
+  font-size: 0.9rem;
+  color: var(--text-color-light);
+  margin-bottom: 0.5rem;
+}
+
+.blog-post-title,
+.resource-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--accent-color);
+}
+
+.blog-excerpt,
+.resource-description {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.blog-tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.blog-tag {
+  font-size: 0.8rem;
+  background-color: var(--accent-light);
+  color: var(--text-color);
+  padding: 0.2rem 0.5rem;
+  border-radius: 15px;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.read-more,
+.resource-link {
+  display: inline-block;
+  font-size: 0.9rem;
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.read-more:hover,
+.resource-link:hover {
+  color: var(--accent-light);
+}
+
+.resource-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .blog-grid,
+  .resources-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
