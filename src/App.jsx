@@ -1,44 +1,54 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import { useState, useEffect, lazy, Suspense } from "react"
 import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
-import Home from "./components/Home"
-import PrivacyPolicy from "./components/PrivacyPolicy"
-import TermsOfService from "./components/TermsOfService"
-import ScrollToTop from "./components/ScrollToTop"
 import "./App.css"
 
-function App() {
-  const [darkMode, setDarkMode] = useState(false)
+// Lazy load components for code splitting
+const WhoAmI = lazy(() => import("./components/WhoAmI"))
+const WhatIDo = lazy(() => import("./components/WhatIDo"))
+const Learn = lazy(() => import("./components/Learn"))
+const Contact = lazy(() => import("./components/Contact"))
 
+function App() {
+  const [activeSection, setActiveSection] = useState("whoami")
+
+  // Handle navigation
+  const navigateTo = (section) => {
+    setActiveSection(section)
+    window.history.pushState({}, "", `#${section}`)
+  }
+
+  // Check URL hash on load
   useEffect(() => {
-    const prefersDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
-    setDarkMode(prefersDarkMode)
+    const hash = window.location.hash.replace("#", "")
+    if (hash) {
+      setActiveSection(hash)
+    }
   }, [])
 
-  useEffect(() => {
-    if (darkMode) {
-      document.body.classList.add("dark")
-    } else {
-      document.body.classList.remove("dark")
-    }
-  }, [darkMode])
-
   return (
-    <Router>
-      <ScrollToTop />
-      <div className="app">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms-of-service" element={<TermsOfService />} />
-        </Routes>
-        <Footer />
-      </div>
-    </Router>
+    <div className="app">
+      <Navbar activeSection={activeSection} navigateTo={navigateTo} />
+
+      <main className="content">
+        <Suspense
+          fallback={
+            <div className="loading-container">
+              <div className="loading"></div>
+            </div>
+          }
+        >
+          {activeSection === "whoami" && <WhoAmI />}
+          {activeSection === "whatido" && <WhatIDo />}
+          {activeSection === "learn" && <Learn />}
+          {activeSection === "contact" && <Contact />}
+        </Suspense>
+      </main>
+
+      <Footer navigateTo={navigateTo} />
+    </div>
   )
 }
 

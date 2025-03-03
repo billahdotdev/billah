@@ -1,117 +1,124 @@
 .whoami-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 4rem 0;
+  padding: 2rem 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.whoami-section.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.underline {
+  height: 4px;
+  width: 100px;
+  background-color: #555;
+  margin: 0 auto;
+  border-radius: 2px;
 }
 
 .profile-container {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  gap: 3rem;
+  align-items: flex-start;
   margin-bottom: 3rem;
-  width: 100%;
 }
 
 .profile-image {
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
+  flex: 0 0 250px;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
-  margin-right: 4rem;
-  transition: transform 0.3s ease;
-}
-
-.profile-image:hover {
-  transform: scale(1.05);
+  border-radius: 50%; /* Make the image round */
 }
 
 .profile-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 50%; /* Make the image round */
 }
+
 
 .profile-content {
   flex: 1;
+  padding: 2rem;
 }
 
-.greeting {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-  color: var(--accent-color);
+.highlight {
+  color: #555;
+  font-weight: bold;
 }
 
-.name {
-  font-size: 3.5rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  background: linear-gradient(45deg, var(--accent-color), var(--accent-light));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.skills-container {
+  margin-top: 2rem;
 }
 
-.title {
-  font-size: 1.5rem;
-  color: #666;
-  margin-bottom: 1.5rem;
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
 }
 
-.bio {
-  margin-bottom: 2rem;
-  line-height: 1.8;
-  font-size: 1.1rem;
+.skill-item {
+  padding: 1rem;
 }
 
-.cta-buttons {
-  display: flex;
+.skill-level {
+  height: 10px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  margin-top: 0.5rem;
+  overflow: hidden;
 }
 
-.cta-btn {
-  margin-right: 1rem;
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.skill-progress {
+  height: 100%;
+  background-color: #555;
+  border-radius: 5px;
+  transition: width 1s ease;
 }
 
-.cta-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.cta-btn.secondary {
-  background: transparent;
-  color: var(--accent-color);
-  border: 2px solid var(--accent-color);
-}
-
-.btn-icon {
-  margin-right: 0.5rem;
-  font-size: 1.2rem;
-}
-
-@media (max-width: 768px) {
+/* Responsive adjustments */
+@media (max-width: 992px) {
   .profile-container {
     flex-direction: column;
-    text-align: center;
+    align-items: center;
   }
 
   .profile-image {
-    margin-right: 0;
     margin-bottom: 2rem;
-    width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-image {
+    flex: 0 0 200px;
     height: 200px;
   }
 
-  .name {
-    font-size: 2.5rem;
-  }
-
-  .cta-buttons {
-    justify-content: center;
+  .profile-content {
+    padding: 1.5rem;
   }
 }
 

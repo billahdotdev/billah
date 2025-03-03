@@ -1,22 +1,13 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Link, useLocation } from "react-router-dom"
 import "../styles/Navbar.css"
 
-const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+const Navbar = ({ activeSection, navigateTo }) => {
+  const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const location = useLocation()
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
-  }
-
-  const closeMenu = () => {
-    setIsMenuOpen(false)
-  }
-
+  // Handle scroll event to change navbar style
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -27,61 +18,61 @@ const Navbar = () => {
     }
 
     window.addEventListener("scroll", handleScroll)
-    return () => {
-      window.removeEventListener("scroll", handleScroll)
-    }
+    return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const isHomePage = location.pathname === "/"
+  // Handle navigation and close mobile menu
+  const handleNavClick = (section) => {
+    navigateTo(section)
+    setMenuOpen(false)
+  }
 
   return (
     <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
       <div className="navbar-container">
-        <Link to="/" className="logo" onClick={closeMenu}>
-          billah.dev
-        </Link>
+        <a href="https://github.com/billahdotdev" target="_blank" rel="noopener noreferrer" className="logo-text accent-color">
+          Masum Billah
+        </a>
 
-        <button
-          className={`mobile-menu-btn ${isMenuOpen ? "active" : ""}`}
-          onClick={toggleMenu}
-          aria-label="Toggle menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+        <div className={`menu-toggle ${menuOpen ? "active" : ""}`} onClick={() => setMenuOpen(!menuOpen)}>
+          <div className="bar"></div>
+          <div className="bar"></div>
+          <div className="bar"></div>
+        </div>
 
-        <ul className={`nav-links ${isMenuOpen ? "active" : ""}`}>
-          {isHomePage ? (
-            <>
-              <li className="nav-item">
-                <a href="#whoami" className="nav-link" onClick={closeMenu}>
-                  WhoAmI?
-                </a>
-              </li>
-              <li className="nav-item">
-                <a href="#whatido" className="nav-link" onClick={closeMenu}>
-                  WhatIDo?
-                </a>
-              </li>
-              <li className="nav-item">
-                <a href="#learn" className="nav-link" onClick={closeMenu}>
-                  Learn
-                </a>
-              </li>
-              <li className="nav-item">
-                <a href="#contact" className="nav-link" onClick={closeMenu}>
-                  Contact
-                </a>
-              </li>
-            </>
-          ) : (
-            <li className="nav-item">
-              <Link to="/" className="nav-link" onClick={closeMenu}>
-                Home
-              </Link>
-            </li>
-          )}
+        <ul className={`nav-menu ${menuOpen ? "active" : ""}`}>
+          <li className={activeSection === "whoami" ? "active" : ""}>
+            <button
+              onClick={() => handleNavClick("whoami")}
+              className={`nav-link ${activeSection === "whoami" ? "active-link" : ""}`}
+            >
+              WhoAmI?
+            </button>
+          </li>
+          <li className={activeSection === "whatido" ? "active" : ""}>
+            <button
+              onClick={() => handleNavClick("whatido")}
+              className={`nav-link ${activeSection === "whatido" ? "active-link" : ""}`}
+            >
+              WhatIDo?
+            </button>
+          </li>
+          <li className={activeSection === "learn" ? "active" : ""}>
+            <button
+              onClick={() => handleNavClick("learn")}
+              className={`nav-link ${activeSection === "learn" ? "active-link" : ""}`}
+            >
+              Learn
+            </button>
+          </li>
+          <li className={activeSection === "contact" ? "active" : ""}>
+            <button
+              onClick={() => handleNavClick("contact")}
+              className={`nav-link ${activeSection === "contact" ? "active-link" : ""}`}
+            >
+              Contact
+            </button>
+          </li>
         </ul>
       </div>
     </nav>

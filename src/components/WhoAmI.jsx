@@ -1,37 +1,96 @@
+"use client"
+
+import { useEffect, useRef } from "react"
 import "../styles/WhoAmI.css"
 
 const WhoAmI = () => {
-  const whatsappLink = "https://wa.me/880167567656"
+  const sectionRef = useRef(null)
+
+  useEffect(() => {
+    // Animation on component mount
+    const section = sectionRef.current
+    if (section) {
+      section.classList.add("fade-in")
+    }
+  }, [])
 
   return (
-    <section id="whoami" className="section whoami-section">
-      <div className="container">
-        <h2 className="section-title">Who Am I?</h2>
+    <section className="whoami-section" ref={sectionRef}>
+      <div className="section-header">
+        <h1>WhoAmI?</h1>
+        <div className="underline"></div>
+      </div>
 
-        <div className="profile-container">
-          <div className="profile-image">
-            <img src="https://avatars.githubusercontent.com/u/112099343?v=4" alt="Developer Profile" />
-          </div>
+      <div className="profile-container">
+        <div className="profile-image">
+        <img
+        src="https://avatars.githubusercontent.com/u/112099343?v=4"
+        alt="Profile"
+      />
+        </div>
 
-          <div className="profile-content">
-            <p className="greeting">Hello, I'm</p>
-            <h1 className="name">Masum Billah</h1>
-            <p className="title">Full Stack Web Developer</p>
-            <p className="bio">
-              I'm a passionate web developer with over 5 years of experience creating modern, responsive websites and
-              web applications. I specialize in front-end development with React and back-end development with Node.js.
-              I love solving complex problems and turning ideas into reality through clean, efficient code.
-            </p>
+        <div className="profile-content neomorphic">
+          <h2>
+            Hello, I'm <span className="highlight">Masum Billah</span>
+          </h2>
+          <h3>Full Stack Web Developer</h3>
 
-            <div className="cta-buttons">
-              <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="btn cta-btn">
-                <span className="btn-icon">💬</span>
-                Contact Me
-              </a>
-              <a href="/john-doe-cv.pdf" download className="btn cta-btn secondary">
-                <span className="btn-icon">📄</span>
-                Download CV
-              </a>
+          <p>
+          🙂 I am passionate about JavaScript and web
+                            technologies. Before the pandemic, I was just a
+                            struggling entrepreneur in the clothing industry.
+                            'GARMENTIK' is a company where I hustled as a
+                            rainmaker. My business had its ups and downs, which
+                            were stressful, but I was learning something new
+                            every day. During the pandemic, I decided to bring
+                            my passion into the business. Nowadays, two roles in
+                            my real-life game are:
+          </p>
+
+          <div className="skills-container">
+            <h3>My Skills</h3>
+            <div className="skills-grid">
+              <div className="skill-item neomorphic-inset">
+                <span>HTML5</span>
+                <div className="skill-level">
+                  <div className="skill-progress" style={{ width: "95%" }}></div>
+                </div>
+              </div>
+
+              <div className="skill-item neomorphic-inset">
+                <span>CSS3</span>
+                <div className="skill-level">
+                  <div className="skill-progress" style={{ width: "90%" }}></div>
+                </div>
+              </div>
+
+              <div className="skill-item neomorphic-inset">
+                <span>JavaScript</span>
+                <div className="skill-level">
+                  <div className="skill-progress" style={{ width: "85%" }}></div>
+                </div>
+              </div>
+
+              <div className="skill-item neomorphic-inset">
+                <span>React</span>
+                <div className="skill-level">
+                  <div className="skill-progress" style={{ width: "80%" }}></div>
+                </div>
+              </div>
+
+              <div className="skill-item neomorphic-inset">
+                <span>Node.js</span>
+                <div className="skill-level">
+                  <div className="skill-progress" style={{ width: "75%" }}></div>
+                </div>
+              </div>
+
+              <div className="skill-item neomorphic-inset">
+                <span>UI/UX Design</span>
+                <div className="skill-level">
+                  <div className="skill-progress" style={{ width: "70%" }}></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

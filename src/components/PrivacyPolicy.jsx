@@ -1,48 +1,39 @@
-
-import { Link } from "react-router-dom"
-import "../styles/Legal.css"
-
-const PrivacyPolicy = () => {
+export default function PrivacyPolicy() {
   return (
-    <div className="legal-container">
+    <div className="policy-container">
       <h1>Privacy Policy</h1>
-      <p>Last updated: {new Date().toLocaleDateString()}</p>
-      <p>
-        This Privacy Policy describes how your personal information is collected, used, and shared when you visit our
-        website.
-      </p>
-      <h2>Personal information we collect</h2>
-      <p>
-        When you visit the Site, we automatically collect certain information about your device, including information
-        about your web browser, IP address, time zone, and some of the cookies that are installed on your device.
-      </p>
-      <h2>How we use your personal information</h2>
-      <p>
-        We use the information we collect to help us screen for potential risk and fraud, and more generally to improve
-        and optimize our Site.
-      </p>
-      <h2>Sharing your personal information</h2>
-      <p>We do not share your Personal Information with third parties.</p>
-      <h2>Changes</h2>
-      <p>
-        We may update this privacy policy from time to time in order to reflect changes to our practices or for other
-        operational, legal or regulatory reasons.
-      </p>
-      <h2>Contact us</h2>
-      <p>
-        For more information about our privacy practices, if you have questions, or if you would like to make a
-        complaint, please contact us by e-mail at privacy@example.com.
-      </p>
-      <Link to="/" className="back-link">
-        Back to Home
-      </Link>
+      <p>Last updated: March 2024</p>
+
+      <section>
+        <h2>1. Information We Collect</h2>
+        <p>We collect information that you provide directly to us, including:</p>
+        <ul>
+          <li>Name and contact information</li>
+          <li>Communication preferences</li>
+          <li>Project requirements and details</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>2. How We Use Your Information</h2>
+        <p>We use the information we collect to:</p>
+        <ul>
+          <li>Provide and maintain our services</li>
+          <li>Respond to your requests and inquiries</li>
+          <li>Send you updates and marketing communications</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>3. Information Sharing</h2>
+        <p>We do not sell or share your personal information with third parties except as described in this policy.</p>
+      </section>
+
+      <section>
+        <h2>4. Contact Us</h2>
+        <p>If you have any questions about this Privacy Policy, please contact us.</p>
+      </section>
     </div>
   )
 }
-
-export default PrivacyPolicy
-
-
-
-
 
