@@ -2,6 +2,9 @@
 
 import { useEffect, useRef } from "react"
 import "../styles/WhoAmI.css"
+import ProfilePhoto from "./ProfilePhoto"
+import MyStory from "./MyStory"
+
 
 const WhoAmI = () => {
   const sectionRef = useRef(null)
@@ -20,24 +23,28 @@ const WhoAmI = () => {
         <h1>WhoAmI?</h1>
         <div className="underline"></div>
       </div>
-
-      <div className="profile-container">
-        <div className="profile-image">
-        <img
-        src="https://avatars.githubusercontent.com/u/112099343?v=4"
-        alt="Profile"
-      />
-        </div>
-
-        <div className="profile-content neomorphic">
-          <h2>
-            Hello, I'm <span className="highlight">Masum Billah</span>
-          </h2>
-          <h4>Full-Stack Web Developer | Branding Consultant</h4>
-          </div>
-        </div>
-    
+    <ProfilePhoto />
+    <div className="designation">
+    <a
+              href="https://garmentik.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="garmentik-link"
+            >
+              Web Developer
+            </a> | Founder of{" "}
+            <a
+              href="https://garmentik.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="garmentik-link"
+            >
+              Brandotory
+            </a>
+            </div>
+            <MyStory />
     </section>
+    
   )
 }
 
