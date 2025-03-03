@@ -33,7 +33,7 @@ const WhoAmI = () => {
           <h2>
             Hello, I'm <span className="highlight">Masum Billah</span>
           </h2>
-          <h4>Full Stack Web Developer | Branding consultent</h4>
+          <h4>Full-Stack Web Developer | Branding Consultant</h4>
           </div>
         </div>
     
