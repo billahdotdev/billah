@@ -87,7 +87,7 @@ const WhatIDo = () => {
               <polyline points="21 15 16 10 5 21"></polyline>
             </svg>
           </div>
-          <h3>UI/UX Design</h3>
+          <h3>SEO</h3>
           <p>Designing intuitive and beautiful user interfaces that provide exceptional user experiences.</p>
         </div>
 
@@ -136,7 +136,7 @@ const WhatIDo = () => {
               <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
             </svg>
           </div>
-          <h3>Consultation</h3>
+          <h3>Digital Marketing</h3>
           <p>Providing expert advice on web technologies, design trends, and digital strategies for your business.</p>
         </div>
       </div>

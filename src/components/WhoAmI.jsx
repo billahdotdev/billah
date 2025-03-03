@@ -4,7 +4,8 @@ import { useEffect, useRef } from "react"
 import "../styles/WhoAmI.css"
 import ProfilePhoto from "./ProfilePhoto"
 import MyStory from "./MyStory"
-
+import MoreAboutMe from "./MoreAboutMe"
+import Skills from "./Skills"
 
 const WhoAmI = () => {
   const sectionRef = useRef(null)
@@ -43,6 +44,8 @@ const WhoAmI = () => {
             </a>
             </div>
             <MyStory />
+            <MoreAboutMe />
+            <Skills />
     </section>
     
   )
