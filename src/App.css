@@ -1,102 +1,15 @@
-/* App-wide styles */
-.app {
+.app-container {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  background-color: #f0f0f0;
-  font-family: "Cascadia Code", monospace;
 }
 
 .content {
   flex: 1;
-  padding: 2rem;
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
 }
 
-/* Neomorphic base styles */
-.neomorphic {
-  border-radius: 20px;
-  background: #f0f0f0;
-  box-shadow: 8px 8px 16px #d1d1d1, -8px -8px 16px #ffffff;
-  transition: all 0.3s ease;
-}
-
-.neomorphic-inset {
-  border-radius: 20px;
-  background: #f0f0f0;
-  box-shadow: inset 5px 5px 10px #d1d1d1, inset -5px -5px 10px #ffffff;
-}
-
-.neomorphic-button {
-  padding: 0.8rem 1.5rem;
-  border: none;
-  border-radius: 12px;
-  background: #f0f0f0;
-  box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff;
-  font-family: "Cascadia Code", monospace;
-  font-size: 1rem;
-  color: #555;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.neomorphic-button:hover {
-  box-shadow: 3px 3px 6px #d1d1d1, -3px -3px 6px #ffffff;
-  transform: translateY(1px);
-}
-
-.neomorphic-button:active {
-  box-shadow: inset 3px 3px 6px #d1d1d1, inset -3px -3px 6px #ffffff;
-}
-
-/* Accent color - Teal */
-.accent-color {
-  color: #008080;
-}
-
-.accent-bg {
-  background-color: #008080;
-}
-
-.accent-border {
-  border-color: #008080;
-}
-
-/* Loading animation */
-.loading-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 50vh;
-}
-
-.loading {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 5px solid #f0f0f0;
-  border-top-color: #008080;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .content {
-    padding: 1.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .content {
-    padding: 1rem;
-  }
+/* For smooth scrolling */
+html {
+  scroll-behavior: smooth;
 }
 

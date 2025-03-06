@@ -1,0 +1,204 @@
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  align-items: start;
+  margin-top: calc(var(--header-height) + 2rem); /* Add margin to prevent overlap */
+  padding: 2rem 0; /* Add padding for better spacing */
+}
+
+.about-image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-image {
+  width: 250px;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 50%; /* Make the image container round */
+  padding: 0.5rem;
+  margin: 0 auto;
+}
+
+.about-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%; /* Make the image round */
+  transition: transform 0.5s ease;
+}
+
+.about-image:hover img {
+  transform: scale(1.05);
+}
+
+.about-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.about-card,
+.skills-card,
+.story-card,
+.motivation-card {
+  padding: 2rem;
+}
+
+.about-card h3,
+.skills-card h3,
+.story-card h3,
+.motivation-card h3 {
+  font-size: 1.8rem;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.about-card h4 {
+  font-size: 1.2rem;
+  color: var(--primary-light);
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.about-card p,
+.story-card p,
+.motivation-card p {
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+}
+
+.about-card p:last-child,
+.story-card p:last-child,
+.motivation-card p:last-child {
+  margin-bottom: 0;
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.stat-item {
+  padding: 1rem;
+  text-align: center;
+  border-radius: var(--border-radius);
+}
+
+.stat-number {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.skills-card h3 {
+  font-size: 1.5rem;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+}
+
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.skill-tag {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  background-color: var(--card-bg);
+  box-shadow: 3px 3px 6px var(--shadow-color), -3px -3px 6px var(--shadow-highlight);
+  transition: var(--transition);
+}
+
+.skill-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 8px var(--shadow-color), -4px -4px 8px var(--shadow-highlight);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .about-content {
+    grid-template-columns: 1fr;
+  }
+
+  .about-image-container {
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .about-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Ensure the section has proper spacing */
+.container {
+  padding-top: 1rem;
+}
+
+/* Update social icons styling */
+.social-icons {
+  display: flex;
+  gap: 2rem; /* Increase gap between icons */
+  margin-top: 2rem;
+  justify-content: center;
+}
+
+.social-icon {
+  width: 45px; /* Slightly larger icons */
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--card-bg);
+  box-shadow: 5px 5px 10px var(--shadow-color), -5px -5px 10px var(--shadow-highlight);
+  transition: var(--transition);
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.social-icon:hover {
+  transform: translateY(-3px);
+  color: var(--primary-light);
+}
+
+/* Fix icon visibility */
+.icon-github::before,
+.icon-linkedin::before,
+.icon-x::before {
+  font-family: "Font Awesome 5 Brands";
+  font-size: 1.5rem;
+}
+
+.icon-github::before {
+  content: "\f09b";
+}
+
+.icon-linkedin::before {
+  content: "\f08c";
+}
+
+.icon-x::before {
+  content: "\f099";
+}
+

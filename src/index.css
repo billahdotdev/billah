@@ -1,117 +1,181 @@
-/* Reset and base styles */
-* {
+:root {
+  --primary: #042630;
+  --primary-light: #4C7273;
+  --background: #f5f5f5;
+  --card-bg: #ffffff;
+  --text-primary: #333;
+  --text-secondary: #666;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --shadow-highlight: rgba(255, 255, 255, 0.2);
+  --border-radius: 8px;
+  --transition: all 0.3s ease;
+  --header-height: 80px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 body {
-  background-color: #f0f0f0;
-  color: #333;
-  font-family: "Cascadia Code", monospace;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-}
-
-/* Import Cascadia Code font */
-@font-face {
-  font-family: "Cascadia Code";
-  src: url("https://cdn.jsdelivr.net/npm/@fontsource/cascadia-code@4.2.1/files/cascadia-code-latin-400-normal.woff2")
-    format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Typography */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 600;
-  line-height: 1.2;
-  margin-bottom: 1rem;
-  color: #444;
-}
-
-h1 {
-  font-size: 2.5rem;
-}
-
-h2 {
-  font-size: 2rem;
-}
-
-h3 {
-  font-size: 1.75rem;
-}
-
-p {
-  margin-bottom: 1rem;
+  font-family: "Roboto", sans-serif;
   line-height: 1.6;
+  color: var(--text-primary);
+  background-color: var(--background);
+  margin: 0;
 }
 
-a {
-  color: #555;
-  text-decoration: none;
-  transition: color 0.3s ease;
+button {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
 }
 
-a:hover {
-  color: #333;
+.neomorphic {
+  background-color: var(--card-bg);
+  box-shadow: 3px 3px 6px var(--shadow-color), -3px -3px 6px var(--shadow-highlight);
+  border-radius: var(--border-radius);
 }
 
-/* Utility classes */
-.text-center {
-  text-align: center;
+.neomorphic-inset {
+  box-shadow: inset 3px 3px 6px var(--shadow-color), inset -3px -3px 6px var(--shadow-highlight);
 }
 
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
+.neomorphic-button {
+  padding: 0.8rem 1.5rem;
+  border-radius: var(--border-radius);
+  background-color: var(--card-bg);
+  box-shadow: 3px 3px 6px var(--shadow-color), -3px -3px 6px var(--shadow-highlight);
+  transition: var(--transition);
 }
 
-/* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+.neomorphic-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 8px var(--shadow-color), -4px -4px 8px var(--shadow-highlight);
+}
+
+.whatsapp-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.whatsapp-icon {
+  font-size: 1.2rem;
+  color: #38b75e;
 }
 
 .fade-in {
-  animation: fadeIn 0.5s ease-in;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
 }
 
-/* Responsive typography */
+.fade-in.visible {
+  opacity: 1;
+}
+
+.section {
+  padding: 4rem 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.active {
+  background-color: var(--primary-light);
+  color: white;
+}
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: var(--card-bg);
+  box-shadow: 3px 3px 6px var(--shadow-color), -3px -3px 6px var(--shadow-highlight);
+  transition: var(--transition);
+}
+
+.social-icon:hover {
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 8px var(--shadow-color), -4px -4px 8px var(--shadow-highlight);
+}
+
+.icon-github {
+  content: "\f09b";
+  font-family: FontAwesome;
+}
+
+.icon-linkedin {
+  content: "\f08c";
+  font-family: FontAwesome;
+}
+
+.icon-x {
+  content: "\f098";
+  font-family: FontAwesome;
+}
+
+
+
 @media (max-width: 768px) {
-  h1 {
-    font-size: 2rem;
-  }
-  h2 {
-    font-size: 1.75rem;
-  }
-  h3 {
-    font-size: 1.5rem;
+  .container {
+    max-width: 90%;
+    margin: 0 auto;
   }
 }
 
-@media (max-width: 480px) {
-  h1 {
-    font-size: 1.75rem;
-  }
-  h2 {
-    font-size: 1.5rem;
-  }
-  h3 {
-    font-size: 1.25rem;
+@media (min-width: 769px) {
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
   }
 }
+
+/* Update X (formerly Twitter) icon */
+.icon-x::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cpath d='M4 4l16 16M4 20L20 4'/%3E%3C/svg%3E")
+    no-repeat center center;
+}
+
+/* Ensure consistent social icon styling */
+.social-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--card-bg);
+  box-shadow: 5px 5px 10px var(--shadow-color), -5px -5px 10px var(--shadow-highlight);
+  transition: var(--transition);
+  color: var(--primary);
+}
+
+.social-icon:hover {
+  transform: translateY(-3px);
+  color: var(--primary-light);
+}
+
+/* Ensure proper spacing between social icons */
+.social-icons {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  justify-content: center;
+}
+
 
