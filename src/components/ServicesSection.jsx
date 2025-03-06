@@ -54,7 +54,7 @@ const ServicesSection = () => {
 
   const handleWhatsAppQuote = () => {
     const message = `Hi, I'm interested in your ${services[activeService].title} service. Can you provide more information?`
-    const whatsappUrl = `https://wa.me/880171526536?text=${encodeURIComponent(message)}`
+    const whatsappUrl = `https://wa.me/8801713401889?text=${encodeURIComponent(message)}`
     window.open(whatsappUrl, "_blank", "noopener,noreferrer")
   }
 

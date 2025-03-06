@@ -35,7 +35,7 @@ const ResourcesSection = () => {
 
   const handleWhatsAppConnect = () => {
     const message = "Hi, I'm interested in receiving more resources and updates from you."
-    const whatsappUrl = `https://wa.me/880171526536?text=${encodeURIComponent(message)}`
+    const whatsappUrl = `https://wa.me/8801713401889?text=${encodeURIComponent(message)}`
     window.open(whatsappUrl, "_blank", "noopener,noreferrer")
   }
 
