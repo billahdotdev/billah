@@ -3,7 +3,9 @@ import "../styles/AboutSection.css"
 const AboutSection = () => {
   return (
     <div className="container">
-      <h2 className="section-title">Who Am I?</h2>
+      <h2 className="section-title" id="about-heading">
+        Who Am I?
+      </h2>
       <div className="about-content">
         <div className="about-image-container">
           <div className="about-image neomorphic">
@@ -12,18 +14,34 @@ const AboutSection = () => {
 
           {/* Social Media Icons */}
           <div className="social-icons">
-          <a href="https://github.com/billahdotdev" className="social-icon" aria-label="GitHub" target="_blank">
-          <span className="icon-github"></span>
-           </a>
-           <a href="https://www.linkedin.com/in/billahdotdev" className="social-icon" aria-label="LinkedIn" target="_blank">
-          <span className="icon-linkedin"></span>
-           </a>
-         <a href="https://x.com/billahdotdev" className="social-icon" aria-label="X (formerly Twitter)" target="_blank">
-          <span className="icon-x"></span>
-          </a>
+            <a
+              href="https://github.com/billahdotdev"
+              className="social-icon"
+              aria-label="GitHub"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span className="icon-github"></span>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/billahdotdev"
+              className="social-icon"
+              aria-label="LinkedIn"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span className="icon-linkedin"></span>
+            </a>
+            <a
+              href="https://x.com/billahdotdev"
+              className="social-icon"
+              aria-label="X (formerly Twitter)"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <span className="icon-x"></span>
+            </a>
           </div>
-
-
         </div>
         <div className="about-text">
           <div className="about-card neomorphic">

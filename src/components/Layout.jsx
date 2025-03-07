@@ -21,7 +21,7 @@ const Layout = () => {
     { id: "contact", title: "Contact" },
   ]
 
-  // Update the handleNavClick function for smoother scrolling
+  // Update the handleNavClick function for better mobile experience
   const handleNavClick = (sectionId) => {
     setActiveSection(sectionId)
     // Smooth scroll to the section with offset
@@ -31,7 +31,7 @@ const Layout = () => {
       const headerHeight =
         Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue("--header-height")) || 80
       const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
-      const offsetPosition = elementPosition - headerHeight
+      const offsetPosition = elementPosition - headerHeight - 20 // Added extra 20px padding
 
       window.scrollTo({
         top: offsetPosition,
@@ -40,12 +40,40 @@ const Layout = () => {
     }
   }
 
-  // Update the useEffect hook to improve transitions
+  // Update the useEffect hook to improve section detection
   useEffect(() => {
     const observers = {}
     const observerOptions = {
-      threshold: [0.1, 0.3, 0.5], // Multiple thresholds for better detection
-      rootMargin: "-100px 0px -20% 0px", // Adjusted rootMargin for better section detection
+      threshold: [0.1, 0.3, 0.5],
+      rootMargin: "-80px 0px -20% 0px", // Adjusted for header height
+    }
+
+    // Function to check which section is most visible
+    const updateActiveSection = () => {
+      const visibleSections = Object.entries(isIntersecting)
+        .filter(([_, isVisible]) => isVisible)
+        .map(([id]) => id)
+
+      if (visibleSections.length > 0) {
+        // Get the section that is most in view (highest intersection ratio)
+        const mostVisibleSection = visibleSections.reduce((prev, current) => {
+          const prevEl = document.getElementById(`section-${prev}`)
+          const currentEl = document.getElementById(`section-${current}`)
+
+          if (!prevEl || !currentEl) return current
+
+          const prevRect = prevEl.getBoundingClientRect()
+          const currentRect = currentEl.getBoundingClientRect()
+
+          // Calculate how much of each section is in the viewport
+          const prevVisible = Math.min(window.innerHeight, prevRect.bottom) - Math.max(0, prevRect.top)
+          const currentVisible = Math.min(window.innerHeight, currentRect.bottom) - Math.max(0, currentRect.top)
+
+          return currentVisible > prevVisible ? current : prev
+        }, visibleSections[0])
+
+        setActiveSection(mostVisibleSection)
+      }
     }
 
     sections.forEach((section) => {
@@ -57,16 +85,21 @@ const Layout = () => {
             [section.id]: entry.isIntersecting,
           }))
 
-          // Auto-update active section based on scroll
-          if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
-            setActiveSection(section.id)
-          }
+          // Call updateActiveSection after state is updated
+          setTimeout(updateActiveSection, 0)
         }, observerOptions)
 
         observer.observe(ref)
         observers[section.id] = observer
       }
     })
+
+    // Also update active section on scroll for smoother transitions
+    const handleScroll = () => {
+      requestAnimationFrame(updateActiveSection)
+    }
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
 
     // Smooth scroll behavior for the entire page
     document.documentElement.style.scrollBehavior = "smooth"
@@ -76,19 +109,22 @@ const Layout = () => {
       Object.values(observers).forEach((observer) => {
         observer.disconnect()
       })
+      window.removeEventListener("scroll", handleScroll)
       document.documentElement.style.scrollBehavior = ""
     }
-  }, [])
+  }, [isIntersecting])
 
   return (
     <div className="portfolio-container">
       <Header sections={sections} activeSection={activeSection} onNavClick={handleNavClick} />
 
-      <main className="content">
+      <main className="content" id="main-content">
         <div
           id="section-about"
           ref={(el) => (sectionRefs.current.about = el)}
           className={`section fade-in ${isIntersecting.about ? "visible" : ""}`}
+          tabIndex="-1"
+          aria-labelledby="about-heading"
         >
           <AboutSection />
         </div>
@@ -97,6 +133,8 @@ const Layout = () => {
           id="section-services"
           ref={(el) => (sectionRefs.current.services = el)}
           className={`section fade-in ${isIntersecting.services ? "visible" : ""}`}
+          tabIndex="-1"
+          aria-labelledby="services-heading"
         >
           <ServicesSection />
         </div>
@@ -105,6 +143,8 @@ const Layout = () => {
           id="section-resources"
           ref={(el) => (sectionRefs.current.resources = el)}
           className={`section fade-in ${isIntersecting.resources ? "visible" : ""}`}
+          tabIndex="-1"
+          aria-labelledby="resources-heading"
         >
           <ResourcesSection />
         </div>
@@ -113,6 +153,8 @@ const Layout = () => {
           id="section-contact"
           ref={(el) => (sectionRefs.current.contact = el)}
           className={`section fade-in ${isIntersecting.contact ? "visible" : ""}`}
+          tabIndex="-1"
+          aria-labelledby="contact-heading"
         >
           <ContactSection />
         </div>

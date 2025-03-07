@@ -1,18 +1,20 @@
+/* Mobile-first approach */
 .footer {
   background-color: var(--card-bg);
-  padding: 3rem 0 1.5rem;
-  margin-top: 4rem;
+  padding: 2rem 0 1rem;
+  margin-top: 3rem;
 }
 
 .footer-content {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  margin-bottom: 2rem;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .footer-logo {
-  padding: 1rem;
+  padding: 0.8rem;
   border-radius: var(--border-radius);
   display: flex;
   align-items: center;
@@ -20,24 +22,24 @@
 }
 
 .footer-logo h2 {
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: var(--primary);
   margin: 0;
+  text-align: center;
 }
 
 .footer-links {
   display: flex;
-  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem 1.5rem;
 }
 
 .footer-links a {
   color: var(--text-secondary);
   text-decoration: none;
   transition: var(--transition);
-}
-
-.footer-links a:hover {
-  color: var(--primary-light);
+  font-size: 0.9rem;
 }
 
 .footer-social {
@@ -47,25 +49,64 @@
 
 .footer-bottom {
   text-align: center;
-  padding-top: 1.5rem;
+  padding-top: 1.2rem;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .footer-bottom p {
   color: var(--text-secondary);
-  font-size: 0.9rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* Tablet and up */
+@media (min-width: 768px) {
+  .footer {
+    padding: 2.5rem 0 1.2rem;
+    margin-top: 3.5rem;
+  }
+
   .footer-content {
-    flex-direction: column;
-    gap: 1.5rem;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  .footer-logo h2 {
+    font-size: 1rem;
   }
 
   .footer-links {
-    flex-wrap: wrap;
-    justify-content: center;
+    gap: 2rem;
+  }
+
+  .footer-links a {
+    font-size: 1rem;
+  }
+
+  .footer-bottom p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Fix for very small screens */
+@media (max-width: 350px) {
+  .footer-links {
+    gap: 0.8rem;
+  }
+
+  .footer-links a {
+    font-size: 0.8rem;
+  }
+
+  .footer-social {
+    gap: 0.8rem;
+  }
+
+  .social-icon {
+    width: 40px;
+    height: 40px;
   }
 }
 

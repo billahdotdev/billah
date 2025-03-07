@@ -12,7 +12,20 @@ const ServicesSection = () => {
       icon: "💻",
       description:
         "I build responsive, modern websites and web applications that work flawlessly across all devices. Using the latest technologies and best practices, I create solutions that are not only visually appealing but also performant and accessible.",
-      skills: ["HTML5/CSS3", "JavaScript/TypeScript", "React", "TailwindCSS", "Material UI", "Next.js", "Express", "Node.js", "RESTful APIs", "MongoDB", "Inkscape", "Figma"],
+      skills: [
+        "HTML5/CSS3",
+        "JavaScript/TypeScript",
+        "React",
+        "TailwindCSS",
+        "Material UI",
+        "Next.js",
+        "Express",
+        "Node.js",
+        "RESTful APIs",
+        "MongoDB",
+        "Inkscape",
+        "Figma",
+      ],
       image:
         "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1172&q=80",
     },
@@ -46,7 +59,17 @@ const ServicesSection = () => {
       icon: "🎨",
       description:
         "I create cohesive and memorable brand identities that resonate with your target audience and differentiate your business from competitors. From logo design to brand guidelines, I develop visual elements that effectively communicate your brand's values and personality.",
-      skills: ["Logo Design", "Brand Guidelines", "Visual Identity", "Typography", "Color Theory", "Brand Strategy", "UX/UI", "Inkscape", "Figma"],
+      skills: [
+        "Logo Design",
+        "Brand Guidelines",
+        "Visual Identity",
+        "Typography",
+        "Color Theory",
+        "Brand Strategy",
+        "UX/UI",
+        "Inkscape",
+        "Figma",
+      ],
       image:
         "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
     },
@@ -60,7 +83,9 @@ const ServicesSection = () => {
 
   return (
     <div className="container">
-      <h2 className="section-title">What Do I Do?</h2>
+      <h2 className="section-title" id="services-heading">
+        What Do I Do?
+      </h2>
 
       <div className="services-container">
         <div className="services-tabs" role="tablist" aria-label="Services">

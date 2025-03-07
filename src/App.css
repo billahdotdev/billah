@@ -2,14 +2,39 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 .content {
   flex: 1;
+  padding-top: var(--header-height); /* Space for fixed header */
 }
 
 /* For smooth scrolling */
 html {
   scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* Prevent content from being hidden under fixed header */
+.section {
+  scroll-margin-top: calc(var(--header-height) + 20px);
+}
+
+/* Improve section spacing */
+.section {
+  padding: 2rem 0;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 3rem 0;
+  }
+}
+
+@media (min-width: 992px) {
+  .section {
+    padding: 4rem 0;
+  }
 }
 

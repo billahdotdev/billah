@@ -70,11 +70,16 @@ Message: ${formData.message}
 
   return (
     <div className="container">
-      <h2 className="section-title">Contact</h2>
+      <h2 className="section-title" id="contact-heading">
+        Contact
+      </h2>
 
       <div className="resources-intro neomorphic">
         <h2>Sometimes, you need someone to listen or give some advice.</h2>
-        <p className="chat-me-text-slot">Book a slot to chat - anything from personal to career, web development, graphic design, digital marketing, T-shirt business, and mental health.</p>
+        <p className="chat-me-text-slot">
+          Book a slot to chat - anything from personal to career, web development, graphic design, digital marketing,
+          T-shirt business, and mental health.
+        </p>
       </div>
 
       <div className="contact-container">

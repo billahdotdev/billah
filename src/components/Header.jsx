@@ -37,6 +37,10 @@ const Header = ({ sections, activeSection, onNavClick }) => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
   }
 
+  const handleOverlayClick = () => {
+    setIsMobileMenuOpen(false)
+  }
+
   return (
     <header className={`header ${isScrolled ? "scrolled" : ""}`}>
       <div className="container header-container">
@@ -69,6 +73,13 @@ const Header = ({ sections, activeSection, onNavClick }) => {
         >
           <span className={`hamburger ${isMobileMenuOpen ? "open" : ""}`}></span>
         </button>
+
+        {/* Mobile Menu Overlay */}
+        <div
+          className={`mobile-menu-overlay ${isMobileMenuOpen ? "open" : ""}`}
+          onClick={handleOverlayClick}
+          aria-hidden="true"
+        ></div>
 
         {/* Mobile Navigation Menu */}
         <div className={`mobile-nav ${isMobileMenuOpen ? "open" : ""}`}>

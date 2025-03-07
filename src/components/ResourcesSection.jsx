@@ -41,7 +41,9 @@ const ResourcesSection = () => {
 
   return (
     <div className="container">
-      <h2 className="section-title">Resources</h2>
+      <h2 className="section-title" id="resources-heading">
+        Resources
+      </h2>
 
       <div className="resources-intro neomorphic">
         <p>
