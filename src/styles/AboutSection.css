@@ -172,7 +172,7 @@
 }
 
 .social-icon {
-  width: 45px; /* Slightly larger icons */
+  width: 45px;
   height: 45px;
   border-radius: 50%;
   display: flex;
@@ -190,23 +190,8 @@
   color: var(--primary-light);
 }
 
-/* Fix icon visibility */
-.icon-github::before,
-.icon-linkedin::before,
-.icon-x::before {
-  font-family: "Font Awesome 5 Brands";
-  font-size: 1.5rem;
-}
-
-.icon-github::before {
-  content: "\f09b";
-}
-
-.icon-linkedin::before {
-  content: "\f08c";
-}
-
-.icon-x::before {
-  content: "\f099";
+.social-icon svg {
+  width: 20px;
+  height: 20px;
 }
 
