@@ -19,6 +19,7 @@
   text-align: left;
   transition: var(--transition);
   border-radius: var(--border-radius);
+  border: 1px solid var(--primary-light);
 }
 
 .service-tab.active {

@@ -160,3 +160,16 @@
   box-shadow: 7px 7px 14px var(--shadow-color), -7px -7px 14px var(--shadow-highlight);
 }
 
+.resources-intro {
+  padding: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  border-radius: var(--border-radius);
+}
+
+.resources-intro p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  max-width: 800px;
+  margin: 0 auto;
+}

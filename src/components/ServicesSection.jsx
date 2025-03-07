@@ -23,7 +23,7 @@ const ServicesSection = () => {
         "I help businesses improve their online visibility and search engine rankings through comprehensive SEO strategies. From keyword research and on-page optimization to technical SEO and link building, I implement proven techniques to drive organic traffic to your website.",
       skills: ["Keyword Research", "On-Page SEO", "Technical SEO", "Link Building", "Content Strategy", "Analytics"],
       image:
-        "https://images.unsplash.com/photo-1562577309-4932fdd64cd1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80",
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     {
       title: "Digital Marketing",
@@ -39,7 +39,7 @@ const ServicesSection = () => {
         "Marketing Automation",
       ],
       image:
-        "https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        "https://plus.unsplash.com/premium_photo-1681487735113-5224f4e33cd2?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nzd8fE1hcmtldGluZ3xlbnwwfHwwfHx8MA%3D%3D",
     },
     {
       title: "Branding Identity Design",

@@ -12,13 +12,13 @@ const AboutSection = () => {
 
           {/* Social Media Icons */}
           <div className="social-icons">
-          <a href="https://github.com/your-profile" className="social-icon" aria-label="GitHub" target="_blank">
+          <a href="https://github.com/billahdotdev" className="social-icon" aria-label="GitHub" target="_blank">
           <span className="icon-github"></span>
            </a>
-           <a href="https://www.linkedin.com/in/your-profile" className="social-icon" aria-label="LinkedIn" target="_blank">
+           <a href="https://www.linkedin.com/in/billahdotdev" className="social-icon" aria-label="LinkedIn" target="_blank">
           <span className="icon-linkedin"></span>
            </a>
-         <a href="https://x.com/your-profile" className="social-icon" aria-label="X (formerly Twitter)" target="_blank">
+         <a href="https://x.com/billahdotdev" className="social-icon" aria-label="X (formerly Twitter)" target="_blank">
           <span className="icon-x"></span>
   </a>
 </div>
@@ -28,7 +28,7 @@ const AboutSection = () => {
         <div className="about-text">
           <div className="about-card neomorphic">
             <h3>Masum Billah</h3>
-            <h4>Web Developer | Branding Consultant</h4>
+            <h6>Web Developer | Branding Consultant</h6>
             <p>I'm a full-stack web developer dedicated to making online dreams a reality.</p>
             <div className="about-stats">
               <div className="stat-item neomorphic-inset">
