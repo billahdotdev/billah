@@ -19,15 +19,15 @@ const Footer = () => {
           </div>
 
           <div className="footer-social">
-            <a href="#" className="social-icon" aria-label="GitHub">
-              <span className="icon-github"></span>
-            </a>
-            <a href="#" className="social-icon" aria-label="LinkedIn">
-              <span className="icon-linkedin"></span>
-            </a>
-            <a href="#" className="social-icon" aria-label="X (formerly Twitter)">
-              <span className="icon-x"></span>
-            </a>
+          <a href="https://github.com/billahdotdev" className="social-icon" aria-label="GitHub" target="_blank">
+          <span className="icon-github"></span>
+           </a>
+           <a href="https://www.linkedin.com/in/billahdotdev" className="social-icon" aria-label="LinkedIn" target="_blank">
+          <span className="icon-linkedin"></span>
+           </a>
+           <a href="https://x.com/billahdotdev" className="social-icon" aria-label="X (formerly Twitter)" target="_blank">
+          <span className="icon-x"></span>
+          </a>
           </div>
         </div>
 

@@ -20,8 +20,8 @@ const AboutSection = () => {
            </a>
          <a href="https://x.com/billahdotdev" className="social-icon" aria-label="X (formerly Twitter)" target="_blank">
           <span className="icon-x"></span>
-  </a>
-</div>
+          </a>
+          </div>
 
 
         </div>
