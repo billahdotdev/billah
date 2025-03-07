@@ -1,13 +1,13 @@
 /* Mobile-first approach */
 .shop-intro {
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
+  padding: var(--space-4);
+  margin-bottom: var(--space-5);
   text-align: center;
   border-radius: var(--border-radius);
 }
 
 .shop-intro p {
-  font-size: 1rem;
+  font-size: var(--font-base);
   line-height: 1.6;
   color: var(--text-primary);
 }
@@ -16,11 +16,15 @@
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
-  gap: 0.75rem;
-  padding-bottom: 1rem;
-  margin-bottom: 1.5rem;
+  gap: var(--space-3);
+  padding-bottom: var(--space-4);
+  margin-bottom: var(--space-5);
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none; /* Firefox */
+  padding-left: var(--space-4); /* Add padding to match container */
+  padding-right: var(--space-4); /* Add padding to match container */
+  margin-left: calc(-1 * var(--space-4)); /* Negative margin to extend full width */
+  margin-right: calc(-1 * var(--space-4)); /* Negative margin to extend full width */
 }
 
 .shop-categories::-webkit-scrollbar {
@@ -30,12 +34,13 @@
 .category-button {
   padding: 0.75rem 1.25rem;
   border-radius: 20px;
-  font-size: 0.9rem;
+  font-size: var(--font-sm);
   white-space: nowrap;
   transition: var(--transition);
   background-color: var(--card-bg);
   color: var(--text-primary);
   box-shadow: 3px 3px 6px var(--shadow-color), -3px -3px 6px var(--shadow-highlight);
+  min-height: 44px; /* Minimum touch target size */
 }
 
 .category-button:hover {
@@ -51,8 +56,8 @@
 .products-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  gap: var(--space-5);
+  margin-bottom: var(--space-6);
 }
 
 .product-card {
@@ -87,13 +92,13 @@
 
 .product-badge {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: var(--space-4);
+  right: var(--space-4);
   background-color: var(--primary-light);
   color: white;
   padding: 0.3rem 0.8rem;
   border-radius: 20px;
-  font-size: 0.8rem;
+  font-size: var(--font-xs);
   font-weight: 500;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
@@ -103,37 +108,37 @@
 }
 
 .product-content {
-  padding: 1.5rem;
+  padding: var(--space-5);
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
 
 .product-content h3 {
-  font-size: 1.2rem;
+  font-size: var(--font-lg);
   color: var(--primary);
-  margin-bottom: 0.6rem;
+  margin-bottom: var(--space-2);
 }
 
 .product-description {
-  margin-bottom: 1.2rem;
+  margin-bottom: var(--space-4);
   color: var(--text-secondary);
   line-height: 1.6;
-  font-size: 0.95rem;
+  font-size: var(--font-sm);
   flex-grow: 1;
 }
 
 .product-price {
-  font-size: 1.5rem;
+  font-size: var(--font-xl);
   font-weight: 700;
   color: var(--primary);
-  margin-bottom: 1.2rem;
+  margin-bottom: var(--space-4);
 }
 
 .product-buttons {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: var(--space-3);
   width: 100%;
 }
 
@@ -145,12 +150,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: var(--space-2);
   width: 100%;
-  padding: 0.8rem 0;
+  padding: var(--space-3) 0;
   border-radius: var(--border-radius);
   font-weight: 500;
   transition: var(--transition);
+  min-height: 44px; /* Minimum touch target size */
 }
 
 .product-button:hover {
@@ -176,24 +182,24 @@
 }
 
 .shop-cta {
-  padding: 2rem 1.5rem;
+  padding: var(--space-6) var(--space-5);
   text-align: center;
   border-radius: var(--border-radius);
-  margin-top: 1.5rem;
+  margin-top: var(--space-5);
 }
 
 .shop-cta h3 {
-  font-size: 1.5rem;
+  font-size: var(--font-xl);
   color: var(--primary);
-  margin-bottom: 0.8rem;
+  margin-bottom: var(--space-3);
 }
 
 .shop-cta p {
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-5);
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
-  font-size: 0.95rem;
+  font-size: var(--font-sm);
 }
 
 /* Update WhatsApp button in Shop section to match */
@@ -205,10 +211,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.8rem;
-  padding: 1rem 2rem;
-  font-size: 1.1rem;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-6);
+  font-size: var(--font-md);
   max-width: 300px;
+  min-height: 44px; /* Minimum touch target size */
 }
 
 .shop-cta .whatsapp-button:hover {
@@ -220,7 +227,7 @@
 /* Cute elements */
 .product-badge {
   border-radius: 20px;
-  font-size: 0.8rem;
+  font-size: var(--font-xs);
   font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
@@ -241,34 +248,46 @@
   background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3));
 }
 
+/* Add a subtle indicator for horizontal scrolling */
+.shop-categories::after {
+  content: "";
+  display: block;
+  min-width: var(--space-4);
+  height: 1px;
+}
+
 /* Responsive */
 @media (min-width: 768px) {
   .shop-intro {
-    padding: 2rem;
-    margin-bottom: 2rem;
+    padding: var(--space-6);
+    margin-bottom: var(--space-6);
   }
 
   .shop-intro p {
-    font-size: 1.1rem;
+    font-size: var(--font-md);
     line-height: 1.8;
   }
 
   .shop-categories {
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .category-button {
     padding: 0.8rem 1.5rem;
-    font-size: 1rem;
+    font-size: var(--font-base);
   }
 
   .products-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    margin-bottom: 2.5rem;
+    gap: var(--space-6);
+    margin-bottom: var(--space-8);
   }
 
   .product-image {
@@ -276,12 +295,16 @@
   }
 
   .product-content {
-    padding: 1.8rem;
+    padding: var(--space-5);
   }
 
   .product-content h3 {
-    font-size: 1.3rem;
-    margin-bottom: 0.8rem;
+    font-size: var(--font-lg);
+    margin-bottom: var(--space-3);
+  }
+
+  .product-description {
+    font-size: var(--font-base);
   }
 
   .product-buttons.two-buttons {
@@ -293,12 +316,16 @@
   }
 
   .shop-cta {
-    padding: 2.5rem 2rem;
-    margin-top: 2rem;
+    padding: var(--space-8) var(--space-6);
+    margin-top: var(--space-6);
   }
 
   .shop-cta h3 {
-    font-size: 1.8rem;
+    font-size: var(--font-2xl);
+  }
+
+  .shop-cta p {
+    font-size: var(--font-base);
   }
 }
 

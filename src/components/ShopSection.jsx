@@ -1,10 +1,12 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import "../styles/ShopSection.css"
 
 const ShopSection = () => {
   const [activeCategory, setActiveCategory] = useState("all")
+  const categoriesRef = useRef(null)
+  const [showScrollIndicator, setShowScrollIndicator] = useState(false)
 
   const categories = [
     { id: "all", name: "All Items" },
@@ -115,6 +117,23 @@ const ShopSection = () => {
     },
   ]
 
+  // Check if categories container is scrollable
+  useEffect(() => {
+    const checkScrollable = () => {
+      if (categoriesRef.current) {
+        const { scrollWidth, clientWidth } = categoriesRef.current
+        setShowScrollIndicator(scrollWidth > clientWidth)
+      }
+    }
+
+    checkScrollable()
+    window.addEventListener("resize", checkScrollable)
+
+    return () => {
+      window.removeEventListener("resize", checkScrollable)
+    }
+  }, [])
+
   // Filter products based on active category, excluding custom solution cards from "All Items" view
   const filteredProducts =
     activeCategory === "all"
@@ -147,31 +166,53 @@ const ShopSection = () => {
         </p>
       </div>
 
-      <div className="shop-categories">
+      <div
+        className={`shop-categories ${showScrollIndicator ? "has-more" : ""}`}
+        ref={categoriesRef}
+        role="tablist"
+        aria-label="Product categories"
+      >
         {categories.map((category) => (
           <button
             key={category.id}
             className={`category-button neomorphic ${activeCategory === category.id ? "active" : ""}`}
             onClick={() => setActiveCategory(category.id)}
             aria-pressed={activeCategory === category.id}
+            role="tab"
+            aria-selected={activeCategory === category.id}
+            id={`tab-${category.id}`}
+            aria-controls={`panel-${category.id}`}
           >
             {category.name}
           </button>
         ))}
       </div>
 
-      <div className="products-grid">
+      <div
+        className="products-grid"
+        role="tabpanel"
+        id={`panel-${activeCategory}`}
+        aria-labelledby={`tab-${activeCategory}`}
+      >
         {filteredProducts.map((product) => (
-          <div key={product.id} className="product-card neomorphic">
+          <div
+            key={product.id}
+            className="product-card neomorphic"
+            data-custom={product.isCustomSolution ? "true" : "false"}
+          >
             <div className="product-image">
-              <img src={product.image || "/placeholder.svg"} alt={product.title} />
+              <img src={product.image || "/placeholder.svg"} alt={`${product.title} product image`} loading="lazy" />
               {product.badge && <span className="product-badge">{product.badge}</span>}
             </div>
             <div className="product-content">
               <h3>{product.title}</h3>
               <p className="product-description">{product.description}</p>
 
-              {!product.isCustomSolution && <div className="product-price">${product.price}</div>}
+              {!product.isCustomSolution && (
+                <div className="product-price" aria-label={`Price: ${product.price} dollars`}>
+                  ${product.price}
+                </div>
+              )}
 
               <div
                 className={`product-buttons ${product.category === "websites" && !product.isCustomSolution ? "two-buttons" : ""}`}
@@ -180,13 +221,18 @@ const ShopSection = () => {
                   <button
                     className="neomorphic-button product-button full-width"
                     onClick={() => handleWhatsAppInquiry(product)}
+                    aria-label={`Contact about custom ${product.category}`}
                   >
                     <span className="whatsapp-icon" aria-hidden="true"></span>
                     Let's Talk
                   </button>
                 ) : (
                   <>
-                    <button className="neomorphic-button product-button" onClick={() => handleWhatsAppInquiry(product)}>
+                    <button
+                      className="neomorphic-button product-button"
+                      onClick={() => handleWhatsAppInquiry(product)}
+                      aria-label={`Inquire about ${product.title}`}
+                    >
                       <span className="whatsapp-icon" aria-hidden="true"></span>
                       Inquire
                     </button>
@@ -196,6 +242,7 @@ const ShopSection = () => {
                       <button
                         className="neomorphic-button product-button demo-button"
                         onClick={() => handleDemoClick(product.github)}
+                        aria-label={`View demo for ${product.title}`}
                       >
                         <span className="github-icon" aria-hidden="true"></span>
                         Demo
@@ -210,9 +257,10 @@ const ShopSection = () => {
       </div>
 
       <div className="shop-cta neomorphic">
-        <h3>Looking for a business collaboration?</h3>
+        <h3>Looking for something custom?</h3>
         <p>
-        Whether you're interested in buying in bulk from me or supplying products to me, I'm open to new business opportunities. Let’s connect and explore how we can work together!"
+          Can't find exactly what you're looking for? I offer custom solutions tailored to your specific needs. Let's
+          chat about your project and create something amazing together!
         </p>
         <button
           onClick={() => {
@@ -221,9 +269,10 @@ const ShopSection = () => {
             window.open(whatsappUrl, "_blank", "noopener,noreferrer")
           }}
           className="neomorphic-button whatsapp-button"
+          aria-label="Contact about custom project"
         >
           <span className="whatsapp-icon" aria-hidden="true"></span>
-          Together, we grow!
+          Let's Create Together
         </button>
       </div>
     </div>

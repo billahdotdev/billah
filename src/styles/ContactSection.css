@@ -2,40 +2,40 @@
 .contact-container {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: var(--space-5);
 }
 
 .contact-info,
 .contact-form {
-  padding: 1.5rem;
+  padding: var(--space-5);
   border-radius: var(--border-radius);
 }
 
 .contact-info h3,
 .contact-form h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1.2rem;
+  font-size: var(--font-xl);
+  margin-bottom: var(--space-4);
 }
 
 .contact-info > p {
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-5);
   line-height: 1.6;
-  font-size: 0.95rem;
+  font-size: var(--font-sm);
 }
 
 .contact-details {
-  margin-bottom: 1.2rem;
+  margin-bottom: var(--space-4);
 }
 
 .contact-item {
   display: flex;
   align-items: flex-start;
-  gap: 0.8rem;
-  margin-bottom: 1.2rem;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
 }
 
 .contact-icon {
-  font-size: 1.3rem;
+  font-size: var(--font-lg);
   min-width: 35px;
   height: 35px;
   display: flex;
@@ -44,32 +44,32 @@
 }
 
 .contact-text h4 {
-  font-size: 1rem;
+  font-size: var(--font-base);
   color: var(--primary);
-  margin-bottom: 0.2rem;
+  margin-bottom: var(--space-1);
 }
 
 .contact-text p {
   color: var(--text-secondary);
-  font-size: 0.9rem;
+  font-size: var(--font-sm);
 }
 
 .availability {
-  margin-top: 1.5rem;
-  padding-top: 1.2rem;
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .availability h4 {
-  font-size: 1rem;
+  font-size: var(--font-base);
   color: var(--primary);
-  margin-bottom: 0.8rem;
+  margin-bottom: var(--space-3);
 }
 
 .availability-status {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: var(--space-3);
 }
 
 .status-indicator {
@@ -93,27 +93,34 @@
 
 /* Form Styles */
 .form-group {
-  margin-bottom: 1.2rem;
+  margin-bottom: var(--space-4);
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--space-2);
   font-weight: 500;
   color: var(--primary);
+  font-size: var(--font-sm);
 }
 
 .form-group input,
 .form-group textarea {
   width: 100%;
-  padding: 0.8rem;
+  padding: var(--space-3);
   border: none;
   background-color: var(--card-bg);
   border-radius: var(--border-radius);
   font-family: inherit;
-  font-size: 0.95rem;
+  font-size: var(--font-sm);
   color: var(--text-primary);
   transition: var(--transition);
+  min-height: 44px; /* Minimum touch target size */
+}
+
+.form-group textarea {
+  min-height: 120px; /* Taller for textarea */
+  resize: vertical;
 }
 
 .form-group input:focus,
@@ -124,8 +131,8 @@
 }
 
 .form-status {
-  margin-top: 1.2rem;
-  padding: 0.8rem;
+  margin-top: var(--space-4);
+  padding: var(--space-3);
   border-radius: var(--border-radius);
   text-align: center;
   font-weight: 500;
@@ -143,19 +150,19 @@
 
 /* Resources intro in contact section */
 .resources-intro {
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
+  padding: var(--space-5);
+  margin-bottom: var(--space-5);
   text-align: center;
   border-radius: var(--border-radius);
 }
 
 .resources-intro h2 {
-  font-size: 1.4rem;
-  margin-bottom: 0.8rem;
+  font-size: var(--font-lg);
+  margin-bottom: var(--space-3);
 }
 
 .resources-intro p {
-  font-size: 0.95rem;
+  font-size: var(--font-sm);
   line-height: 1.8;
   max-width: 800px;
   margin: 0 auto;
@@ -165,78 +172,82 @@
 @media (min-width: 768px) {
   .contact-info,
   .contact-form {
-    padding: 1.8rem;
+    padding: var(--space-6);
   }
 
   .contact-info h3,
   .contact-form h3 {
-    font-size: 1.7rem;
-    margin-bottom: 1.5rem;
+    font-size: var(--font-2xl);
+    margin-bottom: var(--space-5);
   }
 
   .contact-info > p {
-    margin-bottom: 1.8rem;
+    margin-bottom: var(--space-6);
     line-height: 1.7;
-    font-size: 1rem;
+    font-size: var(--font-base);
   }
 
   .contact-item {
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+    gap: var(--space-4);
+    margin-bottom: var(--space-5);
   }
 
   .contact-icon {
-    font-size: 1.5rem;
+    font-size: var(--font-xl);
     min-width: 40px;
     height: 40px;
   }
 
   .contact-text h4 {
-    font-size: 1.1rem;
-    margin-bottom: 0.3rem;
+    font-size: var(--font-md);
+    margin-bottom: var(--space-1);
   }
 
   .contact-text p {
-    font-size: 1rem;
+    font-size: var(--font-base);
   }
 
   .availability {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
+    margin-top: var(--space-6);
+    padding-top: var(--space-5);
   }
 
   .availability h4 {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
+    font-size: var(--font-md);
+    margin-bottom: var(--space-4);
   }
 
   .resources-intro {
-    padding: 2rem;
-    margin-bottom: 2rem;
+    padding: var(--space-6);
+    margin-bottom: var(--space-6);
   }
 
   .resources-intro h2 {
-    font-size: 1.6rem;
-    margin-bottom: 1rem;
+    font-size: var(--font-xl);
+    margin-bottom: var(--space-4);
   }
 
   .resources-intro p {
-    font-size: 1rem;
+    font-size: var(--font-base);
   }
 
   .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--space-5);
+  }
+
+  .form-group label {
+    font-size: var(--font-base);
   }
 
   .form-group input,
   .form-group textarea {
-    padding: 1rem;
-    font-size: 1rem;
+    padding: var(--space-4);
+    font-size: var(--font-base);
   }
 
   .form-status {
-    margin-top: 1.5rem;
-    padding: 1rem;
+    margin-top: var(--space-5);
+    padding: var(--space-4);
   }
 }
 
@@ -245,83 +256,83 @@
   .contact-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    gap: var(--space-6);
   }
 
   .contact-info,
   .contact-form {
-    padding: 2rem;
+    padding: var(--space-6);
   }
 
   .contact-info h3,
   .contact-form h3 {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
+    font-size: var(--font-2xl);
+    margin-bottom: var(--space-5);
   }
 
   .contact-info > p {
-    margin-bottom: 2rem;
+    margin-bottom: var(--space-6);
     line-height: 1.8;
-    font-size: 1rem;
+    font-size: var(--font-base);
   }
 
   .contact-item {
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+    gap: var(--space-4);
+    margin-bottom: var(--space-5);
   }
 
   .contact-icon {
-    font-size: 1.5rem;
+    font-size: var(--font-xl);
     min-width: 40px;
     height: 40px;
   }
 
   .contact-text h4 {
-    font-size: 1.1rem;
-    margin-bottom: 0.3rem;
+    font-size: var(--font-md);
+    margin-bottom: var(--space-1);
   }
 
   .contact-text p {
-    font-size: 1rem;
+    font-size: var(--font-base);
   }
 
   .availability {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
+    margin-top: var(--space-6);
+    padding-top: var(--space-5);
   }
 
   .availability h4 {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
+    font-size: var(--font-md);
+    margin-bottom: var(--space-4);
   }
 
   .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--space-5);
   }
 
   .form-group input,
   .form-group textarea {
-    padding: 1rem;
-    font-size: 1rem;
+    padding: var(--space-4);
+    font-size: var(--font-base);
   }
 
   .form-status {
-    margin-top: 1.5rem;
-    padding: 1rem;
+    margin-top: var(--space-5);
+    padding: var(--space-4);
   }
 
   .resources-intro {
-    padding: 2rem;
-    margin-bottom: 2rem;
+    padding: var(--space-6);
+    margin-bottom: var(--space-6);
   }
 
   .resources-intro h2 {
-    font-size: 1.6rem;
-    margin-bottom: 1rem;
+    font-size: var(--font-xl);
+    margin-bottom: var(--space-4);
   }
 
   .resources-intro p {
-    font-size: 1rem;
+    font-size: var(--font-base);
   }
 }
 
@@ -331,6 +342,7 @@
   color: var(--primary) !important;
   box-shadow: 5px 5px 10px var(--shadow-color), -5px -5px 10px var(--shadow-highlight);
   width: 100%;
+  min-height: 44px; /* Minimum touch target size */
 }
 
 .contact-form .whatsapp-button:hover {

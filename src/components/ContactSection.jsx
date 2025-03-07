@@ -97,7 +97,11 @@ Message: ${formData.message}
               </div>
               <div className="contact-text">
                 <h4>WhatsApp</h4>
-                <p>+880 171 340 1889</p>
+                <p>
+                  <a href="tel:+8801713401889" aria-label="Call on WhatsApp">
+                    +880 171 340 1889
+                  </a>
+                </p>
               </div>
             </div>
 
@@ -107,7 +111,11 @@ Message: ${formData.message}
               </div>
               <div className="contact-text">
                 <h4>Email</h4>
-                <p>billahdotdev@gmail.com</p>
+                <p>
+                  <a href="mailto:billahdotdev@gmail.com" aria-label="Send email">
+                    billahdotdev@gmail.com
+                  </a>
+                </p>
               </div>
             </div>
 
@@ -146,6 +154,7 @@ Message: ${formData.message}
                 className="neomorphic-inset"
                 required
                 aria-required="true"
+                aria-invalid={formStatus.type === "error" && !formData.name ? "true" : "false"}
               />
             </div>
 
@@ -160,6 +169,11 @@ Message: ${formData.message}
                 className="neomorphic-inset"
                 required
                 aria-required="true"
+                aria-invalid={
+                  formStatus.type === "error" && (!formData.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
+                    ? "true"
+                    : "false"
+                }
               />
             </div>
 
@@ -174,6 +188,7 @@ Message: ${formData.message}
                 className="neomorphic-inset"
                 required
                 aria-required="true"
+                aria-invalid={formStatus.type === "error" && !formData.subject ? "true" : "false"}
               />
             </div>
 
@@ -188,6 +203,7 @@ Message: ${formData.message}
                 rows="5"
                 required
                 aria-required="true"
+                aria-invalid={formStatus.type === "error" && !formData.message ? "true" : "false"}
               ></textarea>
             </div>
 

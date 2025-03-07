@@ -1,20 +1,20 @@
 /* Mobile-first approach */
 .footer {
   background-color: var(--card-bg);
-  padding: 2rem 0 1rem;
-  margin-top: 3rem;
+  padding: var(--space-6) 0 var(--space-4);
+  margin-top: var(--space-8);
 }
 
 .footer-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
+  gap: var(--space-5);
+  margin-bottom: var(--space-5);
 }
 
 .footer-logo {
-  padding: 0.8rem;
+  padding: var(--space-3);
   border-radius: var(--border-radius);
   display: flex;
   align-items: center;
@@ -22,7 +22,7 @@
 }
 
 .footer-logo h2 {
-  font-size: 0.9rem;
+  font-size: var(--font-sm);
   color: var(--primary);
   margin: 0;
   text-align: center;
@@ -32,76 +32,86 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem 1.5rem;
+  gap: var(--space-4);
 }
 
 .footer-links a {
   color: var(--text-secondary);
   text-decoration: none;
   transition: var(--transition);
-  font-size: 0.9rem;
+  font-size: var(--font-sm);
+  padding: var(--space-2);
+  min-height: 44px; /* Minimum touch target size */
+  display: flex;
+  align-items: center;
+}
+
+.footer-links a:hover,
+.footer-links a:focus {
+  color: var(--primary);
+  text-decoration: underline;
 }
 
 .footer-social {
   display: flex;
-  gap: 1rem;
+  gap: var(--space-4);
 }
 
 .footer-bottom {
   text-align: center;
-  padding-top: 1.2rem;
+  padding-top: var(--space-4);
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .footer-bottom p {
   color: var(--text-secondary);
-  font-size: 0.8rem;
+  font-size: var(--font-xs);
   line-height: 1.5;
 }
 
 /* Tablet and up */
 @media (min-width: 768px) {
   .footer {
-    padding: 2.5rem 0 1.2rem;
-    margin-top: 3.5rem;
+    padding: var(--space-8) 0 var(--space-4);
+    margin-top: var(--space-10);
   }
 
   .footer-content {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: var(--space-6);
   }
 
   .footer-logo h2 {
-    font-size: 1rem;
+    font-size: var(--font-base);
   }
 
   .footer-links {
-    gap: 2rem;
+    gap: var(--space-6);
   }
 
   .footer-links a {
-    font-size: 1rem;
+    font-size: var(--font-base);
   }
 
   .footer-bottom p {
-    font-size: 0.9rem;
+    font-size: var(--font-sm);
   }
 }
 
 /* Fix for very small screens */
 @media (max-width: 350px) {
   .footer-links {
-    gap: 0.8rem;
+    gap: var(--space-3);
   }
 
   .footer-links a {
-    font-size: 0.8rem;
+    font-size: var(--font-xs);
   }
 
   .footer-social {
-    gap: 0.8rem;
+    gap: var(--space-3);
   }
 
   .social-icon {
