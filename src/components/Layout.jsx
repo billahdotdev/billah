@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react"
 import Header from "./Header"
 import AboutSection from "./AboutSection"
 import ServicesSection from "./ServicesSection"
-import ResourcesSection from "./ResourcesSection"
+import ShopSection from "./ShopSection"
 import ContactSection from "./ContactSection"
 import Footer from "./Footer"
 import "../styles/Layout.css"
@@ -17,7 +17,7 @@ const Layout = () => {
   const sections = [
     { id: "about", title: "Who Am I?" },
     { id: "services", title: "What Do I Do?" },
-    { id: "resources", title: "Resources" },
+    { id: "shop", title: "Shop" },
     { id: "contact", title: "Contact" },
   ]
 
@@ -140,13 +140,13 @@ const Layout = () => {
         </div>
 
         <div
-          id="section-resources"
-          ref={(el) => (sectionRefs.current.resources = el)}
-          className={`section fade-in ${isIntersecting.resources ? "visible" : ""}`}
+          id="section-shop"
+          ref={(el) => (sectionRefs.current.shop = el)}
+          className={`section fade-in ${isIntersecting.shop ? "visible" : ""}`}
           tabIndex="-1"
-          aria-labelledby="resources-heading"
+          aria-labelledby="shop-heading"
         >
-          <ResourcesSection />
+          <ShopSection />
         </div>
 
         <div

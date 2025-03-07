@@ -83,8 +83,8 @@ const AboutSection = () => {
         </div>
         <div className="about-text">
           <div className="about-card neomorphic">
-            <h3>Masum Billah</h3>
-            <h6>Web Developer | Branding Consultant</h6>
+            <h2>Masum Billah</h2>
+            <h4>Web Developer | Branding Consultant</h4>
             <p>I'm a full-stack web developer dedicated to making online dreams a reality.</p>
             <div className="about-stats">
               <div className="stat-item neomorphic-inset">
