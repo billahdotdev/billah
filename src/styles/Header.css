@@ -5,13 +5,15 @@
   width: 100%;
   z-index: 1000;
   padding: 0;
-  transition: var(--transition);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Only animate necessary properties */
   height: var(--header-height);
   display: flex;
   align-items: center;
   background-color: rgba(245, 245, 245, 0.85);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  will-change: transform; /* Optimize for animations */
+  contain: layout; /* Improve performance by containing layout */
 }
 
 .header.scrolled {
@@ -28,12 +30,12 @@
 }
 
 .logo {
-  padding: 0.8rem 1.2rem;
+  padding: 0.6rem 1rem; /* Smaller padding for mobile */
   border-radius: var(--border-radius);
 }
 
 .logo h1 {
-  font-size: 1.5rem;
+  font-size: 1.2rem; /* Smaller font for mobile */
   color: var(--primary);
   margin: 0;
 }
@@ -57,6 +59,7 @@
   align-items: center;
   position: relative;
   z-index: 1001;
+  touch-action: manipulation; /* Optimize for touch */
 }
 
 .hamburger {
@@ -68,7 +71,7 @@
   width: 24px;
   height: 2px;
   background-color: var(--primary);
-  transition: var(--transition);
+  transition: background-color 0.3s ease; /* Only animate necessary properties */
 }
 
 .hamburger::before,
@@ -79,7 +82,7 @@
   width: 24px;
   height: 2px;
   background-color: var(--primary);
-  transition: var(--transition);
+  transition: transform 0.3s ease, top 0.3s ease; /* Only animate necessary properties */
 }
 
 .hamburger::before {
@@ -112,14 +115,15 @@
   max-width: 300px;
   height: calc(100vh - var(--header-height));
   background-color: var(--background);
-  transition: var(--transition);
-  padding: 2rem;
+  transition: right 0.3s ease; /* Only animate necessary properties */
+  padding: 1.5rem; /* Reduced padding for mobile */
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
   z-index: 999;
   overflow-y: auto; /* Allow scrolling if menu is tall */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  overscroll-behavior: contain; /* Prevent scroll chaining */
 }
 
 .mobile-nav.open {
@@ -130,7 +134,7 @@
   display: flex;
   flex-direction: column;
   list-style: none;
-  gap: 1.5rem;
+  gap: 1rem; /* Reduced gap for mobile */
   padding: 0;
   margin: 0;
 }
@@ -142,7 +146,7 @@
 .mobile-nav-links button {
   width: 100%;
   text-align: left;
-  padding: 1rem 1.5rem;
+  padding: 0.8rem 1.2rem; /* Reduced padding for mobile */
 }
 
 /* Add overlay for mobile menu */
@@ -156,7 +160,8 @@
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 998;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease; /* Only animate necessary properties */
+  overscroll-behavior: contain; /* Prevent scroll chaining */
 }
 
 .mobile-menu-overlay.open {
@@ -168,14 +173,6 @@
 @media (max-width: 768px) {
   .header {
     height: 60px; /* Smaller header on mobile */
-  }
-
-  .logo {
-    padding: 0.6rem 1rem;
-  }
-
-  .logo h1 {
-    font-size: 1.2rem;
   }
 
   .desktop-nav {
@@ -197,6 +194,24 @@
   }
 }
 
+@media (min-width: 769px) {
+  .logo {
+    padding: 0.8rem 1.2rem; /* Larger padding for desktop */
+  }
+
+  .logo h1 {
+    font-size: 1.5rem; /* Larger font for desktop */
+  }
+
+  .mobile-nav-links {
+    gap: 1.5rem; /* Larger gap for desktop */
+  }
+
+  .mobile-nav-links button {
+    padding: 1rem 1.5rem; /* Larger padding for desktop */
+  }
+}
+
 @media (max-width: 576px) {
   .header-container {
     padding: 0 1rem;
@@ -204,10 +219,7 @@
 
   .mobile-nav {
     width: 85%;
-  }
-
-  .mobile-nav-links button {
-    padding: 0.8rem 1.2rem;
+    padding: 1.2rem; /* Even smaller padding for very small screens */
   }
 }
 

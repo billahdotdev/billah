@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import "../styles/Header.css"
 
 const Header = ({ sections, activeSection, onNavClick }) => {
@@ -9,11 +9,23 @@ const Header = ({ sections, activeSection, onNavClick }) => {
 
   // Handle scroll event to change header style
   useEffect(() => {
+    let lastScrollY = window.scrollY
+    let ticking = false
+
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsScrolled(true)
-      } else {
-        setIsScrolled(false)
+      const currentScrollY = window.scrollY
+
+      // Only process if we've scrolled a significant amount
+      if (Math.abs(currentScrollY - lastScrollY) < 5) return
+
+      lastScrollY = currentScrollY
+
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(currentScrollY > 20)
+          ticking = false
+        })
+        ticking = true
       }
     }
 
@@ -25,7 +37,7 @@ const Header = ({ sections, activeSection, onNavClick }) => {
     }
 
     // Initial check
-    handleScroll()
+    setIsScrolled(window.scrollY > 20)
 
     window.addEventListener("scroll", handleScroll, { passive: true })
     window.addEventListener("resize", handleResize)
@@ -49,18 +61,21 @@ const Header = ({ sections, activeSection, onNavClick }) => {
     }
   }, [isMobileMenuOpen])
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen)
-  }
+  const toggleMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen((prev) => !prev)
+  }, [])
 
-  const handleOverlayClick = () => {
+  const handleOverlayClick = useCallback(() => {
     setIsMobileMenuOpen(false)
-  }
+  }, [])
 
-  const handleNavItemClick = (sectionId) => {
-    onNavClick(sectionId)
-    setIsMobileMenuOpen(false)
-  }
+  const handleNavItemClick = useCallback(
+    (sectionId) => {
+      onNavClick(sectionId)
+      setIsMobileMenuOpen(false)
+    },
+    [onNavClick],
+  )
 
   return (
     <header className={`header ${isScrolled ? "scrolled" : ""}`}>

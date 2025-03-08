@@ -4,11 +4,13 @@
   flex-direction: column;
   overflow-x: hidden; /* Prevent horizontal scrolling */
   position: relative; /* Establish positioning context */
+  contain: content; /* Improve performance by containing layout */
 }
 
 .content {
   flex: 1;
   position: relative;
+  will-change: transform; /* Optimize for animations */
 }
 
 /* For smooth scrolling */
@@ -32,6 +34,23 @@ html {
 @media (max-width: 768px) {
   .section {
     scroll-margin-top: 60px; /* Adjust for smaller header on mobile */
+  }
+}
+
+/* Add performance optimizations for mobile */
+@media (max-width: 768px) {
+  /* Reduce animation complexity on mobile */
+  * {
+    animation-duration: 0.3s !important; /* Faster animations on mobile */
+    transition-duration: 0.3s !important; /* Faster transitions on mobile */
+  }
+
+  /* Optimize paint operations */
+  .app-container,
+  .content,
+  .section {
+    will-change: transform;
+    transform: translateZ(0); /* Force GPU acceleration */
   }
 }
 

@@ -1,14 +1,32 @@
+"use client"
+
+import { useEffect, useState } from "react"
 import "../styles/Footer.css"
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
+  const [isMobile, setIsMobile] = useState(false)
+
+  // Check if device is mobile
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+
+    checkIfMobile()
+    window.addEventListener("resize", checkIfMobile)
+
+    return () => {
+      window.removeEventListener("resize", checkIfMobile)
+    }
+  }, [])
 
   return (
     <footer className="footer">
       <div className="container">
         <div className="footer-content">
           <div className="footer-logo neomorphic">
-            <h2>Masum Billah (billahdotdev)</h2>
+            <h2>Masum Billah {!isMobile && "(billahdotdev)"}</h2>
           </div>
 
           <nav aria-label="Footer Navigation">

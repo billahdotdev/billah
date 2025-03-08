@@ -3,11 +3,13 @@
   flex-direction: column;
   min-height: 100vh;
   overflow-x: hidden; /* Prevent horizontal scrolling */
+  contain: content; /* Improve performance by containing layout */
 }
 
 .content {
   flex: 1;
   position: relative;
+  will-change: transform; /* Optimize for animations */
 }
 
 /* Ensure sections are properly positioned */
@@ -18,15 +20,16 @@
   margin-top: 0; /* Remove any margin that could cause gaps */
   margin-bottom: 0; /* Remove any margin that could cause gaps */
   scroll-margin-top: var(--header-height); /* For smooth scrolling */
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.3s ease-in-out; /* Faster transition for mobile */
   will-change: opacity; /* Optimize for animations */
+  contain: content; /* Improve performance by containing layout */
 }
 
 /* Improve fade-in animation */
 .fade-in {
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; /* Faster transition for mobile */
 }
 
 .fade-in.visible {
@@ -57,6 +60,11 @@ html {
 @media (min-width: 769px) {
   .section {
     padding-bottom: 3rem; /* Add some bottom padding */
+    transition: opacity 0.5s ease-in-out; /* Slower transition for desktop */
+  }
+
+  .fade-in {
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out; /* Slower transition for desktop */
   }
 }
 
