@@ -10,7 +10,7 @@ const Header = ({ sections, activeSection, onNavClick }) => {
   // Handle scroll event to change header style
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
+      if (window.scrollY > 20) {
         setIsScrolled(true)
       } else {
         setIsScrolled(false)
@@ -24,12 +24,28 @@ const Header = ({ sections, activeSection, onNavClick }) => {
       }
     }
 
-    window.addEventListener("scroll", handleScroll)
+    // Initial check
+    handleScroll()
+
+    window.addEventListener("scroll", handleScroll, { passive: true })
     window.addEventListener("resize", handleResize)
 
     return () => {
       window.removeEventListener("scroll", handleScroll)
       window.removeEventListener("resize", handleResize)
+    }
+  }, [isMobileMenuOpen])
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = ""
+    }
+
+    return () => {
+      document.body.style.overflow = ""
     }
   }, [isMobileMenuOpen])
 
@@ -41,6 +57,11 @@ const Header = ({ sections, activeSection, onNavClick }) => {
     setIsMobileMenuOpen(false)
   }
 
+  const handleNavItemClick = (sectionId) => {
+    onNavClick(sectionId)
+    setIsMobileMenuOpen(false)
+  }
+
   return (
     <header className={`header ${isScrolled ? "scrolled" : ""}`}>
       <div className="container header-container">
@@ -49,13 +70,14 @@ const Header = ({ sections, activeSection, onNavClick }) => {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="desktop-nav">
+        <nav className="desktop-nav" aria-label="Main Navigation">
           <ul className="nav-links">
             {sections.map((section) => (
               <li key={section.id}>
                 <button
                   className={`neomorphic-button ${activeSection === section.id ? "active" : ""}`}
                   onClick={() => onNavClick(section.id)}
+                  aria-current={activeSection === section.id ? "page" : undefined}
                 >
                   {section.title}
                 </button>
@@ -70,6 +92,7 @@ const Header = ({ sections, activeSection, onNavClick }) => {
           onClick={toggleMobileMenu}
           aria-label="Toggle mobile menu"
           aria-expanded={isMobileMenuOpen}
+          aria-controls="mobile-nav"
         >
           <span className={`hamburger ${isMobileMenuOpen ? "open" : ""}`}></span>
         </button>
@@ -82,22 +105,22 @@ const Header = ({ sections, activeSection, onNavClick }) => {
         ></div>
 
         {/* Mobile Navigation Menu */}
-        <div className={`mobile-nav ${isMobileMenuOpen ? "open" : ""}`}>
-          <ul className="mobile-nav-links">
-            {sections.map((section) => (
-              <li key={section.id}>
-                <button
-                  className={`neomorphic-button ${activeSection === section.id ? "active" : ""}`}
-                  onClick={() => {
-                    onNavClick(section.id)
-                    setIsMobileMenuOpen(false)
-                  }}
-                >
-                  {section.title}
-                </button>
-              </li>
-            ))}
-          </ul>
+        <div className={`mobile-nav ${isMobileMenuOpen ? "open" : ""}`} id="mobile-nav" aria-hidden={!isMobileMenuOpen}>
+          <nav aria-label="Mobile Navigation">
+            <ul className="mobile-nav-links">
+              {sections.map((section) => (
+                <li key={section.id}>
+                  <button
+                    className={`neomorphic-button ${activeSection === section.id ? "active" : ""}`}
+                    onClick={() => handleNavItemClick(section.id)}
+                    aria-current={activeSection === section.id ? "page" : undefined}
+                  >
+                    {section.title}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
       </div>
     </header>

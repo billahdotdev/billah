@@ -3,11 +3,12 @@
   display: flex;
   flex-direction: column;
   overflow-x: hidden; /* Prevent horizontal scrolling */
+  position: relative; /* Establish positioning context */
 }
 
 .content {
   flex: 1;
-  padding-top: var(--header-height); /* Space for fixed header */
+  position: relative;
 }
 
 /* For smooth scrolling */
@@ -18,23 +19,19 @@ html {
 
 /* Prevent content from being hidden under fixed header */
 .section {
-  scroll-margin-top: calc(var(--header-height) + 20px);
+  scroll-margin-top: calc(var(--header-height) + 10px);
 }
 
 /* Improve section spacing */
 .section {
-  padding: 2rem 0;
+  position: relative;
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
 }
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
   .section {
-    padding: 3rem 0;
-  }
-}
-
-@media (min-width: 992px) {
-  .section {
-    padding: 4rem 0;
+    scroll-margin-top: 60px; /* Adjust for smaller header on mobile */
   }
 }
 

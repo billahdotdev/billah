@@ -11,15 +11,17 @@ const Footer = () => {
             <h2>Masum Billah (billahdotdev)</h2>
           </div>
 
-          <div className="footer-links">
-            <a href="#section-about">Who I Am?</a>
-            <a href="#section-services">What I Do?</a>
-            <a href="#section-shop">Shop</a>
-            <a href="#section-contact">Contact</a>
-          </div>
+          <nav aria-label="Footer Navigation">
+            <div className="footer-links">
+              <a href="#section-about">Who I Am?</a>
+              <a href="#section-services">What I Do?</a>
+              <a href="#section-shop">Shop</a>
+              <a href="#section-contact">Contact</a>
+            </div>
+          </nav>
 
-          <div className="footer-social">
-          <a
+          <div className="footer-social" aria-label="Social Media Links">
+            <a
               href="https://github.com/billahdotdev"
               className="social-icon"
               aria-label="GitHub"
@@ -88,11 +90,7 @@ const Footer = () => {
         </div>
 
         <div className="footer-bottom">
-          <p>
-            {" "}
-            {currentYear} Built by dreamers: Masum Billah. For dreamers. Deeply indebted to the individuals who I
-            learned from. "NO RIGHT RESERVED".{" "}
-          </p>
+          <p>&copy; {currentYear} Masum Billah. All rights reserved.</p>
         </div>
       </div>
     </footer>

@@ -13,6 +13,7 @@ const Layout = () => {
   const [activeSection, setActiveSection] = useState("about")
   const [isIntersecting, setIsIntersecting] = useState({})
   const sectionRefs = useRef({})
+  const [isScrolling, setIsScrolling] = useState(false)
 
   const sections = [
     { id: "about", title: "Who Am I?" },
@@ -21,35 +22,48 @@ const Layout = () => {
     { id: "contact", title: "Contact" },
   ]
 
-  // Update the handleNavClick function for better mobile experience
+  // Improved smooth scroll function with better offset calculation
   const handleNavClick = (sectionId) => {
+    // Prevent multiple scroll events
+    if (isScrolling) return
+
+    setIsScrolling(true)
     setActiveSection(sectionId)
-    // Smooth scroll to the section with offset
+
     const element = document.getElementById(`section-${sectionId}`)
     if (element) {
       // Get the computed header height from CSS variable
       const headerHeight =
         Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue("--header-height")) || 80
-      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
-      const offsetPosition = elementPosition - headerHeight - 20 // Added extra 20px padding
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY
+      const offsetPosition = elementPosition - headerHeight
 
       window.scrollTo({
         top: offsetPosition,
         behavior: "smooth",
       })
+
+      // Reset scrolling state after animation completes
+      setTimeout(() => {
+        setIsScrolling(false)
+      }, 1000)
+    } else {
+      setIsScrolling(false)
     }
   }
 
-  // Update the useEffect hook to improve section detection
+  // Improved intersection observer setup
   useEffect(() => {
     const observers = {}
     const observerOptions = {
-      threshold: [0.1, 0.3, 0.5],
-      rootMargin: "-80px 0px -20% 0px", // Adjusted for header height
+      threshold: [0.1, 0.5, 0.8], // More threshold points for better detection
+      rootMargin: `-${window.innerWidth <= 768 ? 60 : 80}px 0px -20% 0px`, // Adjusted for mobile
     }
 
     // Function to check which section is most visible
     const updateActiveSection = () => {
+      if (isScrolling) return // Don't update during programmatic scrolling
+
       const visibleSections = Object.entries(isIntersecting)
         .filter(([_, isVisible]) => isVisible)
         .map(([id]) => id)
@@ -86,7 +100,7 @@ const Layout = () => {
           }))
 
           // Call updateActiveSection after state is updated
-          setTimeout(updateActiveSection, 0)
+          setTimeout(updateActiveSection, 10)
         }, observerOptions)
 
         observer.observe(ref)
@@ -94,15 +108,19 @@ const Layout = () => {
       }
     })
 
-    // Also update active section on scroll for smoother transitions
+    // Throttled scroll handler for smoother performance
+    let ticking = false
     const handleScroll = () => {
-      requestAnimationFrame(updateActiveSection)
+      if (!ticking && !isScrolling) {
+        window.requestAnimationFrame(() => {
+          updateActiveSection()
+          ticking = false
+        })
+        ticking = true
+      }
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true })
-
-    // Smooth scroll behavior for the entire page
-    document.documentElement.style.scrollBehavior = "smooth"
 
     // Cleanup
     return () => {
@@ -110,9 +128,8 @@ const Layout = () => {
         observer.disconnect()
       })
       window.removeEventListener("scroll", handleScroll)
-      document.documentElement.style.scrollBehavior = ""
     }
-  }, [isIntersecting])
+  }, [isIntersecting, isScrolling, sections])
 
   return (
     <div className="portfolio-container">

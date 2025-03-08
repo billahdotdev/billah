@@ -41,8 +41,11 @@
 }
 
 html {
-  font-size: 16px; /* Base font size */
-  -webkit-text-size-adjust: 100%; /* Prevent font scaling in landscape */
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  height: 100%;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 body {
@@ -51,8 +54,9 @@ body {
   color: var(--text-primary);
   background-color: var(--background);
   margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  min-height: 100%;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  position: relative;
 }
 
 button {
@@ -62,6 +66,11 @@ button {
   font-family: inherit;
   font-size: inherit;
   color: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 /* Improve focus styles for accessibility */
@@ -76,7 +85,10 @@ button:focus {
   button,
   a {
     min-height: 44px; /* Minimum touch target size */
-    min-width: 44px; /* Minimum touch target size */
+  }
+
+  :root {
+    --header-height: 60px; /* Smaller header on mobile */
   }
 }
 
@@ -124,7 +136,9 @@ button:focus {
 }
 
 .section {
-  padding: 4rem 0;
+  position: relative;
+  padding: 0;
+  margin: 0;
 }
 
 .hidden {
@@ -166,26 +180,10 @@ button:focus {
   height: 20px;
 }
 
-/* Responsive container classes */
 .container {
   width: 100%;
-  padding-right: var(--space-4);
-  padding-left: var(--space-4);
-  margin-right: auto;
-  margin-left: auto;
-}
-
-@media (max-width: 576px) {
-  .container {
-    max-width: 100%;
-  }
-
-  /* Adjust font sizes for very small screens */
-  :root {
-    --font-3xl: 1.75rem; /* Slightly smaller headings on mobile */
-    --font-2xl: 1.5rem;
-    --font-xl: 1.25rem;
-  }
+  padding: 0 1rem;
+  margin: 0 auto;
 }
 
 @media (min-width: 577px) and (max-width: 768px) {

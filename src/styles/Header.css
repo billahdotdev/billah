@@ -4,16 +4,18 @@
   left: 0;
   width: 100%;
   z-index: 1000;
-  padding: 1rem 0;
+  padding: 0;
   transition: var(--transition);
   height: var(--header-height);
   display: flex;
   align-items: center;
-  backdrop-filter: blur(5px);
+  background-color: rgba(245, 245, 245, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .header.scrolled {
-  background-color: rgba(245, 245, 245, 0.95); /* Slightly transparent background */
+  background-color: rgba(245, 245, 245, 0.95);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -22,6 +24,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  height: 100%;
 }
 
 .logo {
@@ -30,7 +33,7 @@
 }
 
 .logo h1 {
-  font-size: var(--font-lg);
+  font-size: 1.5rem;
   color: var(--primary);
   margin: 0;
 }
@@ -39,6 +42,8 @@
   display: flex;
   list-style: none;
   gap: 1rem;
+  margin: 0;
+  padding: 0;
 }
 
 /* Mobile Menu */
@@ -51,6 +56,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  z-index: 1001;
 }
 
 .hamburger {
@@ -137,7 +143,6 @@
   width: 100%;
   text-align: left;
   padding: 1rem 1.5rem;
-  font-size: var(--font-base);
 }
 
 /* Add overlay for mobile menu */
@@ -152,7 +157,6 @@
   z-index: 998;
   opacity: 0;
   transition: opacity 0.3s ease;
-  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
 }
 
 .mobile-menu-overlay.open {
@@ -163,7 +167,7 @@
 /* Responsive */
 @media (max-width: 768px) {
   .header {
-    padding: 0.5rem 0;
+    height: 60px; /* Smaller header on mobile */
   }
 
   .logo {
@@ -171,7 +175,7 @@
   }
 
   .logo h1 {
-    font-size: var(--font-base);
+    font-size: 1.2rem;
   }
 
   .desktop-nav {
@@ -181,6 +185,16 @@
   .mobile-menu-toggle {
     display: flex;
   }
+
+  .mobile-nav {
+    top: 60px; /* Match mobile header height */
+    height: calc(100vh - 60px);
+  }
+
+  .mobile-menu-overlay {
+    top: 60px; /* Match mobile header height */
+    height: calc(100vh - 60px);
+  }
 }
 
 @media (max-width: 576px) {
@@ -189,24 +203,11 @@
   }
 
   .mobile-nav {
-    width: 85%; /* Slightly wider on very small screens */
+    width: 85%;
   }
 
   .mobile-nav-links button {
-    padding: 0.8rem 1.2rem; /* Slightly smaller padding */
-  }
-}
-
-/* Improve desktop navigation */
-@media (min-width: 769px) {
-  .nav-links li button {
-    font-size: var(--font-sm);
-    padding: 0.7rem 1.2rem;
-    transition: all 0.2s ease;
-  }
-
-  .nav-links li button:hover {
-    transform: translateY(-2px);
+    padding: 0.8rem 1.2rem;
   }
 }
 

@@ -5,8 +5,9 @@ import "../styles/ShopSection.css"
 
 const ShopSection = () => {
   const [activeCategory, setActiveCategory] = useState("all")
+  const [isLoaded, setIsLoaded] = useState(false)
   const categoriesRef = useRef(null)
-  const [showScrollIndicator, setShowScrollIndicator] = useState(false)
+  const sectionRef = useRef(null)
 
   const categories = [
     { id: "all", name: "All Items" },
@@ -117,22 +118,52 @@ const ShopSection = () => {
     },
   ]
 
-  // Check if categories container is scrollable
+  // Mark section as loaded after initial render and preload images
   useEffect(() => {
-    const checkScrollable = () => {
-      if (categoriesRef.current) {
-        const { scrollWidth, clientWidth } = categoriesRef.current
-        setShowScrollIndicator(scrollWidth > clientWidth)
+    // Preload images first
+    const imagesToLoad = products.length
+    let imagesLoaded = 0
+
+    const imageLoaded = () => {
+      imagesLoaded++
+      if (imagesLoaded >= imagesToLoad) {
+        setIsLoaded(true)
       }
     }
 
-    checkScrollable()
-    window.addEventListener("resize", checkScrollable)
+    products.forEach((product) => {
+      if (product.image) {
+        const img = new Image()
+        img.onload = imageLoaded
+        img.onerror = imageLoaded // Count errors as loaded to avoid hanging
+        img.src = product.image
+      } else {
+        imageLoaded()
+      }
+    })
 
-    return () => {
-      window.removeEventListener("resize", checkScrollable)
-    }
+    // Set a timeout to ensure loading state changes even if images fail
+    const timeout = setTimeout(() => {
+      setIsLoaded(true)
+    }, 3000)
+
+    return () => clearTimeout(timeout)
   }, [])
+
+  // Scroll to active category when it changes
+  useEffect(() => {
+    if (categoriesRef.current && activeCategory !== "all") {
+      const activeButton = categoriesRef.current.querySelector(`#tab-${activeCategory}`)
+      if (activeButton) {
+        const scrollLeft =
+          activeButton.offsetLeft - categoriesRef.current.clientWidth / 2 + activeButton.clientWidth / 2
+        categoriesRef.current.scrollTo({
+          left: scrollLeft,
+          behavior: "smooth",
+        })
+      }
+    }
+  }, [activeCategory])
 
   // Filter products based on active category, excluding custom solution cards from "All Items" view
   const filteredProducts =
@@ -154,7 +185,7 @@ const ShopSection = () => {
   }
 
   return (
-    <div className="container">
+    <div className="container shop-section-container" ref={sectionRef}>
       <h2 className="section-title" id="shop-heading">
         Shop
       </h2>
@@ -166,94 +197,114 @@ const ShopSection = () => {
         </p>
       </div>
 
-      <div
-        className={`shop-categories ${showScrollIndicator ? "has-more" : ""}`}
-        ref={categoriesRef}
-        role="tablist"
-        aria-label="Product categories"
-      >
-        {categories.map((category) => (
-          <button
-            key={category.id}
-            className={`category-button neomorphic ${activeCategory === category.id ? "active" : ""}`}
-            onClick={() => setActiveCategory(category.id)}
-            aria-pressed={activeCategory === category.id}
-            role="tab"
-            aria-selected={activeCategory === category.id}
-            id={`tab-${category.id}`}
-            aria-controls={`panel-${category.id}`}
-          >
-            {category.name}
-          </button>
-        ))}
+      <div className="shop-categories-wrapper" aria-label="Product categories">
+        <div className="shop-categories" ref={categoriesRef} role="tablist">
+          {categories.map((category) => (
+            <button
+              key={category.id}
+              className={`category-button neomorphic ${activeCategory === category.id ? "active" : ""}`}
+              onClick={() => setActiveCategory(category.id)}
+              aria-pressed={activeCategory === category.id}
+              role="tab"
+              aria-selected={activeCategory === category.id}
+              id={`tab-${category.id}`}
+              aria-controls={`panel-${category.id}`}
+            >
+              {category.name}
+            </button>
+          ))}
+        </div>
+        <div className="scroll-indicator left" aria-hidden="true"></div>
+        <div className="scroll-indicator right" aria-hidden="true"></div>
       </div>
 
       <div
-        className="products-grid"
+        className={`products-grid ${isLoaded ? "loaded" : ""}`}
         role="tabpanel"
         id={`panel-${activeCategory}`}
         aria-labelledby={`tab-${activeCategory}`}
       >
-        {filteredProducts.map((product) => (
-          <div
-            key={product.id}
-            className="product-card neomorphic"
-            data-custom={product.isCustomSolution ? "true" : "false"}
-          >
-            <div className="product-image">
-              <img src={product.image || "/placeholder.svg"} alt={`${product.title} product image`} loading="lazy" />
-              {product.badge && <span className="product-badge">{product.badge}</span>}
-            </div>
-            <div className="product-content">
-              <h3>{product.title}</h3>
-              <p className="product-description">{product.description}</p>
+        {!isLoaded && (
+          <div className="loading-indicator">
+            <div className="loading-spinner"></div>
+            <p>Loading products...</p>
+          </div>
+        )}
 
-              {!product.isCustomSolution && (
-                <div className="product-price" aria-label={`Price: ${product.price} dollars`}>
-                  ${product.price}
-                </div>
-              )}
+        {isLoaded && filteredProducts.length > 0 ? (
+          filteredProducts.map((product) => (
+            <div
+              key={product.id}
+              className="product-card neomorphic"
+              data-custom={product.isCustomSolution ? "true" : "false"}
+            >
+              <div className="product-image">
+                <img
+                  src={product.image || "/placeholder.svg?height=200&width=300"}
+                  alt={`${product.title} product image`}
+                  loading="lazy"
+                  onError={(e) => {
+                    e.target.onerror = null
+                    e.target.src = "/placeholder.svg?height=200&width=300"
+                  }}
+                />
+                {product.badge && <span className="product-badge">{product.badge}</span>}
+              </div>
+              <div className="product-content">
+                <h3>{product.title}</h3>
+                <p className="product-description">{product.description}</p>
 
-              <div
-                className={`product-buttons ${product.category === "websites" && !product.isCustomSolution ? "two-buttons" : ""}`}
-              >
-                {product.isCustomSolution ? (
-                  <button
-                    className="neomorphic-button product-button full-width"
-                    onClick={() => handleWhatsAppInquiry(product)}
-                    aria-label={`Contact about custom ${product.category}`}
-                  >
-                    <span className="whatsapp-icon" aria-hidden="true"></span>
-                    Let's Talk
-                  </button>
-                ) : (
-                  <>
+                {!product.isCustomSolution && (
+                  <div className="product-price" aria-label={`Price: ${product.price} dollars`}>
+                    ${product.price}
+                  </div>
+                )}
+
+                <div
+                  className={`product-buttons ${product.category === "websites" && !product.isCustomSolution ? "two-buttons" : ""}`}
+                >
+                  {product.isCustomSolution ? (
                     <button
-                      className="neomorphic-button product-button"
+                      className="neomorphic-button product-button full-width"
                       onClick={() => handleWhatsAppInquiry(product)}
-                      aria-label={`Inquire about ${product.title}`}
+                      aria-label={`Contact about custom ${product.category}`}
                     >
                       <span className="whatsapp-icon" aria-hidden="true"></span>
-                      Inquire
+                      Let's Talk
                     </button>
-
-                    {/* Only show Demo button for website category */}
-                    {product.category === "websites" && (
+                  ) : (
+                    <>
                       <button
-                        className="neomorphic-button product-button demo-button"
-                        onClick={() => handleDemoClick(product.github)}
-                        aria-label={`View demo for ${product.title}`}
+                        className="neomorphic-button product-button"
+                        onClick={() => handleWhatsAppInquiry(product)}
+                        aria-label={`Inquire about ${product.title}`}
                       >
-                        <span className="github-icon" aria-hidden="true"></span>
-                        Demo
+                        <span className="whatsapp-icon" aria-hidden="true"></span>
+                        Inquire
                       </button>
-                    )}
-                  </>
-                )}
+
+                      {/* Only show Demo button for website category */}
+                      {product.category === "websites" && (
+                        <button
+                          className="neomorphic-button product-button demo-button"
+                          onClick={() => handleDemoClick(product.github)}
+                          aria-label={`View demo for ${product.title}`}
+                        >
+                          <span className="github-icon" aria-hidden="true"></span>
+                          Demo
+                        </button>
+                      )}
+                    </>
+                  )}
+                </div>
               </div>
             </div>
+          ))
+        ) : isLoaded && filteredProducts.length === 0 ? (
+          <div className="no-products-message">
+            <p>No products found in this category.</p>
           </div>
-        ))}
+        ) : null}
       </div>
 
       <div className="shop-cta neomorphic">
