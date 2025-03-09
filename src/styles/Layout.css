@@ -12,6 +12,9 @@
 .section {
   padding: 3rem 0;
   margin-bottom: 2rem; /* Add margin between sections */
+  display: block !important; /* Force display for all sections */
+  width: 100%; /* Full width */
+  overflow: visible; /* Prevent content from being cut off */
 }
 
 /* Ensure fade-in animations work properly */
@@ -30,6 +33,7 @@
 @media (max-width: 768px) {
   .section {
     padding: 2rem 0;
+    display: block !important; /* Explicitly ensure display on mobile */
   }
 }
 

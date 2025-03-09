@@ -37,6 +37,11 @@ const Header = ({ sections, activeSection, onNavClick }) => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
   }
 
+  // Debug active section
+  useEffect(() => {
+    console.log("Current active section:", activeSection)
+  }, [activeSection])
+
   return (
     <header className={`header ${isScrolled ? "scrolled" : ""}`}>
       <div className="container header-container">
@@ -52,6 +57,7 @@ const Header = ({ sections, activeSection, onNavClick }) => {
                 <button
                   className={`neomorphic-button ${activeSection === section.id ? "active" : ""}`}
                   onClick={() => onNavClick(section.id)}
+                  data-section={section.id}
                 >
                   {section.title}
                 </button>
@@ -81,6 +87,7 @@ const Header = ({ sections, activeSection, onNavClick }) => {
                     onNavClick(section.id)
                     setIsMobileMenuOpen(false)
                   }}
+                  data-section={section.id}
                 >
                   {section.title}
                 </button>

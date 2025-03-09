@@ -158,7 +158,7 @@
   line-height: 1.6;
 }
 
-/* Responsive */
+/* Update responsive styles for ProjectsSection */
 @media (max-width: 768px) {
   .projects-grid {
     grid-template-columns: 1fr;
@@ -173,6 +173,14 @@
     width: 100%;
     max-width: 250px;
     text-align: center;
+  }
+
+  /* Ensure section is visible on mobile */
+  .projects-intro,
+  .projects-grid,
+  .projects-cta {
+    display: block !important;
+    width: 100%;
   }
 }
 

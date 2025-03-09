@@ -1,4 +1,3 @@
-// Update the Layout component to ensure proper spacing between sections
 "use client"
 
 import { useState, useRef, useEffect } from "react"
@@ -14,6 +13,7 @@ const Layout = () => {
   const [activeSection, setActiveSection] = useState("about")
   const [isIntersecting, setIsIntersecting] = useState({})
   const sectionRefs = useRef({})
+  const observersRef = useRef({})
 
   const sections = [
     { id: "about", title: "Who Am I?" },
@@ -22,101 +22,88 @@ const Layout = () => {
     { id: "contact", title: "Contact" },
   ]
 
-  // Update the handleNavClick function for smoother scrolling
   const handleNavClick = (sectionId) => {
-    setActiveSection(sectionId)
-    // Smooth scroll to the section with offset
     const element = document.getElementById(`section-${sectionId}`)
     if (element) {
-      // Get the computed header height from CSS variable
-      const headerHeight =
-        Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue("--header-height")) || 80
+      const headerHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--header-height")) || 80
       const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
-      const offsetPosition = elementPosition - headerHeight - 20 // Added extra 20px padding
+      const offsetPosition = elementPosition - headerHeight - 20
 
       window.scrollTo({
         top: offsetPosition,
         behavior: "smooth",
       })
+      setActiveSection(sectionId)
     }
   }
 
-  // Update the useEffect hook to improve transitions
   useEffect(() => {
-    const observers = {}
     const observerOptions = {
-      threshold: [0.1, 0.3, 0.5], // Multiple thresholds for better detection
-      rootMargin: "-100px 0px -20% 0px", // Adjusted rootMargin for better section detection
+      threshold: [0.2], // Simplified threshold
+      rootMargin: "-100px 0px -20% 0px",
     }
 
-    sections.forEach((section) => {
-      const ref = sectionRefs.current[section.id]
-      if (ref) {
-        const observer = new IntersectionObserver(([entry]) => {
-          setIsIntersecting((prev) => ({
-            ...prev,
-            [section.id]: entry.isIntersecting,
-          }))
-
-          // Auto-update active section based on scroll
-          if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
-            setActiveSection(section.id)
-          }
-        }, observerOptions)
-
-        observer.observe(ref)
-        observers[section.id] = observer
-      }
-    })
-
-    // Smooth scroll behavior for the entire page
-    document.documentElement.style.scrollBehavior = "smooth"
-
-    // Cleanup
+    // Cleanup previous observers
     return () => {
-      Object.values(observers).forEach((observer) => {
-        observer.disconnect()
-      })
-      document.documentElement.style.scrollBehavior = ""
+      Object.values(observersRef.current).forEach(observer => observer.disconnect())
     }
-  }, [])
+  }, []) // Empty dependency array as we only need to set this up once
+
+  useEffect(() => {
+    const setupObservers = () => {
+      sections.forEach((section) => {
+        const element = document.getElementById(`section-${section.id}`)
+        if (element && !observersRef.current[section.id]) {
+          const observer = new IntersectionObserver(
+            ([entry]) => {
+              setIsIntersecting(prev => ({
+                ...prev,
+                [section.id]: entry.isIntersecting
+              }))
+
+              if (entry.isIntersecting && entry.intersectionRatio >= 0.2) {
+                setActiveSection(section.id)
+              }
+            },
+            {
+              threshold: [0.2],
+              rootMargin: "-100px 0px -20% 0px"
+            }
+          )
+
+          observer.observe(element)
+          observersRef.current[section.id] = observer
+        }
+      })
+    }
+
+    setupObservers()
+
+    // Cleanup function
+    return () => {
+      Object.values(observersRef.current).forEach(observer => observer.disconnect())
+      observersRef.current = {}
+    }
+  }, [sections]) // Only re-run if sections array changes
 
   return (
     <div className="portfolio-container">
       <Header sections={sections} activeSection={activeSection} onNavClick={handleNavClick} />
 
       <main className="content">
-        <div
-          id="section-about"
-          ref={(el) => (sectionRefs.current.about = el)}
-          className={`section fade-in ${isIntersecting.about ? "visible" : ""}`}
-        >
-          <AboutSection />
-        </div>
-
-        <div
-          id="section-services"
-          ref={(el) => (sectionRefs.current.services = el)}
-          className={`section fade-in ${isIntersecting.services ? "visible" : ""}`}
-        >
-          <ServicesSection />
-        </div>
-
-        <div
-          id="section-projects"
-          ref={(el) => (sectionRefs.current.projects = el)}
-          className={`section fade-in ${isIntersecting.projects ? "visible" : ""}`}
-        >
-          <ProjectsSection />
-        </div>
-
-        <div
-          id="section-contact"
-          ref={(el) => (sectionRefs.current.contact = el)}
-          className={`section fade-in ${isIntersecting.contact ? "visible" : ""}`}
-        >
-          <ContactSection />
-        </div>
+        {sections.map((section) => (
+          <div
+            key={section.id}
+            id={`section-${section.id}`}
+            ref={(el) => (sectionRefs.current[section.id] = el)}
+            className={`section fade-in ${isIntersecting[section.id] ? "visible" : ""}`}
+          >
+            {section.id === "about" && <AboutSection />}
+            {section.id === "services" && <ServicesSection />}
+            {section.id === "projects" && <ProjectsSection />}
+            {section.id === "contact" && <ContactSection />}
+          </div>
+        ))}
       </main>
 
       <Footer />
@@ -125,4 +112,3 @@ const Layout = () => {
 }
 
 export default Layout
-
