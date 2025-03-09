@@ -1,117 +1,74 @@
-"use client"
-
-import { useState } from "react"
 import "../styles/ServicesSection.css"
+import { FaCode, FaPalette, FaGlobe, FaMobile, FaServer, FaRocket } from "react-icons/fa"
 
-const ServicesSection = () => {
-  const [activeService, setActiveService] = useState(0)
-
+function ServicesSection({ darkMode }) {
   const services = [
     {
+      icon: <FaCode className="service-icon" />,
       title: "Web Development",
-      icon: "💻",
       description:
-        "I build responsive, modern websites and web applications that work flawlessly across all devices. Using the latest technologies and best practices, I create solutions that are not only visually appealing but also performant and accessible.",
-      skills: ["HTML5/CSS3", "JavaScript/TypeScript", "React", "Next.js", "Node.js", "RESTful APIs"],
-      image:
-        "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1172&q=80",
+        "Building responsive, fast, and accessible websites using modern technologies like React, Next.js, and CSS.",
+      features: ["Custom Websites", "Web Applications", "E-commerce Solutions", "API Integration"],
     },
     {
-      title: "SEO",
-      icon: "🔍",
+      icon: <FaPalette className="service-icon" />,
+      title: "UI/UX Design",
       description:
-        "I help businesses improve their online visibility and search engine rankings through comprehensive SEO strategies. From keyword research and on-page optimization to technical SEO and link building, I implement proven techniques to drive organic traffic to your website.",
-      skills: ["Keyword Research", "On-Page SEO", "Technical SEO", "Link Building", "Content Strategy", "Analytics"],
-      image:
-        "https://images.unsplash.com/photo-1562577309-4932fdd64cd1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80",
+        "Creating intuitive and visually appealing user interfaces with a focus on user experience and modern design trends.",
+      features: ["User Research", "Wireframing", "Prototyping", "Visual Design"],
     },
     {
-      title: "Digital Marketing",
-      icon: "📱",
+      icon: <FaGlobe className="service-icon" />,
+      title: "SEO Optimization",
       description:
-        "I develop and execute comprehensive digital marketing strategies to help businesses reach their target audience, increase brand awareness, and drive conversions. From social media marketing to email campaigns, I leverage various digital channels to achieve your marketing goals.",
-      skills: [
-        "Social Media Marketing",
-        "Email Marketing",
-        "Content Marketing",
-        "PPC Advertising",
-        "Analytics",
-        "Marketing Automation",
-      ],
-      image:
-        "https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        "Improving website visibility and search engine rankings through technical SEO and content optimization.",
+      features: ["Keyword Research", "On-page SEO", "Technical Audits", "Performance Optimization"],
     },
     {
-      title: "Branding Identity Design",
-      icon: "🎨",
-      description:
-        "I create cohesive and memorable brand identities that resonate with your target audience and differentiate your business from competitors. From logo design to brand guidelines, I develop visual elements that effectively communicate your brand's values and personality.",
-      skills: ["Logo Design", "Brand Guidelines", "Visual Identity", "Typography", "Color Theory", "Brand Strategy"],
-      image:
-        "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+      icon: <FaMobile className="service-icon" />,
+      title: "Mobile Development",
+      description: "Developing cross-platform mobile applications using React Native and other modern frameworks.",
+      features: ["iOS & Android Apps", "Progressive Web Apps", "App Store Submission", "App Maintenance"],
+    },
+    {
+      icon: <FaServer className="service-icon" />,
+      title: "Backend Development",
+      description: "Building robust server-side applications and APIs to power your web and mobile applications.",
+      features: ["Node.js/Express", "Database Design", "API Development", "Authentication Systems"],
+    },
+    {
+      icon: <FaRocket className="service-icon" />,
+      title: "Performance Optimization",
+      description: "Optimizing web applications for speed, efficiency, and better user experience.",
+      features: ["Load Time Reduction", "Code Optimization", "Asset Optimization", "Caching Strategies"],
     },
   ]
 
-  const handleWhatsAppQuote = () => {
-    const message = `Hi, I'm interested in your ${services[activeService].title} service. Can you provide more information?`
-    const whatsappUrl = `https://wa.me/880171526536?text=${encodeURIComponent(message)}`
-    window.open(whatsappUrl, "_blank", "noopener,noreferrer")
-  }
-
   return (
-    <div className="container">
+    <section id="services" className="section services-section">
       <h2 className="section-title">What Do I Do?</h2>
 
-      <div className="services-container">
-        <div className="services-tabs" role="tablist" aria-label="Services">
-          {services.map((service, index) => (
-            <button
-              key={index}
-              className={`service-tab neomorphic ${activeService === index ? "active" : ""}`}
-              onClick={() => setActiveService(index)}
-              role="tab"
-              aria-selected={activeService === index}
-              aria-controls={`service-panel-${index}`}
-              id={`service-tab-${index}`}
-            >
-              <span className="service-icon" aria-hidden="true">
-                {service.icon}
-              </span>
-              <span className="service-title">{service.title}</span>
-            </button>
-          ))}
-        </div>
+      <div className="services-grid">
+        {services.map((service, index) => (
+          <div key={index} className="service-card neo-flat">
+            <div className="service-icon-container neo-circle animate-float">{service.icon}</div>
 
-        <div className="service-content neomorphic">
-          <div className="service-image">
-            <img
-              src={services[activeService].image || "/placeholder.svg"}
-              alt={`${services[activeService].title} service illustration`}
-            />
-          </div>
-          <h3>{services[activeService].title}</h3>
-          <p>{services[activeService].description}</p>
+            <h3 className="service-title accent-gradient">{service.title}</h3>
+            <p className="service-description">{service.description}</p>
 
-          <div className="service-skills">
-            <h4 className="skills-heading">Skills & Technologies:</h4>
-            <div className="skills-list">
-              {services[activeService].skills.map((skill, skillIndex) => (
-                <span key={skillIndex} className="skill-pill">
-                  {skill}
-                </span>
+            <ul className="service-features">
+              {service.features.map((feature, featureIndex) => (
+                <li key={featureIndex} className="service-feature-item">
+                  {feature}
+                </li>
               ))}
-            </div>
-          </div>
+            </ul>
 
-          <div className="service-cta">
-            <button className="neomorphic-button whatsapp-button" onClick={handleWhatsAppQuote}>
-              <span className="whatsapp-icon" aria-hidden="true"></span>
-              <span className="button-text">Let's work together!</span>
-            </button>
+            <button className="service-button neo-button-small glow">Learn More</button>
           </div>
-        </div>
+        ))}
       </div>
-    </div>
+    </section>
   )
 }
 

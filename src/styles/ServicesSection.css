@@ -1,159 +1,110 @@
-/* You'll need to create this file with appropriate styles */
-.services-container {
+.services-grid {
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 2rem;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
 }
 
-.services-tabs {
+.service-card {
+  padding: var(--spacing-lg);
+  transition: all var(--transition-normal);
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  align-items: flex-start;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
 }
 
-.service-tab {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1.2rem;
-  border-radius: var(--border-radius);
-  text-align: left;
-  transition: var(--transition);
+.service-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 40px;
+  background: var(--accent-color);
+  border-radius: 0 0 var(--radius-sm) 0;
+  transition: height var(--transition-slow);
 }
 
-.service-tab:hover {
-  transform: translateY(-2px);
+.service-card:hover::before {
+  height: 70px;
 }
 
-.service-tab.active {
-  background-color: var(--primary);
+.service-card:hover {
+  transform: translateY(-5px);
+}
+
+.service-icon-container {
+  padding: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  display: inline-block;
 }
 
 .service-icon {
-  font-size: 1.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--accent-color);
+  transition: color var(--transition-normal);
 }
 
 .service-title {
-  font-size: 1.1rem;
-  font-weight: 500;
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-light);
+  transition: color var(--transition-normal);
 }
 
-.service-content {
-  padding: 2rem;
-  border-radius: var(--border-radius);
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+body.dark .service-title {
+  color: var(--text-dark);
 }
 
-.service-image {
+.service-description {
+  color: var(--text-tertiary-light);
+  margin-bottom: var(--spacing-md);
+  transition: color var(--transition-normal);
+}
+
+body.dark .service-description {
+  color: var(--text-tertiary-dark);
+}
+
+.service-features {
+  list-style: none;
+  padding: 0;
+  margin-bottom: var(--spacing-md);
   width: 100%;
-  height: 200px;
-  border-radius: var(--border-radius);
-  overflow: hidden;
-  margin-bottom: 1rem;
 }
 
-.service-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.service-content h3 {
-  font-size: 1.8rem;
-  color: var(--primary);
-  margin-bottom: 0.5rem;
-}
-
-.service-content p {
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-}
-
-.service-skills {
-  margin-top: 1rem;
-}
-
-.skills-heading {
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-}
-
-.skills-list {
+.service-feature-item {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  color: var(--text-tertiary-light);
+  transition: all var(--transition-normal);
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.8rem;
+  align-items: center;
 }
 
-.skill-pill {
+body.dark .service-feature-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--text-tertiary-dark);
+}
+
+.service-feature-item::before {
+  content: "✓";
+  color: var(--accent-color);
+  margin-right: 0.5rem;
+  font-weight: bold;
+}
+
+.service-feature-item:last-child {
+  border-bottom: none;
+}
+
+.service-button {
+  margin-top: auto;
+  align-self: flex-end;
   padding: 0.5rem 1rem;
-  background-color: rgba(63, 81, 181, 0.1);
-  border-radius: 20px;
-  font-size: 0.9rem;
-}
-
-.service-cta {
-  margin-top: 2rem;
-  display: flex;
-  justify-content: flex-end;
-}
-
-/* Responsive */
-@media (max-width: 992px) {
-  .services-container {
-    grid-template-columns: 1fr;
-  }
-
-  .services-tabs {
-    flex-direction: row;
-    overflow-x: auto;
-    padding-bottom: 1rem;
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-    scrollbar-width: none; /* Hide scrollbar for Firefox */
-  }
-
-  .services-tabs::-webkit-scrollbar {
-    display: none; /* Hide scrollbar for Chrome/Safari */
-  }
-
-  .service-tab {
-    min-width: 150px;
-    flex-shrink: 0; /* Prevent tabs from shrinking */
-  }
-}
-
-@media (max-width: 576px) {
-  .services-tabs {
-    flex-direction: row; /* Keep horizontal scrolling on mobile */
-    padding-bottom: 1rem;
-    margin-bottom: 1rem;
-  }
-
-  .service-tab {
-    min-width: 120px; /* Slightly smaller on very small screens */
-    padding: 1rem;
-  }
-
-  .service-icon {
-    font-size: 1.2rem;
-  }
-
-  .service-title {
-    font-size: 0.9rem;
-  }
-
-  .service-content {
-    padding: 1.5rem;
-  }
-
-  .service-content h3 {
-    font-size: 1.5rem;
-  }
-
-  .skill-pill {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.8rem;
-  }
 }
 

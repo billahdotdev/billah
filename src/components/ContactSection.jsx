@@ -2,202 +2,244 @@
 
 import { useState } from "react"
 import "../styles/ContactSection.css"
+import {
+  FaEnvelope,
+  FaPhone,
+  FaMapMarkerAlt,
+  FaPaperPlane,
+  FaCheck,
+  FaSpinner,
+  FaWhatsapp,
+  FaGithub,
+  FaTwitter,
+  FaLinkedin,
+  FaInstagram,
+} from "react-icons/fa"
 
-const ContactSection = () => {
+function ContactSection({ darkMode }) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     subject: "",
     message: "",
   })
-  const [formStatus, setFormStatus] = useState({ type: "", message: "" })
+
+  const [formStatus, setFormStatus] = useState({
+    submitting: false,
+    submitted: false,
+    error: null,
+  })
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }))
+    setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleWhatsAppSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
+    // Simulate form submission
+    setFormStatus({ submitting: true, submitted: false, error: null })
 
-    // Form validation
-    if (!formData.name || !formData.email || !formData.message) {
-      setFormStatus({
-        type: "error",
-        message: "Please fill in all required fields",
-      })
-      return
-    }
+    // Simulate API call
+    setTimeout(() => {
+      console.log("Form submitted:", formData)
+      setFormStatus({ submitting: false, submitted: true, error: null })
+      setFormData({ name: "", email: "", subject: "", message: "" })
 
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(formData.email)) {
-      setFormStatus({
-        type: "error",
-        message: "Please enter a valid email address",
-      })
-      return
-    }
-
-    // Prepare WhatsApp message with form data
-    const message = `
-Name: ${formData.name}
-Email: ${formData.email}
-Subject: ${formData.subject}
-Message: ${formData.message}
-    `.trim()
-
-    // Open WhatsApp with pre-filled message
-    const whatsappUrl = `https://wa.me/8801713401889?text=${encodeURIComponent(message)}`
-    window.open(whatsappUrl, "_blank", "noopener,noreferrer")
-
-    // Reset form after opening WhatsApp
-    setFormData({
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-    })
-
-    setFormStatus({
-      type: "success",
-      message: "Your message has been sent via WhatsApp!",
-    })
+      // Reset success message after 5 seconds
+      setTimeout(() => {
+        setFormStatus({ submitting: false, submitted: false, error: null })
+      }, 5000)
+    }, 1500)
   }
+
+  const socialLinks = [
+    { icon: <FaGithub />, label: "GitHub", url: "https://github.com" },
+    { icon: <FaTwitter />, label: "Twitter", url: "https://twitter.com" },
+    { icon: <FaLinkedin />, label: "LinkedIn", url: "https://linkedin.com" },
+    { icon: <FaInstagram />, label: "Instagram", url: "https://instagram.com" },
+  ]
 
   return (
-    <div className="container">
+    <section id="contact" className="section contact-section">
       <h2 className="section-title">Contact</h2>
 
       <div className="contact-container">
-        <div className="contact-info neomorphic">
-          <h3>Get In Touch</h3>
-          <p>
-            Have a project in mind or want to discuss a potential collaboration? I'm always open to new opportunities
-            and challenges. Feel free to reach out using the form or through any of the contact methods below.
+        <div className="contact-info neo-flat">
+          <h3 className="contact-title accent-gradient">Get In Touch</h3>
+
+          <p className="contact-intro">
+            I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision.
           </p>
 
           <div className="contact-details">
             <div className="contact-item">
-              <div className="contact-icon" aria-hidden="true">
-                📱
+              <div className="contact-icon-container neo-circle animate-float">
+                <FaEnvelope className="contact-icon" />
               </div>
               <div className="contact-text">
-                <h4>WhatsApp</h4>
-                <p>+880 171 340 1889</p>
+                <h4 className="contact-label">Email</h4>
+                <a href="mailto:your.email@example.com" className="contact-value contact-link">
+                  your.email@example.com
+                </a>
               </div>
             </div>
 
             <div className="contact-item">
-              <div className="contact-icon" aria-hidden="true">
-                📧
+              <div className="contact-icon-container neo-circle animate-float">
+                <FaPhone className="contact-icon" />
               </div>
               <div className="contact-text">
-                <h4>Email</h4>
-                <p>billahdotdev@gmail.com</p>
+                <h4 className="contact-label">Phone</h4>
+                <a href="tel:+11234567890" className="contact-value contact-link">
+                  +1 (123) 456-7890
+                </a>
               </div>
             </div>
 
             <div className="contact-item">
-              <div className="contact-icon" aria-hidden="true">
-                📍
+              <div className="contact-icon-container neo-circle animate-float">
+                <FaWhatsapp className="contact-icon" />
               </div>
               <div className="contact-text">
-                <h4>Location</h4>
-                <p>Dhaka, Bangladesh | Manila, Philippines</p>
+                <h4 className="contact-label">WhatsApp</h4>
+                <a
+                  href="https://wa.me/880145656565"
+                  className="contact-value contact-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  +880 14 565 6565
+                </a>
+              </div>
+            </div>
+
+            <div className="contact-item">
+              <div className="contact-icon-container neo-circle animate-float">
+                <FaMapMarkerAlt className="contact-icon" />
+              </div>
+              <div className="contact-text">
+                <h4 className="contact-label">Location</h4>
+                <p className="contact-value">San Francisco, CA</p>
               </div>
             </div>
           </div>
 
-          <div className="availability">
-            <h4>Current Availability</h4>
-            <div className="availability-status">
-              <span className="status-indicator available" aria-hidden="true"></span>
-              <p>Available for freelance projects</p>
+          <div className="contact-map neo-inset">
+            <div className="map-placeholder">
+              <span>Google Map</span>
+            </div>
+          </div>
+
+          <div className="social-links">
+            <h4 className="social-title">Follow Me</h4>
+            <div className="social-icons">
+              {socialLinks.map((social, index) => (
+                <a
+                  key={index}
+                  href={social.url}
+                  className="social-icon neo-circle glow"
+                  aria-label={social.label}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {social.icon}
+                </a>
+              ))}
             </div>
           </div>
         </div>
 
-        <div className="contact-form neomorphic">
-          <h3>Send Me a Message</h3>
+        <div className="contact-form-container neo-flat">
+          <h3 className="contact-title accent-gradient">Send Message</h3>
 
-          <form onSubmit={handleWhatsAppSubmit} noValidate>
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                className="neomorphic-inset"
-                required
-                aria-required="true"
-                autoComplete="name"
-              />
+          {formStatus.submitted ? (
+            <div className="success-message neo-inset">
+              <FaCheck className="success-icon animate-pulse" />
+              <p>Your message has been sent successfully!</p>
             </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="contact-form">
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="name" className="form-label">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="form-input neo-input"
+                  />
+                </div>
 
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="neomorphic-inset"
-                required
-                aria-required="true"
-                autoComplete="email"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="subject">Subject</label>
-              <input
-                type="text"
-                id="subject"
-                name="subject"
-                value={formData.subject}
-                onChange={handleChange}
-                className="neomorphic-inset"
-                required
-                aria-required="true"
-                autoComplete="off"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="message">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                className="neomorphic-inset"
-                rows="5"
-                required
-                aria-required="true"
-              ></textarea>
-            </div>
-
-            {formStatus.message && (
-              <div className={`form-status ${formStatus.type}`} role="alert">
-                {formStatus.message}
+                <div className="form-group">
+                  <label htmlFor="email" className="form-label">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="form-input neo-input"
+                  />
+                </div>
               </div>
-            )}
 
-            <button type="submit" className="neomorphic-button whatsapp-button">
-              <span className="whatsapp-icon" aria-hidden="true"></span>
-              Send Message via WhatsApp
-            </button>
-          </form>
+              <div className="form-group">
+                <label htmlFor="subject" className="form-label">
+                  Subject
+                </label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  required
+                  className="form-input neo-input"
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="message" className="form-label">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  rows={5}
+                  className="form-textarea neo-input"
+                />
+              </div>
+
+              <button type="submit" className="submit-button neo-button glow" disabled={formStatus.submitting}>
+                {formStatus.submitting ? (
+                  <>
+                    <FaSpinner className="submit-icon spinner" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    <FaPaperPlane className="submit-icon" />
+                    Send Message
+                  </>
+                )}
+              </button>
+            </form>
+          )}
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 

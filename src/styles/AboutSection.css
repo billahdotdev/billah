@@ -1,173 +1,280 @@
-/* You'll need to create this file with appropriate styles */
 .about-content {
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 2rem;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
 }
 
-/* Update image container styles */
-.about-image-container {
+.profile-card {
+  padding: var(--spacing-lg);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
-}
-
-.about-image {
-  width: 300px; /* Fixed width */
-  height: 300px; /* Fixed height for perfect circle */
-  border-radius: 50%; /* Make it round */
+  position: relative;
   overflow: hidden;
-  padding: 0.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.about-image img {
-  width: 100%;
-  height: 100%;
+.profile-image-container {
+  margin-bottom: var(--spacing-md);
+  position: relative;
+}
+
+.profile-image-wrapper {
+  padding: 0.25rem;
+  border-radius: 50%;
+  margin-bottom: var(--spacing-md);
+  position: relative;
+  z-index: 1;
+}
+
+.profile-image-wrapper::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: linear-gradient(45deg, var(--accent-color), transparent 70%);
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0.3;
+  animation: rotate 10s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.profile-image {
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   object-fit: cover;
-  display: block;
+  border: 4px solid var(--bg-light);
+  transition: border-color var(--transition-normal);
 }
 
-.social-icons {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
+body.dark .profile-image {
+  border-color: var(--bg-dark);
 }
 
-.about-text {
+.profile-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: var(--text-light);
+  transition: color var(--transition-normal);
+}
+
+body.dark .profile-name {
+  color: var(--text-dark);
+}
+
+.profile-title {
+  color: var(--text-secondary-light);
+  margin-bottom: var(--spacing-sm);
+  transition: color var(--transition-normal);
+  font-size: 1rem;
+}
+
+body.dark .profile-title {
+  color: var(--text-secondary-dark);
+}
+
+.profile-details {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
 }
 
-.about-card,
-.story-card,
-.skills-card,
-.motivation-card {
-  padding: 1.5rem;
-  border-radius: var(--border-radius);
+.profile-detail-item {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-sm);
+  border-radius: var(--radius-md);
 }
 
-.about-card h3 {
-  font-size: 1.8rem;
-  margin-bottom: 0.5rem;
-  color: var(--primary);
+.profile-icon {
+  margin-right: var(--spacing-sm);
+  color: var(--accent-color);
+  transition: color var(--transition-normal);
 }
 
-.about-card h4 {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  color: var(--text-secondary);
+.whatsapp-link {
+  color: var(--text-light);
+  text-decoration: none;
+  transition: color var(--transition-normal);
 }
 
-.about-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  margin-top: 1.5rem;
+.whatsapp-link:hover {
+  color: var(--accent-color);
+}
+
+body.dark .whatsapp-link {
+  color: var(--text-dark);
+}
+
+.profile-stats {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+body.dark .profile-stats {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .stat-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  border-radius: var(--border-radius);
   text-align: center;
 }
 
 .stat-number {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  color: var(--primary);
+  color: var(--accent-color);
 }
 
 .stat-label {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
+  font-size: 0.875rem;
+  color: var(--text-secondary-light);
+  transition: color var(--transition-normal);
+}
+
+body.dark .stat-label {
+  color: var(--text-secondary-dark);
+}
+
+.about-bio {
+  padding: var(--spacing-lg);
+}
+
+.bio-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-light);
+  transition: color var(--transition-normal);
+}
+
+body.dark .bio-title {
+  color: var(--text-dark);
+}
+
+.bio-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  color: var(--text-tertiary-light);
+  transition: color var(--transition-normal);
+}
+
+body.dark .bio-text {
+  color: var(--text-tertiary-dark);
 }
 
 .skills-container {
+  margin-top: var(--spacing-lg);
+}
+
+.skills-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-light);
+  transition: color var(--transition-normal);
+}
+
+body.dark .skills-title {
+  color: var(--text-dark);
+}
+
+.skills-list {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.8rem;
-  margin-top: 1rem;
+  flex-direction: column;
+  gap: var(--spacing-sm);
 }
 
-.skill-tag {
-  padding: 0.5rem 1rem;
-  border-radius: var(--border-radius);
-  font-size: 0.9rem;
-  background-color: var(--card-bg);
+.skill-item {
+  width: 100%;
 }
 
-/* Responsive */
-@media (max-width: 992px) {
-  .about-content {
-    grid-template-columns: 1fr;
-  }
+.skill-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
 
-  .about-image-container {
-    margin-bottom: 2rem;
-  }
+.skill-name {
+  font-weight: 500;
+  color: var(--text-tertiary-light);
+  transition: color var(--transition-normal);
+}
 
-  .about-stats {
-    grid-template-columns: repeat(3, 1fr);
+body.dark .skill-name {
+  color: var(--text-tertiary-dark);
+}
+
+.skill-percentage {
+  color: var(--accent-color);
+}
+
+.skill-bar {
+  height: 0.75rem;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  padding: 0;
+}
+
+.skill-progress {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-color), #9370db);
+  border-radius: var(--radius-full);
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-progress::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+  transform: translateX(-100%);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
   }
 }
 
-@media (max-width: 768px) {
-  .about-stats {
-    grid-template-columns: repeat(3, 1fr); /* Keep 3 columns on mobile */
-  }
-
-  .about-image {
-    width: 250px; /* Smaller on mobile */
-    height: 250px;
-  }
-
-  .about-card h3 {
-    font-size: 1.5rem;
-  }
-
-  .about-card h4 {
-    font-size: 1.1rem;
-  }
-
-  .stat-number {
-    font-size: 1.5rem;
-  }
-
-  .stat-label {
-    font-size: 0.8rem;
-  }
-
-  .skill-tag {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.8rem;
-  }
+.bio-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-lg);
 }
 
-@media (max-width: 576px) {
-  .about-stats {
-    grid-template-columns: repeat(3, 1fr); /* Keep 3 columns even on small mobile */
-  }
+.button-icon {
+  margin-right: 0.5rem;
+}
 
-  .stat-item {
-    padding: 0.8rem 0.5rem;
-  }
-
-  .stat-number {
-    font-size: 1.3rem;
-  }
-
-  .stat-label {
-    font-size: 0.7rem;
+@media (min-width: 480px) {
+  .bio-actions {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
