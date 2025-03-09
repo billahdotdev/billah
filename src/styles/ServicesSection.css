@@ -109,15 +109,51 @@
     flex-direction: row;
     overflow-x: auto;
     padding-bottom: 1rem;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+  }
+
+  .services-tabs::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome/Safari */
   }
 
   .service-tab {
     min-width: 150px;
+    flex-shrink: 0; /* Prevent tabs from shrinking */
   }
 }
 
 @media (max-width: 576px) {
   .services-tabs {
-    flex-direction: column;
+    flex-direction: row; /* Keep horizontal scrolling on mobile */
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .service-tab {
+    min-width: 120px; /* Slightly smaller on very small screens */
+    padding: 1rem;
+  }
+
+  .service-icon {
+    font-size: 1.2rem;
+  }
+
+  .service-title {
+    font-size: 0.9rem;
+  }
+
+  .service-content {
+    padding: 1.5rem;
+  }
+
+  .service-content h3 {
+    font-size: 1.5rem;
+  }
+
+  .skill-pill {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
   }
 }
+

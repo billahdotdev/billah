@@ -7,7 +7,12 @@ const AboutSection = () => {
       <div className="about-content">
         <div className="about-image-container">
           <div className="about-image neomorphic">
-            <img src="https://avatars.githubusercontent.com/u/112099343?v=4" alt="Profile of Masum Billah" />
+            <img
+              src="https://avatars.githubusercontent.com/u/112099343?v=4"
+              alt="Profile of Masum Billah"
+              crossOrigin="anonymous" // Add this
+              loading="lazy" // Add this for better performance
+            />
           </div>
 
           {/* Social Media Icons */}

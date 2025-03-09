@@ -165,14 +165,17 @@
   }
 
   .project-categories {
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row; /* Keep horizontal on mobile */
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem; /* Smaller gap on mobile */
   }
 
   .category-button {
-    width: 100%;
-    max-width: 250px;
-    text-align: center;
+    width: auto; /* Auto width instead of 100% */
+    padding: 0.5rem 1rem; /* Smaller padding on mobile */
+    font-size: 0.85rem; /* Slightly smaller font */
+    margin-bottom: 0.5rem; /* Add margin between buttons */
   }
 
   /* Ensure section is visible on mobile */
@@ -181,6 +184,27 @@
   .projects-cta {
     display: block !important;
     width: 100%;
+  }
+
+  /* Make project cards more compact on mobile */
+  .project-card {
+    margin-bottom: 1.5rem;
+  }
+
+  .project-image {
+    height: 180px; /* Slightly smaller image height on mobile */
+  }
+
+  .project-content {
+    padding: 1.2rem;
+  }
+
+  .project-content h3 {
+    font-size: 1.2rem;
+  }
+
+  .project-content p {
+    font-size: 0.95rem;
   }
 }
 

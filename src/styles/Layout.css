@@ -35,6 +35,17 @@
     padding: 2rem 0;
     display: block !important; /* Explicitly ensure display on mobile */
   }
+
+  /* Add container padding for mobile */
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  /* Ensure content doesn't overflow on mobile */
+  .content {
+    overflow-x: hidden;
+  }
 }
 
 /* Add any additional Layout-specific styles here */

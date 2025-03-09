@@ -8,6 +8,7 @@
   padding: 0;
   background-color: var(--card-bg);
   box-shadow: 5px 5px 10px var(--shadow-color), -5px -5px 10px var(--shadow-highlight);
+  z-index: 1001; /* Ensure it's above other elements */
 }
 
 /* Center the hamburger icon perfectly */
@@ -68,6 +69,7 @@
   height: var(--header-height);
   display: flex;
   align-items: center;
+  background-color: var(--background); /* Ensure header has background */
 }
 
 .header.scrolled {
@@ -97,6 +99,8 @@
   display: flex;
   list-style: none;
   gap: 1rem;
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
 }
 
 /* Mobile Navigation */
@@ -112,6 +116,7 @@
   padding: 2rem;
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
   z-index: 999;
+  overflow-y: auto; /* Allow scrolling if needed */
 }
 
 .mobile-nav.open {
@@ -123,6 +128,8 @@
   flex-direction: column;
   list-style: none;
   gap: 1.5rem;
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
 }
 
 .mobile-nav-links li {
@@ -132,6 +139,8 @@
 .mobile-nav-links button {
   width: 100%;
   text-align: left;
+  padding: 1rem; /* Increase touch target size */
+  font-size: 1.1rem; /* Slightly larger font for mobile */
 }
 
 /* Responsive */
@@ -144,6 +153,30 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  /* Ensure logo is visible and not too large on mobile */
+  .logo h1 {
+    font-size: 1.5rem;
+  }
+
+  /* Add overlay when mobile menu is open */
+  .mobile-nav-overlay {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    width: 100%;
+    height: calc(100vh - var(--header-height));
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+  }
+
+  .mobile-nav-overlay.open {
+    opacity: 1;
+    visibility: visible;
   }
 }
 

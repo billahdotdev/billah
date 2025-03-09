@@ -14,6 +14,7 @@ const Layout = () => {
   const [isIntersecting, setIsIntersecting] = useState({})
   const sectionRefs = useRef({})
   const observersRef = useRef({})
+  const [isMobile, setIsMobile] = useState(false)
 
   const sections = [
     { id: "about", title: "Who Am I?" },
@@ -22,12 +23,27 @@ const Layout = () => {
     { id: "contact", title: "Contact" },
   ]
 
+  // Check if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+
+    return () => {
+      window.removeEventListener("resize", checkMobile)
+    }
+  }, [])
+
   const handleNavClick = (sectionId) => {
     const element = document.getElementById(`section-${sectionId}`)
     if (element) {
-      const headerHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--header-height")) || 80
+      const headerHeight =
+        Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue("--header-height")) || 80
       const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
-      const offsetPosition = elementPosition - headerHeight - 20
+      const offsetPosition = elementPosition - headerHeight - (isMobile ? 10 : 20) // Less offset on mobile
 
       window.scrollTo({
         top: offsetPosition,
@@ -38,53 +54,43 @@ const Layout = () => {
   }
 
   useEffect(() => {
+    // Different observer options for mobile vs desktop
     const observerOptions = {
-      threshold: [0.2], // Simplified threshold
-      rootMargin: "-100px 0px -20% 0px",
+      threshold: isMobile ? [0.1] : [0.2], // Lower threshold on mobile
+      rootMargin: isMobile ? "-80px 0px -10% 0px" : "-100px 0px -20% 0px",
     }
 
     // Cleanup previous observers
+    Object.values(observersRef.current).forEach((observer) => observer.disconnect())
+    observersRef.current = {}
+
+    // Setup new observers
+    sections.forEach((section) => {
+      const element = document.getElementById(`section-${section.id}`)
+      if (element) {
+        const observer = new IntersectionObserver(([entry]) => {
+          setIsIntersecting((prev) => ({
+            ...prev,
+            [section.id]: entry.isIntersecting,
+          }))
+
+          // Only update active section if element is visible enough
+          if (entry.isIntersecting && entry.intersectionRatio >= (isMobile ? 0.1 : 0.2)) {
+            setActiveSection(section.id)
+          }
+        }, observerOptions)
+
+        observer.observe(element)
+        observersRef.current[section.id] = observer
+      }
+    })
+
+    // Cleanup on unmount
     return () => {
-      Object.values(observersRef.current).forEach(observer => observer.disconnect())
-    }
-  }, []) // Empty dependency array as we only need to set this up once
-
-  useEffect(() => {
-    const setupObservers = () => {
-      sections.forEach((section) => {
-        const element = document.getElementById(`section-${section.id}`)
-        if (element && !observersRef.current[section.id]) {
-          const observer = new IntersectionObserver(
-            ([entry]) => {
-              setIsIntersecting(prev => ({
-                ...prev,
-                [section.id]: entry.isIntersecting
-              }))
-
-              if (entry.isIntersecting && entry.intersectionRatio >= 0.2) {
-                setActiveSection(section.id)
-              }
-            },
-            {
-              threshold: [0.2],
-              rootMargin: "-100px 0px -20% 0px"
-            }
-          )
-
-          observer.observe(element)
-          observersRef.current[section.id] = observer
-        }
-      })
-    }
-
-    setupObservers()
-
-    // Cleanup function
-    return () => {
-      Object.values(observersRef.current).forEach(observer => observer.disconnect())
+      Object.values(observersRef.current).forEach((observer) => observer.disconnect())
       observersRef.current = {}
     }
-  }, [sections]) // Only re-run if sections array changes
+  }, [sections, isMobile]) // Re-run when sections array or mobile state changes
 
   return (
     <div className="portfolio-container">
@@ -112,3 +118,4 @@ const Layout = () => {
 }
 
 export default Layout
+

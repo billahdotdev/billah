@@ -66,6 +66,24 @@
   .footer-links {
     flex-wrap: wrap;
     justify-content: center;
+    gap: 1rem; /* Smaller gap on mobile */
+  }
+
+  .footer-links a {
+    padding: 0.5rem; /* Larger touch target */
+    font-size: 0.9rem;
+  }
+
+  .footer-social {
+    margin-top: 0.5rem;
+  }
+
+  .footer-social a {
+    padding: 0.5rem; /* Larger touch target */
+  }
+
+  .footer {
+    padding: 2rem 0 1rem; /* Less padding on mobile */
   }
 }
 

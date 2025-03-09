@@ -150,7 +150,12 @@ const ProjectsSection = () => {
         {filteredProjects.map((project, index) => (
           <div key={index} className="project-card neomorphic">
             <div className="project-image">
-              <img src={project.image || "/placeholder.svg"} alt={`${project.title} thumbnail`} />
+              <img
+                src={project.image || "/placeholder.svg"}
+                alt={`${project.title} thumbnail`}
+                crossOrigin="anonymous"
+                loading="lazy"
+              />
               <div className="project-technologies">
                 {project.technologies.map((tech, techIndex) => (
                   <span key={techIndex} className="tech-tag">

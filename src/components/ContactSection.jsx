@@ -136,6 +136,7 @@ Message: ${formData.message}
                 className="neomorphic-inset"
                 required
                 aria-required="true"
+                autoComplete="name"
               />
             </div>
 
@@ -150,6 +151,7 @@ Message: ${formData.message}
                 className="neomorphic-inset"
                 required
                 aria-required="true"
+                autoComplete="email"
               />
             </div>
 
@@ -164,6 +166,7 @@ Message: ${formData.message}
                 className="neomorphic-inset"
                 required
                 aria-required="true"
+                autoComplete="off"
               />
             </div>
 
