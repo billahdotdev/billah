@@ -1,75 +1,83 @@
-/* Mobile-first approach */
+/* You'll need to create this file with appropriate styles */
 .contact-container {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-5);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
 }
 
 .contact-info,
 .contact-form {
-  padding: var(--space-5);
+  padding: 2rem;
   border-radius: var(--border-radius);
 }
 
 .contact-info h3,
 .contact-form h3 {
-  font-size: var(--font-xl);
-  margin-bottom: var(--space-4);
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--primary);
 }
 
-.contact-info > p {
-  margin-bottom: var(--space-5);
+.contact-info p {
+  margin-bottom: 2rem;
   line-height: 1.6;
-  font-size: var(--font-sm);
 }
 
 .contact-details {
-  margin-bottom: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .contact-item {
   display: flex;
-  align-items: flex-start;
-  gap: var(--space-3);
-  margin-bottom: var(--space-4);
+  align-items: center;
+  gap: 1rem;
 }
 
 .contact-icon {
-  font-size: var(--font-lg);
-  min-width: 35px;
-  height: 35px;
+  font-size: 1.5rem;
+  color: var(--primary);
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: rgba(63, 81, 181, 0.1);
+  border-radius: 50%;
 }
 
 .contact-text h4 {
-  font-size: var(--font-base);
-  color: var(--primary);
-  margin-bottom: var(--space-1);
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
 }
 
 .contact-text p {
+  margin: 0;
   color: var(--text-secondary);
-  font-size: var(--font-sm);
 }
 
+/* Update availability status styles for perfect alignment */
 .availability {
-  margin-top: var(--space-5);
-  padding-top: var(--space-4);
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
 }
 
 .availability h4 {
-  font-size: var(--font-base);
-  color: var(--primary);
-  margin-bottom: var(--space-3);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
 }
 
 .availability-status {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
+  gap: 0.8rem;
+}
+
+.availability-status p {
+  margin: 0; /* Remove default paragraph margin */
+  line-height: 1; /* Adjust line height for perfect alignment */
+  padding-top: 2px; /* Fine-tune vertical alignment */
 }
 
 .status-indicator {
@@ -77,6 +85,8 @@
   height: 12px;
   border-radius: 50%;
   background-color: #4caf50;
+  flex-shrink: 0;
+  margin-top: 1px; /* Fine-tune dot position */
 }
 
 .status-indicator.available {
@@ -93,261 +103,61 @@
 
 /* Form Styles */
 .form-group {
-  margin-bottom: var(--space-4);
+  margin-bottom: 1.5rem;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: var(--space-2);
+  margin-bottom: 0.5rem;
   font-weight: 500;
-  color: var(--primary);
-  font-size: var(--font-sm);
 }
 
 .form-group input,
 .form-group textarea {
   width: 100%;
-  padding: var(--space-3);
+  padding: 0.8rem 1rem;
   border: none;
-  background-color: var(--card-bg);
   border-radius: var(--border-radius);
+  background-color: var(--card-bg);
   font-family: inherit;
-  font-size: var(--font-sm);
+  font-size: 1rem;
   color: var(--text-primary);
-  transition: var(--transition);
-  min-height: 44px; /* Minimum touch target size */
 }
 
 .form-group textarea {
-  min-height: 120px; /* Taller for textarea */
   resize: vertical;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-  outline: none;
-  box-shadow: inset 3px 3px 6px var(--shadow-color), inset -3px -3px 6px var(--shadow-highlight), 0 0 0 2px
-    var(--primary-light);
+  min-height: 120px;
 }
 
 .form-status {
-  margin-top: var(--space-4);
-  padding: var(--space-3);
+  margin-bottom: 1.5rem;
+  padding: 0.8rem;
   border-radius: var(--border-radius);
-  text-align: center;
-  font-weight: 500;
+  font-size: 0.9rem;
 }
 
 .form-status.success {
   background-color: rgba(76, 175, 80, 0.1);
-  color: #2e7d32;
+  color: #4caf50;
 }
 
 .form-status.error {
   background-color: rgba(244, 67, 54, 0.1);
-  color: #c62828;
+  color: #f44336;
 }
 
-/* Resources intro in contact section */
-.resources-intro {
-  padding: var(--space-5);
-  margin-bottom: var(--space-5);
-  text-align: center;
-  border-radius: var(--border-radius);
-}
-
-.resources-intro h2 {
-  font-size: var(--font-lg);
-  margin-bottom: var(--space-3);
-}
-
-.resources-intro p {
-  font-size: var(--font-sm);
-  line-height: 1.8;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-/* Tablet and up */
-@media (min-width: 768px) {
-  .contact-info,
-  .contact-form {
-    padding: var(--space-6);
-  }
-
-  .contact-info h3,
-  .contact-form h3 {
-    font-size: var(--font-2xl);
-    margin-bottom: var(--space-5);
-  }
-
-  .contact-info > p {
-    margin-bottom: var(--space-6);
-    line-height: 1.7;
-    font-size: var(--font-base);
-  }
-
-  .contact-item {
-    gap: var(--space-4);
-    margin-bottom: var(--space-5);
-  }
-
-  .contact-icon {
-    font-size: var(--font-xl);
-    min-width: 40px;
-    height: 40px;
-  }
-
-  .contact-text h4 {
-    font-size: var(--font-md);
-    margin-bottom: var(--space-1);
-  }
-
-  .contact-text p {
-    font-size: var(--font-base);
-  }
-
-  .availability {
-    margin-top: var(--space-6);
-    padding-top: var(--space-5);
-  }
-
-  .availability h4 {
-    font-size: var(--font-md);
-    margin-bottom: var(--space-4);
-  }
-
-  .resources-intro {
-    padding: var(--space-6);
-    margin-bottom: var(--space-6);
-  }
-
-  .resources-intro h2 {
-    font-size: var(--font-xl);
-    margin-bottom: var(--space-4);
-  }
-
-  .resources-intro p {
-    font-size: var(--font-base);
-  }
-
-  .form-group {
-    margin-bottom: var(--space-5);
-  }
-
-  .form-group label {
-    font-size: var(--font-base);
-  }
-
-  .form-group input,
-  .form-group textarea {
-    padding: var(--space-4);
-    font-size: var(--font-base);
-  }
-
-  .form-status {
-    margin-top: var(--space-5);
-    padding: var(--space-4);
-  }
-}
-
-/* Desktop and up */
-@media (min-width: 992px) {
+/* Responsive */
+@media (max-width: 992px) {
   .contact-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-6);
+    grid-template-columns: 1fr;
   }
 
-  .contact-info,
+  .contact-info {
+    order: 2;
+  }
+
   .contact-form {
-    padding: var(--space-6);
+    order: 1;
   }
-
-  .contact-info h3,
-  .contact-form h3 {
-    font-size: var(--font-2xl);
-    margin-bottom: var(--space-5);
-  }
-
-  .contact-info > p {
-    margin-bottom: var(--space-6);
-    line-height: 1.8;
-    font-size: var(--font-base);
-  }
-
-  .contact-item {
-    gap: var(--space-4);
-    margin-bottom: var(--space-5);
-  }
-
-  .contact-icon {
-    font-size: var(--font-xl);
-    min-width: 40px;
-    height: 40px;
-  }
-
-  .contact-text h4 {
-    font-size: var(--font-md);
-    margin-bottom: var(--space-1);
-  }
-
-  .contact-text p {
-    font-size: var(--font-base);
-  }
-
-  .availability {
-    margin-top: var(--space-6);
-    padding-top: var(--space-5);
-  }
-
-  .availability h4 {
-    font-size: var(--font-md);
-    margin-bottom: var(--space-4);
-  }
-
-  .form-group {
-    margin-bottom: var(--space-5);
-  }
-
-  .form-group input,
-  .form-group textarea {
-    padding: var(--space-4);
-    font-size: var(--font-base);
-  }
-
-  .form-status {
-    margin-top: var(--space-5);
-    padding: var(--space-4);
-  }
-
-  .resources-intro {
-    padding: var(--space-6);
-    margin-bottom: var(--space-6);
-  }
-
-  .resources-intro h2 {
-    font-size: var(--font-xl);
-    margin-bottom: var(--space-4);
-  }
-
-  .resources-intro p {
-    font-size: var(--font-base);
-  }
-}
-
-/* Update WhatsApp button in Contact section to match */
-.contact-form .whatsapp-button {
-  background-color: var(--card-bg) !important;
-  color: var(--primary) !important;
-  box-shadow: 5px 5px 10px var(--shadow-color), -5px -5px 10px var(--shadow-highlight);
-  width: 100%;
-  min-height: 44px; /* Minimum touch target size */
-}
-
-.contact-form .whatsapp-button:hover {
-  background-color: var(--card-bg) !important;
-  transform: translateY(-2px);
-  box-shadow: 7px 7px 14px var(--shadow-color), -7px -7px 14px var(--shadow-highlight);
 }
 

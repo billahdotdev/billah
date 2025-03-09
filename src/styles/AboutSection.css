@@ -1,102 +1,90 @@
+/* You'll need to create this file with appropriate styles */
 .about-content {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
   gap: 2rem;
-  align-items: center;
-  margin-top: calc(var(--header-height) + 1rem);
-  padding: 1rem 0;
 }
 
+/* Update image container styles */
 .about-image-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  max-width: 250px;
+  gap: 1rem;
 }
 
 .about-image {
-  width: 100%;
-  aspect-ratio: 1 / 1;
+  width: 300px; /* Fixed width */
+  height: 300px; /* Fixed height for perfect circle */
+  border-radius: 50%; /* Make it round */
   overflow: hidden;
-  border-radius: 50%;
   padding: 0.5rem;
-  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .about-image img {
   width: 100%;
   height: 100%;
+  border-radius: 50%;
   object-fit: cover;
-  border-radius: 50%; /* Make the image round */
-  transition: transform 0.5s ease;
+  display: block;
 }
 
-.about-image:hover img {
-  transform: scale(1.05);
+.social-icons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
 .about-text {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  width: 100%;
 }
 
 .about-card,
-.skills-card,
 .story-card,
+.skills-card,
 .motivation-card {
-  padding: 2rem;
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
 }
 
-.about-card h3,
-.skills-card h3,
-.story-card h3,
-.motivation-card h3 {
+.about-card h3 {
   font-size: 1.8rem;
-  color: var(--primary);
   margin-bottom: 0.5rem;
+  color: var(--primary);
 }
 
 .about-card h4 {
   font-size: 1.2rem;
-  color: var(--primary-light);
-  margin-bottom: 1.5rem;
-  font-weight: 500;
-}
-
-.about-card p,
-.story-card p,
-.motivation-card p {
-  margin-bottom: 1.5rem;
-  line-height: 1.8;
-}
-
-.about-card p:last-child,
-.story-card p:last-child,
-.motivation-card p:last-child {
-  margin-bottom: 0;
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
 }
 
 .about-stats {
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
+  margin-top: 1.5rem;
 }
 
 .stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: 1rem;
-  text-align: center;
   border-radius: var(--border-radius);
+  text-align: center;
 }
 
 .stat-number {
-  display: block;
   font-size: 1.8rem;
-  font-weight: 700;
+  font-weight: bold;
   color: var(--primary);
-  margin-bottom: 0.5rem;
 }
 
 .stat-label {
@@ -104,94 +92,44 @@
   color: var(--text-secondary);
 }
 
-.skills-card h3 {
-  font-size: 1.5rem;
-  color: var(--primary);
-  margin-bottom: 1.5rem;
-}
-
 .skills-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 0.8rem;
+  margin-top: 1rem;
 }
 
 .skill-tag {
   padding: 0.5rem 1rem;
-  border-radius: 20px;
+  border-radius: var(--border-radius);
   font-size: 0.9rem;
   background-color: var(--card-bg);
-  box-shadow: 3px 3px 6px var(--shadow-color), -3px -3px 6px var(--shadow-highlight);
-  transition: var(--transition);
-}
-
-.skill-tag:hover {
-  transform: translateY(-2px);
-  box-shadow: 4px 4px 8px var(--shadow-color), -4px -4px 8px var(--shadow-highlight);
 }
 
 /* Responsive */
-@media (min-width: 768px) {
+@media (max-width: 992px) {
   .about-content {
-    margin-top: calc(var(--header-height) + 2rem);
-    padding: 2rem 0;
-    flex-direction: row;
-    align-items: flex-start;
+    grid-template-columns: 1fr;
   }
 
   .about-image-container {
-    width: 30%;
+    margin-bottom: 2rem;
   }
 
-  .about-text {
-    width: 70%;
-  }
   .about-stats {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media (max-width: 576px) {
-  .skill-tag {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.8rem;
+@media (max-width: 768px) {
+  .about-stats {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Ensure the section has proper spacing */
-.container {
-  padding-top: 1rem;
-}
-
-/* Update social icons styling */
-.social-icons {
-  display: flex;
-  gap: 2rem; /* Increase gap between icons */
-  margin-top: 2rem;
-  justify-content: center;
-}
-
-.social-icon {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--card-bg);
-  box-shadow: 5px 5px 10px var(--shadow-color), -5px -5px 10px var(--shadow-highlight);
-  transition: var(--transition);
-  color: var(--primary);
-  text-decoration: none;
-}
-
-.social-icon:hover {
-  transform: translateY(-3px);
-  color: var(--primary-light);
-}
-
-.social-icon svg {
-  width: 20px;
-  height: 20px;
+@media (max-width: 576px) {
+  .about-stats {
+    grid-template-columns: 1fr;
+  }
 }
 

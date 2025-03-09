@@ -70,17 +70,7 @@ Message: ${formData.message}
 
   return (
     <div className="container">
-      <h2 className="section-title" id="contact-heading">
-        Contact
-      </h2>
-
-      <div className="resources-intro neomorphic">
-        <h2>Sometimes, you need someone to listen or give some advice.</h2>
-        <p className="chat-me-text-slot">
-          Book a slot to chat - anything from personal to career, web development, graphic design, digital marketing,
-          T-shirt business, and mental health.
-        </p>
-      </div>
+      <h2 className="section-title">Contact</h2>
 
       <div className="contact-container">
         <div className="contact-info neomorphic">
@@ -97,11 +87,7 @@ Message: ${formData.message}
               </div>
               <div className="contact-text">
                 <h4>WhatsApp</h4>
-                <p>
-                  <a href="tel:+8801713401889" aria-label="Call on WhatsApp">
-                    +880 171 340 1889
-                  </a>
-                </p>
+                <p>+880 171 340 1889</p>
               </div>
             </div>
 
@@ -111,11 +97,7 @@ Message: ${formData.message}
               </div>
               <div className="contact-text">
                 <h4>Email</h4>
-                <p>
-                  <a href="mailto:billahdotdev@gmail.com" aria-label="Send email">
-                    billahdotdev@gmail.com
-                  </a>
-                </p>
+                <p>billahdotdev@gmail.com</p>
               </div>
             </div>
 
@@ -154,7 +136,6 @@ Message: ${formData.message}
                 className="neomorphic-inset"
                 required
                 aria-required="true"
-                aria-invalid={formStatus.type === "error" && !formData.name ? "true" : "false"}
               />
             </div>
 
@@ -169,11 +150,6 @@ Message: ${formData.message}
                 className="neomorphic-inset"
                 required
                 aria-required="true"
-                aria-invalid={
-                  formStatus.type === "error" && (!formData.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
-                    ? "true"
-                    : "false"
-                }
               />
             </div>
 
@@ -188,7 +164,6 @@ Message: ${formData.message}
                 className="neomorphic-inset"
                 required
                 aria-required="true"
-                aria-invalid={formStatus.type === "error" && !formData.subject ? "true" : "false"}
               />
             </div>
 
@@ -203,7 +178,6 @@ Message: ${formData.message}
                 rows="5"
                 required
                 aria-required="true"
-                aria-invalid={formStatus.type === "error" && !formData.message ? "true" : "false"}
               ></textarea>
             </div>
 

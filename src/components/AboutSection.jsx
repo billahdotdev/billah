@@ -3,9 +3,7 @@ import "../styles/AboutSection.css"
 const AboutSection = () => {
   return (
     <div className="container">
-      <h2 className="section-title" id="about-heading">
-        Who Am I?
-      </h2>
+      <h2 className="section-title">Who Am I?</h2>
       <div className="about-content">
         <div className="about-image-container">
           <div className="about-image neomorphic">
@@ -15,16 +13,16 @@ const AboutSection = () => {
           {/* Social Media Icons */}
           <div className="social-icons">
             <a
-              href="https://github.com/billahdotdev"
+              href="https://github.com/yourusername"
               className="social-icon"
               aria-label="GitHub"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -32,20 +30,20 @@ const AboutSection = () => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
               >
-                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
               </svg>
             </a>
             <a
-              href="https://www.linkedin.com/in/billahdotdev"
+              href="https://linkedin.com/in/yourusername"
               className="social-icon"
               aria-label="LinkedIn"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -53,22 +51,22 @@ const AboutSection = () => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
               >
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                <rect x="2" y="9" width="4" height="12" />
-                <circle cx="4" cy="4" r="2" />
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
               </svg>
             </a>
             <a
-              href="https://x.com/billahdotdev"
+              href="https://x.com/yourusername"
               className="social-icon"
               aria-label="X (formerly Twitter)"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -76,7 +74,9 @@ const AboutSection = () => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
               >
-                <path d="M4 4l7.2 7.2M20 4l-7.2 7.2M4 20l7.2-7.2M20 20l-7.2-7.2" />
+                <path d="M4 4l11.733 16h4.267l-11.733-16z" />
+                <path d="M4 20l6.768-6.768" />
+                <path d="M19.5 4l-6.768 6.768" />
               </svg>
             </a>
           </div>
@@ -84,7 +84,7 @@ const AboutSection = () => {
         <div className="about-text">
           <div className="about-card neomorphic">
             <h3>Masum Billah</h3>
-            <h6>Web Developer | Branding Consultant</h6>
+            <h4>Web Developer | Branding Consultant</h4>
             <p>I'm a full-stack web developer dedicated to making online dreams a reality.</p>
             <div className="about-stats">
               <div className="stat-item neomorphic-inset">

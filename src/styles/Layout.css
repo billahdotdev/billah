@@ -2,75 +2,36 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  overflow-x: hidden; /* Prevent horizontal scrolling */
-  contain: content; /* Improve performance by containing layout */
 }
 
 .content {
   flex: 1;
-  position: relative;
-  will-change: transform; /* Optimize for animations */
+  padding-top: var(--header-height); /* Add padding to prevent overlap with fixed header */
 }
 
-/* Ensure sections are properly positioned */
 .section {
-  position: relative;
-  min-height: 100vh; /* Ensure sections fill the viewport */
-  padding-top: var(--header-height); /* Space for fixed header */
-  margin-top: 0; /* Remove any margin that could cause gaps */
-  margin-bottom: 0; /* Remove any margin that could cause gaps */
-  scroll-margin-top: var(--header-height); /* For smooth scrolling */
-  transition: opacity 0.3s ease-in-out; /* Faster transition for mobile */
-  will-change: opacity; /* Optimize for animations */
-  contain: content; /* Improve performance by containing layout */
+  padding: 3rem 0;
+  margin-bottom: 2rem; /* Add margin between sections */
 }
 
-/* Improve fade-in animation */
+/* Ensure fade-in animations work properly */
 .fade-in {
   opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; /* Faster transition for mobile */
+  transform: translateY(30px);
+  transition: opacity 1s ease, transform 1s ease;
 }
 
 .fade-in.visible {
   opacity: 1;
-  visibility: visible;
+  transform: translateY(0);
 }
 
-/* Ensure smooth scrolling */
-html {
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-}
-
-/* Prevent content from being hidden under fixed header */
-.section {
-  scroll-margin-top: var(--header-height);
-}
-
-/* Improve section spacing */
+/* Responsive adjustments */
 @media (max-width: 768px) {
   .section {
-    padding-top: 60px; /* Smaller header height on mobile */
-    min-height: auto; /* Allow sections to be their natural height on mobile */
-    padding-bottom: 2rem; /* Add some bottom padding */
+    padding: 2rem 0;
   }
 }
 
-@media (min-width: 769px) {
-  .section {
-    padding-bottom: 3rem; /* Add some bottom padding */
-    transition: opacity 0.5s ease-in-out; /* Slower transition for desktop */
-  }
-
-  .fade-in {
-    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out; /* Slower transition for desktop */
-  }
-}
-
-@media (min-width: 992px) {
-  .section {
-    padding-bottom: 4rem; /* Add some bottom padding */
-  }
-}
+/* Add any additional Layout-specific styles here */
 
