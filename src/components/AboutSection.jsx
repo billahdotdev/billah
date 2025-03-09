@@ -19,15 +19,15 @@ function AboutSection({ darkMode }) {
           <div className="profile-image-container">
             <div className="profile-image-wrapper neo-flat">
               <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
+                src="../assets/masum.jpg"
                 alt="Profile"
                 className="profile-image"
               />
             </div>
           </div>
 
-          <h3 className="profile-name accent-gradient">Your Name</h3>
-          <p className="profile-title">Web Developer & Designer</p>
+          <h3 className="profile-name accent-gradient">Masum Billah</h3>
+          <p className="profile-title">Web Developer | Branding Consultant</p>
 
           <div className="profile-details">
             <div className="profile-detail-item neo-inset">
@@ -37,12 +37,12 @@ function AboutSection({ darkMode }) {
 
             <div className="profile-detail-item neo-inset">
               <FaMapMarkerAlt className="profile-icon" />
-              <span>San Francisco, CA</span>
+              <span>Dhaka, Bangladesh | Manila, Philippines</span>
             </div>
 
             <div className="profile-detail-item neo-inset">
               <FaCalendarAlt className="profile-icon" />
-              <span>5 years experience</span>
+              <span>9+ years experience</span>
             </div>
 
             <div className="profile-detail-item neo-inset">
@@ -55,11 +55,11 @@ function AboutSection({ darkMode }) {
 
           <div className="profile-stats">
             <div className="stat-item">
-              <div className="stat-number animate-pulse">50+</div>
+              <div className="stat-number animate-pulse">128</div>
               <div className="stat-label">Projects</div>
             </div>
             <div className="stat-item">
-              <div className="stat-number animate-pulse">15+</div>
+              <div className="stat-number animate-pulse">75</div>
               <div className="stat-label">Clients</div>
             </div>
             <div className="stat-item">
