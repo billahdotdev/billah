@@ -32,6 +32,8 @@
 
 .logo-icon {
   color: var(--accent-color);
+  height: 18px;
+  
 }
 
 .app.dark .logo {

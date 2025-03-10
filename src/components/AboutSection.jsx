@@ -1,13 +1,65 @@
 import "../styles/AboutSection.css"
-import { FaUser, FaMapMarkerAlt, FaCalendarAlt, FaDownload, FaLaptopCode, FaWhatsapp } from "react-icons/fa"
+import {
+  FaUser,
+  FaMapMarkerAlt,
+  FaCalendarAlt,
+  FaDownload,
+  FaLaptopCode,
+  FaWhatsapp,
+  FaPlusCircle,
+} from "react-icons/fa"
 
 function AboutSection({ darkMode }) {
   const skills = [
-    { name: "HTML/CSS", level: 90 },
-    { name: "JavaScript", level: 85 },
-    { name: "React", level: 80 },
-    { name: "UI/UX Design", level: 75 },
-    { name: "Node.js", level: 70 },
+    {
+      name: "HTML",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+    },
+    {
+      name: "CSS",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+    },
+    {
+      name: "JavaScript",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+    },
+    {
+      name: "TypeScript",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+    },
+    {
+      name: "React",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+    },
+    {
+      name: "TailwindCSS",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindCSS/tailwindCSS-plain.svg",
+    },
+    {
+      name: "Material UI",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg",
+    },
+    {
+      name: "Node.js",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+    },
+    {
+      name: "Express",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
+    },
+    {
+      name: "MongoDB",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+    },
+    {
+      name: "Figma",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
+    },
+    {
+      name: "More +",
+      logo: null,
+      isButton: true,
+    },
   ]
 
   return (
@@ -19,7 +71,7 @@ function AboutSection({ darkMode }) {
           <div className="profile-image-container">
             <div className="profile-image-wrapper neo-flat">
               <img
-                src="../assets/masum.jpg"
+                src="src/assets/masum.jpg"
                 alt="Profile"
                 className="profile-image"
               />
@@ -27,17 +79,17 @@ function AboutSection({ darkMode }) {
           </div>
 
           <h3 className="profile-name accent-gradient">Masum Billah</h3>
-          <p className="profile-title">Web Developer | Branding Consultant</p>
+          <p className="profile-title">Web Developer | Branding Consultant </p>
 
           <div className="profile-details">
             <div className="profile-detail-item neo-inset">
               <FaUser className="profile-icon" />
-              <span>28 years old</span>
+              <span>Serious, and Curious</span>
             </div>
 
             <div className="profile-detail-item neo-inset">
               <FaMapMarkerAlt className="profile-icon" />
-              <span>Dhaka, Bangladesh | Manila, Philippines</span>
+              <span>Dhaka | Manila</span>
             </div>
 
             <div className="profile-detail-item neo-inset">
@@ -48,23 +100,23 @@ function AboutSection({ darkMode }) {
             <div className="profile-detail-item neo-inset">
               <FaWhatsapp className="profile-icon" />
               <a href="https://wa.me/880145656565" className="whatsapp-link" target="_blank" rel="noopener noreferrer">
-                +880 14 565 6565
+                +880 171 340 1889 +63 915 601 5542
               </a>
             </div>
           </div>
 
           <div className="profile-stats">
             <div className="stat-item">
-              <div className="stat-number animate-pulse">128</div>
+              <div className="stat-number animate-pulse">176</div>
               <div className="stat-label">Projects</div>
             </div>
             <div className="stat-item">
-              <div className="stat-number animate-pulse">75</div>
-              <div className="stat-label">Clients</div>
+              <div className="stat-number animate-pulse">118</div>
+              <div className="stat-label">Happy Clients</div>
             </div>
             <div className="stat-item">
-              <div className="stat-number animate-pulse">3</div>
-              <div className="stat-label">Awards</div>
+              <div className="stat-number animate-pulse">4</div>
+              <div className="stat-label">committers top Rank</div>
             </div>
           </div>
         </div>
@@ -74,43 +126,42 @@ function AboutSection({ darkMode }) {
 
           <div className="bio-text">
             <p>
-              Hello! I'm a passionate web developer and designer with a keen eye for creating beautiful, functional, and
-              user-friendly websites and applications.
-            </p>
-
-            <p>
-              My journey in web development started 5 years ago, and I've been in love with creating digital experiences
-              ever since. I specialize in modern frontend technologies and have a strong foundation in UI/UX design
-              principles.
-            </p>
-
-            <p>
-              When I'm not coding, you can find me exploring new design trends, contributing to open-source projects, or
-              enjoying outdoor activities.
+            I'm a full-stack web developer dedicated to making online dreams a reality.
             </p>
           </div>
 
           <div className="skills-container">
             <h4 className="skills-title">My Skills</h4>
-            <div className="skills-list">
+            <div className="skills-grid">
               {skills.map((skill, index) => (
-                <div key={index} className="skill-item">
-                  <div className="skill-info">
-                    <span className="skill-name">{skill.name}</span>
-                    <span className="skill-percentage">{skill.level}%</span>
+                <div key={index} className={`skill-card neo-flat ${skill.isButton ? "skill-more" : ""}`}>
+                  <div className="skill-icon-wrapper neo-circle">
+                    {skill.logo ? (
+                      <img
+                        src={skill.logo || "/placeholder.svg"}
+                        alt={`${skill.name} logo`}
+                        className="skill-logo-img"
+                      />
+                    ) : (
+                      <FaPlusCircle className="skill-plus-icon" />
+                    )}
                   </div>
-                  <div className="skill-bar neo-inset">
-                    <div className="skill-progress" style={{ width: `${skill.level}%` }}></div>
-                  </div>
+                  <span className="skill-name">{skill.name}</span>
                 </div>
               ))}
             </div>
           </div>
 
           <div className="bio-actions">
-            <button className="neo-button glow">
+
+
+            <button className="neo-button glow" href="../assets/CV.pdf">
               <FaDownload className="button-icon" /> Download CV
             </button>
+
+     
+              
+
             <button className="neo-button-secondary">
               <FaLaptopCode className="button-icon" /> View Projects
             </button>

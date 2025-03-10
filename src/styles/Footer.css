@@ -105,6 +105,48 @@
   box-shadow: 0 6px 15px rgba(106, 90, 205, 0.4);
 }
 
+.newsletter-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md);
+  text-align: center;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+}
+
+.newsletter-success .success-icon {
+  font-size: 2rem;
+  color: #4caf50;
+}
+
+.newsletter-error {
+  background-color: rgba(244, 67, 54, 0.1);
+  color: #f44336;
+  padding: var(--spacing-sm);
+  border-radius: var(--radius-md);
+  margin-top: var(--spacing-sm);
+  text-align: center;
+}
+
+body.dark .newsletter-error {
+  background-color: rgba(244, 67, 54, 0.2);
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .footer-middle {
   display: grid;
   grid-template-columns: 1fr;

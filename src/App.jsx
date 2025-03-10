@@ -9,6 +9,7 @@ import ContactSection from "./components/ContactSection"
 import Footer from "./components/Footer"
 import ThemeToggle from "./components/ThemeToggle"
 import { FaCode } from "react-icons/fa"
+import logo from './assets/logo.svg';  // Import the SVG logo
 import "./App.css"
 
 function App() {
@@ -75,9 +76,14 @@ function App() {
 
       <div className="container">
         <header className="header">
+          {/*<h1 className="logo neo-text">
+            <FaCode className="logo-icon" /> billah.dev
+          </h1>*/}
           <h1 className="logo neo-text">
-            <FaCode className="logo-icon" /> Portfolio
-          </h1>
+      {/* Link to the SVG logo */}
+      <img src={logo} alt="billah.dev logo" className="logo-icon" />
+      billah.dev
+    </h1>
           <ThemeToggle darkMode={darkMode} toggleTheme={toggleTheme} />
         </header>
 

@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import "../styles/WorksSection.css"
-import { FaExternalLinkAlt, FaGithub, FaFilter } from "react-icons/fa"
+import { FaExternalLinkAlt, FaGithub, FaFilter, FaWhatsapp } from "react-icons/fa"
 
 function WorksSection({ darkMode }) {
   const [activeFilter, setActiveFilter] = useState("all")
@@ -149,6 +149,16 @@ function WorksSection({ darkMode }) {
                 <span className="category-label">Category:</span>
                 <span className="category-value">{project.category}</span>
               </div>
+
+              <a
+                href={`https://wa.me/88017165561661?text=Hi, I'm interested in your ${project.title} project.`}
+                className="whatsapp-button neo-button glow"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaWhatsapp className="whatsapp-icon" />
+                Let's make it yours
+              </a>
             </div>
           </div>
         ))}

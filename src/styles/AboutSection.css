@@ -16,6 +16,7 @@
 .profile-image-container {
   margin-bottom: var(--spacing-md);
   position: relative;
+ 
 }
 
 .profile-image-wrapper {
@@ -24,6 +25,7 @@
   margin-bottom: var(--spacing-md);
   position: relative;
   z-index: 1;
+  
 }
 
 .profile-image-wrapper::before {
@@ -50,8 +52,8 @@
 }
 
 .profile-image {
-  width: 150px;
-  height: 150px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
   object-fit: cover;
   border: 4px solid var(--bg-light);
@@ -189,13 +191,120 @@ body.dark .bio-text {
 .skills-title {
   font-size: 1.25rem;
   font-weight: 600;
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
   color: var(--text-light);
   transition: color var(--transition-normal);
 }
 
 body.dark .skills-title {
   color: var(--text-dark);
+}
+
+/* Update the skills grid to handle more items */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: var(--spacing-md);
+  justify-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+/* Style for the logo images */
+.skill-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: all var(--transition-normal);
+}
+
+.skill-plus-icon {
+  width: 70%;
+  height: 70%;
+  color: var(--accent-color);
+  transition: all var(--transition-normal);
+}
+
+.skill-icon-wrapper {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-normal);
+  padding: 8px;
+  overflow: visible;
+}
+
+.skill-card:hover .skill-icon-wrapper {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.skill-card:hover .skill-logo-img,
+.skill-card:hover .skill-plus-icon {
+  filter: drop-shadow(0 0 2px var(--accent-color));
+}
+
+body.dark .skill-logo-img {
+  filter: brightness(1.2);
+}
+
+body.dark .skill-card:hover .skill-logo-img {
+  filter: brightness(1.2) drop-shadow(0 0 3px var(--accent-color));
+}
+
+/* Adjust the skill card to better showcase the logos */
+.skill-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  width: 90px;
+  height: 100px;
+  transition: all var(--transition-normal);
+  cursor: default;
+}
+
+.skill-card:hover {
+  transform: translateY(-5px);
+}
+
+.skill-name {
+  font-size: 0.75rem;
+  color: var(--text-tertiary-light);
+  text-align: center;
+  transition: color var(--transition-normal);
+}
+
+body.dark .skill-name {
+  color: var(--text-tertiary-dark);
+}
+
+/* Style for the "More +" button */
+.skill-more {
+  cursor: pointer;
+  background: linear-gradient(145deg, var(--bg-light), #e6e6e9);
+}
+
+.skill-more .skill-icon-wrapper {
+  color: var(--accent-color-hover);
+}
+
+body.dark .skill-more {
+  background: linear-gradient(145deg, var(--bg-dark), #222222);
+}
+
+body.dark .skill-more .skill-icon-wrapper {
+  color: var(--accent-color);
+}
+
+.skill-more:hover {
+  background: linear-gradient(145deg, #e6e6e9, var(--bg-light));
+}
+
+body.dark .skill-more:hover {
+  background: linear-gradient(145deg, #222222, var(--bg-dark));
 }
 
 .skills-list {
@@ -275,6 +384,19 @@ body.dark .skill-name {
 @media (min-width: 480px) {
   .bio-actions {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 768px) {
+  .skills-grid {
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 992px) {
+  .skills-grid {
+    grid-template-columns: repeat(6, 90px);
   }
 }
 

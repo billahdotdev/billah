@@ -63,8 +63,12 @@ function ServicesSection({ darkMode }) {
                 </li>
               ))}
             </ul>
+              {/* 
+            <button className="service-button neo-button-small glow">Learn More</button> */}
+            <button className="service-button neo-button-small glow" onClick={() => window.open('https://github.com', '_blank')}>
+  Learn More
+</button>
 
-            <button className="service-button neo-button-small glow">Learn More</button>
           </div>
         ))}
       </div>

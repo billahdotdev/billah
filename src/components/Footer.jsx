@@ -1,12 +1,45 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { FaGithub, FaTwitter, FaLinkedin, FaInstagram, FaHeart, FaCode, FaArrowUp, FaWhatsapp } from "react-icons/fa"
+import emailjs from "@emailjs/browser"
+import {
+  FaGithub,
+  FaLinkedin,
+  FaInstagram,
+  FaHeart,
+  FaCode,
+  FaArrowUp,
+  FaWhatsapp,
+  FaCheck,
+  FaSpinner,
+} from "react-icons/fa"
 import "../styles/Footer.css"
+
+// Custom X (Twitter) icon since it's not in react-icons
+function XIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="1em"
+      height="1em"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      style={{ display: "inline-block", verticalAlign: "middle" }}
+    >
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  )
+}
 
 function Footer({ darkMode, toggleTheme }) {
   const [currentYear] = useState(new Date().getFullYear())
   const [randomQuote, setRandomQuote] = useState("")
+  const [email, setEmail] = useState("")
+  const [subscribeStatus, setSubscribeStatus] = useState({
+    submitting: false,
+    submitted: false,
+    error: null,
+  })
 
   const quotes = [
     "Design is not just what it looks like and feels like. Design is how it works.",
@@ -18,7 +51,7 @@ function Footer({ darkMode, toggleTheme }) {
 
   const socialLinks = [
     { icon: <FaGithub />, label: "GitHub", url: "https://github.com" },
-    { icon: <FaTwitter />, label: "Twitter", url: "https://twitter.com" },
+    { icon: <XIcon />, label: "X", url: "https://x.com" },
     { icon: <FaLinkedin />, label: "LinkedIn", url: "https://linkedin.com" },
     { icon: <FaInstagram />, label: "Instagram", url: "https://instagram.com" },
     { icon: <FaWhatsapp />, label: "WhatsApp", url: "https://wa.me/880145656565" },
@@ -37,6 +70,51 @@ function Footer({ darkMode, toggleTheme }) {
     })
   }
 
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value)
+  }
+
+  const handleSubscribe = (e) => {
+    e.preventDefault()
+    setSubscribeStatus({ submitting: true, submitted: false, error: null })
+
+    // EmailJS configuration
+    // Replace these with your actual EmailJS service, template, and user IDs
+   
+
+    const serviceId = "service_oq048wf"
+    const templateId = "template_bo33582"
+    const publicKey = "taJeL_z2EJc_wyVlv"
+
+    // Prepare template parameters
+    const templateParams = {
+      subscriber_email: FormData.email,
+      subscription_date: new Date().toISOString(),
+    }
+
+    // Send email using EmailJS
+    emailjs
+      .send(serviceId, templateId, templateParams, publicKey)
+      .then((response) => {
+        console.log("Subscription email sent successfully:", response)
+        setSubscribeStatus({ submitting: false, submitted: true, error: null })
+        setEmail("")
+
+        // Reset success message after 5 seconds
+        setTimeout(() => {
+          setSubscribeStatus({ submitting: false, submitted: false, error: null })
+        }, 5000)
+      })
+      .catch((error) => {
+        console.error("Subscription email sending failed:", error)
+        setSubscribeStatus({
+          submitting: false,
+          submitted: false,
+          error: "Failed to subscribe. Please try again later.",
+        })
+      })
+  }
+
   return (
     <footer className={`footer-container ${darkMode ? "dark" : ""}`}>
       <div className="footer-content-wrapper">
@@ -48,12 +126,44 @@ function Footer({ darkMode, toggleTheme }) {
           <div className="footer-newsletter neo-flat">
             <h3 className="footer-heading accent-gradient">Stay Updated</h3>
             <p>Subscribe to my newsletter for the latest updates and insights.</p>
-            <form className="newsletter-form">
-              <input type="email" placeholder="Your email address" className="neo-input newsletter-input" required />
-              <button type="submit" className="newsletter-button neo-button glow">
-                Subscribe
-              </button>
-            </form>
+
+            {subscribeStatus.submitted ? (
+              <div className="newsletter-success">
+                <FaCheck className="success-icon animate-pulse" />
+                <p>Thank you for subscribing!</p>
+              </div>
+            ) : (
+              <form className="newsletter-form" onSubmit={handleSubscribe}>
+                <input
+                  type="email"
+                  placeholder="Your email address"
+                  className="neo-input newsletter-input"
+                  value={email}
+                  onChange={handleEmailChange}
+                  required
+                />
+                <button
+                  type="submit"
+                  className="newsletter-button neo-button glow"
+                  disabled={subscribeStatus.submitting}
+                >
+                  {subscribeStatus.submitting ? (
+                    <>
+                      <FaSpinner className="spinner" />
+                      Subscribing...
+                    </>
+                  ) : (
+                    "Subscribe"
+                  )}
+                </button>
+              </form>
+            )}
+
+            {subscribeStatus.error && (
+              <div className="newsletter-error">
+                <p>{subscribeStatus.error}</p>
+              </div>
+            )}
           </div>
         </div>
 
