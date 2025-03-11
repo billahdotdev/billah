@@ -71,7 +71,7 @@ function AboutSection({ darkMode }) {
           <div className="profile-image-container">
             <div className="profile-image-wrapper neo-flat">
               <img
-                src="src/assets/masum.jpg"
+                src="https://avatars.githubusercontent.com/u/112099343?v=4src/assets/masum.jpg"
                 alt="Profile"
                 className="profile-image"
               />
@@ -84,8 +84,13 @@ function AboutSection({ darkMode }) {
           <div className="profile-details">
             <div className="profile-detail-item neo-inset">
               <FaUser className="profile-icon" />
-              <span>Serious, and Curious</span>
+              <span>Serious, and Curious.</span>
             </div>
+
+            <div className="profile-detail-item neo-inset"> 
+            <p className="indicator">&#183;Available (Freelance work)</p>
+            </div>
+
 
             <div className="profile-detail-item neo-inset">
               <FaMapMarkerAlt className="profile-icon" />
@@ -100,7 +105,7 @@ function AboutSection({ darkMode }) {
             <div className="profile-detail-item neo-inset">
               <FaWhatsapp className="profile-icon" />
               <a href="https://wa.me/880145656565" className="whatsapp-link" target="_blank" rel="noopener noreferrer">
-                +880 171 340 1889 +63 915 601 5542
+                +880 171 340 1889&#44; +63 915 601 5542
               </a>
             </div>
           </div>
@@ -125,9 +130,9 @@ function AboutSection({ darkMode }) {
           <h3 className="bio-title accent-gradient">About Me</h3>
 
           <div className="bio-text">
-            <p>
+            <h4>
             I'm a full-stack web developer dedicated to making online dreams a reality.
-            </p>
+            </h4>
           </div>
 
           <div className="skills-container">
@@ -152,16 +157,43 @@ function AboutSection({ darkMode }) {
             </div>
           </div>
 
+
+          <div className="my-container">
+            <h4 className="my-title">My Story</h4>
+            <p className="my-paragraph">I am passionate about JavaScript and web
+                            technologies. Before the pandemic, I was just a
+                            struggling entrepreneur in the clothing industry.
+                            'GARMENTIK' is a company where I hustled as a
+                            rainmaker. My business had its ups and downs, which
+                            were stressful, but I was learning something new
+                            every day. During the pandemic, I decided to bring
+                            my passion into the business.</p>
+          </div>
+
+
+          <div className="my-container">
+            <h4 className="my-title">My Learning Odyssey</h4>
+            <p className="my-paragraph">My journey into web development began with a curiosity about how websites work. What started as a hobby
+              quickly evolved into a passion as I discovered the power of creating digital experiences that can impact
+              people's lives. Through years of learning, experimenting, and building, I've developed a deep
+              understanding of the web ecosystem and the skills needed to create exceptional digital products.</p>
+          </div>
+
+
+
+          <div className="my-container">
+            <h4 className="my-title">My Credentials</h4>
+            <p className="my-paragraph">I'm a Bangladesh University of Engineering and Technology (BUET) certified full-stack web developer on a
+            journey of modern web mastery at the University of Helsinki.</p>
+          </div>
+
+          
+
+
           <div className="bio-actions">
-
-
             <button className="neo-button glow" href="../assets/CV.pdf">
               <FaDownload className="button-icon" /> Download CV
-            </button>
-
-     
-              
-
+            </button>  
             <button className="neo-button-secondary">
               <FaLaptopCode className="button-icon" /> View Projects
             </button>

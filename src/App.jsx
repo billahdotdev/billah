@@ -9,7 +9,7 @@ import ContactSection from "./components/ContactSection"
 import Footer from "./components/Footer"
 import ThemeToggle from "./components/ThemeToggle"
 import { FaCode } from "react-icons/fa"
-import logo from './assets/logo.svg';  // Import the SVG logo
+import logo from './assets/mb-b.svg';  // Import the SVG logo
 import "./App.css"
 
 function App() {
@@ -82,7 +82,7 @@ function App() {
           <h1 className="logo neo-text">
       {/* Link to the SVG logo */}
       <img src={logo} alt="billah.dev logo" className="logo-icon" />
-      billah.dev
+      {/*Masum Billah */}
     </h1>
           <ThemeToggle darkMode={darkMode} toggleTheme={toggleTheme} />
         </header>
