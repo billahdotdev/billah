@@ -18,12 +18,20 @@ import {
 function AboutSection({ darkMode }) {
   const skills = [
     {
-      name: "HTML",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+      name: "MongoDB",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
     },
     {
-      name: "CSS",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+      name: "Express",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
+    },
+    {
+      name: "React",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+    },
+    {
+      name: "Node.js",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
     },
     {
       name: "JavaScript",
@@ -34,11 +42,6 @@ function AboutSection({ darkMode }) {
       logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
     },
     {
-      name: "React",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-    },
-    
-    {
       name: "TailwindCSS",
       logo: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg",
     },
@@ -47,17 +50,14 @@ function AboutSection({ darkMode }) {
       name: "Material UI",
       logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg",
     },
+    
     {
-      name: "Node.js",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+      name: "HTML",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
     },
     {
-      name: "Express",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
-    },
-    {
-      name: "MongoDB",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+      name: "CSS",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
     },
     {
       name: "Figma",
@@ -211,14 +211,14 @@ function XIcon() {
             <h4 className="my-title">My Story</h4>
             <p className="my-paragraph">
             I am passionate about JavaScript and web
-                            technologies. Before the pandemic, I was just a
-                            struggling entrepreneur in the clothing industry.
-                            'GARMENTIK' is a company where I hustled as a
-                            rainmaker. My business had its ups and downs, which
-                            were stressful, but I was learning something new
-                            every day. During the pandemic, I decided to bring
-                            my passion into the business. Nowadays, two roles in
-                            my real-life game are:
+            technologies. Before the pandemic, I was just a
+            struggling entrepreneur in the clothing industry.
+            'GARMENTIK' is a company where I hustled as a
+            rainmaker. My business had its ups and downs, which
+            were stressful, but I was learning something new
+            every day. During the pandemic, I decided to bring
+            my passion into the business. Nowadays, two roles in
+            my real-life game are: Brandotory and Garmentik.
             </p>
             <div className="story-button-container">
               <a
@@ -227,7 +227,7 @@ function XIcon() {
                 rel="noopener noreferrer"
                 className="cute-button button-g"
               >
-                GitHub <FaExternalLinkAlt className="external-icon" />
+                Brandotory <FaExternalLinkAlt className="external-icon" />
               </a>
               <a
                 href="https://behance.net/your"
@@ -235,7 +235,7 @@ function XIcon() {
                 rel="noopener noreferrer"
                 className="cute-button button-b"
               >
-                Behance <FaExternalLinkAlt className="external-icon" />
+                Garmentik <FaExternalLinkAlt className="external-icon" />
               </a>
             </div>
           </div>
