@@ -240,10 +240,9 @@ function Footer({ darkMode, toggleTheme }) {
 
         <div className="footer-bottom">
           <div className="copyright">
-            <p>© {currentYear} Your Name. All rights reserved.</p>
-            <p className="footer-tagline">
-              Crafted with <FaHeart className="heart-icon animate-pulse" /> and <FaCode className="code-icon" />
-            </p>
+            <p>© {currentYear} Built by dreamers: Masum Billah. For dreamers. Deeply indebted to the individuals who I
+            learned from. "NO RIGHT RESERVED".</p>
+            
           </div>
 
           <div className="footer-actions">

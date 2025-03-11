@@ -121,7 +121,7 @@ function ContactSection({ darkMode }) {
               <div className="contact-text">
                 <h4 className="contact-label">Email</h4>
                 <a href="mailto:your.email@example.com" className="contact-value contact-link">
-                  your.email@example.com
+                  billahdotdev@gmail.com
                 </a>
               </div>
             </div>
@@ -133,7 +133,7 @@ function ContactSection({ darkMode }) {
               <div className="contact-text">
                 <h4 className="contact-label">Phone</h4>
                 <a href="tel:+11234567890" className="contact-value contact-link">
-                  +1 (123) 456-7890
+                  +88 01711 992 558
                 </a>
               </div>
             </div>
@@ -150,7 +150,7 @@ function ContactSection({ darkMode }) {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  +880 14 565 6565
+                  +880 1713 401 889
                 </a>
               </div>
             </div>
@@ -161,14 +161,14 @@ function ContactSection({ darkMode }) {
               </div>
               <div className="contact-text">
                 <h4 className="contact-label">Location</h4>
-                <p className="contact-value">San Francisco, CA</p>
+                <p className="contact-value">Dhaka, Bangladesh</p>
               </div>
             </div>
           </div>
 
           <div className="contact-map neo-inset">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d100939.98555098464!2d-122.50764017948551!3d37.75781499657633!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan%20Francisco%2C%20CA%2C%20USA!5e0!3m2!1sen!2s!4v1647043435933!5m2!1sen!2s"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d58403.62095651956!2d90.33388691744386!3d23.810544900000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c0c1c61277fb%3A0xe7d34d4f5c05e741!2sMirpur%2C%20Dhaka!5e0!3m2!1sen!2sbd!4v1710161725644!5m2!1sen!2sbd"
               width="100%"
               height="100%"
               style={{ border: 0 }}

@@ -273,22 +273,9 @@ body.dark .newsletter-error {
   text-align: center;
 }
 
-.footer-tagline {
-  margin-top: 0.5rem;
-  font-size: 0.875rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
 
-.heart-icon {
-  color: var(--heart-color);
-}
 
-.code-icon {
-  color: var(--code-color);
-}
+
 
 .footer-container.dark .heart-icon {
   color: var(--heart-color-dark);
