@@ -84,7 +84,7 @@ function AboutSection({ darkMode }) {
           <div className="profile-image-container">
             <div className="profile-image-wrapper neo-flat">
               <img
-                src="https://avatars.githubusercontent.com/u/11209jjj9343?v=4src/assets/mjjm.jpg"
+                src="https://avatars.githubusercontent.com/u/112099343?v=4"
                 alt="Profile"
                 className="profile-image"
               />
@@ -117,7 +117,7 @@ function AboutSection({ darkMode }) {
 
             <div className="profile-detail-item neo-inset">
               <FaWhatsapp className="profile-icon" />
-              <a href="https://wa.me/880145656565" className="whatsapp-link" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/8801713401889" className="whatsapp-link" target="_blank" rel="noopener noreferrer">
                 +880 1713 40 1889
               </a>
             </div>
