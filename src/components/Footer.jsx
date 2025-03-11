@@ -196,15 +196,15 @@ function Footer({ darkMode, toggleTheme }) {
 
           <div className="footer-contact">
             <h3 className="footer-heading accent-gradient">Contact</h3>
-            <p>San Francisco, CA</p>
+            <p>Dhaka, Manila</p>
             <p>
               <a href="mailto:your.email@example.com" className="footer-contact-link">
-                your.email@example.com
+                billahdotdev@gmail.com
               </a>
             </p>
             <p>
               <a href="tel:+11234567890" className="footer-contact-link">
-                +1 (123) 456-7890
+                +880 1711 99 2558
               </a>
             </p>
             <p>
@@ -214,7 +214,7 @@ function Footer({ darkMode, toggleTheme }) {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                WhatsApp: +880 14 565 6565
+                WhatsApp: +880 1713 40 1889
               </a>
             </p>
           </div>
@@ -240,7 +240,7 @@ function Footer({ darkMode, toggleTheme }) {
 
         <div className="footer-bottom">
           <div className="copyright">
-            <p>© {currentYear} Built by dreamers: Masum Billah. For dreamers. Deeply indebted to the individuals who I
+            <p>v3. Built by dreamers: Masum Billah. For dreamers. Deeply indebted to the individuals who I
             learned from. "NO RIGHT RESERVED".</p>
             
           </div>
