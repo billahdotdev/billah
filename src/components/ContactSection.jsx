@@ -145,7 +145,7 @@ function ContactSection({ darkMode }) {
               <div className="contact-text">
                 <h4 className="contact-label">WhatsApp</h4>
                 <a
-                  href="https://wa.me/880145656565"
+                  href="https://wa.me/+8801713401889"
                   className="contact-value contact-link"
                   target="_blank"
                   rel="noopener noreferrer"
