@@ -92,7 +92,7 @@ function AboutSection({ darkMode }) {
           </div>
 
           <h3 className="profile-name accent-gradient">MASUM BILLAH</h3>
-          <p className="profile-title">Web Developer | Branding Consultant at Brandotory </p>
+          <p className="profile-title">Full Stack Web Developer</p>
 
           <div className="profile-details">
             <div className="profile-detail-item neo-inset">
