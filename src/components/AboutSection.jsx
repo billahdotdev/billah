@@ -37,10 +37,12 @@ function AboutSection({ darkMode }) {
       name: "React",
       logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
     },
+    
     {
       name: "TailwindCSS",
-      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindCSS/tailwindCSS-plain.svg",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg",
     },
+    
     {
       name: "Material UI",
       logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg",
@@ -61,6 +63,11 @@ function AboutSection({ darkMode }) {
       name: "Figma",
       logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
     },
+
+    {
+      name: "Inkscape",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/inkscape/inkscape-original.svg",
+    },
     {
       name: "More +",
       logo: null,
@@ -68,11 +75,28 @@ function AboutSection({ darkMode }) {
     },
   ]
 
+
+  // Custom X (Twitter) icon since it's not in react-icons
+function XIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="1em"
+      height="1em"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      style={{ display: "inline-block", verticalAlign: "middle" }}
+    >
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  )
+}
+
   const socialLinks = [
     { name: "GitHub", icon: <FaGithub />, url: "https://github.com/your" },
     { name: "LinkedIn", icon: <FaLinkedin />, url: "https://linkedin.com/in/your" },
-    { name: "Twitter", icon: <FaTwitter />, url: "https://twitter.com/your" },
-    { name: "Instagram", icon: <FaInstagram />, url: "https://instagram.com/your" },
+    { icon: <XIcon />, label: "X", url: "https://x.com" },
+    
   ]
 
   return (
@@ -102,7 +126,7 @@ function AboutSection({ darkMode }) {
 
             <div className="profile-detail-item neo-inset">
               <FaCircle className="profile-icon-green" />
-              <span>Available for freelance works</span>
+              <span>Available for works</span>
             </div>
 
             <div className="profile-detail-item neo-inset">
