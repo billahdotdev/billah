@@ -96,7 +96,7 @@ function ContactSection({ darkMode }) {
 
   const socialLinks = [
     { icon: <FaGithub />, label: "GitHub", url: "https://github.com/billahdotdev" },
-    { icon: <FaLinkedin />, label: "LinkedIn", url: "https://linkedin.com/in/billahdotdev" },
+    { icon: <FaLinkedin />, label: "LinkedIn", url: "https://www.linkedin.com/in/billahdotdev" },
     { icon: <XIcon />, label: "X", url: "https://x.com/billahdotdev" },
     {/*
     { icon: <FaInstagram />, label: "Instagram", url: "https://instagram.com/billahdotdev" },

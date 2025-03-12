@@ -95,7 +95,7 @@ function XIcon() {
 
   const socialLinks = [
     { name: "GitHub", icon: <FaGithub />, url: "https://github.com/billahdotdev" },
-    { name: "LinkedIn", icon: <FaLinkedin />, url: "https://linkedin.com/in/billahdotdev" },
+    { name: "LinkedIn", icon: <FaLinkedin />, url: "https://www.linkedin.com/in/billahdotdev" },
     { icon: <XIcon />, label: "X", url: "https://x.com/billahdotdev" },
     
   ]
