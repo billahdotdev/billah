@@ -50,11 +50,14 @@ function Footer({ darkMode, toggleTheme }) {
   ]
 
   const socialLinks = [
-    { icon: <FaGithub />, label: "GitHub", url: "https://github.com" },
-    { icon: <XIcon />, label: "X", url: "https://x.com" },
-    { icon: <FaLinkedin />, label: "LinkedIn", url: "https://linkedin.com" },
+    { icon: <FaGithub />, label: "GitHub", url: "https://github.com/billahdotdev" }, 
+    { icon: <FaLinkedin />, label: "LinkedIn", url: "https://linkedin.com/in/billahdotdev" },
+    { icon: <XIcon />, label: "X", url: "https://x.com/billahdotdev" },
+    {/*
     { icon: <FaInstagram />, label: "Instagram", url: "https://instagram.com" },
-    { icon: <FaWhatsapp />, label: "WhatsApp", url: "https://wa.me/880145656565" },
+    { icon: <FaWhatsapp />, label: "WhatsApp", url: "https://wa.me/880145656565" },  
+    */}
+    
   ]
 
   useEffect(() => {
@@ -240,7 +243,7 @@ function Footer({ darkMode, toggleTheme }) {
 
         <div className="footer-bottom">
           <div className="copyright">
-            <p>v3. Built by dreamers: Masum Billah. For dreamers. Deeply indebted to the individuals who I
+            <p>v03. Built by dreamers: Masum Billah. For dreamers. Deeply indebted to the individuals who I
             learned from. "NO RIGHT RESERVED".</p>
             
           </div>

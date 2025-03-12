@@ -94,9 +94,9 @@ function XIcon() {
 }
 
   const socialLinks = [
-    { name: "GitHub", icon: <FaGithub />, url: "https://github.com/your" },
-    { name: "LinkedIn", icon: <FaLinkedin />, url: "https://linkedin.com/in/your" },
-    { icon: <XIcon />, label: "X", url: "https://x.com" },
+    { name: "GitHub", icon: <FaGithub />, url: "https://github.com/billahdotdev" },
+    { name: "LinkedIn", icon: <FaLinkedin />, url: "https://linkedin.com/in/billahdotdev" },
+    { icon: <XIcon />, label: "X", url: "https://x.com/billahdotdev" },
     
   ]
 
@@ -142,8 +142,8 @@ function XIcon() {
 
             <div className="profile-detail-item neo-inset">
               <FaWhatsapp className="profile-icon" />
-              <a href="https://wa.me/8801713401889" className="whatsapp-link" target="_blank" rel="noopener noreferrer">
-                +880 1713 40 1889
+              <a href="https://wa.me/+8801711992558" className="whatsapp-link" target="_blank" rel="noopener noreferrer">
+              +88 01711 992 558
               </a>
             </div>
           </div>
@@ -250,7 +250,7 @@ function XIcon() {
               understanding of the web ecosystem and the skills needed to create exceptional digital products.
             </p>
             <div className="button-container">
-              <a href="https://medium.com/your-blog" target="_blank" rel="noopener noreferrer" className="cute-button">
+              <a href="https://github.com/billahdotdev" target="_blank" rel="noopener noreferrer" className="cute-button">
                 Read My Blog <FaExternalLinkAlt className="external-icon" />
               </a>
             </div>
@@ -264,7 +264,7 @@ function XIcon() {
             </p>
             <div className="button-container">
               <a
-                href="https://linkedin.com/in/your/certifications"
+                href="https://linkedin.com/in/billahdotdev/certifications"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="cute-button"
@@ -275,12 +275,12 @@ function XIcon() {
           </div>
 
           <div className="bio-actions">
-            <a href="/assets/CV.pdf" download className="neo-button glow">
+            <a href="https://linkedin.com/in/billahdotdev/certifications" download className="neo-button glow">
               <FaDownload className="button-icon" /> Download CV
             </a>
 
             <a
-              href="https://github.com/your"
+              href="https://github.com/billahdotdev"
               target="_blank"
               rel="noopener noreferrer"
               className="neo-button-secondary"

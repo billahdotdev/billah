@@ -21,8 +21,8 @@ function WorksSection({ darkMode }) {
       image: "https://images.unsplash.com/photo-1557821552-17105176677c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
       tags: ["React", "CSS", "Stripe"],
       category: "web",
-      liveLink: "https://example.com",
-      githubLink: "https://github.com",
+      liveLink: "https://safewear.com",
+      githubLink: "https://billahdotdev.github.io/test",
       featured: true,
     },
     {
@@ -151,7 +151,7 @@ function WorksSection({ darkMode }) {
               </div>
 
               <a
-                href={`https://wa.me/88017165561661?text=Hi, I'm interested in your ${project.title} project.`}
+                href={`https://wa.me/+8801711992558?text=Hi, I'm interested in your ${project.title} project.`}
                 className="whatsapp-button neo-button glow"
                 target="_blank"
                 rel="noopener noreferrer"

@@ -11,19 +11,21 @@ function ServicesSection({ darkMode }) {
       features: ["Custom Websites", "Web Applications", "E-commerce Solutions", "API Integration"],
     },
     {
-      icon: <FaPalette className="service-icon" />,
-      title: "UI/UX Design",
-      description:
-        "Creating intuitive and visually appealing user interfaces with a focus on user experience and modern design trends.",
-      features: ["User Research", "Wireframing", "Prototyping", "Visual Design"],
-    },
-    {
       icon: <FaGlobe className="service-icon" />,
       title: "SEO Optimization",
       description:
         "Improving website visibility and search engine rankings through technical SEO and content optimization.",
       features: ["Keyword Research", "On-page SEO", "Technical Audits", "Performance Optimization"],
     },
+
+    {
+      icon: <FaPalette className="service-icon" />,
+      title: "Branding Identity Design",
+      description:
+        "Creating intuitive and visually appealing user interfaces with a focus on user experience and modern design trends.",
+      features: ["User Research", "Wireframing", "Prototyping", "Visual Design"],
+    },
+    
     {
       icon: <FaMobile className="service-icon" />,
       title: "Mobile Development",
@@ -65,7 +67,7 @@ function ServicesSection({ darkMode }) {
             </ul>
               {/* 
             <button className="service-button neo-button-small glow">Learn More</button> */}
-            <button className="service-button neo-button-small glow" onClick={() => window.open('https://github.com', '_blank')}>
+            <button className="service-button neo-button-small glow" onClick={() => window.open('https://github.com/billahdotdev', '_blank')}>
   Learn More
 </button>
 

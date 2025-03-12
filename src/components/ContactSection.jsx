@@ -95,10 +95,13 @@ function ContactSection({ darkMode }) {
   }
 
   const socialLinks = [
-    { icon: <FaGithub />, label: "GitHub", url: "https://github.com" },
-    { icon: <XIcon />, label: "X", url: "https://x.com" },
-    { icon: <FaLinkedin />, label: "LinkedIn", url: "https://linkedin.com" },
-    { icon: <FaInstagram />, label: "Instagram", url: "https://instagram.com" },
+    { icon: <FaGithub />, label: "GitHub", url: "https://github.com/billahdotdev" },
+    { icon: <FaLinkedin />, label: "LinkedIn", url: "https://linkedin.com/in/billahdotdev" },
+    { icon: <XIcon />, label: "X", url: "https://x.com/billahdotdev" },
+    {/*
+    { icon: <FaInstagram />, label: "Instagram", url: "https://instagram.com/billahdotdev" },
+    */}
+    
   ]
 
   return (
@@ -145,12 +148,12 @@ function ContactSection({ darkMode }) {
               <div className="contact-text">
                 <h4 className="contact-label">WhatsApp</h4>
                 <a
-                  href="https://wa.me/+8801713401889"
+                  href="https://wa.me/+88 01711 992 558"
                   className="contact-value contact-link"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  +880 1713 401 889
+                  +88 01711 992 558
                 </a>
               </div>
             </div>
