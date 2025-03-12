@@ -223,7 +223,7 @@ function XIcon() {
             </p>
             <div className="story-button-container">
               <a
-                href="https://github.com/your"
+                href="https://www.facebook.com/brandotory"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="cute-button button-g"
@@ -231,7 +231,7 @@ function XIcon() {
                 Brandotory <FaExternalLinkAlt className="external-icon" />
               </a>
               <a
-                href="https://behance.net/your"
+                href="https://www.facebook.com/garmentik"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="cute-button button-b"
