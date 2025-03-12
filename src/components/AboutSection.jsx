@@ -137,7 +137,7 @@ function XIcon() {
 
             <div className="profile-detail-item neo-inset">
               <FaCalendarAlt className="profile-icon" />
-              <span>9+ years experience</span>
+              <span>9+ Years Experience</span>
             </div>
 
             <div className="profile-detail-item neo-inset">
