@@ -1,4 +1,5 @@
 import "../styles/AboutSection.css"
+
 import {
   FaUser,
   FaMapMarkerAlt,

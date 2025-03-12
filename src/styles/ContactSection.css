@@ -4,7 +4,7 @@
   gap: var(--spacing-lg);
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 var(--spacing-sm);
+  /* Remove the padding here since it's already in the global .container class */
 }
 
 .contact-info,
