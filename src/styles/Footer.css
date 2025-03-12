@@ -331,3 +331,24 @@ body.dark .newsletter-error {
   }
 }
 
+/* Ensure footer has consistent spacing */
+.footer-content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-sm);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .footer-content-wrapper {
+    padding: 0 var(--spacing-md);
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer-content-wrapper {
+    padding: 0 var(--spacing-lg);
+  }
+}
+

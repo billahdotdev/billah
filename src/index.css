@@ -423,3 +423,36 @@ body.dark .neo-text {
   }
 }
 
+/* Update the container class to ensure consistent padding at all viewport widths */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-sm);
+  box-sizing: border-box; /* Ensure padding is included in width calculation */
+}
+
+/* Ensure consistent section padding */
+.section {
+  scroll-margin-top: 5rem;
+  padding: var(--spacing-lg) 0; /* Remove horizontal padding from sections */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 var(--spacing-md);
+  }
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding: var(--spacing-xl) 0; /* Keep vertical padding, remove horizontal */
+  }
+
+  .container {
+    padding: 0 var(--spacing-lg);
+  }
+}
+

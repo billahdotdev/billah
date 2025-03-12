@@ -6,6 +6,10 @@
   gap: var(--spacing-sm);
 }
 
+
+
+
+
 .filter-icon {
   color: var(--accent-color);
   margin-bottom: var(--spacing-xs);
@@ -30,10 +34,14 @@
   box-shadow: none;
 }
 
+
+/* Ensure the works grid has consistent spacing */
 .works-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--spacing-lg);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .project-card {

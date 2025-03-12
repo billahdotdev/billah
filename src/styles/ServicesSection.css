@@ -1,7 +1,11 @@
+
+/* Ensure the services grid has consistent spacing */
 .services-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--spacing-lg);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .service-card {

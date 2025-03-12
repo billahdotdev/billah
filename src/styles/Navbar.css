@@ -1,3 +1,6 @@
+
+
+/* Ensure navbar has consistent spacing */
 .navbar {
   padding: var(--spacing-sm);
   border-radius: var(--radius-md);
@@ -5,6 +8,8 @@
   position: sticky;
   top: var(--spacing-sm);
   z-index: 100;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .nav-list {
