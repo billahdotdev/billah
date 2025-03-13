@@ -42,11 +42,12 @@ function Footer({ darkMode, toggleTheme }) {
   })
 
   const quotes = [
-    "Websites promote you 24/7: No employee will do that. — Paul Cookson",
+    
     "First, solve the problem. Then, write the code. — John Johnson.",
     "SEO is not something you do anymore. It's what happens when you do everything else right. — Chad Pollitt",
     "Design is the silent ambassador of your brand. — Paul Ran",
     "Your brand is what other people say about you when you're not in the room. — Jeff Bezos.",
+    "Websites promote you 24/7: No employee will do that. — Paul Cookson",
     
   ]
 
