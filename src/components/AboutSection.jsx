@@ -70,7 +70,7 @@ function AboutSection({ darkMode }) {
       logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/inkscape/inkscape-original.svg",
     },
     {
-      name: "More +",
+      name: "and More...",
       logo: null,
       isButton: true,
     },
@@ -170,7 +170,7 @@ function XIcon() {
             </div>
             <div className="stat-item">
               <div className="stat-number animate-pulse">118</div>
-              <div className="stat-label">Happy Clients</div>
+              <div className="stat-label">Clients</div>
             </div>
             <div className="stat-item">
               <div className="stat-number animate-pulse">4</div>
