@@ -580,7 +580,7 @@ body.dark .skill-name {
     grid-template-columns: repeat(6, 90px);
   }
 }
-/* for fixing responsive issue*/
+
 /* Fix for About Section on older mobile devices */
 @media screen and (max-width: 480px) {
   /* Target the about section specifically */

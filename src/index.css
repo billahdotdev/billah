@@ -10,7 +10,7 @@
   --bg-light: #f0f2f5;
   --text-light: #2d3748;
   --text-secondary-light: #4a5568;
-  --text-tertiary-light: #718096;
+  --text-tertiary-light: #5d6b81;
 
   --bg-dark: #1a202c;
   --text-dark: #f7fafc;
@@ -25,8 +25,8 @@
   --shadow-dark-2: rgba(255, 255, 255, 0.03);
 
   /* Accent Colors - Simplified */
-  --accent-color: #009292;
-  --accent-color-hover: #008181;
+  --accent-color: #007575;
+  --accent-color-hover: #006666;
   --heart-color: #e53e3e;
   --heart-color-dark: #fc8181;
 
