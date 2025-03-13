@@ -580,4 +580,57 @@ body.dark .skill-name {
     grid-template-columns: repeat(6, 90px);
   }
 }
+/* for fixing responsive issue*/
+/* Fix for About Section on older mobile devices */
+@media screen and (max-width: 480px) {
+  /* Target the about section specifically */
+  #about .about-content {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
+
+  /* Ensure profile card and about bio have consistent padding */
+  #about .profile-card,
+  #about .about-bio {
+    padding-left: var(--spacing-sm);
+    padding-right: var(--spacing-sm);
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Fix any potential overflow issues */
+  #about .section {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  /* Ensure container has proper box-sizing */
+  #about .container {
+    padding-left: 0;
+    padding-right: 0;
+    overflow-x: hidden;
+  }
+}
+
+/* Additional fix for very small screens */
+@media screen and (max-width: 320px) {
+  #about .profile-card,
+  #about .about-bio {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  /* Ensure skills grid fits on small screens */
+  #about .skills-grid {
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  }
+
+  /* Adjust skill cards for smaller screens */
+  #about .skill-card {
+    width: 70px;
+  }
+}
 
