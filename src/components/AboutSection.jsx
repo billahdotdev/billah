@@ -70,7 +70,7 @@ function AboutSection({ darkMode }) {
       logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/inkscape/inkscape-original.svg",
     },
     {
-      name: "and More...",
+      name: "More...",
       logo: null,
       isButton: true,
     },
