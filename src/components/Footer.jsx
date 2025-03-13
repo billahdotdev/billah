@@ -42,11 +42,12 @@ function Footer({ darkMode, toggleTheme }) {
   })
 
   const quotes = [
-    "Design is not just what it looks like and feels like. Design is how it works.",
-    "Simplicity is the ultimate sophistication.",
-    "Good design is obvious. Great design is transparent.",
-    "The details are not the details. They make the design.",
-    "Every great design begins with an even better story.",
+    "Websites promote you 24/7: No employee will do that. — Paul Cookson",
+    "First, solve the problem. Then, write the code. — John Johnson.",
+    "SEO is not something you do anymore. It's what happens when you do everything else right. — Chad Pollitt",
+    "Design is the silent ambassador of your brand. — Paul Ran",
+    "Your brand is what other people say about you when you're not in the room. — Jeff Bezos.",
+    
   ]
 
   const socialLinks = [
@@ -243,7 +244,7 @@ function Footer({ darkMode, toggleTheme }) {
 
         <div className="footer-bottom">
           <div className="copyright">
-            <p>v03. Built by dreamers: Masum Billah. For dreamers. Deeply indebted to the individuals who I
+            <p>v3. Built by dreamers: Masum Billah. For dreamers. Deeply indebted to the individuals who I
             learned from. "NO RIGHT RESERVED".</p>
             
           </div>
