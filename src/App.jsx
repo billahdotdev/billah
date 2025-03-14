@@ -9,7 +9,7 @@ import ContactSection from "./components/ContactSection"
 import Footer from "./components/Footer"
 import ThemeToggle from "./components/ThemeToggle"
 import { FaCode } from "react-icons/fa"
-import logo from './assets/mb-b.svg';  // Import the SVG logo
+import logo from './assets/mb-t.svg';  // Import the SVG logo
 import "./App.css"
 
 function App() {
