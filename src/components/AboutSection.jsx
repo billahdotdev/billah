@@ -183,7 +183,7 @@ function XIcon() {
           <h3 className="bio-title accent-gradient">About Me</h3>
 
           <div className="bio-text">
-            <h4>Need a website that works for you? I’m a full-stack web developer and designer here to help you reach your online goals. I create fast, reliable websites, improve your search engine rankings, and help bring more visitors with smart digital marketing. I also design memorable branding to make your business stand out. Let’s get started and see real results!</h4>
+            <h4>I’m a full-stack web developer and designer dedicated to helping you achieve your online goals. I build fast, reliable websites, improve search engine rankings, and drive more traffic through effective digital marketing. I also create memorable branding that makes your business stand out. Let's work together to bring your vision to life and see real results!</h4>
           </div>
 
           <div className="skills-container">
