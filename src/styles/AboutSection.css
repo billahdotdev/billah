@@ -113,7 +113,7 @@ body.dark .profile-title {
 
 .profile-icon-green {
   margin-right: var(--spacing-sm);
-  color: green;
+  color: #4CAF50;
   transition: color var(--transition-normal);
 }
 

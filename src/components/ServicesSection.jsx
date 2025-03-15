@@ -1,5 +1,5 @@
 import "../styles/ServicesSection.css"
-import { FaCode, FaPalette, FaGlobe, FaMobile, FaServer, FaRocket } from "react-icons/fa"
+import { FaCode, FaChartLine, FaBullhorn, FaPalette, FaLinux, } from "react-icons/fa"
 
 function ServicesSection({ darkMode }) {
   const services = [
@@ -7,43 +7,71 @@ function ServicesSection({ darkMode }) {
       icon: <FaCode className="service-icon" />,
       title: "Web Development",
       description:
-        "Building responsive, fast, and accessible websites using modern technologies like React, Next.js, and CSS.",
-      features: ["Custom Websites", "Web Applications", "E-commerce Solutions", "API Integration"],
+        "Building responsive, fast, and accessible websites using modern technologies like MongoDB, Express, React, Node, Next.js, CSS, and TailwindCSS.",
+      features: [
+        "Custom Websites",
+        "SPA (Single Page Applications)",
+        "E-commerce Solutions",
+        "API Integration",
+        "Domain and Hosting Solutions",
+      ],
     },
+    
     {
-      icon: <FaGlobe className="service-icon" />,
+      icon: <FaChartLine className="service-icon" />,
       title: "SEO Optimization",
       description:
         "Improving website visibility and search engine rankings through technical SEO and content optimization.",
       features: ["Keyword Research", "On-page SEO", "Technical Audits", "Performance Optimization"],
     },
+    {
+      icon: <FaBullhorn className="service-icon" />,
+      title: "Digital Marketing",
+      description: "Creating targeted digital marketing strategies to grow your business online through SEO, PPC, social media, and more.",
+      features: [
+        "SEO Optimization",
+        "PPC Campaigns",
+        "Social Media Marketing",
+        "Email Marketing",
+        "Content Marketing",
+        "Analytics & Reporting"
+      ],
+    },
+    
 
     {
       icon: <FaPalette className="service-icon" />,
       title: "Branding Identity Design",
       description:
-        "Creating intuitive and visually appealing user interfaces with a focus on user experience and modern design trends.",
-      features: ["User Research", "Wireframing", "Prototyping", "Visual Design"],
+        "Crafting unique brand identities through logo design, typography, color schemes, and brand guidelines to communicate your brand’s story and values.",
+      features: [
+        "Logo Design",
+        "Brand Strategy",
+        "Typography & Color Schemes",
+        "Brand Guidelines",
+        "Visual Identity Systems",
+        "Packaging Design"
+      ],
     },
     
+    
+   
     {
-      icon: <FaMobile className="service-icon" />,
-      title: "Mobile Development",
-      description: "Developing cross-platform mobile applications using React Native and other modern frameworks.",
-      features: ["iOS & Android Apps", "Progressive Web Apps", "App Store Submission", "App Maintenance"],
-    },
-    {
-      icon: <FaServer className="service-icon" />,
-      title: "Backend Development",
-      description: "Building robust server-side applications and APIs to power your web and mobile applications.",
-      features: ["Node.js/Express", "Database Design", "API Development", "Authentication Systems"],
-    },
-    {
-      icon: <FaRocket className="service-icon" />,
-      title: "Performance Optimization",
-      description: "Optimizing web applications for speed, efficiency, and better user experience.",
-      features: ["Load Time Reduction", "Code Optimization", "Asset Optimization", "Caching Strategies"],
-    },
+      icon: <FaLinux className="service-icon" />,
+      title: "Linux Migration",
+      description:
+        "Linux Migration Service helps transition from your current operating system to a Linux-based OS, ensuring a smooth migration to a more secure, open-source, and customizable environment.",
+      features: [
+        "Choosing the Right Linux Distribution",
+        "Data Backup & Recovery",
+        "OS Installation & Configuration",
+        "Software Migration & Compatibility",
+        "System Configuration & Optimization",
+        "Ongoing Support & Maintenance"
+      ],
+    }
+    
+   
   ]
 
   return (

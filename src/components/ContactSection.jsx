@@ -98,9 +98,6 @@ function ContactSection({ darkMode }) {
     { icon: <FaGithub />, label: "GitHub", url: "https://github.com/billahdotdev" },
     { icon: <FaLinkedin />, label: "LinkedIn", url: "https://www.linkedin.com/in/billahdotdev" },
     { icon: <XIcon />, label: "X", url: "https://x.com/billahdotdev" },
-    {/*
-    { icon: <FaInstagram />, label: "Instagram", url: "https://instagram.com/billahdotdev" },
-    */}
     
   ]
 

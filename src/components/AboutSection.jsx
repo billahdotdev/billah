@@ -11,7 +11,6 @@ import {
   FaCircle,
   FaGithub,
   FaLinkedin,
-  FaTwitter,
   FaInstagram,
   FaExternalLinkAlt,
 } from "react-icons/fa"
@@ -127,7 +126,7 @@ function XIcon() {
 
             <div className="profile-detail-item neo-inset">
               <FaCircle className="profile-icon-green" />
-              <span>Available for works</span>
+              <span>Available for work</span>
             </div>
 
             <div className="profile-detail-item neo-inset">
@@ -137,7 +136,7 @@ function XIcon() {
 
             <div className="profile-detail-item neo-inset">
               <FaCalendarAlt className="profile-icon" />
-              <span>9+ Years Experience</span>
+              <span>7+ Years Experience</span>
             </div>
 
             <div className="profile-detail-item neo-inset">
@@ -183,7 +182,7 @@ function XIcon() {
           <h3 className="bio-title accent-gradient">About Me</h3>
 
           <div className="bio-text">
-            <h4>I’m a full-stack web developer and designer dedicated to helping you achieve your online goals. I build fast, reliable websites, improve search engine rankings, and drive more traffic through effective digital marketing. I also create memorable branding design that makes your business stand out. Let's work together to bring your vision to life.</h4>
+            <h4>I’m a full-stack web developer and designer dedicated to building fast, reliable websites, improving search engine rankings, and driving more traffic through effective digital marketing. I also create memorable branding that makes your business stand out. Let's work together to bring your vision to life.</h4>
           </div>
 
           <div className="skills-container">
@@ -211,15 +210,7 @@ function XIcon() {
           <div className="my-container">
             <h4 className="my-title">My Story</h4>
             <p className="my-paragraph">
-            I am passionate about JavaScript and web
-            technologies. Before the pandemic, I was just a
-            struggling entrepreneur in the clothing industry.
-            'GARMENTIK' is a company where I hustled as a
-            rainmaker. My business had its ups and downs, which
-            were stressful, but I was learning something new
-            every day. During the pandemic, I decided to bring
-            my passion into the business. Nowadays, two roles in
-            my real-life game are: Brandotory and Garmentik.
+            JavaScript and web tech? That's me. 'GARMENTIK' was my clothing business, a hard but rewarding journey. Pandemic changed everything. Now, I combine both passions: 'Brandotory' (web) and 'Garmentik' (clothing).
             </p>
             <div className="story-button-container">
               <a
