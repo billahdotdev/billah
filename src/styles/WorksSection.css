@@ -111,7 +111,7 @@
 .overlay-link {
   width: 2.5rem;
   height: 2.5rem;
-  color: white;
+  color: #007BFF;
   background-color: var(--accent-color);
   box-shadow: none;
 }

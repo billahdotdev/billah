@@ -162,6 +162,9 @@ function ContactSection({ darkMode }) {
               <div className="contact-text">
                 <h4 className="contact-label">Location</h4>
                 <p className="contact-value">Dhaka, Bangladesh</p>
+                <p className="contact-value">Manila, Philippines. (+639156015542)</p>
+               
+                
               </div>
             </div>
           </div>

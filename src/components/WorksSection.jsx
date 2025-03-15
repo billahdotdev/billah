@@ -10,11 +10,33 @@ function WorksSection({ darkMode }) {
   const categories = [
     { id: "all", label: "All" },
     { id: "web", label: "Web" },
-    { id: "mobile", label: "Mobile" },
-    { id: "design", label: "Design" },
+    { id: "mobile", label: "Design" },
+    { id: "design", label: "Xyz" },
   ]
 
   const projects = [
+    {
+      title: "Restaurant Website",
+      description: "A modern website for a restaurant with online reservation and menu display.",
+      image:
+        "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+      tags: ["Vite", "React", "CSS"],
+      category: "web",
+      liveLink: "https://billahdotdev.github.io/resto",
+      githubLink: "https://billahdotdev.github.io/resto/",
+      featured: false,
+    },
+    {
+      title: "My Personal Site",
+      description: "A customizable portfolio template for creative professionals with dark/light mode.",
+      image:
+        "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+      tags: ["React", "Vite", "GSAP", "CSS"],
+      category: "web",
+      liveLink: "https://billahdotdev.github.io/billah",
+      githubLink: "https://billahdotdev.github.io/billah",
+      featured: false,
+    },
     {
       title: "E-Commerce Website",
       description: "A fully responsive e-commerce platform built with React and Stripe integration.",
@@ -25,17 +47,7 @@ function WorksSection({ darkMode }) {
       githubLink: "https://billahdotdev.github.io/test",
       featured: true,
     },
-    {
-      title: "Portfolio Template",
-      description: "A customizable portfolio template for creative professionals with dark/light mode.",
-      image:
-        "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-      tags: ["React", "GSAP", "CSS"],
-      category: "web",
-      liveLink: "https://example.com",
-      githubLink: "https://github.com",
-      featured: false,
-    },
+    
     {
       title: "Task Management App",
       description: "A drag-and-drop task management application with user authentication.",
@@ -53,22 +65,12 @@ function WorksSection({ darkMode }) {
       image:
         "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
       tags: ["React Native", "Firebase", "Redux"],
-      category: "mobile",
+      category: "Design",
       liveLink: "https://example.com",
       githubLink: "https://github.com",
       featured: true,
     },
-    {
-      title: "Restaurant Website",
-      description: "A modern website for a restaurant with online reservation and menu display.",
-      image:
-        "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-      tags: ["HTML", "CSS", "JavaScript"],
-      category: "web",
-      liveLink: "https://example.com",
-      githubLink: "https://github.com",
-      featured: false,
-    },
+    
     {
       title: "UI Design System",
       description: "A comprehensive design system with components and guidelines for web applications.",
