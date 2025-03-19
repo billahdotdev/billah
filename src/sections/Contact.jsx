@@ -71,19 +71,20 @@ const Contact = () => {
 
   const contactInfo = [
     {
-      title: "Email",
-      content: "alex@example.com",
-      link: "mailto:alex@example.com",
+      title: "Phone",
+      content: "+8801711992558",
+      link: "tel:+8801711992558",
     },
     {
-      title: "Phone",
-      content: "+1 (123) 456-7890",
-      link: "tel:+11234567890",
+      title: "Email",
+      content: "billahdotdev@gmail.com",
+      link: "billahdotdev@gmail.com",
     },
+    
   
     {
       title: "Location",
-      content: "San Francisco, CA",
+      content: "Dhaka, Manila",
       link: "https://maps.google.com",
     },
   ]
