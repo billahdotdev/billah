@@ -142,7 +142,7 @@ const Hero = ({ scrollToSection }) => {
             animate={{ opacity: 1, scale: 1 }}
           >
             <div className="image-container">
-              <svg width="180" height="180" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg width="170" height="170" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <motion.circle
                   cx="150"
                   cy="150"
