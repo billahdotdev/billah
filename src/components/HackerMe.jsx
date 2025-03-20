@@ -32,7 +32,7 @@ const useTheme = () => {
   return theme
 }
 
-const MoreAboutMe = ({ onExit }) => {
+const HackerMe = ({ onExit }) => {
   const theme = useTheme()
   const [terminalHistory, setTerminalHistory] = useState([])
   const [currentInput, setCurrentInput] = useState("")
@@ -161,7 +161,7 @@ const MoreAboutMe = ({ onExit }) => {
       "/etc/shadow": "[ACCESS DENIED] - Insufficient privileges",
 
       "/etc/hosts":
-        "127.0.0.1 localhost\n127.0.1.1 terminal-system\n\n# The following lines are desirable for IPv6 capable hosts\n::1     ip6-localhost ip6-loopback\nfe00::0 ip6-localnet\nff00::0 ip6-mcastprefix\nff02::1 ip6-allnodes\nff02::2 ip6-allrouters",
+        "127.0.0.1 localhost\n127.0.1.1 terminal-system\n\n# The following lines are desirable for IPv6 capable hosts\n::1     ip6-localhost ip6-loopback\nfe00::0 ip6-localnet\nff02::1 ip6-allnodes\nff02::2 ip6-allrouters",
 
       "/etc/motd":
         "Welcome to the Personal Terminal Interface\nVersion 1.0.2\n\nThis terminal provides access to personal and professional information.\nType 'help' for a list of available commands.\n\nREMINDER: Some information may be encrypted for security purposes.\nUse appropriate commands to access protected content.\n\nLast system update: 2023-04-15\nSecurity level: High",
@@ -1229,18 +1229,16 @@ Use 'cat [file]' to view file contents.
     })
   }
 
+  // Update the exitTerminal function to properly use the onExit callback
   const exitTerminal = () => {
     addToHistory({
       type: "system",
-      content: "Exiting terminal and returning to homepage...",
+      content: "Exiting terminal...",
     })
 
     setTimeout(() => {
       if (onExit) {
         onExit()
-      } else {
-        // If no onExit prop is provided, try to navigate using window.history
-        window.history.back()
       }
     }, 1000)
   }
@@ -1434,5 +1432,5 @@ Use 'cat [file]' to view file contents.
   )
 }
 
-export default MoreAboutMe
+export default HackerMe
 

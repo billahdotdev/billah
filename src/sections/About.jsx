@@ -1,10 +1,10 @@
 "use client"
 
 import { motion } from "framer-motion"
-import "./About.css"
 import MoreAboutMe from "../components/MoreAboutMe"
 import HackerMe from "../components/HackerMe"
-
+import "./About.css"
+import { useState } from "react"
 
 const About = () => {
   const fadeInUp = {
@@ -18,6 +18,8 @@ const About = () => {
       },
     },
   }
+
+  const [showTerminal, setShowTerminal] = useState(false)
 
   return (
     <div className="about">
@@ -41,11 +43,7 @@ const About = () => {
             variants={fadeInUp}
           >
             <div className="about-image-container">
-              <img
-                src="https://avatars.githubusercontent.com/u/112099343?v=4"
-                alt="Portrait"
-                className="about-image"
-              />
+              <img src="https://avatars.githubusercontent.com/u/112099343?v=4" alt="Portrait" className="about-image" />
               <motion.div
                 className="image-overlay"
                 initial={{ opacity: 0 }}
@@ -69,12 +67,9 @@ const About = () => {
             </h3>
 
             <p>
-            I’m a full-stack web developer and designer dedicated to building fast, 
-            reliable websites, improving search engine rankings, 
-            and driving more traffic through effective digital marketing. 
-            I also create memorable branding that makes your business stand out. 
-            Let's work together to bring your vision to life.
-            
+              I'm a full-stack web developer and designer dedicated to building fast, reliable websites, improving
+              search engine rankings, and driving more traffic through effective digital marketing. I also create
+              memorable branding that makes your business stand out. Let's work together to bring your vision to life.
             </p>
 
             <div className="about-stats">
@@ -118,12 +113,33 @@ const About = () => {
               </motion.a>
             </div>
           </motion.div>
-          
         </div>
+
+        {/* MoreAboutMe Component */}
+        <MoreAboutMe />
+
+        {/* HackerMe Component - Only shown when triggered */}
+        {showTerminal ? (
+          <HackerMe onExit={() => setShowTerminal(false)} />
+        ) : (
+          <motion.div
+            className="terminal-trigger"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+          >
+            <motion.button
+              className="btn hover-target terminal-btn"
+              onClick={() => setShowTerminal(true)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Access Terminal
+            </motion.button>
+            <p className="terminal-hint">Explore my background through an interactive terminal experience</p>
+          </motion.div>
+        )}
       </div>
-     
-      <MoreAboutMe />
-      <HackerMe />
     </div>
   )
 }

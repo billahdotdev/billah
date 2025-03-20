@@ -3,28 +3,41 @@
 :root {
   /* Light theme */
   --bg-color: #ffffff;
-  --bg-secondary: #f5f5f5;
-  --text-primary: #000000;
-  --text-secondary: #555555;
-  --accent: #000000;
+  --bg-secondary: #f8f9fa;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --accent: #111827;
   --border-color: rgba(0, 0, 0, 0.1);
   --card-bg: #ffffff;
   --card-shadow: rgba(0, 0, 0, 0.05);
 
-  /* Common variables */
+  /* Typography */
   --font-primary: "Space Grotesk", sans-serif;
   --font-secondary: "Poppins", sans-serif;
+  --font-accent: "Playfair Display", sans-serif;
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+  --letter-spacing-tight: -0.02em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.05em;
+
+  /* Common variables */
   --border-radius: 0;
   --transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
   --easing: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Container width for mobile-first approach */
+  --container-max-width: 540px;
+  --container-padding: 1.5rem;
 }
 
 [data-theme="dark"] {
   --bg-color: #111111;
   --bg-secondary: #1a1a1a;
-  --text-primary: #ffffff;
-  --text-secondary: #aaaaaa;
-  --accent: #ffffff;
+  --text-primary: #f3f4f6;
+  --text-secondary: #9ca3af;
+  --accent: #f3f4f6;
   --border-color: rgba(255, 255, 255, 0.1);
   --card-bg: #1a1a1a;
   --card-shadow: rgba(0, 0, 0, 0.2);
@@ -38,28 +51,18 @@
 
 html {
   scroll-behavior: smooth;
-  font-size: 14px; /* Base font size for mobile */
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-@media (min-width: 1200px) {
-  html {
-    font-size: 18px;
-  }
+  font-size: 16px; /* Base font size */
 }
 
 body {
-  font-family: var(--font-primary);
+  font-family: var(--font-secondary);
   background-color: var(--bg-color);
   color: var(--text-primary);
-  line-height: 1.6;
+  line-height: var(--line-height-normal);
   transition: background-color 0.5s var(--easing), color 0.5s var(--easing);
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1,
@@ -68,30 +71,40 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 600;
-  line-height: 1.2;
-  margin-bottom: 1rem;
+  font-family: var(--font-primary);
+  font-weight: 700;
+  line-height: var(--line-height-tight);
+  margin-bottom: 1.25rem;
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--text-primary);
 }
 
 h1 {
-  font-size: clamp(2.5rem, 8vw, 5rem);
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-size: clamp(2.5rem, 7vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
 }
 
 h2 {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  letter-spacing: -0.01em;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.2;
 }
 
 h3 {
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.3;
+}
+
+h4 {
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
 }
 
 p {
   margin-bottom: 1.5rem;
   color: var(--text-secondary);
   font-family: var(--font-secondary);
+  font-size: 1rem;
+  line-height: var(--line-height-relaxed);
 }
 
 a {
@@ -132,33 +145,29 @@ img {
 }
 
 .container {
-  width: 92%;
-  max-width: 1400px;
+  width: 100%;
+  max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: 0 1rem;
-}
-
-@media (min-width: 768px) {
-  .container {
-    width: 90%;
-  }
+  padding: 0 var(--container-padding);
 }
 
 .section {
-  padding: 6rem 0;
+  padding: 5rem 0;
   position: relative;
 }
 
 .section-title {
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
   position: relative;
   display: inline-block;
+  font-family: var(--font-primary);
+  font-weight: 700;
 }
 
 .section-title::after {
   content: "";
   position: absolute;
-  bottom: -0.5rem;
+  bottom: -0.75rem;
   left: 0;
   width: 3rem;
   height: 2px;
@@ -167,18 +176,19 @@ img {
 
 .btn {
   display: inline-block;
-  padding: 0.75rem 2rem;
+  padding: 0.9rem 2.25rem;
   background-color: var(--text-primary);
   color: var(--bg-color);
   border: 1px solid var(--text-primary);
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  font-size: 0.875rem;
+  font-size: 0.85rem;
   cursor: pointer;
   transition: var(--transition);
   position: relative;
   overflow: hidden;
+  font-family: var(--font-primary);
 }
 
 .btn:hover {
@@ -201,18 +211,16 @@ img {
   gap: 2rem;
 }
 
-@media (min-width: 768px) {
-  .grid-2 {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.grid-2 {
+  grid-template-columns: 1fr;
+}
 
-  .grid-3 {
-    grid-template-columns: repeat(3, 1fr);
-  }
+.grid-3 {
+  grid-template-columns: 1fr;
+}
 
-  .grid-4 {
-    grid-template-columns: repeat(4, 1fr);
-  }
+.grid-4 {
+  grid-template-columns: 1fr;
 }
 
 /* Utility classes */
@@ -252,5 +260,90 @@ body::-webkit-scrollbar {
 body {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+/* Animation classes */
+.fade-in {
+  animation: fadeIn 1s ease forwards;
+}
+
+.fade-up {
+  animation: fadeUp 1s ease forwards;
+}
+
+.scale-in {
+  animation: scaleIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Hover animations */
+.hover-lift {
+  transition: transform 0.3s var(--easing);
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+}
+
+.hover-scale {
+  transition: transform 0.3s var(--easing);
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+/* Ensure mobile layout is preserved on desktop with improved spacing */
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+
+  /* Keep the container width limited to maintain mobile layout */
+  .container {
+    max-width: var(--container-max-width);
+    padding: 0 var(--container-padding);
+  }
+
+  .section {
+    padding: 6rem 0;
+  }
+}
+
+/* Accent text styling */
+.accent-text {
+  font-family: var(--font-accent);
+  font-weight: 600;
+  font-style: italic;
 }
 

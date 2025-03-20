@@ -1,33 +1,25 @@
+/* Improve services section spacing and card styling */
 .services {
-  padding: 6rem 0;
+  padding: 5rem 0;
   background-color: var(--bg-secondary);
 }
 
 .services-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
-}
-
-@media (min-width: 576px) {
-  .services-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 992px) {
-  .services-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  gap: 2.5rem;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
 }
 
 .service-card {
   position: relative;
-  padding: 2rem;
+  padding: 2.5rem 2rem;
   border: 1px solid var(--border-color);
   transition: var(--transition);
   overflow: hidden;
   height: 100%;
+  background-color: var(--bg-color);
 }
 
 .service-card:hover {
@@ -41,8 +33,10 @@
 
 .service-content h3 {
   font-size: 1.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   transition: var(--transition);
+  font-family: var(--font-primary);
+  font-weight: 700;
 }
 
 .service-card:hover .service-content h3 {
@@ -52,18 +46,21 @@
 .service-content p {
   color: var(--text-secondary);
   margin-bottom: 1.5rem;
+  line-height: var(--line-height-relaxed);
+  font-family: var(--font-secondary);
 }
 
 .service-details {
   overflow: hidden;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 .service-details p {
-  margin-top: 1rem;
-  padding-top: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
   border-top: 1px solid var(--border-color);
-  line-height: 1.8;
+  line-height: var(--line-height-relaxed);
+  font-family: var(--font-secondary);
 }
 
 .service-number {
@@ -71,9 +68,10 @@
   top: 1.5rem;
   right: 1.5rem;
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 800;
   opacity: 0.2;
   transition: var(--transition);
+  font-family: var(--font-primary);
 }
 
 .service-card:hover .service-number {
@@ -81,9 +79,10 @@
   transform: scale(1.1);
 }
 
+/* Maintain mobile layout on desktop */
 @media (min-width: 768px) {
   .services-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr; /* Keep single column on desktop */
   }
 }
 

@@ -2,16 +2,22 @@
 
 import { useState, useEffect, useRef } from "react"
 import { AnimatePresence } from "framer-motion"
+
+// Components
 import Navbar from "./components/Navbar"
 import ThemeToggle from "./components/ThemeToggle"
 import Loader from "./components/Loader"
 import CustomCursor from "./components/CustomCursor"
+import Footer from "./components/Footer"
+
+// Sections
 import Hero from "./sections/Hero"
 import About from "./sections/About"
 import Services from "./sections/Services"
 import Work from "./sections/Work"
 import Contact from "./sections/Contact"
-import Footer from "./components/Footer"
+
+// Styles
 import "./App.css"
 
 function App() {
@@ -19,6 +25,8 @@ function App() {
   const [theme, setTheme] = useState("light")
   const [activeSection, setActiveSection] = useState("hero")
 
+  // Section refs for scrolling
+  const heroRef = useRef(null)
   const aboutRef = useRef(null)
   const servicesRef = useRef(null)
   const workRef = useRef(null)
@@ -56,28 +64,21 @@ function App() {
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 100
 
-      if (
-        aboutRef.current &&
-        scrollPosition >= aboutRef.current.offsetTop &&
-        scrollPosition < servicesRef.current.offsetTop
-      ) {
-        setActiveSection("about")
-      } else if (
-        servicesRef.current &&
-        scrollPosition >= servicesRef.current.offsetTop &&
-        scrollPosition < workRef.current.offsetTop
-      ) {
-        setActiveSection("services")
-      } else if (
-        workRef.current &&
-        scrollPosition >= workRef.current.offsetTop &&
-        scrollPosition < contactRef.current.offsetTop
-      ) {
-        setActiveSection("work")
-      } else if (contactRef.current && scrollPosition >= contactRef.current.offsetTop) {
-        setActiveSection("contact")
-      } else {
-        setActiveSection("hero")
+      const sections = [
+        { id: "hero", ref: heroRef },
+        { id: "about", ref: aboutRef },
+        { id: "services", ref: servicesRef },
+        { id: "work", ref: workRef },
+        { id: "contact", ref: contactRef },
+      ]
+
+      // Find the current section
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i]
+        if (section.ref.current && scrollPosition >= section.ref.current.offsetTop - 100) {
+          setActiveSection(section.id)
+          break
+        }
       }
     }
 
@@ -87,29 +88,20 @@ function App() {
 
   // Scroll to section function
   const scrollToSection = (sectionId) => {
-    let targetRef
-
-    switch (sectionId) {
-      case "about":
-        targetRef = aboutRef
-        break
-      case "services":
-        targetRef = servicesRef
-        break
-      case "work":
-        targetRef = workRef
-        break
-      case "contact":
-        targetRef = contactRef
-        break
-      default:
-        window.scrollTo({ top: 0, behavior: "smooth" })
-        return
+    const sectionRefs = {
+      hero: heroRef,
+      about: aboutRef,
+      services: servicesRef,
+      work: workRef,
+      contact: contactRef,
     }
 
+    const targetRef = sectionRefs[sectionId]
+
     if (targetRef && targetRef.current) {
+      const offset = sectionId === "hero" ? 0 : 80
       window.scrollTo({
-        top: targetRef.current.offsetTop - 80,
+        top: targetRef.current.offsetTop - offset,
         behavior: "smooth",
       })
     }
@@ -126,22 +118,28 @@ function App() {
           <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
 
           <main>
-            <Hero scrollToSection={scrollToSection} />
+            <section ref={heroRef} id="hero">
+              <Hero scrollToSection={scrollToSection} />
+            </section>
+
             <section ref={aboutRef} id="about" className="section">
               <About />
             </section>
+
             <section ref={servicesRef} id="services" className="section">
               <Services />
             </section>
+
             <section ref={workRef} id="work" className="section">
               <Work />
             </section>
+
             <section ref={contactRef} id="contact" className="section">
               <Contact />
             </section>
           </main>
 
-          <Footer />
+          <Footer scrollToSection={scrollToSection} />
         </div>
       )}
     </AnimatePresence>

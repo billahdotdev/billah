@@ -1,39 +1,23 @@
-/*
 .minimal-about-me {
   max-width: 800px;
   margin: 0 auto;
   padding: 5rem 1.5rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  color: var(--text-primary, #333);
-  background-color: var(--bg-primary, #fff);
-  position: relative;
-}
-*/
-
-
-
-
-.minimal-about-me {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 5rem 1.5rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  color: var(--text-primary, #333);
-  background-color: var(--bg-primary, #fff);
+  font-family: var(--font-secondary);
+  color: var(--text-primary);
+  background-color: var(--bg-color);
   position: relative;
   margin-top: 4rem;
 }
 
-
-
-
 .minimal-title {
   font-size: 2.5rem;
-  font-weight: 500;
+  font-weight: 700;
   margin-bottom: 3rem;
-  color: var(--text-primary, #333);
+  color: var(--text-primary);
   position: relative;
   display: inline-block;
+  font-family: var(--font-primary);
+  letter-spacing: var(--letter-spacing-tight);
 }
 
 .minimal-title::after {
@@ -43,7 +27,7 @@
   left: 0;
   width: 40px;
   height: 3px;
-  background-color: var(--accent, #0070f3);
+  background-color: var(--accent);
 }
 
 .minimal-sections {
@@ -53,7 +37,7 @@
 }
 
 .minimal-section {
-  border-bottom: 1px solid var(--border-color, #eaeaea);
+  border-bottom: 1px solid var(--border-color);
   padding-bottom: 1.5rem;
 }
 
@@ -72,26 +56,27 @@
 .minimal-indicator {
   width: 12px;
   height: 2px;
-  background-color: #ddd;
+  background-color: var(--border-color);
   margin-right: 1rem;
   transition: transform 0.3s ease, background-color 0.3s ease;
   transform-origin: center left;
 }
 
 .minimal-section.active .minimal-indicator {
-  background-color: var(--accent, #0070f3);
+  background-color: var(--accent);
 }
 
 .minimal-header h3 {
   font-size: 1.25rem;
-  font-weight: 500;
+  font-weight: 600;
   margin: 0;
-  color: var(--text-primary, #333);
+  color: var(--text-primary);
   transition: color 0.3s ease;
+  font-family: var(--font-primary);
 }
 
 .minimal-section.active .minimal-header h3 {
-  color: var(--accent, #0070f3);
+  color: var(--accent);
 }
 
 .minimal-content {
@@ -100,15 +85,16 @@
 
 .minimal-details {
   padding: 0.5rem 0 0.5rem 1.75rem;
-  border-left: 1px solid var(--border-color, #eaeaea);
+  border-left: 1px solid var(--border-color);
   margin-left: 6px;
 }
 
 .minimal-details p {
   margin: 0;
-  line-height: 1.7;
-  color: var(--text-secondary, #666);
+  line-height: var(--line-height-relaxed);
+  color: var(--text-secondary);
   font-size: 1rem;
+  font-family: var(--font-secondary);
 }
 
 .minimal-progress {
@@ -117,35 +103,35 @@
   left: 0;
   height: 2px;
   width: 100%;
-  background-color: var(--accent, #0070f3);
+  background-color: var(--accent);
   opacity: 0.2;
   transform-origin: left;
 }
 
 /* Dark mode support */
 .dark .minimal-about-me {
-  color: var(--text-primary, #f0f0f0);
-  background-color: var(--bg-primary, #111);
+  color: var(--text-primary);
+  background-color: var(--bg-color);
 }
 
 .dark .minimal-title {
-  color: var(--text-primary, #f0f0f0);
+  color: var(--text-primary);
 }
 
 .dark .minimal-section {
-  border-bottom-color: var(--border-color, #333);
+  border-bottom-color: var(--border-color);
 }
 
 .dark .minimal-header h3 {
-  color: var(--text-primary, #f0f0f0);
+  color: var(--text-primary);
 }
 
 .dark .minimal-details {
-  border-left-color: var(--border-color, #333);
+  border-left-color: var(--border-color);
 }
 
 .dark .minimal-details p {
-  color: var(--text-secondary, #aaa);
+  color: var(--text-secondary);
 }
 
 /* Mobile responsiveness */
@@ -167,11 +153,11 @@
 /* Subtle hover effects */
 @media (hover: hover) {
   .minimal-header:hover h3 {
-    color: var(--accent, #0070f3);
+    color: var(--accent);
   }
 
   .minimal-header:hover .minimal-indicator {
-    background-color: var(--accent, #0070f3);
+    background-color: var(--accent);
   }
 }
 

@@ -6,7 +6,7 @@ import "./ThemeToggle.css"
 const ThemeToggle = ({ theme, toggleTheme }) => {
   return (
     <motion.button
-      className="theme-toggle"
+      className="theme-toggle hover-target"
       onClick={toggleTheme}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}

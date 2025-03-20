@@ -24,8 +24,7 @@ const MoreAboutMe = () => {
     {
       id: 3,
       title: "My Skills",
-      details:
-        "MongoDB, Express, React, Node, TailwindCSS, CSS, and HTML",
+      details: "MongoDB, Express, React, Node, TailwindCSS, CSS, and HTML",
     },
     {
       id: 4,

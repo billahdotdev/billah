@@ -8,38 +8,44 @@ const Services = () => {
   const [hoveredService, setHoveredService] = useState(null)
 
   const services = [
-    
-      {
-        "id": 1,
-        "title": "Web Development",
-        "description": "Let's build a website that truly connects you with your customers, a digital space that feels just right.",
-        "details": "I'll ensure your site looks great on any device, from phones to desktops, for a smooth visitor experience. I'll use clean, fast code and add features you need, like online stores or contact forms. Plus, I'll keep it updated and secure, so you can focus on your business."
-      },
-      {
-        "id": 2,
-        "title": "SEO (Search Engine Optimization)",
-        "description": "Want more people to find you online? I can help your website appear when customers search for what you offer.",
-        "details": "I'll find the exact words your customers use. I'll make your website easy for search engines to understand, so you rank higher. I'll build connections with other websites. And I'll track your website's progress, making adjustments to improve your visibility."
-      },
-      {
-        "id": 3,
-        "title": "Digital Marketing",
-        "description": "Let's grow your business online with smart digital marketing, reaching your customers effectively.",
-        "details": "I focus on creating user-friendly interfaces that are engaging and easy to navigate. Through user research and design, I craft intuitive experiences that increase user satisfaction and conversions, making your online presence truly effective."
-      },
-      {
-        "id": 4,
-        "title": "Brand Identity Design",
-        "description": "I'll build a visual world for your brand, from eye-catching logos to social media magic, so your audience instantly 'gets' you.",
-        "details": "Imagine a logo that sticks in people's minds – that's what I create. I design business cards that spark conversations and social media visuals that make people stop scrolling and say, 'Wow!' I'll turn your brand's personality into visuals that connect."
-      },
-      {
-        "id": 5,
-        "title": "Linux Migration",
-        "description": "Looking for a secure and flexible system? I can help you move to Linux smoothly.",
-        "details": "My Linux Migration Service will help you transition from your current operating system to Linux, providing a secure, open-source, and customizable environment that meets your business needs."
-      }
-    
+    {
+      id: 1,
+      title: "Web Development",
+      description:
+        "Let's build a website that truly connects you with your customers, a digital space that feels just right.",
+      details:
+        "I'll ensure your site looks great on any device, from phones to desktops, for a smooth visitor experience. I'll use clean, fast code and add features you need, like online stores or contact forms. Plus, I'll keep it updated and secure, so you can focus on your business.",
+    },
+    {
+      id: 2,
+      title: "SEO (Search Engine Optimization)",
+      description:
+        "Want more people to find you online? I can help your website appear when customers search for what you offer.",
+      details:
+        "I'll find the exact words your customers use. I'll make your website easy for search engines to understand, so you rank higher. I'll build connections with other websites. And I'll track your website's progress, making adjustments to improve your visibility.",
+    },
+    {
+      id: 3,
+      title: "Digital Marketing",
+      description: "Let's grow your business online with smart digital marketing, reaching your customers effectively.",
+      details:
+        "I focus on creating user-friendly interfaces that are engaging and easy to navigate. Through user research and design, I craft intuitive experiences that increase user satisfaction and conversions, making your online presence truly effective.",
+    },
+    {
+      id: 4,
+      title: "Brand Identity Design",
+      description:
+        "I'll build a visual world for your brand, from eye-catching logos to social media magic, so your audience instantly 'gets' you.",
+      details:
+        "Imagine a logo that sticks in people's minds – that's what I create. I design business cards that spark conversations and social media visuals that make people stop scrolling and say, 'Wow!' I'll turn your brand's personality into visuals that connect.",
+    },
+    {
+      id: 5,
+      title: "Linux Migration",
+      description: "Looking for a secure and flexible system? I can help you move to Linux smoothly.",
+      details:
+        "My Linux Migration Service will help you transition from your current operating system to Linux, providing a secure, open-source, and customizable environment that meets your business needs.",
+    },
   ]
 
   const fadeInUp = {

@@ -1,6 +1,7 @@
 .footer {
-  padding: 4rem 0 2rem;
+  padding: 5rem 0 2rem;
   border-top: 1px solid var(--border-color);
+  background-color: var(--bg-color);
 }
 
 .footer-content {
@@ -8,6 +9,10 @@
   grid-template-columns: 1fr;
   gap: 3rem;
   margin-bottom: 3rem;
+  max-width: var(--container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 var(--container-padding);
 }
 
 .footer-logo .logo-text {
@@ -17,24 +22,29 @@
   display: inline-block;
   text-transform: uppercase;
   letter-spacing: 1px;
+  font-family: var(--font-primary);
 }
 
 .footer-logo p {
   color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: var(--line-height-relaxed);
+  font-family: var(--font-secondary);
 }
 
-/*New*/
 .footer-links {
   overflow: hidden;
 }
 
 .footer-links h3 {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   margin-bottom: 1.5rem;
   position: relative;
   display: inline-block;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: var(--letter-spacing-wide);
+  font-family: var(--font-primary);
+  font-weight: 700;
 }
 
 .footer-links h3::after {
@@ -53,7 +63,7 @@
 }
 
 .footer-links li {
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.9rem;
 }
 
 .footer-links a {
@@ -61,23 +71,32 @@
   transition: var(--transition);
   position: relative;
   display: inline-block;
+  font-size: 0.95rem;
+  font-family: var(--font-secondary);
 }
 
 .footer-bottom {
   text-align: center;
   padding-top: 2rem;
   border-top: 1px solid var(--border-color);
+  max-width: var(--container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2rem var(--container-padding) 0;
 }
 
 .footer-bottom p {
   color: var(--text-secondary);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  line-height: var(--line-height-relaxed);
+  font-family: var(--font-secondary);
 }
 
+/* Maintain mobile layout on desktop */
 @media (min-width: 768px) {
   .footer-content {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 4rem;
+    grid-template-columns: 1fr; /* Keep single column on desktop */
+    gap: 3rem;
   }
 }
 

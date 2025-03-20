@@ -130,19 +130,19 @@ const Hero = ({ scrollToSection }) => {
               x: calculateMovement(mousePosition.x, mousePosition.y).x,
               y: calculateMovement(mousePosition.x, mousePosition.y).y,
             }}
-            transition={{ 
-              type: "spring", 
-              stiffness: 75, 
-              damping: 30, 
+            transition={{
+              type: "spring",
+              stiffness: 75,
+              damping: 30,
               mass: 0.5,
               opacity: { delay: 0.5, duration: 0.8 },
-              scale: { delay: 0.5, duration: 0.8 }
+              scale: { delay: 0.5, duration: 0.8 },
             }}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
           >
             <div className="image-container">
-              <svg width="150" height="150" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <motion.circle
                   cx="150"
                   cy="150"
@@ -202,3 +202,4 @@ const Hero = ({ scrollToSection }) => {
 }
 
 export default Hero
+
