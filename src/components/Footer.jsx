@@ -116,8 +116,7 @@ const Footer = ({ scrollToSection }) => {
           viewport={{ once: true }}
         >
           <p>
-            NO RIGHT RESERVED. {currentYear} Built by dreamers: Masum Billah. For dreamers. Deeply indebted to the
-            individuals who I learned from.
+            {currentYear} NO RIGHT RESERVED. Deeply indebted to the individuals who I learned from.
           </p>
         </motion.div>
       </div>

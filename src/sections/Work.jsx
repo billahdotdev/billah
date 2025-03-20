@@ -67,7 +67,7 @@ const Work = () => {
   const filters = [
     { id: "all", label: "All" },
     { id: "web", label: "Web" },
-    { id: "mobile", label: "Mobile" },
+    { id: "design", label: "Design" },
   ]
 
   const openModal = (project) => {
