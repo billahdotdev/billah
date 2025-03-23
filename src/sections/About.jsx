@@ -63,7 +63,7 @@ const About = () => {
             custom={1}
           >
             <h2 className="accent-text">
-            I’m a web enthusiast,<span className="asteriska">*</span></h2>
+            I’m a web enthusiast<span className="asteriska">*</span>,</h2>
 
             <p>
             dedicated to bringing digital dreams to life. I’ll keep learning, growing, and giving my all—with every breath—to make the impossible possible.

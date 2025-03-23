@@ -14,17 +14,18 @@
 
 .contact-intro {
   margin-bottom: 0.5rem;
-  font-size: 2rem;
+  font-size: 1.2rem;
   
 }
 
 .contact-quote1 {
-  font-size: 2rem;
+  font-size: 1.8rem;
   line-height: var(--line-height-relaxed);
   margin-bottom: 1.5rem;
   color: var(--text-primary);
   font-weight: 600;
   font-family: var(--font-accent);
+  
 }
 
 .contact-quote {
@@ -34,6 +35,7 @@
   color: var(--text-primary);
   font-weight: 500;
   font-family: var(--font-accent);
+  
   
 }
 
@@ -45,8 +47,8 @@
 }
 
 .status-dot {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   background-color: #10b981; /* Green color for available */
   border-radius: 50%;
   display: inline-block;

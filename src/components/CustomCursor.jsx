@@ -10,12 +10,22 @@ const CustomCursor = () => {
   const [linkHovered, setLinkHovered] = useState(false)
   const [hidden, setHidden] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
+  const [isTyping, setIsTyping] = useState(false)
+  const [textOpacity, setTextOpacity] = useState(0)
 
   // Use useCallback for event handlers
-  const onMouseMove = useCallback((e) => {
-    setPosition({ x: e.clientX, y: e.clientY })
-    setIsVisible(true)
-  }, [])
+  const onMouseMove = useCallback(
+    (e) => {
+      setPosition({ x: e.clientX, y: e.clientY })
+      setIsVisible(true)
+
+      // Gradually show text after cursor has been visible for a moment
+      if (isVisible && textOpacity < 1) {
+        setTextOpacity((prev) => Math.min(prev + 0.05, 1))
+      }
+    },
+    [isVisible, textOpacity],
+  )
 
   const onMouseEnter = useCallback(() => {
     setHidden(false)
@@ -50,6 +60,24 @@ const CustomCursor = () => {
     }
   }, [])
 
+  // Check for input fields to detect typing
+  const handleInputEvents = useCallback(() => {
+    const handleInputFocus = () => setIsTyping(true)
+    const handleInputBlur = () => setIsTyping(false)
+
+    document.querySelectorAll("input, textarea, [contenteditable]").forEach((el) => {
+      el.addEventListener("focus", handleInputFocus)
+      el.addEventListener("blur", handleInputBlur)
+    })
+
+    return () => {
+      document.querySelectorAll("input, textarea, [contenteditable]").forEach((el) => {
+        el.removeEventListener("focus", handleInputFocus)
+        el.removeEventListener("blur", handleInputBlur)
+      })
+    }
+  }, [])
+
   useEffect(() => {
     // Check if we're on a device with touch support
     if ("ontouchstart" in window) {
@@ -62,7 +90,13 @@ const CustomCursor = () => {
     document.addEventListener("mousedown", onMouseDown)
     document.addEventListener("mouseup", onMouseUp)
 
-    const cleanup = handleLinkHoverEvents()
+    const cleanupLinkEvents = handleLinkHoverEvents()
+    const cleanupInputEvents = handleInputEvents()
+
+    // Fade in text after a delay
+    const textTimer = setTimeout(() => {
+      setTextOpacity(0.8)
+    }, 1000)
 
     return () => {
       document.removeEventListener("mousemove", onMouseMove)
@@ -70,9 +104,11 @@ const CustomCursor = () => {
       document.removeEventListener("mouseleave", onMouseLeave)
       document.removeEventListener("mousedown", onMouseDown)
       document.removeEventListener("mouseup", onMouseUp)
-      cleanup()
+      cleanupLinkEvents()
+      cleanupInputEvents()
+      clearTimeout(textTimer)
     }
-  }, [onMouseMove, onMouseEnter, onMouseLeave, onMouseDown, onMouseUp, handleLinkHoverEvents])
+  }, [onMouseMove, onMouseEnter, onMouseLeave, onMouseDown, onMouseUp, handleLinkHoverEvents, handleInputEvents])
 
   // Don't render the custom cursor on touch devices
   if ("ontouchstart" in window) {
@@ -111,6 +147,29 @@ const CustomCursor = () => {
           damping: 28,
         }}
       />
+      <motion.div
+        className={`cursor-text ${clicked ? "clicked" : ""} ${hidden ? "hidden" : ""} ${isTyping ? "typing" : ""} ${linkHovered ? "link-hovered" : ""}`}
+        style={{
+          left: position.x,
+          top: position.y,
+          opacity: textOpacity,
+        }}
+        animate={{
+          x: linkHovered ? 15 : 10,
+          y: linkHovered ? -15 : -10,
+          scale: clicked ? 0.9 : 1,
+        }}
+        transition={{
+          type: "spring",
+          stiffness: 300,
+          damping: 20,
+        }}
+      >
+        <span className="cursor-text-bracket">{"{"}</span>
+        <span className="cursor-text-function">{" () => "}</span>
+        <span className="cursor-text-name">{"masum"}</span>
+        <span className="cursor-text-bracket">{" }"}</span>
+      </motion.div>
     </>
   )
 }

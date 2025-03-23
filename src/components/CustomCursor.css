@@ -29,6 +29,41 @@
   transition: opacity 0.3s ease;
 }
 
+.cursor-text {
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 14px;
+  pointer-events: none;
+  z-index: 9997;
+  transform: translate(10px, -10px);
+  white-space: nowrap;
+  color: var(--text-primary);
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.cursor-text-bracket {
+  color: var(--accent, #9c27b0);
+  font-weight: 500;
+}
+
+.cursor-text-function {
+  color: var(--text-secondary, #555555);
+  font-style: italic;
+}
+
+.cursor-text-name {
+  color: var(--accent, #4caf50);
+  font-weight: 600;
+}
+
+[data-theme="dark"] .cursor-text-function {
+  color: var(--text-secondary, #aaaaaa);
+}
+
 .cursor-dot.visible,
 .cursor-outline.visible {
   opacity: 1;
@@ -42,20 +77,74 @@
   border-color: var(--text-primary);
 }
 
+.cursor-text.clicked {
+  transform: translate(10px, -10px) scale(0.9);
+}
+
 .cursor-outline.link-hovered {
   border-color: var(--text-primary);
   background-color: rgba(0, 0, 0, 0.05);
 }
 
+.cursor-text.link-hovered {
+  transform: translate(15px, -15px);
+}
+
+.cursor-text.typing {
+  opacity: 0.3 !important;
+  filter: blur(1px);
+}
+
 .cursor-dot.hidden,
-.cursor-outline.hidden {
+.cursor-outline.hidden,
+.cursor-text.hidden {
   opacity: 0;
+}
+
+/* Add subtle animation to the cursor text */
+@keyframes pulse {
+  0% {
+    transform: translate(10px, -10px) scale(1);
+  }
+  50% {
+    transform: translate(10px, -10px) scale(1.03);
+  }
+  100% {
+    transform: translate(10px, -10px) scale(1);
+  }
+}
+
+.cursor-text:not(.clicked):not(.link-hovered):not(.typing) {
+  animation: pulse 2s infinite ease-in-out;
 }
 
 @media (max-width: 768px) {
   .cursor-dot,
-  .cursor-outline {
+  .cursor-outline,
+  .cursor-text {
     display: none;
   }
+}
+
+/* Add a subtle glow effect on hover */
+.cursor-text.link-hovered .cursor-text-name {
+  text-shadow: 0 0 8px rgba(76, 175, 80, 0.6);
+}
+
+/* Improve visibility in dark mode */
+[data-theme="dark"] .cursor-outline {
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+[data-theme="dark"] .cursor-dot {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="dark"] .cursor-text {
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .cursor-outline.link-hovered {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 

@@ -141,7 +141,7 @@ const HackerMe = ({ onExit }) => {
         '{\n  "technical": [\n    {\n      "title": "Clean Code",\n      "author": "Robert C. Martin",\n      "impact": "Fundamentally changed my approach to writing maintainable software"\n    },\n    {\n      "title": "Designing Data-Intensive Applications",\n      "author": "Martin Kleppmann",\n      "impact": "Deepened my understanding of distributed systems and databases"\n    },\n    {\n      "title": "You Don\'t Know JS",\n      "author": "Kyle Simpson",\n      "impact": "Provided crucial insights into JavaScript\'s core mechanisms"\n    },\n    {\n      "title": "Refactoring",\n      "author": "Martin Fowler",\n      "impact": "Taught me systematic approaches to improving code quality"\n    },\n    {\n      "title": "The Pragmatic Programmer",\n      "author": "Andrew Hunt & David Thomas",\n      "impact": "Shaped my philosophy on software craftsmanship"\n    }\n  ],\n  "non_technical": [\n    {\n      "title": "Thinking, Fast and Slow",\n      "author": "Daniel Kahneman",\n      "impact": "Improved my decision-making process and understanding of cognitive biases"\n    },\n    {\n      "title": "Dune",\n      "author": "Frank Herbert",\n      "impact": "Favorite science fiction novel exploring complex themes of politics and ecology"\n    },\n    {\n      "title": "Atomic Habits",\n      "author": "James Clear",\n      "impact": "Helped establish productive routines and continuous improvement"\n    },\n    {\n      "title": "The Design of Everyday Things",\n      "author": "Don Norman",\n      "impact": "Influenced my approach to user experience and interface design"\n    },\n    {\n      "title": "Sapiens",\n      "author": "Yuval Noah Harari",\n      "impact": "Provided perspective on human history and technological evolution"\n    }\n  ],\n  "currently_reading": [\n    {\n      "title": "The Art of Computer Programming",\n      "author": "Donald Knuth",\n      "goal": "Deepen understanding of fundamental algorithms"\n    },\n    {\n      "title": "Working in Public",\n      "author": "Nadia Eghbal",\n      "goal": "Better understand open source ecosystem and sustainability"\n    }\n  ]\n}',
 
       "/home/user/interests/travel.txt":
-        "TRAVEL EXPERIENCES & ASPIRATIONS\n==============================\n\nPLACES VISITED\n-------------\n\nJAPAN (2019)\nHighlights: Tokyo's tech district, traditional ryokan stay in Kyoto, hiking Mount Fuji\nTech Connection: Visited Nintendo headquarters and attended a local developer meetup\n\nGERMANY (2018)\nHighlights: Berlin's startup scene, Bavarian countryside, Munich's museums\nTech Connection: Participated in Berlin Tech Conference and toured innovation labs\n\nCANADA (2017)\nHighlights: Vancouver's natural beauty, Toronto's diverse neighborhoods, Montreal's culture\nTech Connection: Collaborated with Canadian tech company on cross-border project\n\nSINGAPORE (2016)\nHighlights: Gardens by the Bay, hawker centers, urban efficiency\nTech Connection: Studied Singapore's smart city initiatives and implementation\n\nICELAND (2015)\nHighlights: Northern lights, volcanic landscapes, hot springs\nTech Connection: Explored renewable energy technology and data centers\n\nFUTURE DESTINATIONS\n-----------------\n\nNEW ZEALAND\nInterest: Natural landscapes, outdoor adventures, Wellington's tech scene\nGoal: Work remotely while exploring both islands\n\nPORTUGAL\nInterest: Lisbon's growing tech hub, coastal beauty, historical sites\nGoal: Attend Web Summit and connect with European developers\n\nSOUTH KOREA\nInterest: Seoul's technology integration, food culture, historical temples\nGoal: Study Korean tech giants' innovation approaches\n\nTRAVEL PHILOSOPHY\n---------------\nI believe travel broadens perspective and sparks creativity. I seek destinations that offer a blend of natural beauty, cultural experiences, and technological innovation. When traveling, I enjoy connecting with local developer communities and bringing back fresh ideas and approaches to my work.",
+        "TRAVEL EXPERIENCES & ASPIRATIONS\n==============================\n\nPLACES VISITED\n-------------\n\nMALAYSIA (2014)\nHighlights: Kualalumpur, Lankawi,\nTech Connection: Visited Nintendo headquarters and attended a local developer meetup\n\nGERMANY (2018)\nHighlights: Berlin's startup scene, Bavarian countryside, Munich's museums\nTech Connection: Participated in Berlin Tech Conference and toured innovation labs\n\nCANADA (2017)\nHighlights: Vancouver's natural beauty, Toronto's diverse neighborhoods, Montreal's culture\nTech Connection: Collaborated with Canadian tech company on cross-border project\n\nSINGAPORE (2016)\nHighlights: Gardens by the Bay, hawker centers, urban efficiency\nTech Connection: Studied Singapore's smart city initiatives and implementation\n\nICELAND (2015)\nHighlights: Northern lights, volcanic landscapes, hot springs\nTech Connection: Explored renewable energy technology and data centers\n\nFUTURE DESTINATIONS\n-----------------\n\nNEW ZEALAND\nInterest: Natural landscapes, outdoor adventures, Wellington's tech scene\nGoal: Work remotely while exploring both islands\n\nPORTUGAL\nInterest: Lisbon's growing tech hub, coastal beauty, historical sites\nGoal: Attend Web Summit and connect with European developers\n\nSOUTH KOREA\nInterest: Seoul's technology integration, food culture, historical temples\nGoal: Study Korean tech giants' innovation approaches\n\nTRAVEL PHILOSOPHY\n---------------\nI believe travel broadens perspective and sparks creativity. I seek destinations that offer a blend of natural beauty, cultural experiences, and technological innovation. When traveling, I enjoy connecting with local developer communities and bringing back fresh ideas and approaches to my work.",
 
       "/home/user/.hidden/secrets.enc":
         "[ENCRYPTED FILE - HIGH SECURITY CLEARANCE REQUIRED]\n\nAttempting unauthorized access may trigger security protocols.",
@@ -585,8 +585,8 @@ TIP: Use Tab key for command and path completion
       content: `
 USER PROFILE
 ===========
-Username: user
-Role: Web Developer / Software Engineer
+Username: billahdotdev
+Role: Web Developer
 Status: Active
 Access Level: Standard User
 Last Login: ${new Date().toLocaleString()}
@@ -624,11 +624,11 @@ Type 'about' for more detailed information.
           content: `
 CONTACT INFORMATION
 ==================
-Email: developer@example.com
-GitHub: github.com/developer
-LinkedIn: linkedin.com/in/developer
-Twitter: @webdev_expert
-Personal Website: https://www.developer-portfolio.com
+Email: billahdotdev@gmail.com
+GitHub: github.com/billahdotdev
+LinkedIn: linkedin.com/in/billahdodev
+X: @billahdotdev
+Personal Website: https://billah.dev
           `,
         })
       } else if (target === "secrets.enc") {
@@ -748,7 +748,7 @@ Personal Website: https://www.developer-portfolio.com
       canvas.height = window.innerHeight
 
       const characters =
-        "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789"
+        "M A S U M B I L L A H M A S U M B I L L A H M A S U M B I L L A H M A S U M"
       const columns = canvas.width / 20
       const drops = []
       const colors = ["#0F0", "#00F", "#F00", "#FF0", "#0FF", "#F0F"]
@@ -801,8 +801,8 @@ SKILLS OVERVIEW
 TECHNICAL PROFICIENCY
 --------------------
 Frontend: ████████████████████ 95%
-Backend:  ██████████████████   85%
-Database: ████████████████     75%
+Backend:  ███████████████████  90%
+Database: ██████████████████   85%
 DevOps:   ████████████         60%
 UI/UX:    ██████████████████   85%
 Mobile:   ██████████████       70%
@@ -812,7 +812,7 @@ TOP TECHNOLOGIES
 - JavaScript/TypeScript
 - React & Next.js
 - Node.js
-- SQL & NoSQL Databases
+- NoSQL Databases
 - AWS Cloud Services
 - GraphQL & REST APIs
 
@@ -1097,13 +1097,13 @@ Bachelor of Science in Computer Science | State University | 2014
 
 SKILLS
 -----
-Languages: JavaScript, TypeScript, HTML, CSS, Python, SQL, PHP
+Languages: JavaScript, TypeScript, HTML, CSS
 Frontend: React, Next.js, Vue.js, Redux, Tailwind CSS, SASS
 Backend: Node.js, Express, NestJS, Django, GraphQL, REST
 Databases: MongoDB, PostgreSQL, MySQL, Redis
 DevOps: Git, Docker, AWS, CI/CD, Vercel, Netlify
 Testing: Jest, Cypress, React Testing Library
-Tools: VS Code, Figma, Jira, Postman
+Tools: VS Code, Figma, Jira, Postman, Inkscape
 
 CERTIFICATIONS
 ------------
@@ -1139,27 +1139,27 @@ Use 'contact' command to view contact information.
 SOCIAL MEDIA PROFILES
 ===================
 
-GitHub: github.com/developer
+GitHub: github.com/billahdotdev
 - Open source contributions and personal projects
 - 20+ public repositories
 - Active in JavaScript and React communities
 
-LinkedIn: linkedin.com/in/developer
+LinkedIn: linkedin.com/in/billahdotdev
 - Professional network and career updates
 - Recommendations from colleagues and clients
 - Articles on web development best practices
 
-Twitter: @webdev_expert
+X: @billahdotdev
 - Tech insights and industry news
 - Engagement with developer community
 - Conference and event updates
 
-Dev.to: dev.to/developer
+Dev.to: dev.to/billahdotdev
 - Technical articles and tutorials
 - Code snippets and solutions
 - Career advice for developers
 
-Medium: medium.com/@developer
+Medium: medium.com/@billahdotdev
 - In-depth technical deep dives
 - Case studies of complex projects
 - Thought leadership on development trends

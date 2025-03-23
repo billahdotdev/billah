@@ -1,256 +1,315 @@
-/* Reset previous styles */
-.minimal-about-me,
-.unique-about-me {
-  display: none;
-}
-
-/* New perspective card flip design */
-.perspective-about-me {
-  max-width: 1000px;
+.minimal-journey {
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1rem;
+  overflow: hidden;
+  touch-action: pan-y;
   margin: 0 auto;
-  padding: 5rem 1.5rem;
-  font-family: var(--font-secondary);
-  color: var(--text-primary);
-  position: relative;
+  transition: min-height 0.3s ease;
 }
 
-.perspective-title-wrapper {
-  text-align: center;
-  margin-bottom: 4rem;
-  position: relative;
-}
-
-.perspective-title {
-  font-size: 2.5rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  display: inline-block;
+.minimal-journey-title {
   font-family: var(--font-primary);
+  font-size: clamp(1.75rem, 8vw, 2.5rem);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
   letter-spacing: var(--letter-spacing-tight);
-  position: relative;
 }
 
-.perspective-title::after {
-  content: "";
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50%;
-  height: 1px;
-  background-color: var(--accent);
+/* Dot indicators */
+.minimal-journey-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 0 auto 2rem;
 }
 
-.perspective-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  margin-bottom: 3rem;
-}
-
-.perspective-card-wrapper {
-  perspective: 1000px;
-  height: 280px;
-}
-
-.perspective-card {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
+.minimal-journey-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--border-color);
+  border: none;
+  padding: 0;
   cursor: pointer;
-}
-
-.perspective-front,
-.perspective-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  border: 1px solid var(--border-color);
-  border-radius: 2px;
+  transition: all 0.3s var(--easing);
+  position: relative;
   overflow: hidden;
 }
 
-.perspective-front {
-  background-color: var(--bg-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.perspective-front::before {
+.minimal-journey-dot::after {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    135deg,
-    transparent 0%,
-    transparent 50%,
-    rgba(var(--accent-rgb), 0.05) 50%,
-    rgba(var(--accent-rgb), 0.05) 100%
-  );
-  z-index: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--accent);
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0);
+  transition: transform 0.3s var(--easing), opacity 0.3s var(--easing);
 }
 
-.perspective-front-content {
+.minimal-journey-dot:hover::after {
+  opacity: 0.5;
+  transform: scale(1);
+}
+
+.minimal-journey-dot:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.minimal-journey-dot.active {
+  background-color: var(--accent);
+  transform: scale(1.2);
+}
+
+.minimal-journey-content-container {
+  flex: 1;
   position: relative;
-  z-index: 1;
-  padding: 2rem;
-  text-align: center;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow: visible;
+  margin: 1rem 0;
   width: 100%;
-  height: 100%;
+}
+
+.minimal-journey-content {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  padding: 1rem;
 }
 
-.perspective-number {
-  font-size: 5rem;
-  font-weight: 200;
-  color: rgba(var(--accent-rgb), 0.1);
+.minimal-journey-index {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  font-family: var(--font-primary);
+  font-size: clamp(8rem, 20vw, 12rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  opacity: 0.05;
   z-index: -1;
-  font-family: var(--font-primary);
+  user-select: none;
+  pointer-events: none;
 }
 
-.perspective-front-content h3 {
-  font-size: 1.25rem;
-  font-weight: 500;
-  margin: 0 0 1rem;
+.minimal-journey-item-title {
+  font-family: var(--font-primary);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
   color: var(--text-primary);
-  font-family: var(--font-primary);
-  position: relative;
 }
 
-.perspective-hint {
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  opacity: 0.7;
-  position: absolute;
-  bottom: 1.5rem;
-  left: 0;
+.minimal-journey-item-content-wrapper {
   width: 100%;
-  text-align: center;
 }
 
-.perspective-back {
-  background-color: var(--bg-secondary);
-  transform: rotateY(180deg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-}
-
-.perspective-back-content {
-  max-height: 100%;
-  overflow-y: auto;
-  padding-right: 0.5rem;
-}
-
-.perspective-back-content p {
-  margin: 0 0 1.5rem;
-  line-height: 1.6;
-  color: var(--text-secondary);
-  font-size: 0.95rem;
+.minimal-journey-item-content {
   font-family: var(--font-secondary);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  width: 100%;
+  margin: 0;
+  overflow-y: visible;
 }
 
-.perspective-close {
-  background: none;
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
-  padding: 0.5rem 1rem;
-  font-size: 0.8rem;
-  cursor: pointer;
-  border-radius: 2px;
-  transition: all 0.3s ease;
-  font-family: var(--font-primary);
-}
-
-.perspective-close:hover {
-  background-color: var(--accent);
-  color: var(--bg-color);
-  border-color: var(--accent);
-}
-
-.perspective-controls {
+.minimal-journey-controls {
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  align-items: center;
+  gap: 1.5rem;
   margin-top: 2rem;
 }
 
-.perspective-control {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1px solid var(--border-color);
+.minimal-journey-control {
   background: none;
+  border: 1px solid var(--border-color);
   color: var(--text-primary);
-  font-family: var(--font-primary);
-  font-weight: 500;
+  font-size: 1.25rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s var(--easing);
+  position: relative;
+  overflow: hidden;
 }
 
-.perspective-control:hover,
-.perspective-control.active {
+.minimal-journey-control::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-color: var(--accent);
+  opacity: 0;
+  transition: opacity 0.3s var(--easing);
+  z-index: -1;
+}
+
+.minimal-journey-control:hover:not(:disabled)::after {
+  opacity: 1;
+}
+
+.minimal-journey-control:hover:not(:disabled) {
   color: var(--bg-color);
   border-color: var(--accent);
 }
 
-/* Custom scrollbar for the content */
-.perspective-back-content::-webkit-scrollbar {
-  width: 4px;
+.minimal-journey-control:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
-.perspective-back-content::-webkit-scrollbar-track {
-  background: rgba(var(--border-color-rgb, 0, 0, 0), 0.1);
+.minimal-journey-control:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }
 
-.perspective-back-content::-webkit-scrollbar-thumb {
-  background: rgba(var(--accent-rgb, 17, 24, 39), 0.3);
-  border-radius: 2px;
+.minimal-journey-arrow {
+  display: block;
+  position: relative;
+  z-index: 1;
 }
 
-/* Responsive styles */
-@media (max-width: 768px) {
-  .perspective-about-me {
-    padding: 3rem 1rem;
+.minimal-journey-indicator {
+  font-family: var(--font-primary);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.minimal-journey-swipe-hint {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  opacity: 0.7;
+  display: block;
+}
+
+/* For tablets and larger screens */
+@media (min-width: 768px) {
+  .minimal-journey {
+    padding: 3rem;
+    max-width: 800px;
   }
 
-  .perspective-title {
+  .minimal-journey-dot {
+    width: 14px;
+    height: 14px;
+  }
+
+  .minimal-journey-content {
+    padding: 1.5rem;
+  }
+
+  .minimal-journey-item-title {
     font-size: 2rem;
+    margin-bottom: 1.5rem;
   }
 
-  .perspective-grid {
-    grid-template-columns: 1fr;
+  .minimal-journey-item-content {
+    font-size: 1.1rem;
   }
 
-  .perspective-card-wrapper {
-    height: 240px;
+  .minimal-journey-control {
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+  }
+
+  .minimal-journey-swipe-hint {
+    display: none; /* Hide on desktop */
   }
 }
 
-/* Add these CSS variables to support the new styles if they don't exist */
-:root {
-  --accent-rgb: 17, 24, 39;
-  --border-color-rgb: 0, 0, 0;
+/* For dark mode support */
+[data-theme="dark"] .minimal-journey-index {
+  opacity: 0.07;
 }
 
-[data-theme="dark"] {
-  --accent-rgb: 243, 244, 246;
-  --border-color-rgb: 255, 255, 255;
+[data-theme="dark"] .minimal-journey-dot {
+  background-color: var(--border-color);
+}
+
+[data-theme="dark"] .minimal-journey-dot:hover::after {
+  background-color: var(--accent);
+}
+
+[data-theme="dark"] .minimal-journey-dot.active {
+  background-color: var(--accent);
+}
+
+[data-theme="dark"] .minimal-journey-control::after {
+  background-color: var(--accent);
+}
+
+/* Add touch hint animation */
+@keyframes swipeHint {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+.minimal-journey-swipe-hint {
+  animation: swipeHint 2s infinite;
+}
+
+/* Print styles */
+@media print {
+  .minimal-journey {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  .minimal-journey-content {
+    position: static;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .minimal-journey-controls,
+  .minimal-journey-dots,
+  .minimal-journey-swipe-hint,
+  .minimal-journey-index {
+    display: none !important;
+  }
+}
+
+/* Prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .minimal-journey-dot,
+  .minimal-journey-control,
+  .minimal-journey-swipe-hint {
+    transition: none !important;
+    animation: none !important;
+  }
 }
 
