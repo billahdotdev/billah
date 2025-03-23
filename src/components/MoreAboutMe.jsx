@@ -38,7 +38,7 @@ const MinimalJourney = () => {
       id: "education",
       title: "My Credentials",
       content:
-        "I'm a Bangladesh University of Engineering and Technology (BUET) certified full-stack web developer on a journey of modern web mastery at the University of Helsinki. Continuous learning is a core part of my professional identity, and I'm always seeking new opportunities to grow my knowledge and skills.",
+        "I'm a Bangladesh University of Engineering and Technology (BUET) certified full-stack web developer on a journey of modern web mastery at the University of Helsinki.",
     },
   ]
 
