@@ -1,11 +1,12 @@
 "use client"
 
 import { useState, useRef } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion } from "framer-motion"
 import "./MoreAboutMe.css"
 
 const MoreAboutMe = () => {
   const [activeSection, setActiveSection] = useState(null)
+  const [hoveredSection, setHoveredSection] = useState(null)
   const containerRef = useRef(null)
 
   const sections = [
@@ -43,72 +44,75 @@ const MoreAboutMe = () => {
   }
 
   return (
-    <div className="minimal-about-me" ref={containerRef}>
-      <motion.h2
-        className="minimal-title"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-      >
-        More About Me
-      </motion.h2>
+    <div className="perspective-about-me" ref={containerRef}>
+      <div className="perspective-title-wrapper">
+        <motion.h2
+          className="perspective-title"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+        >
+          More About Me
+        </motion.h2>
+      </div>
 
-      <div className="minimal-sections">
+      <div className="perspective-grid">
         {sections.map((section, index) => (
           <motion.div
             key={section.id}
-            className={`minimal-section ${activeSection === section.id ? "active" : ""}`}
+            className={`perspective-card-wrapper ${activeSection === section.id ? "active" : ""}`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            transition={{ duration: 0.4, delay: index * 0.1 }}
+            onHoverStart={() => setHoveredSection(section.id)}
+            onHoverEnd={() => setHoveredSection(null)}
           >
-            <motion.div
-              className="minimal-header"
+            <div
+              className="perspective-card"
               onClick={() => handleToggle(section.id)}
-              whileHover={{ x: 5 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              style={{
+                transform: activeSection === section.id ? "rotateY(180deg)" : "rotateY(0deg)",
+              }}
             >
-              <motion.div
-                className="minimal-indicator"
-                animate={{
-                  rotate: activeSection === section.id ? 90 : 0,
-                  backgroundColor: activeSection === section.id ? "var(--accent, #0070f3)" : "#ddd",
-                }}
-                transition={{ duration: 0.3 }}
-              />
-              <h3>{section.title}</h3>
-            </motion.div>
-
-            <AnimatePresence>
-              {activeSection === section.id && (
-                <motion.div
-                  className="minimal-content"
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                >
-                  <motion.div
-                    className="minimal-details"
-                    initial={{ y: -10, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.3, delay: 0.1 }}
+              <div className="perspective-front">
+                <div className="perspective-front-content">
+                  <span className="perspective-number">{index + 1}</span>
+                  <h3>{section.title}</h3>
+                  <div className="perspective-hint">{hoveredSection === section.id ? "Click to reveal" : ""}</div>
+                </div>
+              </div>
+              <div className="perspective-back">
+                <div className="perspective-back-content">
+                  <p>{section.details}</p>
+                  <button
+                    className="perspective-close"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      setActiveSection(null)
+                    }}
                   >
-                    <p>{section.details}</p>
-                  </motion.div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
           </motion.div>
         ))}
       </div>
 
-      <motion.div
-        className="minimal-progress"
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: 1 }}
-        transition={{ duration: 1.5, ease: "easeInOut" }}
-      />
+      <div className="perspective-controls">
+        {sections.map((section, index) => (
+          <motion.button
+            key={section.id}
+            className={`perspective-control ${activeSection === section.id ? "active" : ""}`}
+            onClick={() => handleToggle(section.id)}
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            {index + 1}
+          </motion.button>
+        ))}
+      </div>
     </div>
   )
 }

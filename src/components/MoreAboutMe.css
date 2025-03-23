@@ -1,163 +1,256 @@
-.minimal-about-me {
-  max-width: 800px;
+/* Reset previous styles */
+.minimal-about-me,
+.unique-about-me {
+  display: none;
+}
+
+/* New perspective card flip design */
+.perspective-about-me {
+  max-width: 1000px;
   margin: 0 auto;
   padding: 5rem 1.5rem;
   font-family: var(--font-secondary);
   color: var(--text-primary);
-  background-color: var(--bg-color);
   position: relative;
-  margin-top: 4rem;
 }
 
-.minimal-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 3rem;
-  color: var(--text-primary);
+.perspective-title-wrapper {
+  text-align: center;
+  margin-bottom: 4rem;
   position: relative;
+}
+
+.perspective-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
   display: inline-block;
   font-family: var(--font-primary);
   letter-spacing: var(--letter-spacing-tight);
+  position: relative;
 }
 
-.minimal-title::after {
+.perspective-title::after {
   content: "";
   position: absolute;
   bottom: -10px;
-  left: 0;
-  width: 40px;
-  height: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  height: 1px;
   background-color: var(--accent);
 }
 
-.minimal-sections {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+.perspective-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
 }
 
-.minimal-section {
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 1.5rem;
+.perspective-card-wrapper {
+  perspective: 1000px;
+  height: 280px;
 }
 
-.minimal-section:last-child {
-  border-bottom: none;
-}
-
-.minimal-header {
-  display: flex;
-  align-items: center;
+.perspective-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
   cursor: pointer;
-  padding: 0.5rem 0;
-  user-select: none;
 }
 
-.minimal-indicator {
-  width: 12px;
-  height: 2px;
-  background-color: var(--border-color);
-  margin-right: 1rem;
-  transition: transform 0.3s ease, background-color 0.3s ease;
-  transform-origin: center left;
-}
-
-.minimal-section.active .minimal-indicator {
-  background-color: var(--accent);
-}
-
-.minimal-header h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin: 0;
-  color: var(--text-primary);
-  transition: color 0.3s ease;
-  font-family: var(--font-primary);
-}
-
-.minimal-section.active .minimal-header h3 {
-  color: var(--accent);
-}
-
-.minimal-content {
+.perspective-front,
+.perspective-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border: 1px solid var(--border-color);
+  border-radius: 2px;
   overflow: hidden;
 }
 
-.minimal-details {
-  padding: 0.5rem 0 0.5rem 1.75rem;
-  border-left: 1px solid var(--border-color);
-  margin-left: 6px;
+.perspective-front {
+  background-color: var(--bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.minimal-details p {
-  margin: 0;
-  line-height: var(--line-height-relaxed);
+.perspective-front::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    transparent 50%,
+    rgba(var(--accent-rgb), 0.05) 50%,
+    rgba(var(--accent-rgb), 0.05) 100%
+  );
+  z-index: 0;
+}
+
+.perspective-front-content {
+  position: relative;
+  z-index: 1;
+  padding: 2rem;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.perspective-number {
+  font-size: 5rem;
+  font-weight: 200;
+  color: rgba(var(--accent-rgb), 0.1);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  font-family: var(--font-primary);
+}
+
+.perspective-front-content h3 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin: 0 0 1rem;
+  color: var(--text-primary);
+  font-family: var(--font-primary);
+  position: relative;
+}
+
+.perspective-hint {
+  font-size: 0.75rem;
   color: var(--text-secondary);
-  font-size: 1rem;
+  opacity: 0.7;
+  position: absolute;
+  bottom: 1.5rem;
+  left: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.perspective-back {
+  background-color: var(--bg-secondary);
+  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.perspective-back-content {
+  max-height: 100%;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.perspective-back-content p {
+  margin: 0 0 1.5rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
   font-family: var(--font-secondary);
 }
 
-.minimal-progress {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 2px;
-  width: 100%;
+.perspective-close {
+  background: none;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  font-family: var(--font-primary);
+}
+
+.perspective-close:hover {
   background-color: var(--accent);
-  opacity: 0.2;
-  transform-origin: left;
+  color: var(--bg-color);
+  border-color: var(--accent);
 }
 
-/* Dark mode support */
-.dark .minimal-about-me {
+.perspective-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.perspective-control {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  background: none;
   color: var(--text-primary);
-  background-color: var(--bg-color);
+  font-family: var(--font-primary);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.dark .minimal-title {
-  color: var(--text-primary);
+.perspective-control:hover,
+.perspective-control.active {
+  background-color: var(--accent);
+  color: var(--bg-color);
+  border-color: var(--accent);
 }
 
-.dark .minimal-section {
-  border-bottom-color: var(--border-color);
+/* Custom scrollbar for the content */
+.perspective-back-content::-webkit-scrollbar {
+  width: 4px;
 }
 
-.dark .minimal-header h3 {
-  color: var(--text-primary);
+.perspective-back-content::-webkit-scrollbar-track {
+  background: rgba(var(--border-color-rgb, 0, 0, 0), 0.1);
 }
 
-.dark .minimal-details {
-  border-left-color: var(--border-color);
+.perspective-back-content::-webkit-scrollbar-thumb {
+  background: rgba(var(--accent-rgb, 17, 24, 39), 0.3);
+  border-radius: 2px;
 }
 
-.dark .minimal-details p {
-  color: var(--text-secondary);
-}
-
-/* Mobile responsiveness */
+/* Responsive styles */
 @media (max-width: 768px) {
-  .minimal-about-me {
+  .perspective-about-me {
     padding: 3rem 1rem;
   }
 
-  .minimal-title {
+  .perspective-title {
     font-size: 2rem;
-    margin-bottom: 2rem;
   }
 
-  .minimal-details {
-    padding-left: 1.5rem;
+  .perspective-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .perspective-card-wrapper {
+    height: 240px;
   }
 }
 
-/* Subtle hover effects */
-@media (hover: hover) {
-  .minimal-header:hover h3 {
-    color: var(--accent);
-  }
+/* Add these CSS variables to support the new styles if they don't exist */
+:root {
+  --accent-rgb: 17, 24, 39;
+  --border-color-rgb: 0, 0, 0;
+}
 
-  .minimal-header:hover .minimal-indicator {
-    background-color: var(--accent);
-  }
+[data-theme="dark"] {
+  --accent-rgb: 243, 244, 246;
+  --border-color-rgb: 255, 255, 255;
 }
 

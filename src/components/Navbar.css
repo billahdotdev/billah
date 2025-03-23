@@ -28,16 +28,10 @@
   font-weight: 700;
   letter-spacing: 1px;
   cursor: pointer;
-  text-transform: uppercase;
+  
   font-family: var(--font-primary);
 }
 
-.logo-billah {
-  text-transform: lowercase;
-  font-family: var(--font-accent);
-  font-style: italic;
-  font-weight: 600;
-}
 
 .nav-links {
   display: none;

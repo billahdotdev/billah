@@ -14,6 +14,17 @@
 
 .contact-intro {
   margin-bottom: 0.5rem;
+  font-size: 2rem;
+  
+}
+
+.contact-quote1 {
+  font-size: 2rem;
+  line-height: var(--line-height-relaxed);
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+  font-weight: 600;
+  font-family: var(--font-accent);
 }
 
 .contact-quote {
@@ -23,7 +34,7 @@
   color: var(--text-primary);
   font-weight: 500;
   font-family: var(--font-accent);
-  font-style: italic;
+  
 }
 
 .availability-status {
@@ -34,8 +45,8 @@
 }
 
 .status-dot {
-  width: 10px;
-  height: 10px;
+  width: 20px;
+  height: 20px;
   background-color: #10b981; /* Green color for available */
   border-radius: 50%;
   display: inline-block;
@@ -45,6 +56,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  
 }
 
 .contact-card {
@@ -53,9 +65,21 @@
   gap: 1.5rem;
   padding: 1.75rem;
   background-color: var(--bg-color);
-  border: 1px solid var(--border-color);
+  border: 2px solid var(--border-color);
   transition: var(--transition);
+  
 }
+
+.contact-card:hover {
+
+  border-color: var(--text-primary);
+  transform: translateY(-5px);
+}
+
+.contact-card:hover::after {
+  width: 0; /* Remove underline on hover */
+}
+
 
 .contact-icon {
   width: 48px;
@@ -153,6 +177,18 @@
   font-family: var(--font-secondary);
   font-size: 0.95rem;
   transition: var(--transition);
+  
+}
+
+.form-group input:hover,
+.form-group textarea:hover {
+  
+  border-color: var(--text-primary);
+  transform: translateY(-5px);
+}
+
+.social-link:hover::after {
+  width: 0; /* Remove underline on hover */
 }
 
 .form-group input:focus,

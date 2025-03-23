@@ -62,15 +62,13 @@ const About = () => {
             variants={fadeInUp}
             custom={1}
           >
-            <h3>
-              I'm a <span className="accent-text">Full Stack Web developer</span>
-            </h3>
+            <h2 className="accent-text">
+            I’m a web enthusiast,<span className="asteriska">*</span></h2>
 
             <p>
-              I'm a full-stack web developer and designer dedicated to building fast, reliable websites, improving
-              search engine rankings, and driving more traffic through effective digital marketing. I also create
-              memorable branding that makes your business stand out. Let's work together to bring your vision to life.
+            dedicated to bringing digital dreams to life. I’ll keep learning, growing, and giving my all—with every breath—to make the impossible possible.
             </p>
+          
 
             <div className="about-stats">
               <motion.div

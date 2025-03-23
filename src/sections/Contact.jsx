@@ -37,8 +37,13 @@ const Contact = () => {
             viewport={{ once: true, amount: 0.3 }}
             variants={fadeInUp}
           >
+            <p className="contact-quote1">
+            Sometimes, you need someone to listen or give some advice.
+            </p>
             <p className="contact-quote">
-              I believe effective communication is the key to unlocking opportunities. Let's connect!
+            Book a slot to chat - anything from personal to career, 
+            web development, graphic design, digital marketing, 
+            T-shirt business, and mental health.
             </p>
             <div className="availability-status">
               <span className="status-dot"></span>
@@ -184,22 +189,11 @@ const Contact = () => {
                   />
                 </svg>
               </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-link hover-target"
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </a>
+              <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="social-link hover-target">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+      </svg>
+    </a>
             </div>
           </motion.div>
 

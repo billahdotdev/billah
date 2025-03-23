@@ -62,7 +62,6 @@
   position: relative;
   display: inline-block;
   font-family: var(--font-accent);
-  font-style: italic;
   font-weight: 600;
 }
 
@@ -125,6 +124,10 @@
   letter-spacing: var(--letter-spacing-wide);
   font-family: var(--font-primary);
   font-weight: 500;
+}
+
+.asteriska {
+  color: rgb(255, 0, 0);
 }
 
 .about-buttons {

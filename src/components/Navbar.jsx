@@ -39,7 +39,7 @@ const Navbar = ({ activeSection, scrollToSection }) => {
           whileTap={{ scale: 0.95 }}
           onClick={() => scrollToSection("hero")}
         >
-          <span className="logo-billah">billah.dev</span>
+          <span className="logo">billah.dev</span>
         </motion.div>
 
         <div className="nav-links">
