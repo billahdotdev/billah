@@ -801,11 +801,11 @@ SKILLS OVERVIEW
 TECHNICAL PROFICIENCY
 --------------------
 Frontend: ████████████████████ 95%
-Backend:  ███████████████████  90%
-Database: ██████████████████   85%
-DevOps:   ████████████         60%
-UI/UX:    ██████████████████   85%
-Mobile:   ██████████████       70%
+Backend: ███████████████████ 90%
+Database: ██████████████████ 85%
+DevOps: ████████████ 60%
+UI/UX: ██████████████████ 85%
+Mobile: ██████████████ 70%
 
 TOP TECHNOLOGIES
 ---------------
@@ -1141,7 +1141,7 @@ SOCIAL MEDIA PROFILES
 
 GitHub: github.com/billahdotdev
 - Open source contributions and personal projects
-- 20+ public repositories
+- 30+ public repositories
 - Active in JavaScript and React communities
 
 LinkedIn: linkedin.com/in/billahdotdev

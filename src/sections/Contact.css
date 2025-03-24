@@ -49,7 +49,7 @@
 .status-dot {
   width: 18px;
   height: 18px;
-  background-color: #10b981; /* Green color for available */
+  background-color: #28a745; /* Green color for available */
   border-radius: 50%;
   display: inline-block;
 }

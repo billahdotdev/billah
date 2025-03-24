@@ -166,7 +166,7 @@ const MinimalJourney = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        About Me
+        More About Me
       </motion.h2>
 
       <div className="minimal-journey-dots" role="tablist">

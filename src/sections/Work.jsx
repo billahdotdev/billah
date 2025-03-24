@@ -102,7 +102,7 @@ const Work = () => {
           viewport={{ once: true, amount: 0.3 }}
           variants={fadeInUp}
         >
-          My Work
+          My Works
         </motion.h2>
 
         <div className="filters">
