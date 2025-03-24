@@ -685,7 +685,7 @@ Personal Website: https://billah.dev
       canvas.height = window.innerHeight
 
       const characters =
-        "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789"
+        "M A S U M   B I L L A H   M A S U M   B I L L A H   M A S U M   B I L L A H   M A S U M   B I L L A H   M A S U M   B I L L A H"
       const columns = canvas.width / 20
       const drops = []
 
