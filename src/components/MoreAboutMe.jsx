@@ -20,19 +20,19 @@ const MinimalJourney = () => {
       id: "story",
       title: "My Story",
       content:
-        "JavaScript and web tech? That's me. 'GARMENTIK' was my clothing business, a hard but rewarding journey. Pandemic changed everything. Now, I combine both passions: 'Brandotory' (web) and 'Garmentik' (clothing).",
+        "I built 'GARMENTIK' to fly, but needed wings. 'Brandotory' gave me those wings, and now I'm building flight paths for others.",
     },
     {
       id: "journey",
       title: "My Learning Odyssey",
       content:
-        "My journey into web development began with curiosity about how websites work. What started as a hobby quickly evolved into a passion as I discovered the power of creating digital experiences that impact people's lives. Through years of learning, experimenting, and building, I've developed a deep understanding of the web ecosystem.",
+        "I discovered the power of creating digital experiences that impact people's lives. Through years of learning, experimenting, and building, I've developed a deep understanding of the web ecosystem.",
     },
     {
       id: "skills",
       title: "My Skills",
       content:
-        "MongoDB, Express, React, Node, TailwindCSS, CSS, and HTML. I'm constantly expanding my skillset to stay current with the latest technologies and best practices in web development. My focus is on creating responsive, accessible, and performant web applications.",
+        "JavaScript, Typescript, MongoDB, Express, React, Node, TailwindCSS, Material UI,  CSS, HTML, Figma, Inkscape and more...",
     },
     {
       id: "education",
