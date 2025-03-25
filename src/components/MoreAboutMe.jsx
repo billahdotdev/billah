@@ -14,6 +14,9 @@ const MinimalJourney = () => {
   const [scrollY, setScrollY] = useState(0)
   const [contentHeight, setContentHeight] = useState(0)
   const [isReducedMotion, setIsReducedMotion] = useState(false)
+  const [isHovering, setIsHovering] = useState(false)
+  const [animateProgress, setAnimateProgress] = useState(false)
+  const [touchFeedback, setTouchFeedback] = useState(null)
 
   const journeyItems = [
     {
@@ -32,7 +35,7 @@ const MinimalJourney = () => {
       id: "skills",
       title: "My Skills",
       content:
-        "JavaScript, Typescript, MongoDB, Express, React, Node, TailwindCSS, Material UI,  CSS, HTML, Figma, Inkscape and more...",
+        "JavaScript, Typescript, MongoDB, Express, React, Node, HTML, CSS, TailwindCSS, Material UI, Figma, Inkscape, More +",
     },
     {
       id: "education",
@@ -75,10 +78,38 @@ const MinimalJourney = () => {
     }
   }, [activeIndex])
 
+  // Animate progress when active index changes
+  useEffect(() => {
+    setAnimateProgress(true)
+    const timer = setTimeout(() => setAnimateProgress(false), 600)
+    return () => clearTimeout(timer)
+  }, [activeIndex])
+
+  // Auto-advance slides with pause on hover
+  useEffect(() => {
+    if (isHovering) return
+
+    const interval = setInterval(() => {
+      if (activeIndex < journeyItems.length - 1) {
+        setDirection(1)
+        setActiveIndex((prev) => prev + 1)
+      } else {
+        setDirection(-1)
+        setActiveIndex(0)
+      }
+    }, 10000)
+
+    return () => clearInterval(interval)
+  }, [activeIndex, isHovering, journeyItems.length])
+
   const handleNext = useCallback(() => {
     if (activeIndex < journeyItems.length - 1) {
       setDirection(1)
       setActiveIndex((prev) => prev + 1)
+    } else {
+      // Loop back to the first slide
+      setDirection(-1)
+      setActiveIndex(0)
     }
   }, [activeIndex, journeyItems.length])
 
@@ -86,8 +117,12 @@ const MinimalJourney = () => {
     if (activeIndex > 0) {
       setDirection(-1)
       setActiveIndex((prev) => prev - 1)
+    } else {
+      // Loop to the last slide
+      setDirection(1)
+      setActiveIndex(journeyItems.length - 1)
     }
-  }, [activeIndex])
+  }, [activeIndex, journeyItems.length])
 
   const handleTouchStart = (e) => {
     // Don't initiate drag if we're touching a scrollable content area or interactive element
@@ -97,6 +132,7 @@ const MinimalJourney = () => {
     setIsDragging(true)
     setStartY(e.touches[0].clientY)
     setScrollY(0)
+    setTouchFeedback(null)
   }
 
   const handleTouchMove = (e) => {
@@ -104,6 +140,15 @@ const MinimalJourney = () => {
     const currentY = e.touches[0].clientY
     const diff = currentY - startY
     setScrollY(diff)
+
+    // Visual feedback for swipe direction
+    if (diff > 30) {
+      setTouchFeedback("up")
+    } else if (diff < -30) {
+      setTouchFeedback("down")
+    } else {
+      setTouchFeedback(null)
+    }
   }
 
   const handleTouchEnd = () => {
@@ -116,6 +161,7 @@ const MinimalJourney = () => {
       handleNext()
     }
     setScrollY(0)
+    setTouchFeedback(null)
   }
 
   // Handle keyboard navigation
@@ -148,13 +194,18 @@ const MinimalJourney = () => {
     }),
   }
 
+  // Split skills into array for the skills section
+  const skillsArray = journeyItems[2].content.split(",").map((skill) => skill.trim())
+
   return (
     <div
-      className="minimal-journey"
+      className={`minimal-journey ${touchFeedback ? `swipe-${touchFeedback}` : ""} ${isDragging ? "is-dragging" : ""}`}
       ref={containerRef}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
       style={{
         // Dynamically adjust height based on content
         minHeight: Math.max(400, contentHeight + 200) + "px",
@@ -169,21 +220,27 @@ const MinimalJourney = () => {
         More About Me
       </motion.h2>
 
-      <div className="minimal-journey-dots" role="tablist">
-        {journeyItems.map((item, index) => (
-          <button
-            key={index}
-            className={`minimal-journey-dot ${index === activeIndex ? "active" : ""}`}
-            onClick={() => {
-              setDirection(index > activeIndex ? 1 : -1)
-              setActiveIndex(index)
-            }}
-            aria-label={`${item.title}`}
-            aria-selected={index === activeIndex}
-            role="tab"
-            tabIndex={index === activeIndex ? 0 : -1}
-          />
-        ))}
+      <div className="journey-navigation">
+        <div className="journey-progress">
+          {journeyItems.map((_, index) => (
+            <button
+              key={index}
+              className={`journey-progress-item ${index === activeIndex ? "active" : ""} ${
+                index < activeIndex ? "completed" : ""
+              }`}
+              onClick={() => {
+                setDirection(index > activeIndex ? 1 : -1)
+                setActiveIndex(index)
+              }}
+              aria-label={`Go to slide ${index + 1}`}
+              aria-current={index === activeIndex ? "true" : "false"}
+            >
+              <span className="journey-progress-line"></span>
+              <span className="journey-progress-dot"></span>
+              <span className="journey-progress-label">{journeyItems[index].title}</span>
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="minimal-journey-content-container" aria-live="polite">
@@ -203,24 +260,25 @@ const MinimalJourney = () => {
             }}
             role="tabpanel"
           >
-            <motion.span
-              className="minimal-journey-index"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 0.1, scale: 1 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              aria-hidden="true"
-            >
-              {activeIndex + 1}
-            </motion.span>
+            <div className="journey-item-header">
+              <motion.div
+                className="journey-item-number"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.1, duration: 0.5 }}
+              >
+                {(activeIndex + 1).toString().padStart(2, "0")}
+              </motion.div>
 
-            <motion.h3
-              className="minimal-journey-item-title"
-              initial={{ y: isReducedMotion ? 0 : 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.1, duration: 0.5 }}
-            >
-              {journeyItems[activeIndex].title}
-            </motion.h3>
+              <motion.h3
+                className="minimal-journey-item-title"
+                initial={{ y: isReducedMotion ? 0 : 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.1, duration: 0.5 }}
+              >
+                {journeyItems[activeIndex].title}
+              </motion.h3>
+            </div>
 
             <motion.div
               className="minimal-journey-item-content-wrapper"
@@ -228,7 +286,31 @@ const MinimalJourney = () => {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.2, duration: 0.5 }}
             >
-              <p className="minimal-journey-item-content">{journeyItems[activeIndex].content}</p>
+              {activeIndex === 2 ? (
+                <div className="skills-grid">
+                  {skillsArray.map((skill, i) => (
+                    <motion.div
+                      key={i}
+                      className="skill-tag"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2 + i * 0.05, duration: 0.4 }}
+                      whileHover={{
+                        y: -5,
+                        transition: { duration: 0.2 },
+                      }}
+                      whileTap={{
+                        scale: 0.95,
+                        transition: { duration: 0.1 },
+                      }}
+                    >
+                      {skill}
+                    </motion.div>
+                  ))}
+                </div>
+              ) : (
+                <p className="minimal-journey-item-content">{journeyItems[activeIndex].content}</p>
+              )}
             </motion.div>
           </motion.div>
         </AnimatePresence>
@@ -238,28 +320,49 @@ const MinimalJourney = () => {
         <motion.button
           className="minimal-journey-control"
           onClick={handlePrev}
-          whileHover={{ scale: isReducedMotion ? 1 : 1.1 }}
-          whileTap={{ scale: isReducedMotion ? 1 : 0.9 }}
-          disabled={activeIndex === 0}
+          whileHover={{
+            y: -3,
+            x: -3,
+            transition: { duration: 0.2 },
+          }}
+          whileTap={{
+            scale: 0.95,
+            transition: { duration: 0.1 },
+          }}
           aria-label="Previous slide"
         >
-          <span className="minimal-journey-arrow">↑</span>
+          <span className="control-arrow">←</span>
+          <span className="control-text">Prev</span>
         </motion.button>
 
         <div className="minimal-journey-indicator" aria-hidden="true">
-          {activeIndex + 1}/{journeyItems.length}
+          <span className={`indicator-current ${animateProgress ? "animate" : ""}`}>{activeIndex + 1}</span>
+          <span className="indicator-separator">/</span>
+          <span className="indicator-total">{journeyItems.length}</span>
         </div>
 
         <motion.button
           className="minimal-journey-control"
           onClick={handleNext}
-          whileHover={{ scale: isReducedMotion ? 1 : 1.1 }}
-          whileTap={{ scale: isReducedMotion ? 1 : 0.9 }}
-          disabled={activeIndex === journeyItems.length - 1}
+          whileHover={{
+            y: -3,
+            x: 3,
+            transition: { duration: 0.2 },
+          }}
+          whileTap={{
+            scale: 0.95,
+            transition: { duration: 0.1 },
+          }}
           aria-label="Next slide"
         >
-          <span className="minimal-journey-arrow">↓</span>
+          <span className="control-text">Next</span>
+          <span className="control-arrow">→</span>
         </motion.button>
+      </div>
+
+      <div className="touch-feedback-indicator">
+        <div className="touch-arrow up-arrow">↑</div>
+        <div className="touch-arrow down-arrow">↓</div>
       </div>
 
       <div className="minimal-journey-swipe-hint" aria-hidden="true">

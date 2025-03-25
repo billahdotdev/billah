@@ -5,11 +5,54 @@
   min-height: 400px;
   display: flex;
   flex-direction: column;
-  padding: 2rem 1rem;
+  padding: 3rem 1.5rem;
   overflow: hidden;
   touch-action: pan-y;
   margin: 0 auto;
-  transition: min-height 0.3s ease;
+  transition: min-height 0.3s var(--easing), transform 0.3s var(--easing), border-color 0.3s var(--easing);
+  border: 1px solid var(--border-color);
+  margin-top: 5rem;
+}
+
+/* Hover effect for the entire component */
+.minimal-journey:hover {
+  border-color: var(--text-secondary);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+}
+
+/* Touch feedback classes */
+.minimal-journey.is-dragging {
+  cursor: grabbing;
+}
+
+.minimal-journey.swipe-up .touch-arrow.up-arrow,
+.minimal-journey.swipe-down .touch-arrow.down-arrow {
+  opacity: 0.2;
+  transform: scale(1);
+}
+
+.touch-feedback-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  z-index: 10;
+}
+
+.touch-arrow {
+  font-size: 3rem;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.3s var(--easing), transform 0.3s var(--easing);
+  color: var(--text-primary);
 }
 
 .minimal-journey-title {
@@ -17,58 +60,142 @@
   font-size: clamp(1.25rem, 6vw, 2rem);
   font-weight: 500;
   text-align: left;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   letter-spacing: var(--letter-spacing-tight);
+  position: relative;
+  display: inline-block;
 }
 
-/* Dot indicators */
-.minimal-journey-dots {
+.minimal-journey-title::after {
+  content: "";
+  position: absolute;
+  bottom: -0.75rem;
+  left: 0;
+  width: 3rem;
+  height: 2px;
+  background-color: var(--accent);
+  transition: width 0.3s var(--easing);
+}
+
+.minimal-journey:hover .minimal-journey-title::after {
+  width: 100%;
+}
+
+/* Journey navigation */
+.journey-navigation {
+  margin-bottom: 2.5rem;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  padding-bottom: 1rem;
   display: flex;
-  justify-content: center;
-  gap: 0.75rem;
-  margin: 0 auto 2rem;
+  justify-content: center; /* Center the navigation */
+  width: 100%;
 }
 
-.minimal-journey-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: var(--border-color);
+.journey-navigation::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.journey-progress {
+  display: flex;
+  position: relative;
+  min-width: min-content;
+  max-width: 80%; /* Limit width to prevent edge overlap */
+  margin: 0 auto; /* Center the progress container */
+  padding: 0 20px; /* Add padding to prevent edge cut-off */
+}
+
+.journey-progress-item {
+  flex: 1;
+  min-width: 60px;
+  display: flex;
+  align-items: center;
+  background: none;
   border: none;
   padding: 0;
   cursor: pointer;
-  transition: all 0.3s var(--easing);
   position: relative;
-  overflow: hidden;
+  height: 30px;
+  transition: all 0.3s var(--easing);
 }
 
-.minimal-journey-dot::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: var(--accent);
-  border-radius: 50%;
+.journey-progress-line {
+  flex: 1;
+  height: 1px;
+  background-color: var(--border-color);
+  transition: background-color 0.5s var(--easing), height 0.3s var(--easing);
+}
+
+.journey-progress-item:first-child .journey-progress-line {
   opacity: 0;
-  transform: scale(0);
-  transition: transform 0.3s var(--easing), opacity 0.3s var(--easing);
 }
 
-.minimal-journey-dot:hover::after {
-  opacity: 0.5;
-  transform: scale(1);
+.journey-progress-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-color);
+  transition: all 0.3s var(--easing);
+  position: absolute;
+  right: 0;
+  transform: translateX(50%);
 }
 
-.minimal-journey-dot:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+.journey-progress-label {
+  position: absolute;
+  top: -20px;
+  right: 0;
+  transform: translateX(50%);
+  font-size: 0.7rem;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s var(--easing), transform 0.3s var(--easing);
+  color: var(--text-secondary);
 }
 
-.minimal-journey-dot.active {
-  background-color: var(--accent);
-  transform: scale(1.2);
+.journey-progress-item:hover .journey-progress-label {
+  opacity: 1;
+  transform: translateX(50%) translateY(-5px);
+}
+
+.journey-progress-item.active .journey-progress-label {
+  opacity: 1;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.journey-progress-item:hover .journey-progress-dot {
+  transform: translateX(50%) scale(1.5);
+}
+
+.journey-progress-item:hover .journey-progress-line {
+  height: 2px;
+}
+
+.journey-progress-item.active .journey-progress-dot {
+  width: 12px;
+  height: 12px;
+  background-color: var(--text-primary);
+  border-color: var(--text-primary);
+}
+
+.journey-progress-item.completed .journey-progress-line {
+  background-color: var(--text-primary);
+}
+
+.journey-progress-item.completed .journey-progress-dot {
+  background-color: var(--text-primary);
+  border-color: var(--text-primary);
+}
+
+.journey-progress-item:focus-visible {
+  outline: none;
+}
+
+.journey-progress-item:focus-visible .journey-progress-dot {
+  box-shadow: 0 0 0 2px var(--accent);
 }
 
 .minimal-journey-content-container {
@@ -92,31 +219,57 @@
   padding: 1rem;
 }
 
-.minimal-journey-index {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.journey-item-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.journey-item-number {
   font-family: var(--font-primary);
-  font-size: clamp(8rem, 20vw, 12rem);
-  font-weight: 800;
-  color: var(--text-primary);
-  opacity: 0.05;
-  z-index: -1;
-  user-select: none;
-  pointer-events: none;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--text-secondary);
+  opacity: 0.5;
+  letter-spacing: var(--letter-spacing-tight);
+  transition: opacity 0.3s var(--easing), transform 0.3s var(--easing);
+}
+
+.minimal-journey:hover .journey-item-number {
+  opacity: 0.8;
+  transform: scale(1.1);
 }
 
 .minimal-journey-item-title {
   font-family: var(--font-primary);
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
   color: var(--text-primary);
+  letter-spacing: var(--letter-spacing-tight);
+  position: relative;
+  display: inline-block;
+}
+
+.minimal-journey-item-title::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--text-primary);
+  transition: width 0.5s var(--easing);
+}
+
+.minimal-journey:hover .minimal-journey-item-title::after {
+  width: 100%;
 }
 
 .minimal-journey-item-content-wrapper {
   width: 100%;
+  margin-top: 0.5rem;
 }
 
 .minimal-journey-item-content {
@@ -129,104 +282,249 @@
   overflow-y: visible;
 }
 
-.minimal-journey-controls {
+/* Skills grid for the skills section */
+.skills-grid {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
-  margin-top: 2rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
 }
 
-.minimal-journey-control {
-  background: none;
+.skill-tag {
   border: 1px solid var(--border-color);
-  color: var(--text-primary);
-  font-size: 1.25rem;
-  cursor: pointer;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--text-secondary);
   transition: all 0.3s var(--easing);
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 }
 
-.minimal-journey-control::after {
+.skill-tag::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--accent);
+  background-color: var(--text-primary);
   opacity: 0;
   transition: opacity 0.3s var(--easing);
   z-index: -1;
 }
 
-.minimal-journey-control:hover:not(:disabled)::after {
+.skill-tag:hover {
+  color: var(--bg-color);
+  border-color: var(--text-primary);
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.skill-tag:hover::before {
   opacity: 1;
 }
 
-.minimal-journey-control:hover:not(:disabled) {
+.minimal-journey-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2.5rem;
+  padding: 0 1rem;
+}
+
+.minimal-journey-control {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-family: var(--font-primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s var(--easing);
+  padding: 0.5rem 1rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 4px;
+}
+
+.control-arrow {
+  font-size: 1.2rem;
+  transition: transform 0.3s var(--easing);
+}
+
+.minimal-journey-control:hover .control-arrow:first-child {
+  transform: translateX(-3px);
+}
+
+.minimal-journey-control:hover .control-arrow:last-child {
+  transform: translateX(3px);
+}
+
+.minimal-journey-control::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--text-primary);
+  opacity: 0;
+  transition: opacity 0.3s var(--easing);
+  z-index: -1;
+  border-radius: 4px;
+}
+
+.minimal-journey-control:hover {
   color: var(--bg-color);
-  border-color: var(--accent);
+}
+
+.minimal-journey-control:hover::before {
+  opacity: 1;
 }
 
 .minimal-journey-control:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-
-.minimal-journey-control:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-
-.minimal-journey-arrow {
-  display: block;
-  position: relative;
-  z-index: 1;
+  outline: none;
+  box-shadow: 0 0 0 2px var(--accent);
 }
 
 .minimal-journey-indicator {
   font-family: var(--font-primary);
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: var(--text-secondary);
-  font-weight: 500;
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  transition: transform 0.3s var(--easing);
+}
+
+.minimal-journey:hover .minimal-journey-indicator {
+  transform: scale(1.1);
+}
+
+.indicator-current {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  position: relative;
+  display: inline-block;
+}
+
+.indicator-current.animate {
+  animation: countUp 0.6s var(--easing);
+}
+
+.indicator-separator {
+  opacity: 0.5;
+  margin: 0 0.25rem;
+}
+
+.indicator-total {
+  opacity: 0.5;
+}
+
+@keyframes countUp {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .minimal-journey-swipe-hint {
   text-align: center;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
   font-size: 0.75rem;
   color: var(--text-secondary);
   opacity: 0.7;
   display: block;
 }
 
+/* Mobile-specific enhancements */
+@media (max-width: 767px) {
+  .minimal-journey {
+    padding: 2rem 1rem;
+  }
+
+  .journey-progress-item {
+    min-width: 40px;
+  }
+
+  .minimal-journey-control {
+    padding: 0.75rem;
+    margin: 0 -0.5rem;
+    touch-action: manipulation;
+  }
+
+  .touch-arrow {
+    font-size: 2.5rem;
+  }
+
+  /* Make touch targets larger on mobile */
+  .journey-progress-dot {
+    width: 12px;
+    height: 12px;
+  }
+
+  .journey-progress-item.active .journey-progress-dot {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Improve swipe hint visibility */
+  .minimal-journey-swipe-hint {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+    background-color: rgba(var(--bg-color-rgb, 255, 255, 255), 0.8);
+    border-radius: 20px;
+    margin: 1rem auto;
+    width: fit-content;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.7;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 0.7;
+    }
+  }
+
+  /* Better visual feedback for touch */
+  .skill-tag:active {
+    transform: scale(0.95);
+    background-color: rgba(var(--text-primary-rgb, 0, 0, 0), 0.1);
+  }
+}
+
 /* For tablets and larger screens */
 @media (min-width: 768px) {
   .minimal-journey {
-    padding: 3rem;
+    padding: 4rem 3rem;
     max-width: 800px;
   }
 
-  .minimal-journey-dot {
-    width: 14px;
-    height: 14px;
-  }
-
-  .minimal-journey-content {
-    padding: 1.5rem;
+  .journey-item-number {
+    font-size: 2rem;
   }
 
   .minimal-journey-item-title {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
+    font-size: 2.25rem;
   }
 
   .minimal-journey-item-content {
@@ -234,35 +532,25 @@
   }
 
   .minimal-journey-control {
-    width: 48px;
-    height: 48px;
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
 
   .minimal-journey-swipe-hint {
     display: none; /* Hide on desktop */
   }
+
+  .touch-feedback-indicator {
+    display: none; /* Hide on desktop */
+  }
 }
 
 /* For dark mode support */
-[data-theme="dark"] .minimal-journey-index {
-  opacity: 0.07;
+[data-theme="dark"] .journey-progress-dot {
+  background-color: var(--bg-color);
 }
 
-[data-theme="dark"] .minimal-journey-dot {
-  background-color: var(--border-color);
-}
-
-[data-theme="dark"] .minimal-journey-dot:hover::after {
-  background-color: var(--accent);
-}
-
-[data-theme="dark"] .minimal-journey-dot.active {
-  background-color: var(--accent);
-}
-
-[data-theme="dark"] .minimal-journey-control::after {
-  background-color: var(--accent);
+[data-theme="dark"] .minimal-journey:hover {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 /* Add touch hint animation */
@@ -287,6 +575,9 @@
   .minimal-journey {
     height: auto !important;
     min-height: 0 !important;
+    border: none;
+    transform: none !important;
+    box-shadow: none !important;
   }
 
   .minimal-journey-content {
@@ -296,20 +587,26 @@
   }
 
   .minimal-journey-controls,
-  .minimal-journey-dots,
+  .journey-navigation,
   .minimal-journey-swipe-hint,
-  .minimal-journey-index {
+  .touch-feedback-indicator {
     display: none !important;
   }
 }
 
 /* Prefers reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .minimal-journey-dot,
   .minimal-journey-control,
-  .minimal-journey-swipe-hint {
+  .minimal-journey-swipe-hint,
+  .journey-progress-item,
+  .journey-progress-dot,
+  .journey-progress-line,
+  .indicator-current,
+  .skill-tag,
+  .minimal-journey {
     transition: none !important;
     animation: none !important;
+    transform: none !important;
   }
 }
 
