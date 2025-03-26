@@ -45,7 +45,7 @@ const About = () => {
             variants={fadeInUp}
           >
             <div className="about-image-container">
-              <img src="../src/assets/MasumB.JPG" alt="Portrait" className="about-image" />
+              <img src="https://avatars.githubusercontent.com/u/112099343?s=400&u=0090532ddc022edb81897e8c287cd91dbbf0a876&v=4" alt="Portrait" className="about-image" />
               <motion.div
                 className="image-overlay"
                 initial={{ opacity: 0 }}
