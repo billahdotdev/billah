@@ -32,7 +32,8 @@ const Footer = ({ scrollToSection }) => {
             viewport={{ once: true }}
           >
             <span className="logo-text">MASUM BILLAH</span>
-            <p>I Create clean, responsive, and functional websites</p>
+            <p>Think of me as your neighborhood developer — not just working for money. 
+            Even if your budget is tight, I'll find a way because I understand budget challenges.</p>
           </motion.div>
 
           <motion.div

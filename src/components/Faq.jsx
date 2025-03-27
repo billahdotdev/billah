@@ -1,29 +1,42 @@
 "use client"
 
-import { useState, useRef, useEffect, useCallback } from "react"
+import { useState, useRef, useEffect, useCallback, memo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import "./Faq.css"
 
-export default function Faq() {
-  const [activeCategory, setActiveCategory] = useState("web")
+export default memo(function Faq() {
+  const [activeCategories, setActiveCategories] = useState({})
+  const [activeQuestions, setActiveQuestions] = useState({})
   const [searchQuery, setSearchQuery] = useState("")
-  const [activeQuestion, setActiveQuestion] = useState(null)
-  const [showSearch, setShowSearch] = useState(false)
-  const [suggestions, setSuggestions] = useState([])
-  const [isSearching, setIsSearching] = useState(false)
-  const [categoryTransition, setCategoryTransition] = useState(false)
+  const [filteredItems, setFilteredItems] = useState([])
   const searchInputRef = useRef(null)
-  const searchTimeoutRef = useRef(null)
-  const faqItemsRef = useRef(null)
-  const touchStartX = useRef(0)
-  const touchEndX = useRef(0)
 
   const categories = [
-    { id: "web", label: "Web Development" },
-    { id: "seo", label: "SEO" },
-    { id: "marketing", label: "Marketing" },
-    { id: "branding", label: "Branding" },
-    { id: "linux", label: "Linux" },
+    {
+      id: "web",
+      label: "Web Development",
+      description: "Questions about website creation, maintenance, and design services.",
+    },
+    {
+      id: "seo",
+      label: "SEO",
+      description: "Questions about search engine optimization and improving visibility.",
+    },
+    {
+      id: "marketing",
+      label: "Marketing",
+      description: "Questions about digital marketing strategies and campaigns.",
+    },
+    {
+      id: "branding",
+      label: "Branding",
+      description: "Questions about brand identity, design, and strategy.",
+    },
+    {
+      id: "linux",
+      label: "Linux",
+      description: "Questions about Linux migration and support services.",
+    },
   ]
 
   const faqItems = [
@@ -326,7 +339,7 @@ export default function Faq() {
     {
       question: "Can you help rebrand my business?",
       answer:
-        "Absolutely! If your current branding no longer reflects your business's values or market position, I offer rebranding services to help refresh your image and reposition your business. This includes updating your logo, visual identity, and brand strategy to better align with your target audience and business goals while maintaining brand equity where appropriate.",
+        "If your current branding no longer reflects your business's values or market position, I offer rebranding services to help refresh your image and reposition your business. This includes updating your logo, visual identity, and brand strategy to better align with your target audience and business goals while maintaining brand equity where appropriate.",
       category: "branding",
       keywords: ["rebrand", "refresh", "reposition", "update", "image", "business", "identity"],
     },
@@ -467,7 +480,7 @@ export default function Faq() {
     },
   ]
 
-  // Improved fuzzy search function with better typo handling
+  // Fuzzy search function for filtering questions
   const fuzzySearch = useCallback((text, query) => {
     if (!query) return false
 
@@ -498,438 +511,263 @@ export default function Faq() {
     return query.length - queryIndex <= maxDistance
   }, [])
 
-  // Generate suggestions based on search query
-  const generateSuggestions = useCallback(
-    (query) => {
-      if (!query || query.length < 2) return []
+  // Toggle category expansion
+  const toggleCategory = (categoryId) => {
+    setActiveCategories((prev) => ({
+      ...prev,
+      [categoryId]: !prev[categoryId],
+    }))
 
-      const allSuggestions = []
+    // Reset active questions when toggling categories
+    setActiveQuestions({})
+  }
 
-      // Check for keyword matches
-      faqItems.forEach((item) => {
-        // Check question text
-        if (fuzzySearch(item.question, query)) {
-          allSuggestions.push({
-            text: item.question,
-            category: item.category,
-            type: "question",
-          })
-        }
+  // Toggle question expansion
+  const toggleQuestion = (categoryId, questionIndex) => {
+    const key = `${categoryId}-${questionIndex}`
+    setActiveQuestions((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }))
+  }
 
-        // Check keywords
-        if (item.keywords) {
-          item.keywords.forEach((keyword) => {
-            if (fuzzySearch(keyword, query) && !allSuggestions.some((s) => s.text === item.question)) {
-              allSuggestions.push({
-                text: item.question,
-                category: item.category,
-                type: "keyword",
-                matchedKeyword: keyword,
-              })
-            }
-          })
-        }
+  // Handle search input change
+  const handleSearchChange = (e) => {
+    const query = e.target.value
+    setSearchQuery(query)
+
+    if (query.trim() === "") {
+      setFilteredItems([])
+    } else {
+      // Filter all questions based on search query
+      const filtered = faqItems.filter(
+        (item) =>
+          fuzzySearch(item.question, query) ||
+          fuzzySearch(item.answer, query) ||
+          (item.keywords && item.keywords.some((keyword) => fuzzySearch(keyword, query))),
+      )
+      setFilteredItems(filtered)
+
+      // Expand categories that have matching questions
+      const matchingCategories = {}
+      filtered.forEach((item) => {
+        matchingCategories[item.category] = true
       })
 
-      // Limit to top 5 suggestions
-      return allSuggestions.slice(0, 5)
-    },
-    [fuzzySearch],
-  )
+      setActiveCategories((prev) => ({
+        ...prev,
+        ...matchingCategories,
+      }))
+    }
+  }
 
+  // Get questions for a specific category
+  const getCategoryQuestions = (categoryId) => {
+    return faqItems.filter((item) => item.category === categoryId)
+  }
+
+  // Check if a question is active
+  const isQuestionActive = (categoryId, index) => {
+    return !!activeQuestions[`${categoryId}-${index}`]
+  }
+
+  // Focus search input when component mounts, but don't interfere with routing
   useEffect(() => {
-    // Reset active question when category changes
-    setActiveQuestion(null)
-    setCategoryTransition(true)
-
-    // Reset transition state after animation completes
-    const timer = setTimeout(() => {
-      setCategoryTransition(false)
-    }, 500)
-
-    // Focus search input when search is shown
-    if (showSearch && searchInputRef.current) {
-      searchInputRef.current.focus()
+    if (searchInputRef.current && searchQuery) {
+      setTimeout(() => {
+        searchInputRef.current.focus()
+      }, 500)
     }
+  }, [searchQuery])
 
-    return () => clearTimeout(timer)
-  }, [activeCategory, showSearch])
-
+  // Handle URL hash changes to prevent redirection
   useEffect(() => {
-    // Clear previous timeout
-    if (searchTimeoutRef.current) {
-      clearTimeout(searchTimeoutRef.current)
-    }
-
-    if (searchQuery.length > 0) {
-      setIsSearching(true)
-
-      // Delay search to avoid excessive processing while typing
-      searchTimeoutRef.current = setTimeout(() => {
-        const newSuggestions = generateSuggestions(searchQuery)
-        setSuggestions(newSuggestions)
-        setIsSearching(false)
-      }, 300)
-    } else {
-      setSuggestions([])
-      setIsSearching(false)
-    }
-
-    return () => {
-      if (searchTimeoutRef.current) {
-        clearTimeout(searchTimeoutRef.current)
-      }
-    }
-  }, [searchQuery, generateSuggestions])
-
-  // Handle keyboard navigation
-  const handleKeyDown = useCallback(
-    (e) => {
-      if (e.key === "Escape") {
-        if (showSearch) {
-          clearSearch()
+    const handleHashChange = () => {
+      // Only scroll to FAQ if explicitly targeted
+      if (window.location.hash === "#faq") {
+        const faqElement = document.getElementById("faq")
+        if (faqElement) {
+          faqElement.scrollIntoView({ behavior: "smooth" })
         }
       }
-    },
-    [showSearch],
-  )
-
-  useEffect(() => {
-    // Add keyboard event listener
-    window.addEventListener("keydown", handleKeyDown)
-
-    // Clean up
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown)
     }
-  }, [handleKeyDown])
 
-  const toggleQuestion = (index) => {
-    setActiveQuestion(activeQuestion === index ? null : index)
+    // Check hash on mount
+    if (typeof window !== "undefined") {
+      window.addEventListener("hashchange", handleHashChange)
+      // Don't auto-scroll on initial load
+      // handleHashChange()
+    }
 
-    // Scroll to the question if it's not already in view
-    if (activeQuestion !== index && faqItemsRef.current) {
-      const items = faqItemsRef.current.querySelectorAll(".faq-item")
-      if (items[index]) {
-        setTimeout(() => {
-          const rect = items[index].getBoundingClientRect()
-          const isInView = rect.top >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
-
-          if (!isInView) {
-            items[index].scrollIntoView({ behavior: "smooth", block: "nearest" })
-          }
-        }, 100)
+    return () => {
+      if (typeof window !== "undefined") {
+        window.removeEventListener("hashchange", handleHashChange)
       }
     }
-  }
+  }, [])
 
-  // Add this function after the toggleQuestion function
-  const handleKeyboardNavigation = (e, index) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault()
-      toggleQuestion(index)
-    }
-  }
-
-  // Add this function after the selectSuggestion function
-  const scrollToCategory = (categoryId) => {
-    // Find the category button element
-    const categoryElement = document.getElementById(`tab-${categoryId}`)
-    if (categoryElement) {
-      // Scroll the category into view on all devices
-      categoryElement.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" })
-    }
-  }
-
-  const handleSearch = (e) => {
-    setSearchQuery(e.target.value)
-    setActiveCategory("search")
-  }
-
-  const clearSearch = () => {
+  const resetFaq = useCallback(() => {
     setSearchQuery("")
-    setShowSearch(false)
-    setActiveCategory("web")
-    scrollToCategory("web")
-    setSuggestions([])
-  }
-
-  const selectSuggestion = (suggestion) => {
-    // Find the question in faqItems
-    const questionIndex = faqItems.findIndex(
-      (item) => item.question === suggestion.text && item.category === suggestion.category,
-    )
-
-    if (questionIndex !== -1) {
-      setActiveCategory(suggestion.category)
-      scrollToCategory(suggestion.category)
-
-      // Wait for category change to take effect
-      setTimeout(() => {
-        setActiveQuestion(
-          faqItems.filter((item) => item.category === suggestion.category).indexOf(faqItems[questionIndex]),
-        )
-      }, 100)
-    }
-
-    setSearchQuery("")
-    setShowSearch(false)
-    setSuggestions([])
-  }
-
-  // Filter items based on active category or search query
-  const filteredItems =
-    activeCategory === "search"
-      ? faqItems.filter(
-          (item) =>
-            fuzzySearch(item.question, searchQuery) ||
-            fuzzySearch(item.answer, searchQuery) ||
-            (item.keywords && item.keywords.some((keyword) => fuzzySearch(keyword, searchQuery))),
-        )
-      : faqItems.filter((item) => item.category === activeCategory)
-
-  // Get friendly message for no results
-  const getNoResultsMessage = () => {
-    const messages = [
-      `Hmm, I don't have an answer for "${searchQuery}" yet.`,
-      `I'm still learning about "${searchQuery}".`,
-      `That's a great question about "${searchQuery}"! Let's chat about it.`,
-      `I don't have details on "${searchQuery}" in my FAQ yet.`,
-    ]
-
-    return messages[Math.floor(Math.random() * messages.length)]
-  }
-
-  const handleTouchStart = (e) => {
-    touchStartX.current = e.touches[0].clientX
-  }
-
-  const handleTouchEnd = (e) => {
-    touchEndX.current = e.changedTouches[0].clientX
-    handleSwipe()
-  }
-
-  // Update the handleSwipe function to work better on all devices
-  const handleSwipe = () => {
-    const currentIndex = categories.findIndex((cat) => cat.id === activeCategory)
-
-    // Minimum swipe distance to register
-    const minSwipeDistance = 50
-
-    // Calculate swipe distance
-    const swipeDistance = touchStartX.current - touchEndX.current
-
-    if (Math.abs(swipeDistance) < minSwipeDistance) return
-
-    if (swipeDistance > 0 && currentIndex < categories.length - 1) {
-      // Swiped left, go to next category
-      const nextCategory = categories[currentIndex + 1].id
-      setActiveCategory(nextCategory)
-      scrollToCategory(nextCategory)
-    } else if (swipeDistance < 0 && currentIndex > 0) {
-      // Swiped right, go to previous category
-      const prevCategory = categories[currentIndex - 1].id
-      setActiveCategory(prevCategory)
-      scrollToCategory(prevCategory)
-    }
-  }
+    setActiveCategories({})
+    setActiveQuestions({})
+    setFilteredItems([])
+  }, [])
 
   return (
     <section className="section" id="faq">
-      <div className="container">
-        <motion.h2
-          className="section-title faq-title"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-        >
-          Have Questions?
-        </motion.h2>
-        <p className="faq-subtitle">Find answers to common questions about my services</p>
+      <div className="faq-container">
+        <div className="faq-header">
+          <motion.h2
+            className="faq-title"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+          >
+            Have Questions?
+          </motion.h2>
+          <p className="faq-subtitle">Find answers to common questions about my services</p>
+        </div>
 
         <div className="faq-search-container">
-          {showSearch ? (
-            <div className="faq-search-input-container">
-              <span className="faq-search-icon">→</span>
-              <input
-                ref={searchInputRef}
-                type="text"
-                placeholder="Search questions..."
-                value={searchQuery}
-                onChange={handleSearch}
-                className="faq-search-input"
-                aria-label="Search questions"
-              />
-              <button onClick={clearSearch} className="faq-search-clear" aria-label="Clear search">
-                ×
-              </button>
-
-              {/* Suggestions dropdown */}
-              <AnimatePresence>
-                {suggestions.length > 0 && searchQuery.length > 0 && (
-                  <motion.div
-                    className="faq-suggestions"
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.2 }}
-                    role="listbox"
-                    aria-label="Search suggestions"
-                  >
-                    <div className="faq-suggestions-header">
-                      <span>Did you mean...</span>
-                    </div>
-                    {suggestions.map((suggestion, index) => (
-                      <motion.button
-                        key={index}
-                        className="faq-suggestion-item"
-                        onClick={() => selectSuggestion(suggestion)}
-                        role="option"
-                        whileHover={{ x: 5 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <span className="faq-suggestion-text">{suggestion.text}</span>
-                        <span className="faq-suggestion-category">
-                          <span>{categories.find((c) => c.id === suggestion.category)?.label}</span>
-                        </span>
-                      </motion.button>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              {/* Loading indicator */}
-              {isSearching && searchQuery.length > 0 && (
-                <div className="faq-search-loading" aria-hidden="true">
-                  <div className="faq-search-loading-dot"></div>
-                  <div className="faq-search-loading-dot"></div>
-                  <div className="faq-search-loading-dot"></div>
-                </div>
-              )}
-            </div>
-          ) : (
-            <motion.button
-              className="faq-search-button"
-              onClick={() => setShowSearch(true)}
-              aria-label="Open search"
-              whileHover={{ y: -3 }}
-              whileTap={{ y: 0 }}
+          <div className="faq-search-input-wrapper">
+            <input
+              ref={searchInputRef}
+              type="text"
+              placeholder="Search all questions..."
+              value={searchQuery}
+              onChange={handleSearchChange}
+              className="faq-search-input"
+              aria-label="Search questions"
+            />
+            <svg
+              className="faq-search-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
-              <span>Search questions</span>
-            </motion.button>
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </div>
+          {searchQuery && (
+            <button onClick={resetFaq} className="faq-reset-button" aria-label="Clear search and reset">
+              Clear search
+            </button>
           )}
         </div>
 
-        <div
-          className="faq-categories"
-          role="tablist"
-          aria-label="FAQ Categories"
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
-        >
+        <div className="faq-categories">
           {categories.map((category) => (
-            <motion.button
-              key={category.id}
-              className={`faq-category ${activeCategory === category.id ? "active" : ""}`}
-              onClick={() => {
-                setActiveCategory(category.id)
-                scrollToCategory(category.id)
-              }}
-              aria-selected={activeCategory === category.id}
-              role="tab"
-              id={`tab-${category.id}`}
-              aria-controls={`panel-${category.id}`}
-              whileHover={{ y: -3 }}
-              whileTap={{ y: 0 }}
-            >
-              <span className="faq-category-label">{category.label}</span>
-              {activeCategory === category.id && (
+            <div key={category.id}>
+              <motion.button
+                className={`faq-category-toggle ${activeCategories[category.id] ? "active" : ""}`}
+                onClick={() => toggleCategory(category.id)}
+                whileHover={{ x: 5 }}
+                transition={{ duration: 0.2 }}
+                aria-expanded={activeCategories[category.id]}
+                aria-controls={`category-content-${category.id}`}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault()
+                    toggleCategory(category.id)
+                  }
+                }}
+              >
+                <span className="faq-category-title">{category.label}</span>
                 <motion.span
-                  className="faq-category-indicator"
-                  layoutId="categoryIndicator"
-                  transition={{ type: "spring", duration: 0.5 }}
-                />
-              )}
-            </motion.button>
+                  className="faq-category-icon"
+                  animate={{ rotate: activeCategories[category.id] ? 45 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  +
+                </motion.span>
+              </motion.button>
+
+              <div
+                className={`faq-category-content ${activeCategories[category.id] ? "active" : ""}`}
+                id={`category-content-${category.id}`}
+              >
+                <div className="faq-category-content-inner">
+                  <AnimatePresence>
+                    {activeCategories[category.id] && (
+                      <motion.div
+                        className="faq-questions"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        {(searchQuery.trim() === ""
+                          ? getCategoryQuestions(category.id)
+                          : filteredItems.filter((item) => item.category === category.id)
+                        ).map((item, index) => (
+                          <motion.div
+                            key={`${category.id}-${index}`}
+                            className={`faq-item ${isQuestionActive(category.id, index) ? "active" : ""}`}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.3, delay: index * 0.05 }}
+                            layout
+                          >
+                            <button
+                              className="faq-question"
+                              onClick={() => toggleQuestion(category.id, index)}
+                              aria-expanded={isQuestionActive(category.id, index)}
+                              aria-controls={`answer-${category.id}-${index}`}
+                            >
+                              <span className="faq-question-text">{item.question}</span>
+                              <motion.span
+                                className="faq-question-icon"
+                                animate={{ rotate: isQuestionActive(category.id, index) ? 45 : 0 }}
+                                transition={{ duration: 0.3 }}
+                              >
+                                +
+                              </motion.span>
+                            </button>
+
+                            <AnimatePresence>
+                              {isQuestionActive(category.id, index) && (
+                                <motion.div
+                                  className="faq-answer"
+                                  initial={{ height: 0, opacity: 0 }}
+                                  animate={{ height: "auto", opacity: 1 }}
+                                  exit={{ height: 0, opacity: 0 }}
+                                  transition={{ duration: 0.3 }}
+                                  id={`answer-${category.id}-${index}`}
+                                >
+                                  <p>{item.answer}</p>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </motion.div>
+                        ))}
+
+                        {searchQuery.trim() !== "" &&
+                          filteredItems.filter((item) => item.category === category.id).length === 0 && (
+                            <div className="faq-no-results">
+                              <p>No questions found in this category matching "{searchQuery}"</p>
+                            </div>
+                          )}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
 
-        <div className="faq-items-container">
-          {filteredItems.length > 0 ? (
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeCategory}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-                className="faq-items"
-                role="tabpanel"
-                id={`panel-${activeCategory}`}
-                aria-labelledby={`tab-${activeCategory}`}
-                ref={faqItemsRef}
-              >
-                {filteredItems.map((item, index) => (
-                  <motion.div
-                    key={`${item.category}-${index}`}
-                    className={`faq-item ${activeQuestion === index ? "active" : ""}`}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.05 }}
-                    whileHover={{ y: -3 }}
-                  >
-                    <button
-                      className="faq-question"
-                      onClick={() => toggleQuestion(index)}
-                      onKeyDown={(e) => handleKeyboardNavigation(e, index)}
-                      aria-expanded={activeQuestion === index}
-                      aria-controls={`answer-${item.category}-${index}`}
-                    >
-                      <span className="faq-question-number">{(index + 1).toString().padStart(2, "0")}</span>
-                      <span className="faq-question-text">{item.question}</span>
-                      <motion.span
-                        animate={{ rotate: activeQuestion === index ? 45 : 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="faq-question-icon"
-                        aria-hidden="true"
-                      >
-                        +
-                      </motion.span>
-                    </button>
-
-                    <AnimatePresence>
-                      {activeQuestion === index && (
-                        <motion.div
-                          className="faq-answer"
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3 }}
-                          id={`answer-${item.category}-${index}`}
-                        >
-                          <p>{item.answer}</p>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </AnimatePresence>
-          ) : (
-            <div className="faq-no-results" role="status">
-              <p>{getNoResultsMessage()}</p>
-              <motion.button
-                onClick={clearSearch}
-                className="faq-reset-search"
-                aria-label="View all questions"
-                whileHover={{ y: -3 }}
-                whileTap={{ y: 0 }}
-              >
-                <span>View all questions</span>
-              </motion.button>
-            </div>
-          )}
-        </div>
+        {searchQuery.trim() !== "" && filteredItems.length === 0 && (
+          <div className="faq-no-results">
+            <p>No questions found matching "{searchQuery}"</p>
+          </div>
+        )}
 
         <motion.div
           className="faq-contact-prompt"
@@ -937,16 +775,24 @@ export default function Faq() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <div className="faq-contact-prompt-content">
-            <h3>Still have questions?</h3>
-            <p>I'm here to help with any specific questions about your project.</p>
-            <motion.a href="#contact" className="faq-contact-button" whileHover={{ y: -3 }} whileTap={{ y: 0 }}>
-              Contact Me
-            </motion.a>
-          </div>
+          <h3>Still have questions?</h3>
+          <p>I'm here to help with any specific questions about your project.</p>
+          <a
+            href="#contact"
+            className="faq-contact-button"
+            onClick={(e) => {
+              e.preventDefault()
+              const contactSection = document.getElementById("contact")
+              if (contactSection) {
+                contactSection.scrollIntoView({ behavior: "smooth" })
+              }
+            }}
+          >
+            Contact Me
+          </a>
         </motion.div>
       </div>
     </section>
   )
-}
+})
 

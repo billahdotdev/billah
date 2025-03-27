@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import "./Services.css"
+import Faq from "../components/Faq"
 
 const Services = () => {
   const [hoveredService, setHoveredService] = useState(null)
@@ -108,7 +109,9 @@ const Services = () => {
             </motion.div>
           ))}
         </div>
+        <Faq />
       </div>
+      
     </div>
   )
 }

@@ -9,7 +9,7 @@
   font-family: "JetBrains Mono", monospace;
   border: 1px solid var(--border-color, rgba(0, 0, 0, 0.1));
   width: 100%;
-  max-width: 800px;
+  max-width: var(--container-max-width); /* Use the same max-width variable as other components */
   margin: 2rem auto;
   height: auto;
   min-height: 500px;
@@ -18,6 +18,7 @@
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  padding: 0; /* Reset padding to properly control inner elements */
 }
 
 /* Dark theme styles - using attribute selector to match existing theme system */
@@ -82,7 +83,7 @@
 }
 
 .terminal-body {
-  padding: 1.5rem;
+  padding: 1.5rem var(--container-padding, 1.5rem); /* Use the same container padding variable as other components */
   min-height: 400px;
   overflow-y: auto;
   max-height: 600px;
@@ -312,12 +313,12 @@
 /* Mobile responsiveness */
 @media (max-width: 768px) {
   .terminal-container {
-    margin: 1rem;
-    width: auto;
+    margin: 1.5rem auto; /* Center alignment with consistent vertical spacing */
+    width: 100%; /* Full width on mobile */
   }
 
   .terminal-body {
-    padding: 1rem;
+    padding: 1rem var(--container-padding, 1rem); /* Consistent with container padding on mobile */
     max-height: 400px;
   }
 

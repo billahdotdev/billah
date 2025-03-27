@@ -3,7 +3,7 @@
 import { motion } from "framer-motion"
 import MoreAboutMe from "../components/MoreAboutMe"
 import HackerMe from "../components/HackerMe"
-import Faq from "../components/Faq"
+
 
 import "./About.css"
 import { useState } from "react"
@@ -117,7 +117,7 @@ const About = () => {
 
         {/* MoreAboutMe Component */}
         <MoreAboutMe />
-        <Faq />
+       
 
         {/* HackerMe Component - Only shown when triggered */}
         {showTerminal ? (
