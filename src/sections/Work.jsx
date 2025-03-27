@@ -19,7 +19,7 @@ const Work = () => {
         "https://images.unsplash.com/photo-1523289333742-be1143f6b766?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
       description: "A clean, minimal e-commerce website with a focus on user experience and product presentation.",
       technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-      link: "https://example.com",
+      link: "https://github.com/billahdotdev",
       details:
         "This minimalist e-commerce platform was designed with a focus on showcasing products in a clean, uncluttered environment. The black and white aesthetic puts the focus on product imagery while providing an elegant shopping experience. Features include a responsive design, smooth animations, product filtering, cart functionality, and secure checkout with Stripe integration.",
     },
@@ -31,7 +31,7 @@ const Work = () => {
         "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1455&q=80",
       description: "A minimalist portfolio website for a photographer with image galleries and contact form.",
       technologies: ["HTML", "CSS", "JavaScript", "PHP"],
-      link: "https://example.com",
+      link: "https://github.com/billahdotdev",
       details:
         "This photography portfolio was designed to showcase the photographer's work with minimal distractions. The black and white design creates a gallery-like experience, allowing the photographs to be the focal point. The site features smooth transitions between images, lazy loading for optimal performance, and a clean, intuitive navigation system.",
     },
@@ -43,7 +43,7 @@ const Work = () => {
         "https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
       description: "A mobile banking application with secure authentication and transaction history.",
       technologies: ["React Native", "Firebase", "Redux"],
-      link: "https://example.com",
+      link: "https://github.com/billahdotdev",
       details:
         "This mobile banking application was developed with a focus on security, usability, and clean design. The minimalist interface makes banking tasks intuitive and straightforward. Features include biometric authentication, real-time transaction tracking, budget management tools, and bill payment functionality. The app was built with React Native for cross-platform compatibility.",
     },
@@ -55,7 +55,7 @@ const Work = () => {
         "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
       description: "An elegant website for a high-end restaurant with online reservations and menu showcase.",
       technologies: ["Vue.js", "Express", "PostgreSQL"],
-      link: "https://example.com",
+      link: "https://github.com/billahdotdev",
       details:
         "This restaurant website combines elegant design with practical functionality. The black and white color scheme creates a sophisticated atmosphere that reflects the restaurant's high-end positioning. Features include an interactive menu with beautiful food photography, an online reservation system, chef profiles, and integration with review platforms. The site is fully responsive and optimized for all devices.",
     },
