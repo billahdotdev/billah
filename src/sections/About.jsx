@@ -103,7 +103,7 @@ const About = () => {
 
             <div className="about-buttons">
               <motion.a
-                href="../assets/resume.pdf"
+                href="../public/resume.pdf"
                 className="btn hover-target"
                 download
                 whileHover={{ scale: 1.05 }}
