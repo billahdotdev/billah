@@ -65,7 +65,7 @@ const About = () => {
             custom={1}
           >
             <h2 className="accent-text">
-            I’m a web enthusiast<span className="asteriska">*</span>,</h2>
+            I’m a web enthusiast,</h2>
 
             <p>
             dedicated to bringing digital dreams to life. I’ll keep learning, growing, and giving my all—with every breath—to make the impossible possible.
@@ -103,7 +103,7 @@ const About = () => {
 
             <div className="about-buttons">
               <motion.a
-                href="/resume.pdf"
+                href="../assets/resume.pdf"
                 className="btn hover-target"
                 download
                 whileHover={{ scale: 1.05 }}
