@@ -1,4 +1,4 @@
-.about {
+.more-about-me {
   padding: 5rem 0;
 }
 
@@ -8,74 +8,18 @@
   gap: 4rem;
   align-items: center;
   max-width: var(--container-max-width);
-  margin: 0 auto;
-}
-
-.about-image-wrapper {
-  width: 100%;
-  max-width: 280px;
-}
-
-.about-image-container {
-  position: relative;
-  width: 100%;
-  padding-bottom: 125%;
-  overflow: hidden;
-}
-
-.about-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: grayscale(100%);
-  transition: filter 0.5s var(--easing);
-}
-
-.about-image-container:hover .about-image {
-  filter: grayscale(0%);
-}
-
-.image-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 100%);
-  pointer-events: none;
+  margin: 0 auto 5rem auto;
 }
 
 .about-text {
   max-width: 100%;
+  text-align: center;
 }
 
 .about-text h3 {
   margin-bottom: 1.75rem;
   font-size: 1.75rem;
   font-family: var(--font-primary);
-}
-
-.accent-text {
-  position: relative;
-  display: inline-block;
-  font-family: var(--font-accent);
-  font-weight: 600;
-}
-
-.accent-text::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 5px;
-  background-color: var(--text-primary);
-  transform: scaleX(0.3);
-  transform-origin: left;
-  transition: transform 0.5s var(--easing);
 }
 
 .about-text:hover .accent-text::after {
@@ -126,12 +70,10 @@
   font-weight: 500;
 }
 
-.asteriska {
-  color: rgb(255, 0, 0);
-}
-
 .about-buttons {
   margin-top: 2.5rem;
+  display: flex;
+  justify-content: center;
 }
 
 .stat-item:hover {
@@ -139,62 +81,629 @@
   transform: translateY(-10px);
 }
 
-/* Terminal trigger styling */
-.terminal-trigger {
-  margin: 4rem auto 2rem;
-  text-align: center;
+.journey-container {
+  position: relative;
+  width: 100%;
+  margin: 5rem auto 0;
+  touch-action: pan-y;
+  overflow: hidden;
 }
 
-.terminal-btn {
-  background-color: var(--text-primary);
-  color: var(--bg-color);
-  border: 1px solid var(--text-primary);
-  padding: 0.9rem 2.25rem;
-  font-family: "JetBrains Mono", monospace;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+.journey-container.is-dragging {
+  cursor: grabbing;
+}
+
+.journey-container.swipe-up .touch-arrow.up-arrow,
+.journey-container.swipe-down .touch-arrow.down-arrow {
+  opacity: 0.2;
+  transform: scale(1);
+}
+
+.journey-main-title {
+  font-family: var(--font-primary);
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 4rem;
+  letter-spacing: var(--letter-spacing-tight);
   position: relative;
-  overflow: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+.journey-main-title::after {
+  content: "";
+  position: absolute;
+  bottom: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4rem;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), #00d4aa);
+}
+
+/* Journey Navigation */
+.journey-navigation {
+  margin-bottom: 4rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.journey-progress {
+  display: flex;
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.journey-progress-item {
+  flex: 1;
+  min-width: 80px;
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  height: 40px;
+  transition: all 0.3s var(--easing);
+}
+
+.journey-progress-line {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, var(--border-color), transparent);
+  transition: all 0.5s var(--easing);
+}
+
+.journey-progress-item:first-child .journey-progress-line {
+  opacity: 0;
+}
+
+.journey-progress-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  background-color: var(--bg-color);
+  transition: all 0.3s var(--easing);
+  position: absolute;
+  right: 0;
+  transform: translateX(50%);
+  z-index: 2;
+}
+
+.journey-progress-label {
+  position: absolute;
+  top: -30px;
+  right: 0;
+  transform: translateX(50%);
+  font-size: 0.75rem;
+  white-space: nowrap;
+  opacity: 0;
+  transition: all 0.3s var(--easing);
+  color: var(--text-secondary);
+  font-family: var(--font-primary);
+  font-weight: 500;
+}
+
+.journey-progress-item:hover .journey-progress-label {
+  opacity: 1;
+  transform: translateX(50%) translateY(-5px);
+}
+
+.journey-progress-item.active .journey-progress-label {
+  opacity: 1;
+  color: var(--text-primary);
   font-weight: 600;
 }
 
-.terminal-btn:hover {
-  background-color: transparent;
+.journey-progress-item:hover .journey-progress-dot {
+  transform: translateX(50%) scale(1.3);
+}
+
+.journey-progress-item.active .journey-progress-dot {
+  width: 16px;
+  height: 16px;
+  background: linear-gradient(135deg, var(--accent), #00d4aa);
+  border-color: var(--accent);
+  box-shadow: 0 0 20px rgba(255, 0, 128, 0.3);
+}
+
+.journey-progress-item.completed .journey-progress-line {
+  background: linear-gradient(90deg, var(--accent), #00d4aa);
+}
+
+.journey-progress-item.completed .journey-progress-dot {
+  background: linear-gradient(135deg, var(--accent), #00d4aa);
+  border-color: var(--accent);
+}
+
+/* Journey Sections Container */
+.journey-sections-container {
+  position: relative;
+  width: 100%;
+  min-height: 500px;
+  margin: 3rem 0;
+}
+
+.journey-section {
+  position: relative;
+  width: 100%;
+  min-height: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  transition: all 0.5s var(--easing);
+}
+
+/* Section Background Patterns */
+.section-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.section-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.1;
+  transition: opacity 0.5s var(--easing);
+}
+
+/* My Story - Section 0 */
+.journey-section-0 {
+  background: linear-gradient(135deg, rgba(255, 0, 128, 0.05) 0%, rgba(0, 212, 170, 0.05) 100%);
+  border: 1px solid rgba(255, 0, 128, 0.2);
+}
+
+.journey-section-0 .section-pattern {
+  background-image: radial-gradient(circle at 20% 20%, rgba(255, 0, 128, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(0, 212, 170, 0.1) 0%, transparent 50%);
+}
+
+.journey-section-0 .section-number {
+  color: var(--accent);
+  text-shadow: 0 0 20px rgba(255, 0, 128, 0.3);
+}
+
+/* My Learning Odyssey - Section 1 */
+.journey-section-1 {
+  background: linear-gradient(135deg, rgba(0, 212, 170, 0.05) 0%, rgba(124, 58, 237, 0.05) 100%);
+  border: 1px solid rgba(0, 212, 170, 0.2);
+}
+
+.journey-section-1 .section-pattern {
+  background-image: linear-gradient(45deg, transparent 40%, rgba(0, 212, 170, 0.05) 50%, transparent 60%),
+    linear-gradient(-45deg, transparent 40%, rgba(124, 58, 237, 0.05) 50%, transparent 60%);
+  background-size: 40px 40px;
+}
+
+.journey-section-1 .section-number {
+  color: #00d4aa;
+  text-shadow: 0 0 20px rgba(0, 212, 170, 0.3);
+}
+
+/* My Skills - Section 2 */
+.journey-section-2 {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+}
+
+.journey-section-2 .section-pattern {
+  background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(124, 58, 237, 0.03) 2px,
+      rgba(124, 58, 237, 0.03) 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(59, 130, 246, 0.03) 2px,
+      rgba(59, 130, 246, 0.03) 4px
+    );
+}
+
+.journey-section-2 .section-number {
+  color: #7c3aed;
+  text-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
+}
+
+/* My Credentials - Section 3 */
+.journey-section-3 {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.journey-section-3 .section-pattern {
+  background-image: radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.08) 0%, transparent 25%),
+    radial-gradient(circle at 75% 75%, rgba(16, 185, 129, 0.08) 0%, transparent 25%);
+  background-size: 60px 60px;
+}
+
+.journey-section-3 .section-number {
+  color: #3b82f6;
+  text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+}
+
+/* Section Content */
+.section-content {
+  position: relative;
+  z-index: 2;
+  padding: 3rem 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.section-number {
+  font-family: var(--font-primary);
+  font-size: 3rem;
+  font-weight: 300;
+  opacity: 0.8;
+  letter-spacing: var(--letter-spacing-tight);
+  transition: all 0.3s var(--easing);
+}
+
+.section-title {
+  font-family: var(--font-primary);
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 700;
+  margin: 0;
+  color: var(--text-primary);
+  letter-spacing: var(--letter-spacing-tight);
+  position: relative;
+}
+
+.section-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section-text {
+  font-family: var(--font-secondary);
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 100%;
+}
+
+/* Enhanced Skills Grid */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.skill-tag {
+  padding: 1rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: rgba(124, 58, 237, 0.05);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  border-radius: 12px;
+  transition: all 0.3s var(--easing);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  text-align: center;
+  backdrop-filter: blur(5px);
+}
+
+.skill-tag::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.1), transparent);
+  transition: left 0.5s var(--easing);
+}
+
+.skill-tag:hover {
+  color: var(--text-primary);
+  border-color: #7c3aed;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(124, 58, 237, 0.2);
+  background: rgba(124, 58, 237, 0.1);
+}
+
+.skill-tag:hover::before {
+  left: 100%;
+}
+
+/* Journey Controls */
+.journey-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
+  padding: 0 1rem;
+}
+
+.journey-control {
+  background: rgba(var(--text-primary), 0.05);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-family: var(--font-primary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s var(--easing);
+  padding: 1rem 1.5rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.control-arrow {
+  font-size: 1.2rem;
+  transition: transform 0.3s var(--easing);
+}
+
+.journey-control:hover .control-arrow:first-child {
+  transform: translateX(-3px);
+}
+
+.journey-control:hover .control-arrow:last-child {
+  transform: translateX(3px);
+}
+
+.journey-control:hover {
+  color: var(--text-primary);
+  border-color: var(--accent);
+  background: rgba(255, 0, 128, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(255, 0, 128, 0.2);
+}
+
+.journey-indicator {
+  font-family: var(--font-primary);
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(var(--text-primary), 0.05);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.indicator-current {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  position: relative;
+  display: inline-block;
+}
+
+.indicator-current.animate {
+  animation: countUp 0.6s var(--easing);
+}
+
+.indicator-separator {
+  opacity: 0.5;
+  margin: 0 0.25rem;
+}
+
+.indicator-total {
+  opacity: 0.7;
+}
+
+/* Touch Feedback */
+.touch-feedback-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  z-index: 10;
+}
+
+.touch-arrow {
+  font-size: 3rem;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.3s var(--easing), transform 0.3s var(--easing);
   color: var(--text-primary);
 }
 
-.terminal-hint {
-  margin-top: 1rem;
-  font-size: 0.9rem;
+.journey-swipe-hint {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.8rem;
   color: var(--text-secondary);
-  font-style: italic;
+  opacity: 0.7;
   font-family: var(--font-secondary);
+  font-style: italic;
 }
 
-/* Maintain mobile layout on desktop with improved spacing */
+/* Responsive Design */
+@media (max-width: 767px) {
+  .section-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .section-number {
+    font-size: 2rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .skill-tag {
+    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .journey-control {
+    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .journey-swipe-hint {
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 0.7;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+}
+
 @media (min-width: 768px) {
-  .about-content {
-    flex-direction: column; /* Keep column layout on desktop */
-    align-items: center;
+  .journey-sections-container {
+    min-height: 600px;
   }
 
-  .about-image-wrapper {
-    max-width: 300px; /* Limit image size */
+  .journey-section {
+    min-height: 600px;
   }
 
-  .about-text {
-    max-width: 100%;
-    text-align: center; /* Center text on desktop */
+  .section-content {
+    padding: 4rem 3rem;
   }
 
-  .about-stats {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+  .journey-swipe-hint {
+    display: none;
   }
 
-  .about-buttons {
-    display: flex;
-    justify-content: center; /* Center button */
+  .touch-feedback-indicator {
+    display: none;
   }
 }
 
+/* Dark Mode Adjustments */
+[data-theme="dark"] .journey-section-0 {
+  background: linear-gradient(135deg, rgba(255, 0, 128, 0.1) 0%, rgba(0, 212, 170, 0.1) 100%);
+}
+
+[data-theme="dark"] .journey-section-1 {
+  background: linear-gradient(135deg, rgba(0, 212, 170, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
+}
+
+[data-theme="dark"] .journey-section-2 {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+}
+
+[data-theme="dark"] .journey-section-3 {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
+}
+
+[data-theme="dark"] .skill-tag {
+  background: rgba(124, 58, 237, 0.15);
+  border-color: rgba(124, 58, 237, 0.3);
+}
+
+[data-theme="dark"] .skill-tag:hover {
+  background: rgba(124, 58, 237, 0.25);
+  box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
+}
+
+/* Add touch hint animation */
+@keyframes swipeHint {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+.minimal-journey-swipe-hint {
+  animation: swipeHint 2s infinite;
+}
+
+/* Print styles */
+@media print {
+  .minimal-journey {
+    height: auto !important;
+    min-height: 0 !important;
+    border: none;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  .minimal-journey-content {
+    position: static;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .minimal-journey-controls,
+  .journey-navigation,
+  .minimal-journey-swipe-hint,
+  .touch-feedback-indicator {
+    display: none !important;
+  }
+}
+
+/* Prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .minimal-journey-control,
+  .minimal-journey-swipe-hint,
+  .journey-progress-item,
+  .journey-progress-dot,
+  .journey-progress-line,
+  .indicator-current,
+  .skill-tag,
+  .minimal-journey {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}

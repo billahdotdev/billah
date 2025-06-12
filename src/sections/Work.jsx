@@ -9,74 +9,321 @@ const Work = () => {
   const [hoveredProject, setHoveredProject] = useState(null)
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedProject, setSelectedProject] = useState(null)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [currentPageIndex, setCurrentPageIndex] = useState(0)
+  const [isZoomed, setIsZoomed] = useState(false)
 
-  const projects = [
+  const products = [
     {
       id: 1,
-      title: "Minimalist E-commerce",
+      title: "E-commerce Website Package",
       category: "web",
+      price: "$2,500",
       image:
         "https://images.unsplash.com/photo-1523289333742-be1143f6b766?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-      description: "A clean, minimal e-commerce website with a focus on user experience and product presentation.",
+      description: "Complete e-commerce solution with modern design, payment integration, and admin dashboard.",
       technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-      link: "https://github.com/billahdotdev",
+      features: [
+        "Responsive design for all devices",
+        "Product catalog with search & filters",
+        "Shopping cart & checkout system",
+        "Payment gateway integration",
+        "Admin dashboard for inventory",
+        "Order management system",
+        "Customer account system",
+        "SEO optimization",
+        "3 months free support",
+      ],
+      deliveryTime: "4-6 weeks",
       details:
-        "This minimalist e-commerce platform was designed with a focus on showcasing products in a clean, uncluttered environment. The black and white aesthetic puts the focus on product imagery while providing an elegant shopping experience. Features include a responsive design, smooth animations, product filtering, cart functionality, and secure checkout with Stripe integration.",
+        "This comprehensive e-commerce package includes everything you need to start selling online. Built with modern technologies and best practices, featuring a clean, professional design that converts visitors into customers. Includes full source code, documentation, and deployment assistance.",
+      githubUrl: "https://github.com/yourusername/ecommerce-demo",
+      livePreviewUrl: "https://ecommerce-demo.vercel.app",
     },
     {
       id: 2,
-      title: "Photography Portfolio",
+      title: "Portfolio Website",
       category: "web",
+      price: "$800",
       image:
         "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1455&q=80",
-      description: "A minimalist portfolio website for a photographer with image galleries and contact form.",
-      technologies: ["HTML", "CSS", "JavaScript", "PHP"],
-      link: "https://github.com/billahdotdev",
+      description: "Professional portfolio website to showcase your work with elegant design and smooth animations.",
+      technologies: ["React", "CSS", "JavaScript", "Framer Motion"],
+      features: [
+        "Custom responsive design",
+        "Project showcase gallery",
+        "About & services sections",
+        "Contact form integration",
+        "Smooth animations",
+        "SEO optimized",
+        "Fast loading speed",
+        "Mobile-first approach",
+        "1 month free support",
+      ],
+      deliveryTime: "2-3 weeks",
       details:
-        "This photography portfolio was designed to showcase the photographer's work with minimal distractions. The black and white design creates a gallery-like experience, allowing the photographs to be the focal point. The site features smooth transitions between images, lazy loading for optimal performance, and a clean, intuitive navigation system.",
+        "A stunning portfolio website designed to showcase your work professionally. Features smooth animations, responsive design, and optimized performance. Perfect for freelancers, agencies, and creative professionals looking to make a strong online presence.",
+      githubUrl: "https://github.com/yourusername/portfolio-template",
+      livePreviewUrl: "https://portfolio-template.vercel.app",
     },
     {
       id: 3,
-      title: "Banking App",
-      category: "mobile",
+      title: "Business Website Package",
+      category: "web",
+      price: "$1,200",
       image:
-        "https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-      description: "A mobile banking application with secure authentication and transaction history.",
-      technologies: ["React Native", "Firebase", "Redux"],
-      link: "https://github.com/billahdotdev",
+        "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+      description: "Complete business website with booking system, service pages, and professional design.",
+      technologies: ["Vue.js", "Express", "PostgreSQL", "Tailwind"],
+      features: [
+        "Professional business design",
+        "Service/product pages",
+        "Online booking system",
+        "Contact & location info",
+        "Testimonials section",
+        "Blog/news section",
+        "Social media integration",
+        "Analytics setup",
+        "2 months free support",
+      ],
+      deliveryTime: "3-4 weeks",
       details:
-        "This mobile banking application was developed with a focus on security, usability, and clean design. The minimalist interface makes banking tasks intuitive and straightforward. Features include biometric authentication, real-time transaction tracking, budget management tools, and bill payment functionality. The app was built with React Native for cross-platform compatibility.",
+        "A comprehensive business website solution that establishes your professional online presence. Includes booking functionality, service showcases, and all the essential pages your business needs to attract and convert customers.",
+      githubUrl: "https://github.com/yourusername/business-site",
+      livePreviewUrl: "https://business-site-demo.vercel.app",
     },
     {
       id: 4,
-      title: "Restaurant Website",
-      category: "web",
+      title: "Brand Identity Design",
+      category: "design",
+      price: "$600",
       image:
-        "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-      description: "An elegant website for a high-end restaurant with online reservations and menu showcase.",
-      technologies: ["Vue.js", "Express", "PostgreSQL"],
-      link: "https://github.com/billahdotdev",
+        "https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+      description: "Complete brand identity package including logo, color palette, and brand guidelines.",
+      technologies: ["Figma", "Illustrator", "Photoshop"],
+      features: [
+        "Logo design (3 concepts)",
+        "Color palette selection",
+        "Typography guidelines",
+        "Brand style guide",
+        "Business card design",
+        "Letterhead template",
+        "Social media templates",
+        "File formats (AI, PNG, SVG)",
+        "Unlimited revisions",
+      ],
+      deliveryTime: "2-3 weeks",
       details:
-        "This restaurant website combines elegant design with practical functionality. The black and white color scheme creates a sophisticated atmosphere that reflects the restaurant's high-end positioning. Features include an interactive menu with beautiful food photography, an online reservation system, chef profiles, and integration with review platforms. The site is fully responsive and optimized for all devices.",
+        "A complete brand identity package that establishes your visual presence across all platforms. Includes professional logo design, comprehensive brand guidelines, and all the essential materials to maintain consistent branding.",
+      images: [
+        "https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+        "https://images.unsplash.com/photo-1600775508114-5c30cf911a40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
+        "https://images.unsplash.com/photo-1634942537034-2531766767d1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+        "https://images.unsplash.com/photo-1599817777301-94d8a0b33b11?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+      ],
+    },
+    {
+      id: 5,
+      title: "UI/UX Design Package",
+      category: "design",
+      price: "$1,500",
+      image:
+        "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+      description: "Complete UI/UX design for web or mobile applications with user research and prototyping.",
+      technologies: ["Figma", "Adobe XD", "Principle", "InVision"],
+      features: [
+        "User research & personas",
+        "Wireframing & prototyping",
+        "High-fidelity UI designs",
+        "Interactive prototypes",
+        "Design system creation",
+        "Responsive design layouts",
+        "Usability testing",
+        "Developer handoff files",
+        "2 rounds of revisions",
+      ],
+      deliveryTime: "4-5 weeks",
+      details:
+        "Comprehensive UI/UX design service that covers the entire design process from research to final handoff. Creates user-centered designs that are both beautiful and functional, ensuring optimal user experience.",
+      images: [
+        "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+        "https://images.unsplash.com/photo-1559028012-481c04fa702d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80",
+        "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+        "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+      ],
+    },
+    {
+      id: 6,
+      title: "Web Development Mastery eBook",
+      category: "ebook",
+      price: "$49",
+      image:
+        "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+      description: "Comprehensive guide to modern web development with practical projects and real-world examples.",
+      technologies: ["PDF", "EPUB", "Interactive Examples"],
+      features: [
+        "300+ pages of content",
+        "15 practical projects",
+        "Source code included",
+        "Video tutorials access",
+        "Modern frameworks coverage",
+        "Best practices guide",
+        "Career advice section",
+        "Lifetime updates",
+        "Community access",
+      ],
+      deliveryTime: "Instant download",
+      details:
+        "A comprehensive guide that takes you from beginner to advanced web developer. Includes practical projects, real-world examples, and everything you need to build modern web applications. Perfect for self-learners and bootcamp students.",
+      samplePages: [
+        "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+        "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+        "https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+      ],
+      pageDescriptions: [
+        "Chapter 1: Introduction to Modern Web Development",
+        "Chapter 3: Building Your First React Application",
+        "Chapter 7: Advanced CSS Techniques for Professional Designs",
+      ],
+    },
+    {
+      id: 7,
+      title: "Freelancer's Business Guide",
+      category: "ebook",
+      price: "$29",
+      image:
+        "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+      description: "Complete guide to building a successful freelance business with proven strategies and templates.",
+      technologies: ["PDF", "Templates", "Worksheets"],
+      features: [
+        "200+ pages of strategies",
+        "Client acquisition methods",
+        "Pricing strategies",
+        "Contract templates",
+        "Invoice templates",
+        "Project management tips",
+        "Marketing strategies",
+        "Tax & legal guidance",
+        "Bonus worksheets",
+      ],
+      deliveryTime: "Instant download",
+      details:
+        "Everything you need to build a thriving freelance business. From finding your first client to scaling your operations, this guide covers all aspects of freelancing with practical templates and proven strategies.",
+      samplePages: [
+        "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+        "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1511&q=80",
+        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+      ],
+      pageDescriptions: [
+        "Chapter 2: Finding Your First Clients",
+        "Chapter 5: Setting Rates That Reflect Your Value",
+        "Chapter 8: Creating Professional Contracts and Agreements",
+      ],
+    },
+    {
+      id: 8,
+      title: "Design Systems Handbook",
+      category: "ebook",
+      price: "$39",
+      image:
+        "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+      description: "Master the art of creating scalable design systems for modern digital products.",
+      technologies: ["PDF", "Figma Templates", "Code Examples"],
+      features: [
+        "250+ pages of content",
+        "Design system templates",
+        "Component libraries",
+        "Documentation examples",
+        "Implementation guides",
+        "Case studies",
+        "Figma resources",
+        "Code snippets",
+        "Industry best practices",
+      ],
+      deliveryTime: "Instant download",
+      details:
+        "Learn how to create, implement, and maintain design systems that scale. Includes templates, examples, and best practices from leading companies. Essential for designers and developers working on digital products.",
+      samplePages: [
+        "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+        "https://images.unsplash.com/photo-1558655146-d09347e92766?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1464&q=80",
+        "https://images.unsplash.com/photo-1618788372246-79faff0c3742?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
+      ],
+      pageDescriptions: [
+        "Chapter 1: Introduction to Design Systems",
+        "Chapter 4: Building a Component Library",
+        "Chapter 9: Maintaining and Evolving Your Design System",
+      ],
     },
   ]
 
   const filteredProjects =
-    activeFilter === "all" ? projects : projects.filter((project) => project.category === activeFilter)
+    activeFilter === "all" ? products : products.filter((product) => product.category === activeFilter)
 
   const filters = [
     { id: "all", label: "All" },
     { id: "web", label: "Web" },
     { id: "design", label: "Design" },
+    { id: "ebook", label: "eBook" },
   ]
 
-  const openModal = (project) => {
-    setSelectedProject(project)
+  const openModal = (product) => {
+    setSelectedProject(product)
+    setCurrentImageIndex(0)
+    setCurrentPageIndex(0)
+    setIsZoomed(false)
     setModalOpen(true)
   }
 
   const closeModal = () => {
     setModalOpen(false)
+    setIsZoomed(false)
+  }
+
+  const handlePurchase = (product) => {
+    const whatsappMessage = `Hi! I'm interested in purchasing "${product.title}" for ${product.price}. Can you please provide more details about the ordering process?`
+    const whatsappUrl = `https://wa.me/8801710000000?text=${encodeURIComponent(whatsappMessage)}`
+
+    window.open(whatsappUrl, "_blank")
+  }
+
+  const handleEmailInquiry = (product) => {
+    const subject = `Inquiry about ${product.title}`
+    const body = `Hi,\n\nI'm interested in purchasing "${product.title}" for ${product.price}.\n\nCould you please provide more information about:\n- Payment process\n- Delivery timeline\n- Any additional details\n\nThank you!\n\nBest regards`
+    const mailtoUrl = `mailto:your-email@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+
+    window.location.href = mailtoUrl
+  }
+
+  const handleLivePreview = (url) => {
+    window.open(url, "_blank")
+  }
+
+  const handleNextImage = () => {
+    if (selectedProject && selectedProject.images) {
+      setCurrentImageIndex((prev) => (prev === selectedProject.images.length - 1 ? 0 : prev + 1))
+    }
+  }
+
+  const handlePrevImage = () => {
+    if (selectedProject && selectedProject.images) {
+      setCurrentImageIndex((prev) => (prev === 0 ? selectedProject.images.length - 1 : prev - 1))
+    }
+  }
+
+  const handleNextPage = () => {
+    if (selectedProject && selectedProject.samplePages) {
+      setCurrentPageIndex((prev) => (prev === selectedProject.samplePages.length - 1 ? 0 : prev + 1))
+    }
+  }
+
+  const handlePrevPage = () => {
+    if (selectedProject && selectedProject.samplePages) {
+      setCurrentPageIndex((prev) => (prev === 0 ? selectedProject.samplePages.length - 1 : prev - 1))
+    }
+  }
+
+  const toggleZoom = () => {
+    setIsZoomed(!isZoomed)
   }
 
   const fadeInUp = {
@@ -92,6 +339,280 @@ const Work = () => {
     }),
   }
 
+  // Render modal content based on product category
+  const renderModalContent = () => {
+    if (!selectedProject) return null
+
+    switch (selectedProject.category) {
+      case "web":
+        return (
+          <div className="modal-content">
+            <div className="modal-image">
+              <img src={selectedProject.image || "/placeholder.svg"} alt={selectedProject.title} />
+              <div className="modal-price-badge">{selectedProject.price}</div>
+            </div>
+
+            <div className="modal-details">
+              <div className="modal-header">
+                <h3>{selectedProject.title}</h3>
+                <div className="modal-delivery">
+                  <span>⏱️ {selectedProject.deliveryTime}</span>
+                </div>
+              </div>
+
+              <p className="modal-description">{selectedProject.details}</p>
+
+              <div className="modal-features">
+                <h4>What's Included:</h4>
+                <ul className="features-list">
+                  {selectedProject.features.map((feature, i) => (
+                    <li key={i}>✓ {feature}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="modal-tech">
+                <h4>Technologies Used:</h4>
+                <div className="tech-tags">
+                  {selectedProject.technologies.map((tech, i) => (
+                    <span key={i} className="tech-tag">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {selectedProject.livePreviewUrl && (
+                <div className="live-preview-section">
+                  <button className="btn preview-btn" onClick={() => handleLivePreview(selectedProject.livePreviewUrl)}>
+                    <span>🔍</span> Live Preview
+                  </button>
+                  <p className="preview-note">Check out the live demo to see this project in action</p>
+                </div>
+              )}
+
+              <div className="purchase-section">
+                <div className="purchase-price">
+                  <span className="price-label">Price:</span>
+                  <span className="price-value">{selectedProject.price}</span>
+                </div>
+
+                <div className="purchase-buttons">
+                  <button className="btn hover-target purchase-btn" onClick={() => handlePurchase(selectedProject)}>
+                    <span>💬</span>
+                    Order via WhatsApp
+                  </button>
+
+                  <button className="btn btn-outline hover-target" onClick={() => handleEmailInquiry(selectedProject)}>
+                    <span>📧</span>
+                    Email Inquiry
+                  </button>
+                </div>
+
+                <div className="contact-info">
+                  <p>📱 WhatsApp: +008801710000000</p>
+                  <p>📧 Email: your-email@example.com</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+
+      case "design":
+        return (
+          <div className="modal-content">
+            <div className={`modal-image-gallery ${isZoomed ? "zoomed" : ""}`}>
+              <div className="gallery-container" onClick={toggleZoom}>
+                {selectedProject.images && (
+                  <img
+                    src={selectedProject.images[currentImageIndex] || "/placeholder.svg"}
+                    alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
+                    className={isZoomed ? "zoomed-image" : ""}
+                  />
+                )}
+                <div className="zoom-indicator">
+                  <span>{isZoomed ? "Click to zoom out" : "Click to zoom in"}</span>
+                </div>
+              </div>
+
+              <div className="gallery-navigation">
+                <button className="gallery-nav-btn prev" onClick={handlePrevImage}>
+                  ←
+                </button>
+                <div className="gallery-indicator">
+                  {currentImageIndex + 1} / {selectedProject.images?.length || 1}
+                </div>
+                <button className="gallery-nav-btn next" onClick={handleNextImage}>
+                  →
+                </button>
+              </div>
+
+              <div className="gallery-thumbnails">
+                {selectedProject.images?.map((img, idx) => (
+                  <div
+                    key={idx}
+                    className={`gallery-thumbnail ${idx === currentImageIndex ? "active" : ""}`}
+                    onClick={() => setCurrentImageIndex(idx)}
+                  >
+                    <img src={img || "/placeholder.svg"} alt={`Thumbnail ${idx + 1}`} />
+                  </div>
+                ))}
+              </div>
+
+              <div className="modal-price-badge">{selectedProject.price}</div>
+            </div>
+
+            <div className="modal-details">
+              <div className="modal-header">
+                <h3>{selectedProject.title}</h3>
+                <div className="modal-delivery">
+                  <span>⏱️ {selectedProject.deliveryTime}</span>
+                </div>
+              </div>
+
+              <p className="modal-description">{selectedProject.details}</p>
+
+              <div className="modal-features">
+                <h4>What's Included:</h4>
+                <ul className="features-list">
+                  {selectedProject.features.map((feature, i) => (
+                    <li key={i}>✓ {feature}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="modal-tech">
+                <h4>Technologies Used:</h4>
+                <div className="tech-tags">
+                  {selectedProject.technologies.map((tech, i) => (
+                    <span key={i} className="tech-tag">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="purchase-section">
+                <div className="purchase-price">
+                  <span className="price-label">Price:</span>
+                  <span className="price-value">{selectedProject.price}</span>
+                </div>
+
+                <div className="purchase-buttons">
+                  <button className="btn hover-target purchase-btn" onClick={() => handlePurchase(selectedProject)}>
+                    <span>💬</span>
+                    Order via WhatsApp
+                  </button>
+
+                  <button className="btn btn-outline hover-target" onClick={() => handleEmailInquiry(selectedProject)}>
+                    <span>📧</span>
+                    Email Inquiry
+                  </button>
+                </div>
+
+                <div className="contact-info">
+                  <p>📱 WhatsApp: +008801710000000</p>
+                  <p>📧 Email: your-email@example.com</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+
+      case "ebook":
+        return (
+          <div className="modal-content">
+            <div className="ebook-preview">
+              <div className="ebook-page-container">
+                {selectedProject.samplePages && (
+                  <>
+                    <img
+                      src={selectedProject.samplePages[currentPageIndex] || "/placeholder.svg"}
+                      alt={`Sample page ${currentPageIndex + 1}`}
+                      className="ebook-page"
+                    />
+                    <div className="page-description">{selectedProject.pageDescriptions?.[currentPageIndex]}</div>
+                  </>
+                )}
+              </div>
+
+              <div className="ebook-navigation">
+                <button className="ebook-nav-btn prev" onClick={handlePrevPage}>
+                  ← Previous Page
+                </button>
+                <div className="ebook-indicator">
+                  Page {currentPageIndex + 1} of {selectedProject.samplePages?.length || 1}
+                </div>
+                <button className="ebook-nav-btn next" onClick={handleNextPage}>
+                  Next Page →
+                </button>
+              </div>
+
+              <div className="modal-price-badge">{selectedProject.price}</div>
+            </div>
+
+            <div className="modal-details">
+              <div className="modal-header">
+                <h3>{selectedProject.title}</h3>
+                <div className="modal-delivery">
+                  <span>⏱️ {selectedProject.deliveryTime}</span>
+                </div>
+              </div>
+
+              <p className="modal-description">{selectedProject.details}</p>
+
+              <div className="modal-features">
+                <h4>What's Included:</h4>
+                <ul className="features-list">
+                  {selectedProject.features.map((feature, i) => (
+                    <li key={i}>✓ {feature}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="modal-tech">
+                <h4>Available Formats:</h4>
+                <div className="tech-tags">
+                  {selectedProject.technologies.map((tech, i) => (
+                    <span key={i} className="tech-tag">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="purchase-section">
+                <div className="purchase-price">
+                  <span className="price-label">Price:</span>
+                  <span className="price-value">{selectedProject.price}</span>
+                </div>
+
+                <div className="purchase-buttons">
+                  <button className="btn hover-target purchase-btn" onClick={() => handlePurchase(selectedProject)}>
+                    <span>💬</span>
+                    Order via WhatsApp
+                  </button>
+
+                  <button className="btn btn-outline hover-target" onClick={() => handleEmailInquiry(selectedProject)}>
+                    <span>📧</span>
+                    Email Inquiry
+                  </button>
+                </div>
+
+                <div className="contact-info">
+                  <p>📱 WhatsApp: +008801710000000</p>
+                  <p>📧 Email: your-email@example.com</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+
+      default:
+        return null
+    }
+  }
+
   return (
     <div className="work">
       <div className="container">
@@ -102,7 +623,7 @@ const Work = () => {
           viewport={{ once: true, amount: 0.3 }}
           variants={fadeInUp}
         >
-          My Works
+          My Store
         </motion.h2>
 
         <div className="filters">
@@ -121,9 +642,9 @@ const Work = () => {
 
         <div className="projects-grid">
           <AnimatePresence>
-            {filteredProjects.map((project, index) => (
+            {filteredProjects.map((product, index) => (
               <motion.div
-                key={project.id}
+                key={product.id}
                 className="project-card hover-target"
                 initial="hidden"
                 whileInView="visible"
@@ -131,47 +652,76 @@ const Work = () => {
                 variants={fadeInUp}
                 custom={index}
                 layout
-                onMouseEnter={() => setHoveredProject(project.id)}
+                onMouseEnter={() => setHoveredProject(product.id)}
                 onMouseLeave={() => setHoveredProject(null)}
               >
                 <div className="project-image-container">
-                  <img src={project.image || "/placeholder.svg"} alt={project.title} className="project-image" />
+                  <img src={product.image || "/placeholder.svg"} alt={product.title} className="project-image" />
+
+                  <div className="price-badge">{product.price}</div>
 
                   <motion.div
                     className="project-overlay"
                     initial={{ opacity: 0 }}
                     animate={{
-                      opacity: hoveredProject === project.id ? 1 : 0,
+                      opacity: hoveredProject === product.id ? 1 : 0,
                     }}
                     transition={{ duration: 0.3 }}
                   >
-                    <motion.button
-                      className="btn hover-target"
-                      onClick={() => openModal(project)}
-                      initial={{ y: 20, opacity: 0 }}
-                      animate={{
-                        y: hoveredProject === project.id ? 0 : 20,
-                        opacity: hoveredProject === project.id ? 1 : 0,
-                      }}
-                      transition={{ delay: 0.1 }}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      View Details
-                    </motion.button>
+                    <div className="overlay-buttons">
+                      <motion.button
+                        className="btn hover-target"
+                        onClick={() => openModal(product)}
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{
+                          y: hoveredProject === product.id ? 0 : 20,
+                          opacity: hoveredProject === product.id ? 1 : 0,
+                        }}
+                        transition={{ delay: 0.1 }}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        View Details
+                      </motion.button>
+
+                      <motion.button
+                        className="btn btn-outline hover-target"
+                        onClick={() => handlePurchase(product)}
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{
+                          y: hoveredProject === product.id ? 0 : 20,
+                          opacity: hoveredProject === product.id ? 1 : 0,
+                        }}
+                        transition={{ delay: 0.2 }}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        Buy Now
+                      </motion.button>
+                    </div>
                   </motion.div>
                 </div>
 
                 <div className="project-info">
-                  <h3>{project.title}</h3>
-                  <p>{project.description}</p>
+                  <div className="product-header">
+                    <h3>{product.title}</h3>
+                    <span className="product-price">{product.price}</span>
+                  </div>
+                  <p>{product.description}</p>
+
+                  <div className="delivery-info">
+                    <span className="delivery-time">⏱️ {product.deliveryTime}</span>
+                  </div>
 
                   <div className="project-tech">
-                    {project.technologies.map((tech, i) => (
+                    {product.technologies.slice(0, 3).map((tech, i) => (
                       <span key={i} className="tech-tag">
                         {tech}
                       </span>
                     ))}
+                    {product.technologies.length > 3 && (
+                      <span className="tech-tag">+{product.technologies.length - 3} more</span>
+                    )}
                   </div>
                 </div>
               </motion.div>
@@ -190,7 +740,7 @@ const Work = () => {
             onClick={closeModal}
           >
             <motion.div
-              className="modal"
+              className={`modal ${selectedProject.category}-modal`}
               initial={{ opacity: 0, y: 100, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 100, scale: 0.9 }}
@@ -209,31 +759,7 @@ const Work = () => {
                 </svg>
               </button>
 
-              <div className="modal-content">
-                <div className="modal-image">
-                  <img src={selectedProject.image || "/placeholder.svg"} alt={selectedProject.title} />
-                </div>
-
-                <div className="modal-details">
-                  <h3>{selectedProject.title}</h3>
-                  <p className="modal-description">{selectedProject.details}</p>
-
-                  <div className="modal-tech">
-                    <h4>Technologies</h4>
-                    <div className="tech-tags">
-                      {selectedProject.technologies.map((tech, i) => (
-                        <span key={i} className="tech-tag">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <a href={selectedProject.link} className="btn hover-target" target="_blank" rel="noopener noreferrer">
-                    Visit Project
-                  </a>
-                </div>
-              </div>
+              {renderModalContent()}
             </motion.div>
           </motion.div>
         )}
@@ -243,4 +769,3 @@ const Work = () => {
 }
 
 export default Work
-
