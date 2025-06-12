@@ -3,7 +3,9 @@
 import { useState, useEffect, useRef } from "react"
 import { AnimatePresence } from "framer-motion"
 
+
 // Components
+
 import Navbar from "./components/Navbar"
 import ThemeToggle from "./components/ThemeToggle"
 import Loader from "./components/Loader"
@@ -114,6 +116,7 @@ function App() {
       ) : (
         <div className="app">
           <CustomCursor />
+          
           <Navbar activeSection={activeSection} scrollToSection={scrollToSection} />
           <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
 

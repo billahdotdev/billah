@@ -2,6 +2,8 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+
+
 import "./Work.css"
 
 const Work = () => {
@@ -12,15 +14,18 @@ const Work = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [currentPageIndex, setCurrentPageIndex] = useState(0)
   const [isZoomed, setIsZoomed] = useState(false)
+  const [showPurchaseConfirm, setShowPurchaseConfirm] = useState(false)
+  const [purchaseProduct, setPurchaseProduct] = useState(null)
 
   const products = [
     {
       id: 1,
-      title: "E-commerce Website Package",
+      title: "Coming Soon Landing Page Template",
       category: "web",
-      price: "$2,500",
+      price: "$10",
+      gumroadUrl: "https://gumroad.com/l/coming-soon-landing-page-template",
       image:
-        "https://images.unsplash.com/photo-1523289333742-be1143f6b766?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+        "https://public-files.gumroad.com/pi0lb4ic5ayrnkrampmuepl5c2il",
       description: "Complete e-commerce solution with modern design, payment integration, and admin dashboard.",
       technologies: ["React", "Node.js", "MongoDB", "Stripe"],
       features: [
@@ -45,6 +50,7 @@ const Work = () => {
       title: "Portfolio Website",
       category: "web",
       price: "$800",
+      gumroadUrl: "https://gumroad.com/l/portfolio-website",
       image:
         "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1455&q=80",
       description: "Professional portfolio website to showcase your work with elegant design and smooth animations.",
@@ -71,6 +77,7 @@ const Work = () => {
       title: "Business Website Package",
       category: "web",
       price: "$1,200",
+      gumroadUrl: "https://gumroad.com/l/business-website",
       image:
         "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
       description: "Complete business website with booking system, service pages, and professional design.",
@@ -97,6 +104,7 @@ const Work = () => {
       title: "Brand Identity Design",
       category: "design",
       price: "$600",
+      gumroadUrl: "https://gumroad.com/l/brand-identity",
       image:
         "https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
       description: "Complete brand identity package including logo, color palette, and brand guidelines.",
@@ -127,6 +135,7 @@ const Work = () => {
       title: "UI/UX Design Package",
       category: "design",
       price: "$1,500",
+      gumroadUrl: "https://gumroad.com/l/uiux-design",
       image:
         "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
       description: "Complete UI/UX design for web or mobile applications with user research and prototyping.",
@@ -157,6 +166,7 @@ const Work = () => {
       title: "Web Development Mastery eBook",
       category: "ebook",
       price: "$49",
+      gumroadUrl: "https://gumroad.com/l/web-dev-mastery",
       image:
         "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
       description: "Comprehensive guide to modern web development with practical projects and real-world examples.",
@@ -191,6 +201,7 @@ const Work = () => {
       title: "Freelancer's Business Guide",
       category: "ebook",
       price: "$29",
+      gumroadUrl: "https://gumroad.com/l/freelancer-guide",
       image:
         "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
       description: "Complete guide to building a successful freelance business with proven strategies and templates.",
@@ -225,6 +236,7 @@ const Work = () => {
       title: "Design Systems Handbook",
       category: "ebook",
       price: "$39",
+      gumroadUrl: "https://gumroad.com/l/design-systems",
       image:
         "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
       description: "Master the art of creating scalable design systems for modern digital products.",
@@ -280,18 +292,24 @@ const Work = () => {
   }
 
   const handlePurchase = (product) => {
-    const whatsappMessage = `Hi! I'm interested in purchasing "${product.title}" for ${product.price}. Can you please provide more details about the ordering process?`
-    const whatsappUrl = `https://wa.me/8801710000000?text=${encodeURIComponent(whatsappMessage)}`
-
-    window.open(whatsappUrl, "_blank")
+    // Direct redirect to Gumroad for instant purchase (same tab)
+    window.location.href = product.gumroadUrl
   }
 
-  const handleEmailInquiry = (product) => {
-    const subject = `Inquiry about ${product.title}`
-    const body = `Hi,\n\nI'm interested in purchasing "${product.title}" for ${product.price}.\n\nCould you please provide more information about:\n- Payment process\n- Delivery timeline\n- Any additional details\n\nThank you!\n\nBest regards`
-    const mailtoUrl = `mailto:your-email@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+  const handlePurchaseClick = (product) => {
+    setPurchaseProduct(product)
+    setShowPurchaseConfirm(true)
+  }
 
-    window.location.href = mailtoUrl
+  const confirmPurchase = () => {
+    if (purchaseProduct) {
+      window.location.href = purchaseProduct.gumroadUrl
+    }
+  }
+
+  const cancelPurchase = () => {
+    setShowPurchaseConfirm(false)
+    setPurchaseProduct(null)
   }
 
   const handleLivePreview = (url) => {
@@ -398,20 +416,19 @@ const Work = () => {
                 </div>
 
                 <div className="purchase-buttons">
-                  <button className="btn hover-target purchase-btn" onClick={() => handlePurchase(selectedProject)}>
-                    <span>💬</span>
-                    Order via WhatsApp
-                  </button>
-
-                  <button className="btn btn-outline hover-target" onClick={() => handleEmailInquiry(selectedProject)}>
-                    <span>📧</span>
-                    Email Inquiry
+                  <button
+                    className="btn hover-target purchase-btn"
+                    onClick={() => handlePurchaseClick(selectedProject)}
+                  >
+                    <span>🛒</span>
+                    Buy Now on Gumroad
                   </button>
                 </div>
 
-                <div className="contact-info">
-                  <p>📱 WhatsApp: +008801710000000</p>
-                  <p>📧 Email: your-email@example.com</p>
+                <div className="purchase-info">
+                  <p>✅ Instant download after purchase</p>
+                  <p>🔒 Secure payment via Gumroad</p>
+                  <p>💳 Accepts all major payment methods</p>
                 </div>
               </div>
             </div>
@@ -499,20 +516,19 @@ const Work = () => {
                 </div>
 
                 <div className="purchase-buttons">
-                  <button className="btn hover-target purchase-btn" onClick={() => handlePurchase(selectedProject)}>
-                    <span>💬</span>
-                    Order via WhatsApp
-                  </button>
-
-                  <button className="btn btn-outline hover-target" onClick={() => handleEmailInquiry(selectedProject)}>
-                    <span>📧</span>
-                    Email Inquiry
+                  <button
+                    className="btn hover-target purchase-btn"
+                    onClick={() => handlePurchaseClick(selectedProject)}
+                  >
+                    <span>🛒</span>
+                    Buy Now on Gumroad
                   </button>
                 </div>
 
-                <div className="contact-info">
-                  <p>📱 WhatsApp: +008801710000000</p>
-                  <p>📧 Email: your-email@example.com</p>
+                <div className="purchase-info">
+                  <p>✅ Instant download after purchase</p>
+                  <p>🔒 Secure payment via Gumroad</p>
+                  <p>💳 Accepts all major payment methods</p>
                 </div>
               </div>
             </div>
@@ -588,20 +604,19 @@ const Work = () => {
                 </div>
 
                 <div className="purchase-buttons">
-                  <button className="btn hover-target purchase-btn" onClick={() => handlePurchase(selectedProject)}>
-                    <span>💬</span>
-                    Order via WhatsApp
-                  </button>
-
-                  <button className="btn btn-outline hover-target" onClick={() => handleEmailInquiry(selectedProject)}>
-                    <span>📧</span>
-                    Email Inquiry
+                  <button
+                    className="btn hover-target purchase-btn"
+                    onClick={() => handlePurchaseClick(selectedProject)}
+                  >
+                    <span>🛒</span>
+                    Buy Now on Gumroad
                   </button>
                 </div>
 
-                <div className="contact-info">
-                  <p>📱 WhatsApp: +008801710000000</p>
-                  <p>📧 Email: your-email@example.com</p>
+                <div className="purchase-info">
+                  <p>✅ Instant download after purchase</p>
+                  <p>🔒 Secure payment via Gumroad</p>
+                  <p>💳 Accepts all major payment methods</p>
                 </div>
               </div>
             </div>
@@ -686,7 +701,7 @@ const Work = () => {
 
                       <motion.button
                         className="btn btn-outline hover-target"
-                        onClick={() => handlePurchase(product)}
+                        onClick={() => handlePurchaseClick(product)}
                         initial={{ y: 20, opacity: 0 }}
                         animate={{
                           y: hoveredProject === product.id ? 0 : 20,
@@ -728,6 +743,8 @@ const Work = () => {
             ))}
           </AnimatePresence>
         </div>
+
+     
       </div>
 
       <AnimatePresence>
@@ -760,6 +777,86 @@ const Work = () => {
               </button>
 
               {renderModalContent()}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Purchase Confirmation Modal */}
+      <AnimatePresence>
+        {showPurchaseConfirm && purchaseProduct && (
+          <motion.div
+            className="modal-overlay purchase-confirm-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={cancelPurchase}
+          >
+            <motion.div
+              className="purchase-confirm-modal"
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 50, scale: 0.9 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="gumroad-header">
+                <div className="gumroad-logo">
+                  <span className="gumroad-icon">🛒</span>
+                  <span className="gumroad-text">Powered by Gumroad</span>
+                </div>
+                <button className="modal-close" onClick={cancelPurchase}>
+                  ×
+                </button>
+              </div>
+
+              <div className="purchase-confirm-content">
+                <div className="product-summary">
+                  <img
+                    src={purchaseProduct.image || "/placeholder.svg"}
+                    alt={purchaseProduct.title}
+                    className="summary-image"
+                  />
+                  <div className="summary-details">
+                    <h3>{purchaseProduct.title}</h3>
+                    <p className="summary-price">{purchaseProduct.price}</p>
+                  </div>
+                </div>
+
+                <div className="gumroad-benefits">
+                  <h4>Why choose Gumroad?</h4>
+                  <div className="benefits-grid">
+                    <div className="benefit-item">
+                      <span className="benefit-icon">⚡</span>
+                      <span>Instant Download</span>
+                    </div>
+                    <div className="benefit-item">
+                      <span className="benefit-icon">🔒</span>
+                      <span>Secure Payment</span>
+                    </div>
+                    <div className="benefit-item">
+                      <span className="benefit-icon">💳</span>
+                      <span>All Payment Methods</span>
+                    </div>
+                    <div className="benefit-item">
+                      <span className="benefit-icon">📧</span>
+                      <span>Email Receipt</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="purchase-actions">
+                  <button className="gumroad-btn primary" onClick={confirmPurchase}>
+                    <span className="btn-icon">🛒</span>
+                    Continue to Gumroad
+                  </button>
+                  <button className="gumroad-btn secondary" onClick={cancelPurchase}>
+                    Cancel
+                  </button>
+                </div>
+
+                <p className="gumroad-disclaimer">You'll be redirected to Gumroad's secure checkout page</p>
+              </div>
             </motion.div>
           </motion.div>
         )}
