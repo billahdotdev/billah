@@ -267,7 +267,7 @@ const MoreAboutMe = () => {
 
             <div className="about-buttons">
               <motion.a
-                href="/resume.pdf"
+                href="/MasumBillah-Resume.pdf"
                 className="btn hover-target"
                 download
                 whileHover={{ scale: 1.05 }}

@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
 import "./Hero.css"
 
+
 const Hero = ({ scrollToSection }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 
@@ -144,6 +145,7 @@ const Hero = ({ scrollToSection }) => {
 
         
       </div>
+    
     </section>
   )
 }
