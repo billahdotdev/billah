@@ -29,7 +29,7 @@ const Assesor = () => {
     setReport(null);
 
     try {
-      const apiKey = "AIzaSyBd3jVqEwi_MxRSM-Q8ZO33eKS6WIW89ww"; // Add your key
+      const apiKey = "AIza..."; // Add your key
       const apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(
         url
       )}&strategy=mobile&key=${apiKey}`;
