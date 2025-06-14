@@ -53,7 +53,7 @@ const MoreAboutMe = () => {
       id: "education",
       title: "My Credentials",
       content:
-        "I'm a Bangladesh University of Engineering and Technology (BUET) Certified full-stack web developer on a journey of modern web mastery at the University of Helsinki. I'm also certified in Machine Learning AI from the National Information Society Agency, South Korea.",
+        "I'm a Bangladesh University of Engineering and Technology (BUET), and IAC Certified full-stack web developer on a journey of modern web mastery at the University of Helsinki. I'm also certified in Machine Learning AI from the National Information Society Agency, South Korea.",
     },
   ]
 
