@@ -43,7 +43,7 @@ const Work = () => {
       details:
         "This comprehensive e-commerce package includes everything you need to start selling online. Built with modern technologies and best practices, featuring a clean, professional design that converts visitors into customers. Includes full source code, documentation, and deployment assistance.",
       githubUrl: "https://github.com/yourusername/ecommerce-demo",
-      livePreviewUrl: "https://ecommerce-demo.vercel.app",
+      livePreviewUrl: "https://billahdotdev.github.io/dhakateez",
     },
     {
       id: 2,
