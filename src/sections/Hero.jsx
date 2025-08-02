@@ -1,31 +1,30 @@
-"use client"
+'use client';
 
-import { motion } from "framer-motion"
-import { useEffect, useState } from "react"
-import "./Hero.css"
-
+import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import './Hero.css';
 
 const Hero = ({ scrollToSection }) => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY })
-    }
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
 
-    window.addEventListener("mousemove", handleMouseMove)
-    return () => window.removeEventListener("mousemove", handleMouseMove)
-  }, [])
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   const calculateMovement = (x, y, factor = 0.02) => {
-    const centerX = window.innerWidth / 2
-    const centerY = window.innerHeight / 2
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
 
-    const deltaX = (x - centerX) * factor
-    const deltaY = (y - centerY) * factor
+    const deltaX = (x - centerX) * factor;
+    const deltaY = (y - centerY) * factor;
 
-    return { x: deltaX, y: deltaY }
-  }
+    return { x: deltaX, y: deltaY };
+  };
 
   // Update the letterVariants for smoother animation
   const letterVariants = {
@@ -39,33 +38,33 @@ const Hero = ({ scrollToSection }) => {
         ease: [0.22, 1, 0.36, 1],
       },
     }),
-  }
+  };
 
-  const headingText = "MASUM BILLAH"
-  const subheadingText = "WEB DEVELOPER"
+  const headingText = 'MASUM BILLAH';
+  const subheadingText = 'WEB DEVELOPER AND BRAND STRATEGIST';
 
   return (
     <section id="hero" className="hero">
       <div className="container hero-container">
         <div className="hero-content">
           <motion.div
-  className="profile-image-wrapper"
-  initial={{ opacity: 0, scale: 0.5, y: -50 }}
-  animate={{ opacity: 1, scale: 1, y: 0 }}
-  transition={{ duration: 1, ease: "easeOut" }}
->
-  <motion.img
-    src="https://avatars.githubusercontent.com/u/112099343?v=4"
-    alt="Masum Billah"
-    className="profile-image"
-    whileHover={{ scale: 1.05 }}
-    whileTap={{ scale: 0.95 }}
-  />
-</motion.div>
+            className="profile-image-wrapper"
+            initial={{ opacity: 0, scale: 0.5, y: -50 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 1, ease: 'easeOut' }}
+          >
+            <motion.img
+              src="https://avatars.githubusercontent.com/u/112099343?v=4"
+              alt="Masum Billah"
+              className="profile-image"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            />
+          </motion.div>
 
           <div className="hero-text">
             <div className="animated-heading">
-              {headingText.split("").map((char, index) => (
+              {headingText.split('').map((char, index) => (
                 <motion.span
                   key={index}
                   custom={index}
@@ -74,7 +73,7 @@ const Hero = ({ scrollToSection }) => {
                   animate="visible"
                   className="heading-letter"
                 >
-                  {char === " " ? "\u00A0" : char}
+                  {char === ' ' ? '\u00A0' : char}
                 </motion.span>
               ))}
             </div>
@@ -85,7 +84,7 @@ const Hero = ({ scrollToSection }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.5 }}
             >
-              {subheadingText.split("").map((char, index) => (
+              {subheadingText.split('').map((char, index) => (
                 <motion.span
                   key={index}
                   custom={index}
@@ -94,7 +93,7 @@ const Hero = ({ scrollToSection }) => {
                   animate="visible"
                   className="subheading-letter"
                 >
-                  {char === " " ? "\u00A0" : char}
+                  {char === ' ' ? '\u00A0' : char}
                 </motion.span>
               ))}
             </motion.div>
@@ -116,8 +115,12 @@ const Hero = ({ scrollToSection }) => {
             >
               <motion.button
                 className="btn hover-target"
-                onClick={() => scrollToSection("work")}
-                whileHover={{ scale: 1.05, backgroundColor: "var(--bg-color)", color: "var(--text-primary)" }}
+                onClick={() => scrollToSection('work')}
+                whileHover={{
+                  scale: 1.05,
+                  backgroundColor: 'var(--bg-color)',
+                  color: 'var(--text-primary)',
+                }}
                 whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -128,8 +131,12 @@ const Hero = ({ scrollToSection }) => {
 
               <motion.button
                 className="btn btn-outline hover-target"
-                onClick={() => scrollToSection("contact")}
-                whileHover={{ scale: 1.05, backgroundColor: "var(--text-primary)", color: "var(--bg-color)" }}
+                onClick={() => scrollToSection('contact')}
+                whileHover={{
+                  scale: 1.05,
+                  backgroundColor: 'var(--text-primary)',
+                  color: 'var(--bg-color)',
+                }}
                 whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -139,16 +146,10 @@ const Hero = ({ scrollToSection }) => {
               </motion.button>
             </motion.div>
           </div>
-
-          
         </div>
-
-        
       </div>
-    
     </section>
-  )
-}
+  );
+};
 
-export default Hero
-
+export default Hero;

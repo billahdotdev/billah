@@ -1,22 +1,22 @@
-"use client"
+'use client';
 
-import { useState, useRef, useEffect, useCallback } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import "./About.css"
+import { useState, useRef, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import './About.css';
 
 const MoreAboutMe = () => {
-  const [activeIndex, setActiveIndex] = useState(0)
-  const [direction, setDirection] = useState(0)
-  const containerRef = useRef(null)
-  const contentRef = useRef(null)
-  const [isDragging, setIsDragging] = useState(false)
-  const [startY, setStartY] = useState(0)
-  const [scrollY, setScrollY] = useState(0)
-  const [contentHeight, setContentHeight] = useState(0)
-  const [isReducedMotion, setIsReducedMotion] = useState(false)
-  const [isHovering, setIsHovering] = useState(false)
-  const [animateProgress, setAnimateProgress] = useState(false)
-  const [touchFeedback, setTouchFeedback] = useState(null)
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const containerRef = useRef(null);
+  const contentRef = useRef(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startY, setStartY] = useState(0);
+  const [scrollY, setScrollY] = useState(0);
+  const [contentHeight, setContentHeight] = useState(0);
+  const [isReducedMotion, setIsReducedMotion] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
+  const [animateProgress, setAnimateProgress] = useState(false);
+  const [touchFeedback, setTouchFeedback] = useState(null);
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 60 },
@@ -28,167 +28,171 @@ const MoreAboutMe = () => {
         ease: [0.22, 1, 0.36, 1],
       },
     },
-  }
+  };
 
   const journeyItems = [
     {
-      id: "story",
-      title: "My Story",
+      id: 'story',
+      title: 'My Story',
       content:
         "I built 'GARMENTIK' to fly, but needed wings. 'Brandotory' gave me those wings, and now I'm building flight paths for others.",
     },
     {
-      id: "journey",
-      title: "My Learning Odyssey",
+      id: 'journey',
+      title: 'My Learning Odyssey',
       content:
         "I discovered the power of creating digital experiences that impact people's lives. Through years of learning, experimenting, and building, I've developed a deep understanding of the web ecosystem.",
     },
     {
-      id: "skills",
-      title: "My Skills",
+      id: 'skills',
+      title: 'My Skills',
       content:
-        "JavaScript, Typescript, MongoDB, Express, React, Node, HTML, CSS, TailwindCSS, Material UI, Figma, Inkscape, More +",
+        'JavaScript, Typescript, MongoDB, Express, React, Node, HTML, CSS, TailwindCSS, Material UI, Figma, Inkscape, More +',
     },
     {
-      id: "education",
-      title: "My Credentials",
+      id: 'education',
+      title: 'My Credentials',
       content:
         "I'm a Bangladesh University of Engineering and Technology (BUET), and IAC Certified full-stack web developer on a journey of modern web mastery at the University of Helsinki. I'm also certified in Machine Learning AI from the National Information Society Agency, South Korea.",
     },
-  ]
+  ];
 
   // Check for reduced motion preference
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
-    setIsReducedMotion(mediaQuery.matches)
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setIsReducedMotion(mediaQuery.matches);
 
-    const handleChange = () => setIsReducedMotion(mediaQuery.matches)
-    mediaQuery.addEventListener("change", handleChange)
+    const handleChange = () => setIsReducedMotion(mediaQuery.matches);
+    mediaQuery.addEventListener('change', handleChange);
 
-    return () => mediaQuery.removeEventListener("change", handleChange)
-  }, [])
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
 
   // Measure content height to adjust container dynamically
   useEffect(() => {
     if (contentRef.current) {
       const updateHeight = () => {
-        const height = contentRef.current.scrollHeight
-        setContentHeight(height)
-      }
+        const height = contentRef.current.scrollHeight;
+        setContentHeight(height);
+      };
 
       // Use ResizeObserver for more reliable size detection
       if (window.ResizeObserver) {
-        const resizeObserver = new ResizeObserver(updateHeight)
-        resizeObserver.observe(contentRef.current)
-        return () => resizeObserver.disconnect()
+        const resizeObserver = new ResizeObserver(updateHeight);
+        resizeObserver.observe(contentRef.current);
+        return () => resizeObserver.disconnect();
       } else {
         // Fallback for browsers without ResizeObserver
-        updateHeight()
-        window.addEventListener("resize", updateHeight)
-        return () => window.removeEventListener("resize", updateHeight)
+        updateHeight();
+        window.addEventListener('resize', updateHeight);
+        return () => window.removeEventListener('resize', updateHeight);
       }
     }
-  }, [activeIndex])
+  }, [activeIndex]);
 
   // Animate progress when active index changes
   useEffect(() => {
-    setAnimateProgress(true)
-    const timer = setTimeout(() => setAnimateProgress(false), 600)
-    return () => clearTimeout(timer)
-  }, [activeIndex])
+    setAnimateProgress(true);
+    const timer = setTimeout(() => setAnimateProgress(false), 600);
+    return () => clearTimeout(timer);
+  }, [activeIndex]);
 
   // Auto-advance slides with pause on hover
   useEffect(() => {
-    if (isHovering) return
+    if (isHovering) return;
 
     const interval = setInterval(() => {
       if (activeIndex < journeyItems.length - 1) {
-        setDirection(1)
-        setActiveIndex((prev) => prev + 1)
+        setDirection(1);
+        setActiveIndex((prev) => prev + 1);
       } else {
-        setDirection(-1)
-        setActiveIndex(0)
+        setDirection(-1);
+        setActiveIndex(0);
       }
-    }, 10000)
+    }, 10000);
 
-    return () => clearInterval(interval)
-  }, [activeIndex, isHovering, journeyItems.length])
+    return () => clearInterval(interval);
+  }, [activeIndex, isHovering, journeyItems.length]);
 
   const handleNext = useCallback(() => {
     if (activeIndex < journeyItems.length - 1) {
-      setDirection(1)
-      setActiveIndex((prev) => prev + 1)
+      setDirection(1);
+      setActiveIndex((prev) => prev + 1);
     } else {
       // Loop back to the first slide
-      setDirection(-1)
-      setActiveIndex(0)
+      setDirection(-1);
+      setActiveIndex(0);
     }
-  }, [activeIndex, journeyItems.length])
+  }, [activeIndex, journeyItems.length]);
 
   const handlePrev = useCallback(() => {
     if (activeIndex > 0) {
-      setDirection(-1)
-      setActiveIndex((prev) => prev - 1)
+      setDirection(-1);
+      setActiveIndex((prev) => prev - 1);
     } else {
       // Loop to the last slide
-      setDirection(1)
-      setActiveIndex(journeyItems.length - 1)
+      setDirection(1);
+      setActiveIndex(journeyItems.length - 1);
     }
-  }, [activeIndex, journeyItems.length])
+  }, [activeIndex, journeyItems.length]);
 
   const handleTouchStart = (e) => {
     // Don't initiate drag if we're touching a scrollable content area or interactive element
-    if (e.target.closest(".minimal-journey-item-content") || e.target.closest("button") || e.target.tagName === "A")
-      return
+    if (
+      e.target.closest('.minimal-journey-item-content') ||
+      e.target.closest('button') ||
+      e.target.tagName === 'A'
+    )
+      return;
 
-    setIsDragging(true)
-    setStartY(e.touches[0].clientY)
-    setScrollY(0)
-    setTouchFeedback(null)
-  }
+    setIsDragging(true);
+    setStartY(e.touches[0].clientY);
+    setScrollY(0);
+    setTouchFeedback(null);
+  };
 
   const handleTouchMove = (e) => {
-    if (!isDragging) return
-    const currentY = e.touches[0].clientY
-    const diff = currentY - startY
-    setScrollY(diff)
+    if (!isDragging) return;
+    const currentY = e.touches[0].clientY;
+    const diff = currentY - startY;
+    setScrollY(diff);
 
     // Visual feedback for swipe direction
     if (diff > 30) {
-      setTouchFeedback("up")
+      setTouchFeedback('up');
     } else if (diff < -30) {
-      setTouchFeedback("down")
+      setTouchFeedback('down');
     } else {
-      setTouchFeedback(null)
+      setTouchFeedback(null);
     }
-  }
+  };
 
   const handleTouchEnd = () => {
-    if (!isDragging) return
+    if (!isDragging) return;
 
-    setIsDragging(false)
+    setIsDragging(false);
     if (scrollY > 70) {
-      handlePrev()
+      handlePrev();
     } else if (scrollY < -70) {
-      handleNext()
+      handleNext();
     }
-    setScrollY(0)
-    setTouchFeedback(null)
-  }
+    setScrollY(0);
+    setTouchFeedback(null);
+  };
 
   // Handle keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === "ArrowDown") {
-        handleNext()
-      } else if (e.key === "ArrowUp") {
-        handlePrev()
+      if (e.key === 'ArrowDown') {
+        handleNext();
+      } else if (e.key === 'ArrowUp') {
+        handlePrev();
       }
-    }
+    };
 
-    window.addEventListener("keydown", handleKeyDown)
-    return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [handleNext, handlePrev])
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [handleNext, handlePrev]);
 
   // Animation variants
   const contentVariants = {
@@ -204,10 +208,12 @@ const MoreAboutMe = () => {
       y: isReducedMotion ? 0 : direction > 0 ? -100 : 100,
       opacity: 0,
     }),
-  }
+  };
 
   // Split skills into array for the skills section
-  const skillsArray = journeyItems[2].content.split(",").map((skill) => skill.trim())
+  const skillsArray = journeyItems[2].content
+    .split(',')
+    .map((skill) => skill.trim());
 
   return (
     <div className="more-about-me">
@@ -232,15 +238,16 @@ const MoreAboutMe = () => {
             variants={fadeInUp}
           >
             <p>
-              I'm a web enthusiast, dedicated to bringing digital dreams to life. I'll keep learning, growing, and
-              giving my all—with every breath—to make the impossible possible.
+              I'm a web enthusiast, dedicated to bringing digital dreams to
+              life. I'll keep learning, growing, and giving my all with every
+              breath to make the impossible possible.
             </p>
 
             <div className="about-stats">
               <motion.div
                 className="stat-item hover-target"
                 whileHover={{ y: -10 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
               >
                 <span className="stat-number">7+</span>
                 <span className="stat-label">Years Experience</span>
@@ -249,18 +256,18 @@ const MoreAboutMe = () => {
               <motion.div
                 className="stat-item hover-target"
                 whileHover={{ y: -10 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
               >
-                <span className="stat-number">176</span>
+                <span className="stat-number">178</span>
                 <span className="stat-label">Projects Completed</span>
               </motion.div>
 
               <motion.div
                 className="stat-item hover-target"
                 whileHover={{ y: -10 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
               >
-                <span className="stat-number">118</span>
+                <span className="stat-number">119</span>
                 <span className="stat-label">Happy Clients</span>
               </motion.div>
             </div>
@@ -281,7 +288,9 @@ const MoreAboutMe = () => {
 
         {/* Interactive Journey Section */}
         <div
-          className={`journey-container ${touchFeedback ? `swipe-${touchFeedback}` : ""} ${isDragging ? "is-dragging" : ""}`}
+          className={`journey-container ${
+            touchFeedback ? `swipe-${touchFeedback}` : ''
+          } ${isDragging ? 'is-dragging' : ''}`}
           ref={containerRef}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
@@ -303,19 +312,21 @@ const MoreAboutMe = () => {
               {journeyItems.map((_, index) => (
                 <button
                   key={index}
-                  className={`journey-progress-item ${index === activeIndex ? "active" : ""} ${
-                    index < activeIndex ? "completed" : ""
-                  }`}
+                  className={`journey-progress-item ${
+                    index === activeIndex ? 'active' : ''
+                  } ${index < activeIndex ? 'completed' : ''}`}
                   onClick={() => {
-                    setDirection(index > activeIndex ? 1 : -1)
-                    setActiveIndex(index)
+                    setDirection(index > activeIndex ? 1 : -1);
+                    setActiveIndex(index);
                   }}
                   aria-label={`Go to slide ${index + 1}`}
-                  aria-current={index === activeIndex ? "true" : "false"}
+                  aria-current={index === activeIndex ? 'true' : 'false'}
                 >
                   <span className="journey-progress-line"></span>
                   <span className="journey-progress-dot"></span>
-                  <span className="journey-progress-label">{journeyItems[index].title}</span>
+                  <span className="journey-progress-label">
+                    {journeyItems[index].title}
+                  </span>
                 </button>
               ))}
             </div>
@@ -333,7 +344,7 @@ const MoreAboutMe = () => {
                 animate="animate"
                 exit="exit"
                 transition={{
-                  y: { type: "spring", stiffness: 300, damping: 30 },
+                  y: { type: 'spring', stiffness: 300, damping: 30 },
                   opacity: { duration: 0.5 },
                 }}
                 role="tabpanel"
@@ -350,7 +361,7 @@ const MoreAboutMe = () => {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.1, duration: 0.5 }}
                     >
-                      {(activeIndex + 1).toString().padStart(2, "0")}
+                      {(activeIndex + 1).toString().padStart(2, '0')}
                     </motion.div>
 
                     <motion.h4
@@ -377,7 +388,10 @@ const MoreAboutMe = () => {
                             className="skill-tag"
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2 + i * 0.05, duration: 0.4 }}
+                            transition={{
+                              delay: 0.2 + i * 0.05,
+                              duration: 0.4,
+                            }}
                             whileHover={{
                               y: -5,
                               transition: { duration: 0.2 },
@@ -392,7 +406,9 @@ const MoreAboutMe = () => {
                         ))}
                       </div>
                     ) : (
-                      <p className="section-text">{journeyItems[activeIndex].content}</p>
+                      <p className="section-text">
+                        {journeyItems[activeIndex].content}
+                      </p>
                     )}
                   </motion.div>
                 </div>
@@ -420,7 +436,13 @@ const MoreAboutMe = () => {
             </motion.button>
 
             <div className="journey-indicator" aria-hidden="true">
-              <span className={`indicator-current ${animateProgress ? "animate" : ""}`}>{activeIndex + 1}</span>
+              <span
+                className={`indicator-current ${
+                  animateProgress ? 'animate' : ''
+                }`}
+              >
+                {activeIndex + 1}
+              </span>
               <span className="indicator-separator">/</span>
               <span className="indicator-total">{journeyItems.length}</span>
             </div>
@@ -448,14 +470,10 @@ const MoreAboutMe = () => {
             <div className="touch-arrow up-arrow">↑</div>
             <div className="touch-arrow down-arrow">↓</div>
           </div>
-
-          <div className="journey-swipe-hint" aria-hidden="true">
-            <span>Swipe to navigate</span>
-          </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default MoreAboutMe
+export default MoreAboutMe;
