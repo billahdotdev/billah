@@ -104,7 +104,7 @@ const Hero = ({ scrollToSection }) => {
               animate={{ opacity: 1 }}
               transition={{ delay: 1.2, duration: 0.5 }}
             >
-              I create clean, responsive, and functional websites.
+              I build clean, responsive, functional websites that grow brands.
             </motion.p>
 
             <motion.div
