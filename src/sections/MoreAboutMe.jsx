@@ -39,19 +39,19 @@ const MoreAboutMe = () => {
     },
     {
       id: 'journey',
-      title: 'My Learning Odyssey',
+      title: 'Learning Odyssey',
       content:
         "I discovered the power of creating digital experiences that impact people's lives. Through years of learning, experimenting, and building, I've developed a deep understanding of the web ecosystem.",
     },
     {
       id: 'skills',
-      title: 'My Skills',
+      title: 'Skills',
       content:
         'JavaScript, Typescript, MongoDB, Express, React, Node, HTML, CSS, TailwindCSS, Material UI, Figma, Inkscape, More +',
     },
     {
       id: 'education',
-      title: 'My Credentials',
+      title: 'Credentials',
       content:
         "I'm a Bangladesh University of Engineering and Technology (BUET), and IAC Certified full-stack web developer on a journey of modern web mastery at the University of Helsinki. I'm also certified in Machine Learning AI from the National Information Society Agency, South Korea.",
     },

@@ -1,33 +1,33 @@
-"use client"
+'use client';
 
-import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import "./Navbar.css"
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import './Navbar.css';
 
 const Navbar = ({ activeSection, scrollToSection }) => {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
+      setIsScrolled(window.scrollY > 50);
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navLinks = [
-    { id: "hero", label: "Home" },
-    { id: "about", label: "About" },
-    { id: "services", label: "Services" },
-    { id: "work", label: "Work" },
-    { id: "contact", label: "Contact" },
-  ]
+    { id: 'hero', label: 'Home' },
+    { id: 'about', label: 'About' },
+    { id: 'services', label: 'Services' },
+    { id: 'work', label: 'Work' },
+    { id: 'contact', label: 'Contact' },
+  ];
 
   return (
     <motion.nav
-      className={`navbar ${isScrolled ? "scrolled" : ""}`}
+      className={`navbar ${isScrolled ? 'scrolled' : ''}`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -37,7 +37,7 @@ const Navbar = ({ activeSection, scrollToSection }) => {
           className="logo hover-target"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          onClick={() => scrollToSection("hero")}
+          onClick={() => scrollToSection('hero')}
         >
           <span className="logo">billah.dev</span>
         </motion.div>
@@ -46,7 +46,9 @@ const Navbar = ({ activeSection, scrollToSection }) => {
           {navLinks.map((link) => (
             <motion.button
               key={link.id}
-              className={`nav-link hover-target ${activeSection === link.id ? "active" : ""}`}
+              className={`nav-link hover-target ${
+                activeSection === link.id ? 'active' : ''
+              }`}
               onClick={() => scrollToSection(link.id)}
               whileHover={{ y: -3 }}
               whileTap={{ scale: 0.95 }}
@@ -56,7 +58,7 @@ const Navbar = ({ activeSection, scrollToSection }) => {
                 <motion.div
                   className="active-indicator"
                   layoutId="activeIndicator"
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                 />
               )}
             </motion.button>
@@ -68,7 +70,7 @@ const Navbar = ({ activeSection, scrollToSection }) => {
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           whileTap={{ scale: 0.95 }}
         >
-          <div className={`hamburger ${isMobileMenuOpen ? "open" : ""}`}>
+          <div className={`hamburger ${isMobileMenuOpen ? 'open' : ''}`}>
             <span></span>
             <span></span>
             <span></span>
@@ -88,10 +90,12 @@ const Navbar = ({ activeSection, scrollToSection }) => {
             {navLinks.map((link, index) => (
               <motion.button
                 key={link.id}
-                className={`mobile-nav-link hover-target ${activeSection === link.id ? "active" : ""}`}
+                className={`mobile-nav-link hover-target ${
+                  activeSection === link.id ? 'active' : ''
+                }`}
                 onClick={() => {
-                  scrollToSection(link.id)
-                  setIsMobileMenuOpen(false)
+                  scrollToSection(link.id);
+                  setIsMobileMenuOpen(false);
                 }}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{
@@ -108,8 +112,7 @@ const Navbar = ({ activeSection, scrollToSection }) => {
         )}
       </AnimatePresence>
     </motion.nav>
-  )
-}
+  );
+};
 
-export default Navbar
-
+export default Navbar;
