@@ -1,24 +1,24 @@
-"use client"
+'use client';
 
-import { motion } from "framer-motion"
-import "./Footer.css"
+import { motion } from 'framer-motion';
+import './Footer.css';
 
 const Footer = ({ scrollToSection }) => {
-  const currentYear = new Date().getFullYear()
+  const currentYear = new Date().getFullYear();
 
   // Fallback implementation if scrollToSection isn't provided
   const handleScroll = (sectionId) => {
     if (scrollToSection) {
       // Use the provided scrollToSection function if available
-      scrollToSection(sectionId)
+      scrollToSection(sectionId);
     } else {
       // Fallback: manually scroll to the section
-      const element = document.getElementById(sectionId)
+      const element = document.getElementById(sectionId);
       if (element) {
-        element.scrollIntoView({ behavior: "smooth" })
+        element.scrollIntoView({ behavior: 'smooth' });
       }
     }
-  }
+  };
 
   return (
     <footer className="footer">
@@ -32,8 +32,12 @@ const Footer = ({ scrollToSection }) => {
             viewport={{ once: true }}
           >
             <span className="logo-text">MASUM BILLAH</span>
-            <p>Think of me as your neighborhood developer — not just working for money. 
-            Even if your budget is tight, I'll find a way because I understand budget challenges.</p>
+            <p>
+              Think of me as your neighborhood developer, not just someone
+              working for money. Even if your budget is tight, I’ll work with
+              you to find a way to make it happen because I understand budget
+              challenges.
+            </p>
           </motion.div>
 
           <motion.div
@@ -50,8 +54,8 @@ const Footer = ({ scrollToSection }) => {
                   href="#hero"
                   className="hover-target"
                   onClick={(e) => {
-                    e.preventDefault()
-                    handleScroll("hero")
+                    e.preventDefault();
+                    handleScroll('hero');
                   }}
                 >
                   Home
@@ -62,8 +66,8 @@ const Footer = ({ scrollToSection }) => {
                   href="#about"
                   className="hover-target"
                   onClick={(e) => {
-                    e.preventDefault()
-                    handleScroll("about")
+                    e.preventDefault();
+                    handleScroll('about');
                   }}
                 >
                   About
@@ -74,8 +78,8 @@ const Footer = ({ scrollToSection }) => {
                   href="#services"
                   className="hover-target"
                   onClick={(e) => {
-                    e.preventDefault()
-                    handleScroll("services")
+                    e.preventDefault();
+                    handleScroll('services');
                   }}
                 >
                   Services
@@ -86,8 +90,8 @@ const Footer = ({ scrollToSection }) => {
                   href="#work"
                   className="hover-target"
                   onClick={(e) => {
-                    e.preventDefault()
-                    handleScroll("work")
+                    e.preventDefault();
+                    handleScroll('work');
                   }}
                 >
                   Work
@@ -98,8 +102,8 @@ const Footer = ({ scrollToSection }) => {
                   href="#contact"
                   className="hover-target"
                   onClick={(e) => {
-                    e.preventDefault()
-                    handleScroll("contact")
+                    e.preventDefault();
+                    handleScroll('contact');
                   }}
                 >
                   Contact
@@ -117,13 +121,13 @@ const Footer = ({ scrollToSection }) => {
           viewport={{ once: true }}
         >
           <p>
-            {currentYear} NO RIGHT RESERVED. Deeply indebted to the individuals who I learned from.
+            {currentYear} NO RIGHT RESERVED. Deeply indebted to the individuals
+            who I learned from.
           </p>
         </motion.div>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
-
+export default Footer;
