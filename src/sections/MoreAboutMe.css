@@ -112,7 +112,7 @@
 }
 
 .journey-main-title::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: -1rem;
   left: 50%;
@@ -262,13 +262,25 @@
 
 /* My Story - Section 0 */
 .journey-section-0 {
-  background: linear-gradient(135deg, rgba(255, 0, 128, 0.05) 0%, rgba(0, 212, 170, 0.05) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 0, 128, 0.05) 0%,
+    rgba(0, 212, 170, 0.05) 100%
+  );
   border: 1px solid rgba(255, 0, 128, 0.2);
 }
 
 .journey-section-0 .section-pattern {
-  background-image: radial-gradient(circle at 20% 20%, rgba(255, 0, 128, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(0, 212, 170, 0.1) 0%, transparent 50%);
+  background-image: radial-gradient(
+      circle at 20% 20%,
+      rgba(255, 0, 128, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(0, 212, 170, 0.1) 0%,
+      transparent 50%
+    );
 }
 
 .journey-section-0 .section-number {
@@ -278,13 +290,27 @@
 
 /* My Learning Odyssey - Section 1 */
 .journey-section-1 {
-  background: linear-gradient(135deg, rgba(0, 212, 170, 0.05) 0%, rgba(124, 58, 237, 0.05) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 212, 170, 0.05) 0%,
+    rgba(124, 58, 237, 0.05) 100%
+  );
   border: 1px solid rgba(0, 212, 170, 0.2);
 }
 
 .journey-section-1 .section-pattern {
-  background-image: linear-gradient(45deg, transparent 40%, rgba(0, 212, 170, 0.05) 50%, transparent 60%),
-    linear-gradient(-45deg, transparent 40%, rgba(124, 58, 237, 0.05) 50%, transparent 60%);
+  background-image: linear-gradient(
+      45deg,
+      transparent 40%,
+      rgba(0, 212, 170, 0.05) 50%,
+      transparent 60%
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 40%,
+      rgba(124, 58, 237, 0.05) 50%,
+      transparent 60%
+    );
   background-size: 40px 40px;
 }
 
@@ -295,7 +321,11 @@
 
 /* My Skills - Section 2 */
 .journey-section-2 {
-  background: linear-gradient(135deg, rgba(124, 58, 237, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(124, 58, 237, 0.05) 0%,
+    rgba(59, 130, 246, 0.05) 100%
+  );
   border: 1px solid rgba(124, 58, 237, 0.2);
 }
 
@@ -323,13 +353,25 @@
 
 /* My Credentials - Section 3 */
 .journey-section-3 {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(16, 185, 129, 0.05) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.05) 0%,
+    rgba(16, 185, 129, 0.05) 100%
+  );
   border: 1px solid rgba(59, 130, 246, 0.2);
 }
 
 .journey-section-3 .section-pattern {
-  background-image: radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.08) 0%, transparent 25%),
-    radial-gradient(circle at 75% 75%, rgba(16, 185, 129, 0.08) 0%, transparent 25%);
+  background-image: radial-gradient(
+      circle at 25% 25%,
+      rgba(59, 130, 246, 0.08) 0%,
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 75% 75%,
+      rgba(16, 185, 129, 0.08) 0%,
+      transparent 25%
+    );
   background-size: 60px 60px;
 }
 
@@ -416,13 +458,18 @@
 }
 
 .skill-tag::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: -100%;
   right: 0;
   bottom: 0;
-  background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.1), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(124, 58, 237, 0.1),
+    transparent
+  );
   transition: left 0.5s var(--easing);
 }
 
@@ -625,28 +672,44 @@
 }
 
 /* Dark Mode Adjustments */
-[data-theme="dark"] .journey-section-0 {
-  background: linear-gradient(135deg, rgba(255, 0, 128, 0.1) 0%, rgba(0, 212, 170, 0.1) 100%);
+[data-theme='dark'] .journey-section-0 {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 0, 128, 0.1) 0%,
+    rgba(0, 212, 170, 0.1) 100%
+  );
 }
 
-[data-theme="dark"] .journey-section-1 {
-  background: linear-gradient(135deg, rgba(0, 212, 170, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
+[data-theme='dark'] .journey-section-1 {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 212, 170, 0.1) 0%,
+    rgba(124, 58, 237, 0.1) 100%
+  );
 }
 
-[data-theme="dark"] .journey-section-2 {
-  background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+[data-theme='dark'] .journey-section-2 {
+  background: linear-gradient(
+    135deg,
+    rgba(124, 58, 237, 0.1) 0%,
+    rgba(59, 130, 246, 0.1) 100%
+  );
 }
 
-[data-theme="dark"] .journey-section-3 {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
+[data-theme='dark'] .journey-section-3 {
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.1) 0%,
+    rgba(16, 185, 129, 0.1) 100%
+  );
 }
 
-[data-theme="dark"] .skill-tag {
+[data-theme='dark'] .skill-tag {
   background: rgba(124, 58, 237, 0.15);
   border-color: rgba(124, 58, 237, 0.3);
 }
 
-[data-theme="dark"] .skill-tag:hover {
+[data-theme='dark'] .skill-tag:hover {
   background: rgba(124, 58, 237, 0.25);
   box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
 }

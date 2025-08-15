@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import './About.css';
+import './MoreAboutMe.css';
 
 const MoreAboutMe = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -258,7 +258,7 @@ const MoreAboutMe = () => {
                 whileHover={{ y: -10 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 20 }}
               >
-                <span className="stat-number">178</span>
+                <span className="stat-number">179</span>
                 <span className="stat-label">Projects Completed</span>
               </motion.div>
 
