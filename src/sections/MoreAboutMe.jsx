@@ -1,479 +1,356 @@
 'use client';
 
-import { useState, useRef, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import './MoreAboutMe.css';
 
-const MoreAboutMe = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [direction, setDirection] = useState(0);
-  const containerRef = useRef(null);
-  const contentRef = useRef(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startY, setStartY] = useState(0);
-  const [scrollY, setScrollY] = useState(0);
-  const [contentHeight, setContentHeight] = useState(0);
-  const [isReducedMotion, setIsReducedMotion] = useState(false);
-  const [isHovering, setIsHovering] = useState(false);
-  const [animateProgress, setAnimateProgress] = useState(false);
-  const [touchFeedback, setTouchFeedback] = useState(null);
+let activeCard = null;
+let dealtCards = [];
+let deckPosition = 'stacked';
+let isShuffling = false;
 
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 60 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1],
-      },
-    },
-  };
+const journeyCards = [
+  {
+    id: 'intro',
+    title: 'The Developer',
+    type: 'intro',
+    content:
+      "I'm a web enthusiast, dedicated to bringing digital dreams to life. I'll keep learning, growing, and giving my all with every breath to make the impossible possible.",
+    stats: [
+      { number: '7+', label: 'Years Experience' },
+      { number: '179', label: 'Projects Completed' },
+      { number: '119', label: 'Happy Clients' },
+    ],
+    color: 'emerald',
+    pattern: 'dots',
+  },
+  {
+    id: 'story',
+    title: 'My Story',
+    type: 'story',
+    content:
+      "I built 'GARMENTIK' to fly, but needed wings. 'Brandotory' gave me those wings, and now I'm building flight paths for others.",
+    color: 'purple',
+    pattern: 'waves',
+  },
+  {
+    id: 'journey',
+    title: 'Learning Odyssey',
+    type: 'journey',
+    content:
+      "I discovered the power of creating digital experiences that impact people's lives. Through years of learning, experimenting, and building, I've developed a deep understanding of the web ecosystem.",
+    color: 'blue',
+    pattern: 'grid',
+  },
+  {
+    id: 'skills',
+    title: 'Skills Arsenal',
+    type: 'skills',
+    skills: [
+      'JavaScript',
+      'TypeScript',
+      'MongoDB',
+      'Express',
+      'React',
+      'Node',
+      'HTML',
+      'CSS',
+      'TailwindCSS',
+      'Material UI',
+      'Figma',
+      'Inkscape',
+      'More +',
+    ],
+    color: 'orange',
+    pattern: 'circuit',
+  },
+  {
+    id: 'education',
+    title: 'Credentials',
+    type: 'education',
+    content:
+      "I'm a Bangladesh University of Engineering and Technology (BUET), and IAC Certified full-stack web developer on a journey of modern web mastery at the University of Helsinki. I'm also certified in Machine Learning AI from the National Information Society Agency, South Korea.",
+    color: 'indigo',
+    pattern: 'hexagon',
+  },
+];
 
-  const journeyItems = [
-    {
-      id: 'story',
-      title: 'My Story',
-      content:
-        "I built 'GARMENTIK' to fly, but needed wings. 'Brandotory' gave me those wings, and now I'm building flight paths for others.",
-    },
-    {
-      id: 'journey',
-      title: 'Learning Odyssey',
-      content:
-        "I discovered the power of creating digital experiences that impact people's lives. Through years of learning, experimenting, and building, I've developed a deep understanding of the web ecosystem.",
-    },
-    {
-      id: 'skills',
-      title: 'Skills',
-      content:
-        'JavaScript, Typescript, MongoDB, Express, React, Node, HTML, CSS, TailwindCSS, Material UI, Figma, Inkscape, More +',
-    },
-    {
-      id: 'education',
-      title: 'Credentials',
-      content:
-        "I'm a Bangladesh University of Engineering and Technology (BUET), and IAC Certified full-stack web developer on a journey of modern web mastery at the University of Helsinki. I'm also certified in Machine Learning AI from the National Information Society Agency, South Korea.",
-    },
-  ];
+const dealCard = (cardId) => {
+  if (dealtCards.includes(cardId)) return;
+  dealtCards.push(cardId);
+  activeCard = cardId;
+  updateCardPositions();
+  updateActiveCardDisplay();
+};
 
-  // Check for reduced motion preference
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setIsReducedMotion(mediaQuery.matches);
+const collectCards = () => {
+  isShuffling = true;
+  const deckArea = document.querySelector('.deck-area');
+  if (deckArea) deckArea.classList.add('shuffling');
 
-    const handleChange = () => setIsReducedMotion(mediaQuery.matches);
-    mediaQuery.addEventListener('change', handleChange);
+  setTimeout(() => {
+    dealtCards = [];
+    activeCard = null;
+    deckPosition = 'stacked';
+    isShuffling = false;
+    updateCardPositions();
+    updateActiveCardDisplay();
+    if (deckArea) deckArea.classList.remove('shuffling');
+  }, 800);
+};
 
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, []);
+const fanOutDeck = () => {
+  deckPosition = 'fanned';
+  updateCardPositions();
+};
 
-  // Measure content height to adjust container dynamically
-  useEffect(() => {
-    if (contentRef.current) {
-      const updateHeight = () => {
-        const height = contentRef.current.scrollHeight;
-        setContentHeight(height);
-      };
+const updateCardPositions = () => {
+  const cards = document.querySelectorAll('.card-wrapper');
+  cards.forEach((card, index) => {
+    const cardId = card.dataset.cardId;
+    const isDealt = dealtCards.includes(cardId);
+    const transform = getCardTransform(index, isDealt, cardId);
+    card.style.transform = transform.transform;
+    card.style.zIndex = transform.zIndex;
+  });
+};
 
-      // Use ResizeObserver for more reliable size detection
-      if (window.ResizeObserver) {
-        const resizeObserver = new ResizeObserver(updateHeight);
-        resizeObserver.observe(contentRef.current);
-        return () => resizeObserver.disconnect();
-      } else {
-        // Fallback for browsers without ResizeObserver
-        updateHeight();
-        window.addEventListener('resize', updateHeight);
-        return () => window.removeEventListener('resize', updateHeight);
-      }
-    }
-  }, [activeIndex]);
+const updateActiveCardDisplay = () => {
+  const display = document.querySelector('.active-card-display');
+  if (activeCard && display) {
+    const card = journeyCards.find((c) => c.id === activeCard);
+    display.querySelector('.active-card-title').textContent = card.title;
+    display.querySelector(
+      '.active-card-text'
+    ).textContent = `Currently viewing: ${card.title}`;
+    display.classList.add('visible');
+  } else if (display) {
+    display.classList.remove('visible');
+  }
+};
 
-  // Animate progress when active index changes
-  useEffect(() => {
-    setAnimateProgress(true);
-    const timer = setTimeout(() => setAnimateProgress(false), 600);
-    return () => clearTimeout(timer);
-  }, [activeIndex]);
-
-  // Auto-advance slides with pause on hover
-  useEffect(() => {
-    if (isHovering) return;
-
-    const interval = setInterval(() => {
-      if (activeIndex < journeyItems.length - 1) {
-        setDirection(1);
-        setActiveIndex((prev) => prev + 1);
-      } else {
-        setDirection(-1);
-        setActiveIndex(0);
-      }
-    }, 10000);
-
-    return () => clearInterval(interval);
-  }, [activeIndex, isHovering, journeyItems.length]);
-
-  const handleNext = useCallback(() => {
-    if (activeIndex < journeyItems.length - 1) {
-      setDirection(1);
-      setActiveIndex((prev) => prev + 1);
-    } else {
-      // Loop back to the first slide
-      setDirection(-1);
-      setActiveIndex(0);
-    }
-  }, [activeIndex, journeyItems.length]);
-
-  const handlePrev = useCallback(() => {
-    if (activeIndex > 0) {
-      setDirection(-1);
-      setActiveIndex((prev) => prev - 1);
-    } else {
-      // Loop to the last slide
-      setDirection(1);
-      setActiveIndex(journeyItems.length - 1);
-    }
-  }, [activeIndex, journeyItems.length]);
-
-  const handleTouchStart = (e) => {
-    // Don't initiate drag if we're touching a scrollable content area or interactive element
-    if (
-      e.target.closest('.minimal-journey-item-content') ||
-      e.target.closest('button') ||
-      e.target.tagName === 'A'
-    )
-      return;
-
-    setIsDragging(true);
-    setStartY(e.touches[0].clientY);
-    setScrollY(0);
-    setTouchFeedback(null);
-  };
-
-  const handleTouchMove = (e) => {
-    if (!isDragging) return;
-    const currentY = e.touches[0].clientY;
-    const diff = currentY - startY;
-    setScrollY(diff);
-
-    // Visual feedback for swipe direction
-    if (diff > 30) {
-      setTouchFeedback('up');
-    } else if (diff < -30) {
-      setTouchFeedback('down');
-    } else {
-      setTouchFeedback(null);
-    }
-  };
-
-  const handleTouchEnd = () => {
-    if (!isDragging) return;
-
-    setIsDragging(false);
-    if (scrollY > 70) {
-      handlePrev();
-    } else if (scrollY < -70) {
-      handleNext();
-    }
-    setScrollY(0);
-    setTouchFeedback(null);
-  };
-
-  // Handle keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'ArrowDown') {
-        handleNext();
-      } else if (e.key === 'ArrowUp') {
-        handlePrev();
-      }
+const getCardTransform = (index, isDealt, cardId) => {
+  if (isDealt) {
+    const dealtIndex = dealtCards.indexOf(cardId);
+    return {
+      transform: `translate(${dealtIndex * 60 - dealtCards.length * 30}px, ${
+        dealtIndex * -20
+      }px) rotate(${dealtIndex * 5 - dealtCards.length * 2.5}deg) scale(${
+        activeCard === cardId ? 1.05 : 0.95
+      })`,
+      zIndex: activeCard === cardId ? 50 : 40 - dealtIndex,
     };
+  }
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [handleNext, handlePrev]);
+  if (deckPosition === 'fanned') {
+    return {
+      transform: `translate(${index * 15 - journeyCards.length * 7.5}px, ${
+        index * -2
+      }px) rotate(${index * 8 - journeyCards.length * 4}deg) scale(1)`,
+      zIndex: 30 - index,
+    };
+  }
 
-  // Animation variants
-  const contentVariants = {
-    initial: (direction) => ({
-      y: isReducedMotion ? 0 : direction > 0 ? 100 : -100,
-      opacity: 0,
-    }),
-    animate: {
-      y: 0,
-      opacity: 1,
-    },
-    exit: (direction) => ({
-      y: isReducedMotion ? 0 : direction > 0 ? -100 : 100,
-      opacity: 0,
-    }),
+  return {
+    transform: `translate(${index * 2}px, ${index * -3}px) rotate(${
+      index * 1
+    }deg) scale(1)`,
+    zIndex: 30 - index,
   };
+};
 
-  // Split skills into array for the skills section
-  const skillsArray = journeyItems[2].content
-    .split(',')
-    .map((skill) => skill.trim());
+const PatternOverlay = ({ pattern }) => {
+  const patterns = {
+    dots: (
+      <div className="pattern-overlay">
+        <div className="pattern-dots"></div>
+      </div>
+    ),
+    waves: (
+      <div className="pattern-overlay">
+        <svg className="pattern-svg" viewBox="0 0 400 400">
+          <path
+            d="M0,200 Q100,150 200,200 T400,200 L400,400 L0,400 Z"
+            fill="white"
+          />
+          <path
+            d="M0,250 Q100,200 200,250 T400,250 L400,400 L0,400 Z"
+            fill="white"
+          />
+        </svg>
+      </div>
+    ),
+    grid: (
+      <div className="pattern-overlay">
+        <div className="pattern-grid"></div>
+      </div>
+    ),
+    circuit: (
+      <div className="pattern-overlay">
+        <svg className="pattern-svg" viewBox="0 0 400 400">
+          <circle cx="100" cy="100" r="3" fill="white" />
+          <circle cx="300" cy="150" r="3" fill="white" />
+          <circle cx="200" cy="300" r="3" fill="white" />
+          <path
+            d="M100,100 L300,150 L200,300"
+            stroke="white"
+            strokeWidth="1"
+            fill="none"
+          />
+        </svg>
+      </div>
+    ),
+    hexagon: (
+      <div className="pattern-overlay">
+        <svg className="pattern-svg" viewBox="0 0 400 400">
+          <polygon
+            points="200,50 350,125 350,275 200,350 50,275 50,125"
+            stroke="white"
+            strokeWidth="2"
+            fill="none"
+          />
+          <polygon
+            points="200,100 300,150 300,250 200,300 100,250 100,150"
+            stroke="white"
+            strokeWidth="1"
+            fill="none"
+          />
+        </svg>
+      </div>
+    ),
+  };
+  return patterns[pattern] || null;
+};
+
+const CardDeckAbout = () => {
+  setTimeout(() => {
+    const container = document.querySelector('.deck-container');
+    const header = document.querySelector('.deck-header');
+    const controls = document.querySelector('.deck-controls');
+    const downloadSection = document.querySelector('.download-section');
+
+    if (container) container.classList.add('visible');
+    if (header) header.classList.add('visible');
+    if (controls) controls.classList.add('visible');
+    if (downloadSection) downloadSection.classList.add('visible');
+  }, 100);
 
   return (
-    <div className="more-about-me">
-      <div className="container">
-        <motion.h2
-          className="section-title"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={fadeInUp}
-        >
-          More About Me
-        </motion.h2>
-
-        {/* About Content Section */}
-        <div className="about-content">
-          <motion.div
-            className="about-text"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={fadeInUp}
-          >
-            <p>
-              I'm a web enthusiast, dedicated to bringing digital dreams to
-              life. I'll keep learning, growing, and giving my all with every
-              breath to make the impossible possible.
-            </p>
-
-            <div className="about-stats">
-              <motion.div
-                className="stat-item hover-target"
-                whileHover={{ y: -10 }}
-                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-              >
-                <span className="stat-number">7+</span>
-                <span className="stat-label">Years Experience</span>
-              </motion.div>
-
-              <motion.div
-                className="stat-item hover-target"
-                whileHover={{ y: -10 }}
-                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-              >
-                <span className="stat-number">179</span>
-                <span className="stat-label">Projects Completed</span>
-              </motion.div>
-
-              <motion.div
-                className="stat-item hover-target"
-                whileHover={{ y: -10 }}
-                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-              >
-                <span className="stat-number">119</span>
-                <span className="stat-label">Happy Clients</span>
-              </motion.div>
-            </div>
-
-            <div className="about-buttons">
-              <motion.a
-                href="/MasumBillah-Resume.pdf"
-                className="btn hover-target"
-                download
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Download Resume
-              </motion.a>
-            </div>
-          </motion.div>
+    <div className="deck-container">
+      <div className="deck-wrapper">
+        <div className="deck-header">
+          <h2 className="deck-title">
+            The <span className="deck-title-accent">Deck</span>
+          </h2>
+          <p className="deck-subtitle">Draw a card to explore my journey</p>
         </div>
 
-        {/* Interactive Journey Section */}
-        <div
-          className={`journey-container ${
-            touchFeedback ? `swipe-${touchFeedback}` : ''
-          } ${isDragging ? 'is-dragging' : ''}`}
-          ref={containerRef}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
-          onMouseEnter={() => setIsHovering(true)}
-          onMouseLeave={() => setIsHovering(false)}
-        >
-          <motion.h3
-            className="journey-main-title"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
+        <div className="deck-controls">
+          <button
+            onClick={() => fanOutDeck()}
+            className="deck-btn deck-btn-primary"
           >
-            My Journey
-          </motion.h3>
+            Fan Out Deck
+          </button>
+          <button
+            onClick={() => collectCards()}
+            className="deck-btn deck-btn-secondary"
+          >
+            Collect Cards
+          </button>
+        </div>
 
-          <div className="journey-navigation">
-            <div className="journey-progress">
-              {journeyItems.map((_, index) => (
-                <button
-                  key={index}
-                  className={`journey-progress-item ${
-                    index === activeIndex ? 'active' : ''
-                  } ${index < activeIndex ? 'completed' : ''}`}
-                  onClick={() => {
-                    setDirection(index > activeIndex ? 1 : -1);
-                    setActiveIndex(index);
-                  }}
-                  aria-label={`Go to slide ${index + 1}`}
-                  aria-current={index === activeIndex ? 'true' : 'false'}
-                >
-                  <span className="journey-progress-line"></span>
-                  <span className="journey-progress-dot"></span>
-                  <span className="journey-progress-label">
-                    {journeyItems[index].title}
-                  </span>
-                </button>
-              ))}
-            </div>
-          </div>
+        <div className="deck-area">
+          {journeyCards.map((card, index) => (
+            <div
+              key={card.id}
+              className="card-wrapper"
+              data-card-id={card.id}
+              onClick={() => dealCard(card.id)}
+            >
+              <div className={`card card-${card.color}`}>
+                <PatternOverlay pattern={card.pattern} />
 
-          <div className="journey-sections-container" aria-live="polite">
-            <AnimatePresence custom={direction} mode="wait">
-              <motion.div
-                key={activeIndex}
-                className={`journey-section journey-section-${activeIndex}`}
-                ref={contentRef}
-                custom={direction}
-                variants={contentVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                transition={{
-                  y: { type: 'spring', stiffness: 300, damping: 30 },
-                  opacity: { duration: 0.5 },
-                }}
-                role="tabpanel"
-              >
-                <div className="section-background">
-                  <div className="section-pattern"></div>
-                </div>
-
-                <div className="section-content">
-                  <div className="section-header">
-                    <motion.div
-                      className="section-number"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.1, duration: 0.5 }}
-                    >
-                      {(activeIndex + 1).toString().padStart(2, '0')}
-                    </motion.div>
-
-                    <motion.h4
-                      className="section-title"
-                      initial={{ y: isReducedMotion ? 0 : 20, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ delay: 0.1, duration: 0.5 }}
-                    >
-                      {journeyItems[activeIndex].title}
-                    </motion.h4>
+                <div className="card-content">
+                  <div className="card-header">
+                    <h3 className="card-title">{card.title}</h3>
+                    <div className="card-number">
+                      <span>{index + 1}</span>
+                    </div>
                   </div>
 
-                  <motion.div
-                    className="section-body"
-                    initial={{ y: isReducedMotion ? 0 : 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.2, duration: 0.5 }}
-                  >
-                    {activeIndex === 2 ? (
-                      <div className="skills-grid">
-                        {skillsArray.map((skill, i) => (
-                          <motion.div
-                            key={i}
-                            className="skill-tag"
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{
-                              delay: 0.2 + i * 0.05,
-                              duration: 0.4,
-                            }}
-                            whileHover={{
-                              y: -5,
-                              transition: { duration: 0.2 },
-                            }}
-                            whileTap={{
-                              scale: 0.95,
-                              transition: { duration: 0.1 },
-                            }}
-                          >
-                            {skill}
-                          </motion.div>
+                  {card.type === 'intro' && (
+                    <div className="card-intro">
+                      <p className="card-text">{card.content}</p>
+                      <div className="stats-grid">
+                        {card.stats.map((stat, statIndex) => (
+                          <div key={statIndex} className="stat-item">
+                            <div className="stat-number">{stat.number}</div>
+                            <div className="stat-label">{stat.label}</div>
+                          </div>
                         ))}
                       </div>
-                    ) : (
-                      <p className="section-text">
-                        {journeyItems[activeIndex].content}
-                      </p>
-                    )}
-                  </motion.div>
+                    </div>
+                  )}
+
+                  {card.type === 'skills' && (
+                    <div className="card-skills">
+                      <div className="skills-grid">
+                        {card.skills.slice(0, 8).map((skill, skillIndex) => (
+                          <div key={skillIndex} className="skill-item">
+                            <span>{skill}</span>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="skills-more">
+                        <span>+ {card.skills.length - 8} more</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {(card.type === 'story' ||
+                    card.type === 'journey' ||
+                    card.type === 'education') && (
+                    <div className="card-story">
+                      <p className="card-text">{card.content}</p>
+                    </div>
+                  )}
+
+                  <div className="card-decoration">
+                    <div className="decoration-inner"></div>
+                  </div>
                 </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          <div className="journey-controls">
-            <motion.button
-              className="journey-control"
-              onClick={handlePrev}
-              whileHover={{
-                y: -3,
-                x: -3,
-                transition: { duration: 0.2 },
-              }}
-              whileTap={{
-                scale: 0.95,
-                transition: { duration: 0.1 },
-              }}
-              aria-label="Previous slide"
-            >
-              <span className="control-arrow">←</span>
-              <span className="control-text">Prev</span>
-            </motion.button>
-
-            <div className="journey-indicator" aria-hidden="true">
-              <span
-                className={`indicator-current ${
-                  animateProgress ? 'animate' : ''
-                }`}
-              >
-                {activeIndex + 1}
-              </span>
-              <span className="indicator-separator">/</span>
-              <span className="indicator-total">{journeyItems.length}</span>
+              </div>
             </div>
+          ))}
+        </div>
 
-            <motion.button
-              className="journey-control"
-              onClick={handleNext}
-              whileHover={{
-                y: -3,
-                x: 3,
-                transition: { duration: 0.2 },
-              }}
-              whileTap={{
-                scale: 0.95,
-                transition: { duration: 0.1 },
-              }}
-              aria-label="Next slide"
+        <div className="active-card-display">
+          <div className="active-card-content">
+            <h4 className="active-card-title"></h4>
+            <p className="active-card-text"></p>
+          </div>
+        </div>
+
+        <div className="download-section">
+          <a href="/MasumBillah-Resume.pdf" download className="download-btn">
+            <svg
+              className="download-icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
             >
-              <span className="control-text">Next</span>
-              <span className="control-arrow">→</span>
-            </motion.button>
-          </div>
-
-          <div className="touch-feedback-indicator">
-            <div className="touch-arrow up-arrow">↑</div>
-            <div className="touch-arrow down-arrow">↓</div>
-          </div>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              />
+            </svg>
+            Download Resume
+          </a>
         </div>
       </div>
     </div>
   );
 };
 
-export default MoreAboutMe;
+export default CardDeckAbout;
