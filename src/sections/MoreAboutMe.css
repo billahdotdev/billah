@@ -7,6 +7,8 @@
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   font-family: 'Courier New', 'Monaco', 'Menlo', monospace;
   border: 1px solid #333;
+  /* Prevent any scroll behavior on container */
+  scroll-behavior: auto;
 }
 
 .terminal-header {
@@ -60,6 +62,9 @@
   overflow-y: auto;
   padding: 20px;
   cursor: text;
+  /* Improve touch scrolling on mobile */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 
 .terminal-body::-webkit-scrollbar {
@@ -185,6 +190,9 @@
   align-items: center;
   gap: 8px;
   position: relative;
+  /* Better touch target for mobile */
+  min-height: 44px;
+  cursor: text;
 }
 
 .terminal-input {
@@ -196,30 +204,14 @@
   font-size: 14px;
   flex: 1;
   caret-color: transparent;
+  /* Better mobile input handling */
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.terminal-input::placeholder {
-  color: #666;
-}
-
-.cursor {
-  width: 8px;
-  height: 16px;
-  background: #00ff41;
-  animation: blink 1s infinite;
-  position: absolute;
-  right: 0;
-}
-
-@keyframes blink {
-  0%,
-  50% {
-    opacity: 1;
-  }
-  51%,
-  100% {
-    opacity: 0;
-  }
+.terminal-content {
+  color: #00ff41;
+  font-size: 14px;
 }
 
 .suggested-commands {
@@ -252,16 +244,13 @@
   font-size: 12px;
   cursor: pointer;
   transition: all 0.2s;
-}
-
-.suggestion-button:hover {
-  background: #333;
-  border-color: #00ff41;
-  transform: translateY(-1px);
-}
-
-.suggestion-button:active {
-  transform: translateY(0);
+  /* Better touch targets for mobile */
+  min-height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Responsive Design */
@@ -269,12 +258,16 @@
   .terminal-container {
     margin: 1rem;
     border-radius: 8px;
+    /* Better mobile margins */
+    margin: 1rem 0.5rem;
   }
 
   .terminal-body {
     padding: 16px;
     min-height: 400px;
     max-height: 500px;
+    /* Better mobile height */
+    max-height: 60vh;
   }
 
   .terminal-content {
@@ -282,16 +275,26 @@
   }
 
   .ascii-art {
+    color: #00d4aa;
     font-size: 10px;
+    /* Better mobile ASCII art display */
+    overflow-x: auto;
+    white-space: nowrap;
   }
 
   .suggestions-list {
     gap: 6px;
+    /* Better mobile button layout */
+    justify-content: center;
   }
 
   .suggestion-button {
     padding: 8px 12px;
     font-size: 11px;
+    /* Ensure minimum touch target size */
+    min-height: 44px;
+    flex: 1;
+    max-width: 120px;
   }
 }
 
@@ -306,6 +309,8 @@
 
   .terminal-body {
     padding: 12px;
+    /* Better small screen height */
+    max-height: 50vh;
   }
 
   .terminal-content {
@@ -313,13 +318,38 @@
   }
 
   .current-input-line {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
+    /* Keep horizontal layout on small screens */
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
   }
 
   .terminal-input {
     width: 100%;
+    /* Better mobile input sizing */
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  .suggestion-button {
+    /* Stack buttons on very small screens */
+    flex: 1;
+    min-width: 80px;
+    font-size: 10px;
+  }
+
+  .suggestions-list {
+    /* Better small screen layout */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+  }
+}
+
+/* Add landscape mobile optimization */
+@media (max-width: 768px) and (orientation: landscape) {
+  .terminal-body {
+    max-height: 40vh;
   }
 }
 
@@ -352,4 +382,26 @@
 .suggestion-button:focus {
   outline: 2px solid #00ff41;
   outline-offset: 2px;
+}
+
+/* Add better mobile focus and active states */
+.suggestion-button:focus-visible {
+  outline: 2px solid #00ff41;
+  outline-offset: 2px;
+}
+
+.suggestion-button:active {
+  transform: translateY(0);
+  background: #00ff41;
+  color: #0a0a0a;
+}
+
+/* Prevent text selection on mobile for better UX */
+.terminal-header,
+.suggestions-label,
+.prompt {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

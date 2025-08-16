@@ -46,9 +46,8 @@ const MoreAboutMe = () => {
   ];
 
   useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
+    // Ensure page starts at the top
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
@@ -122,12 +121,12 @@ const MoreAboutMe = () => {
   };
 
   const handleTerminalClick = () => {
-    if (containerRef.current) {
-      containerRef.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center',
-      });
+    if (inputRef.current) {
+      inputRef.current.focus();
     }
+  };
+
+  const handleInputFocus = () => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
@@ -195,7 +194,7 @@ const MoreAboutMe = () => {
           )}
 
           <form onSubmit={handleSubmit} className="input-form">
-            <div className="current-input-line">
+            <div className="current-input-line" onClick={handleInputFocus}>
               <span className="prompt">masum@dev-terminal:~$</span>
               <input
                 ref={inputRef}
@@ -221,6 +220,7 @@ const MoreAboutMe = () => {
               key={cmd}
               onClick={() => handleSuggestedCommand(cmd)}
               className="suggestion-button"
+              type="button"
             >
               {cmd}
             </button>
