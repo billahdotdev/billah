@@ -209,11 +209,6 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.terminal-content {
-  color: #00ff41;
-  font-size: 14px;
-}
-
 .suggested-commands {
   background: #1a1a1a;
   padding: 16px 20px;
@@ -256,18 +251,17 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .terminal-container {
-    margin: 1rem;
+    margin: 4rem 0.5rem 1rem 0.5rem;
     border-radius: 8px;
-    /* Better mobile margins */
-    margin: 1rem 0.5rem;
+    /* Add safe area padding for mobile browsers */
+    margin-top: max(4rem, env(safe-area-inset-top, 0px) + 2rem);
   }
 
   .terminal-body {
     padding: 16px;
     min-height: 400px;
-    max-height: 500px;
-    /* Better mobile height */
-    max-height: 60vh;
+    /* Better mobile height calculation */
+    max-height: min(500px, 60vh);
   }
 
   .terminal-content {
@@ -299,6 +293,12 @@
 }
 
 @media (max-width: 480px) {
+  /* Enhanced small screen positioning */
+  .terminal-container {
+    margin: 5rem 0.25rem 1rem 0.25rem;
+    margin-top: max(5rem, env(safe-area-inset-top, 0px) + 3rem);
+  }
+
   .terminal-header {
     padding: 10px 12px;
   }
@@ -309,8 +309,9 @@
 
   .terminal-body {
     padding: 12px;
-    /* Better small screen height */
-    max-height: 50vh;
+    /* Better small screen height with viewport consideration */
+    max-height: min(400px, 50vh);
+    min-height: 300px;
   }
 
   .terminal-content {
@@ -346,10 +347,23 @@
   }
 }
 
-/* Add landscape mobile optimization */
+/* Add landscape mobile optimization with better positioning */
 @media (max-width: 768px) and (orientation: landscape) {
+  .terminal-container {
+    margin: 2rem 0.5rem 1rem 0.5rem;
+    margin-top: max(2rem, env(safe-area-inset-top, 0px) + 1rem);
+  }
+
   .terminal-body {
-    max-height: 40vh;
+    max-height: min(300px, 40vh);
+  }
+}
+
+/* Add specific mobile browser compatibility */
+@media screen and (max-width: 768px) {
+  .terminal-container {
+    /* Ensure proper spacing from mobile browser UI */
+    margin-top: calc(env(safe-area-inset-top, 0px) + 4rem);
   }
 }
 
