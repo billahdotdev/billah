@@ -1,123 +1,143 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './MoreAboutMe.css';
 
 const MoreAboutMe = () => {
-  const [history, setHistory] = useState([
-    {
-      type: 'welcome',
-      content: "Welcome to Masum Billah's Dev Terminal",
-      timestamp: new Date().toLocaleTimeString(),
-    },
-    {
-      type: 'output',
-      content:
-        "Type 'help' to see available commands or click on the suggested commands below.",
-    },
-  ]);
-  const [currentInput, setCurrentInput] = useState('');
+  const [currentCommand, setCurrentCommand] = useState('');
+  const [commandHistory, setCommandHistory] = useState([]);
   const [isTyping, setIsTyping] = useState(false);
-  const inputRef = useRef(null);
+  const [showCursor, setShowCursor] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
   const terminalRef = useRef(null);
-  const containerRef = useRef(null);
+  const inputRef = useRef(null);
 
   const commands = {
     story:
-      "I built 'GARMENTIK' to fly, but needed wings. 'Brandotory' gave me those wings, and now I'm building flight paths for others.",
+      "🚀 I built 'GARMENTIK' to fly, but needed wings. 'Brandotory' gave me those wings, and now I'm building flight paths for others. Every line of code is a step toward making the impossible possible.",
     journey:
-      "I discovered the power of creating digital experiences that impact people's lives. Through years of learning, experimenting, and building, I've developed a deep understanding of the web ecosystem.",
-    skills:
-      'JavaScript, Typescript, MongoDB, Express, React, Node, HTML, CSS, TailwindCSS, Material UI, Figma, Inkscape, More +',
+      "💻 My journey began with curiosity and evolved into passion. From debugging my first 'Hello World' to architecting full-stack applications, I've discovered that the best code tells a story - and I'm here to write the next chapter.",
+    skills: [
+      'JavaScript',
+      'TypeScript',
+      'MongoDB',
+      'Express',
+      'React',
+      'Node.js',
+      'HTML5',
+      'CSS3',
+      'TailwindCSS',
+      'Material UI',
+      'Figma',
+      'Inkscape',
+      'Git',
+      'Docker',
+      'AWS',
+      'Firebase',
+      'Next.js',
+      'Vue.js',
+      'Python',
+      'More +',
+    ],
     credentials:
-      "I'm a Bangladesh University of Engineering and Technology (BUET), and IAC Certified full-stack web developer on a journey of modern web mastery at the University of Helsinki. I'm also certified in Machine Learning AI from the National Information Society Agency, South Korea.",
-    stats: '7+ Years Experience | 179 Projects Completed | 119 Happy Clients',
-    help: 'Available commands: story, journey, skills, credentials, stats, help, clear',
-    clear: 'clear',
+      '🎓 BUET Graduate | IAC Certified Full-Stack Developer | University of Helsinki (Modern Web Development) | ML/AI Certified (National Information Society Agency, South Korea) | Building the future, one commit at a time.',
+    projects:
+      '🛠️ GARMENTIK (E-commerce Platform) | Brandotory (Digital Agency) | Portfolio Websites | Custom Web Applications | Open Source Contributions',
+    contact:
+      "📧 Ready to collaborate? Let's build something amazing together! Email: masum@example.com | LinkedIn: /in/masumbillah",
+    help: 'Available commands: story, journey, skills, credentials, projects, contact, clear, help',
+    clear: 'CLEAR_TERMINAL',
   };
 
-  const suggestedCommands = [
-    'story',
-    'journey',
-    'skills',
-    'credentials',
-    'stats',
-    'help',
-  ];
-
   useEffect(() => {
-    // Ensure page starts at the top
-    window.scrollTo(0, 0);
+    const interval = setInterval(() => {
+      setShowCursor((prev) => !prev);
+    }, 500);
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
-    if (terminalRef.current) {
-      terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
     }
-  }, [history]);
+  }, []);
 
-  const executeCommand = (command) => {
-    const cmd = command.toLowerCase().trim();
+  const typeText = (text, callback) => {
+    setIsTyping(true);
+    let index = 0;
+    const interval = setInterval(() => {
+      if (index < text.length) {
+        callback(text.slice(0, index + 1));
+        index++;
+      } else {
+        clearInterval(interval);
+        setIsTyping(false);
+      }
+    }, 30);
+  };
 
-    setHistory((prev) => [
-      ...prev,
-      {
-        type: 'input',
-        content: `$ ${command}`,
-        timestamp: new Date().toLocaleTimeString(),
-      },
-    ]);
+  const executeCommand = (cmd) => {
+    const command = cmd.toLowerCase().trim();
+
+    if (command === 'clear') {
+      setCommandHistory([]);
+      return;
+    }
+
+    const newEntry = {
+      command: cmd,
+      timestamp: new Date().toLocaleTimeString(),
+      output: null,
+    };
+
+    if (commands[command]) {
+      if (command === 'skills') {
+        newEntry.output = { type: 'skills', data: commands[command] };
+      } else {
+        newEntry.output = { type: 'text', data: commands[command] };
+      }
+    } else {
+      newEntry.output = {
+        type: 'error',
+        data: `❌ Command '${cmd}' not found. Type 'help' for available commands.`,
+      };
+    }
+
+    setCommandHistory((prev) => [...prev, newEntry]);
 
     setTimeout(() => {
-      if (cmd === 'clear') {
-        setHistory([
-          {
-            type: 'welcome',
-            content: "Welcome to Masum Billah's Dev Terminal",
-            timestamp: new Date().toLocaleTimeString(),
-          },
-          {
-            type: 'output',
-            content:
-              "Type 'help' to see available commands or click on the suggested commands below.",
-          },
-        ]);
-      } else if (commands[cmd]) {
-        setHistory((prev) => [
-          ...prev,
-          {
-            type: 'output',
-            content: commands[cmd],
-          },
-        ]);
-      } else if (cmd === '') {
-      } else {
-        setHistory((prev) => [
-          ...prev,
-          {
-            type: 'output',
-            content:
-              "Command not found. Type 'help' to see available commands.",
-          },
-        ]);
+      if (terminalRef.current) {
+        terminalRef.current.scrollTo({
+          top: terminalRef.current.scrollHeight,
+          behavior: 'smooth',
+        });
       }
-      setIsTyping(false);
-    }, 500);
-
-    setIsTyping(true);
-    setCurrentInput('');
+    }, 100);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (currentInput.trim()) {
-      executeCommand(currentInput);
+  const handleCommandClick = (cmd) => {
+    setCurrentCommand(cmd);
+    executeCommand(cmd);
+    setCurrentCommand('');
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      if (currentCommand.trim()) {
+        executeCommand(currentCommand);
+        setCurrentCommand('');
+      }
     }
-  };
-
-  const handleSuggestedCommand = (command) => {
-    setCurrentInput(command);
-    executeCommand(command);
   };
 
   const handleTerminalClick = () => {
@@ -126,106 +146,148 @@ const MoreAboutMe = () => {
     }
   };
 
-  const handleInputFocus = () => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  };
-
   return (
-    <div className="terminal-container" ref={containerRef}>
-      <div className="terminal-header">
-        <div className="terminal-controls">
-          <div className="terminal-button close"></div>
-          <div className="terminal-button minimize"></div>
-          <div className="terminal-button maximize"></div>
-        </div>
-        <div className="terminal-title">masum@dev-terminal:~</div>
+    <div className="more-about-section">
+      <div className="container">
+        <h2 className="section-title">
+          <span className="title-text">More About Me</span>
+          <span className="title-subtitle">Interactive Developer Terminal</span>
+        </h2>
       </div>
 
-      <div
-        className="terminal-body"
-        ref={terminalRef}
-        onClick={handleTerminalClick}
-      >
-        <div className="terminal-content">
-          {history.map((line, index) => (
-            <div key={index} className={`terminal-line ${line.type}`}>
-              {line.type === 'welcome' && (
-                <div className="welcome-message">
-                  <div className="ascii-art">
-                    {`
-    ╔══════════════════════════════════════╗
-    ║     Welcome to Masum Billah's        ║
-    ║         Dev Terminal v1.0            ║
-    ╚══════════════════════════════════════╝
-                    `}
+      <div className={`terminal-container ${isMinimized ? 'minimized' : ''}`}>
+        <div className="terminal-header">
+          <div className="terminal-controls">
+            <button
+              className="control-dot red"
+              onClick={() => setIsMinimized(!isMinimized)}
+              title="Minimize"
+            ></button>
+            <span className="control-dot yellow"></span>
+            <span className="control-dot green"></span>
+          </div>
+          <div className="terminal-title">
+            {isMobile ? "Masum's Terminal" : "Masum Billah's Dev Terminal"}
+          </div>
+          <div className="terminal-status">
+            <span className="status-dot"></span>
+            <span className="status-text">Online</span>
+          </div>
+        </div>
+
+        {!isMinimized && (
+          <div
+            className="terminal-body"
+            ref={terminalRef}
+            onClick={handleTerminalClick}
+          >
+            <div className="terminal-welcome">
+              <div className="welcome-text">
+                {isMobile
+                  ? '👋 Welcome!'
+                  : "🚀 Welcome to Masum Billah's Dev Terminal"}
+              </div>
+              <div className="terminal-info">
+                {isMobile
+                  ? 'Tap commands below:'
+                  : 'Type a command or click on the suggestions below:'}
+              </div>
+            </div>
+
+            <div className="command-suggestions">
+              <div className="suggestions-title">💡 Quick Commands:</div>
+              <div className="suggestions-grid">
+                {Object.keys(commands)
+                  .filter((cmd) => cmd !== 'help' && cmd !== 'clear')
+                  .map((cmd) => (
+                    <button
+                      key={cmd}
+                      className="command-suggestion"
+                      onClick={() => handleCommandClick(cmd)}
+                      title={`Execute ${cmd} command`}
+                    >
+                      <span className="command-prompt">&gt;</span>
+                      <span className="command-name">{cmd}</span>
+                    </button>
+                  ))}
+              </div>
+            </div>
+
+            <div className="terminal-history">
+              {commandHistory.map((entry, index) => (
+                <div key={index} className="history-entry">
+                  <div className="command-line">
+                    <span className="prompt">masum@dev:~$</span>
+                    <span className="command">{entry.command}</span>
+                    <span className="timestamp">[{entry.timestamp}]</span>
                   </div>
-                  <div className="welcome-text">{line.content}</div>
-                  {line.timestamp && (
-                    <div className="timestamp">
-                      Session started at {line.timestamp}
+
+                  {entry.output && (
+                    <div className="command-output">
+                      {entry.output.type === 'error' ? (
+                        <div className="error-output">{entry.output.data}</div>
+                      ) : entry.output.type === 'skills' ? (
+                        <div className="skills-output">
+                          <div className="skills-grid">
+                            {entry.output.data.map((skill, i) => (
+                              <span key={i} className="skill-tag">
+                                {skill}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="text-output">{entry.output.data}</div>
+                      )}
                     </div>
                   )}
                 </div>
-              )}
-              {line.type === 'input' && (
-                <div className="input-line">
-                  <span className="prompt">masum@dev-terminal:~</span>
-                  <span className="command">
-                    {line.content.replace('$ ', '')}
-                  </span>
-                </div>
-              )}
-              {line.type === 'output' && (
-                <div className="output-line">{line.content}</div>
-              )}
+              ))}
             </div>
-          ))}
 
-          {isTyping && (
-            <div className="terminal-line output">
-              <div className="typing-indicator">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit} className="input-form">
-            <div className="current-input-line" onClick={handleInputFocus}>
-              <span className="prompt">masum@dev-terminal:~$</span>
+            <div className="terminal-input-line">
+              <span className="prompt">masum@dev:~$</span>
               <input
                 ref={inputRef}
                 type="text"
-                value={currentInput}
-                onChange={(e) => setCurrentInput(e.target.value)}
+                value={currentCommand}
+                onChange={(e) => setCurrentCommand(e.target.value)}
+                onKeyPress={handleKeyPress}
                 className="terminal-input"
-                placeholder="Type a command..."
+                placeholder={isMobile ? 'Type here...' : 'Type a command...'}
+                disabled={isTyping}
                 autoComplete="off"
-                spellCheck="false"
+                autoCapitalize="off"
+                autoCorrect="off"
               />
-              <span className="cursor"></span>
+              <span className={`cursor ${showCursor ? 'visible' : ''}`}>|</span>
             </div>
-          </form>
-        </div>
-      </div>
 
-      <div className="suggested-commands">
-        <div className="suggestions-label">Quick Commands:</div>
-        <div className="suggestions-list">
-          {suggestedCommands.map((cmd) => (
-            <button
-              key={cmd}
-              onClick={() => handleSuggestedCommand(cmd)}
-              className="suggestion-button"
-              type="button"
-            >
-              {cmd}
-            </button>
-          ))}
-        </div>
+            <div className="terminal-footer">
+              <div className="footer-commands">
+                <button
+                  className="footer-command help"
+                  onClick={() => handleCommandClick('help')}
+                >
+                  <span className="command-icon">❓</span>
+                  help
+                </button>
+                <button
+                  className="footer-command clear"
+                  onClick={() => handleCommandClick('clear')}
+                >
+                  <span className="command-icon">🗑️</span>
+                  clear
+                </button>
+              </div>
+              <div className="footer-info">
+                <span className="footer-text">
+                  Press Enter to execute • Click commands to try
+                </span>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
