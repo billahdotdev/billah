@@ -1,301 +1,294 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import './MoreAboutMe.css';
 
 const MoreAboutMe = () => {
-  const [currentCommand, setCurrentCommand] = useState('');
-  const [commandHistory, setCommandHistory] = useState([]);
-  const [isTyping, setIsTyping] = useState(false);
-  const [showCursor, setShowCursor] = useState(true);
-  const [isMobile, setIsMobile] = useState(false);
-  const [isMinimized, setIsMinimized] = useState(false);
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
-  const terminalRef = useRef(null);
-  const inputRef = useRef(null);
+  const [activeSection, setActiveSection] = useState(null);
+  const [isReducedMotion, setIsReducedMotion] = useState(false);
+  const sectionRefs = useRef({});
 
-  const commands = {
-    story:
-      'I used to have a clothing business, which taught me a lot about solving problems. While doing that, I discovered a love for coding. The pandemic gave me the perfect chance to put those two things together.',
-    journey:
-      "I discovered the power of creating digital experiences that impact people's lives. Through years of learning, experimenting, and building, I've developed a deep understanding of the web ecosystem.",
-    skills: [
-      'JavaScript',
-      'TypeScript',
-      'MongoDB',
-      'Express',
-      'React',
-      'Node.js',
-      'HTML5',
-      'CSS3',
-      'TailwindCSS',
-      'Material UI',
-      'Figma',
-      'Inkscape',
-      'Git',
-      'More +',
-    ],
-    credentials:
-      "I am a Bangladesh University of Engineering and Technology (BUET), and IAC Certified full-stack web developer on a journey of modern web mastery at the University of Helsinki. I'm also certified in Machine Learning AI from the National Information Society Agency, South Korea.",
-    contact: 'Email: billahdotdev@gmail.com | LinkedIn: /in/billahdotdev',
-    help: 'Available commands: story, journey, skills, credentials, projects, contact, clear, help',
-    clear: 'CLEAR_TERMINAL',
-  };
-
+  // Check for reduced motion preference
   useEffect(() => {
-    const interval = setInterval(() => {
-      setShowCursor((prev) => !prev);
-    }, 500);
-    return () => clearInterval(interval);
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setIsReducedMotion(mediaQuery.matches);
+
+    const handleChange = () => setIsReducedMotion(mediaQuery.matches);
+    mediaQuery.addEventListener('change', handleChange);
+
+    return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-      setIsTouchDevice(
-        'ontouchstart' in window || navigator.maxTouchPoints > 0
-      );
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+  const accordionSections = [
+    {
+      id: 'story',
+      title: 'My Story',
+      content: {
+        text: "I built 'GARMENTIK' to fly, but needed wings. 'Brandotory' gave me those wings, and now I'm building flight paths for others. My journey in web development started with a simple curiosity about how websites work, and it evolved into a passion for creating digital experiences that make a real impact.",
+        highlights: [
+          'Founded GARMENTIK - A fashion-tech startup',
+          'Co-founded Brandotory - Digital agency',
+          'Mentoring aspiring developers',
+          'Building innovative web solutions',
+        ],
+      },
+    },
+    {
+      id: 'journey',
+      title: 'My Learning Odyssey',
+      content: {
+        text: "I discovered the power of creating digital experiences that impact people's lives. Through years of learning, experimenting, and building, I've developed a deep understanding of the web ecosystem. Every project teaches me something new, and I believe in continuous learning and adaptation.",
+        highlights: [
+          'Self-taught web development fundamentals',
+          'Mastered modern JavaScript frameworks',
+          'Specialized in full-stack development',
+          'Contributed to open-source projects',
+        ],
+      },
+    },
+    {
+      id: 'skills',
+      title: 'My Technical Arsenal',
+      content: {
+        text: "My technical skills span across the entire web development stack, from crafting pixel-perfect user interfaces to building robust backend systems. I'm passionate about using the right tools for each project and staying updated with the latest technologies.",
+        skills: [
+          {
+            category: 'Frontend',
+            items: [
+              'JavaScript',
+              'TypeScript',
+              'React',
+              'HTML5',
+              'CSS3',
+              'TailwindCSS',
+            ],
+          },
+          {
+            category: 'Backend',
+            items: ['Node.js', 'Express.js', 'MongoDB', 'RESTful APIs'],
+          },
+          {
+            category: 'Tools & Design',
+            items: ['Figma', 'Inkscape', 'Git', 'Material UI'],
+          },
+        ],
+      },
+    },
+    {
+      id: 'education',
+      title: 'My Credentials',
+      content: {
+        text: "I'm a IAC and Bangladesh University of Engineering and Technology (BUET) Certified full-stack web developer on a journey of modern web mastery at the University of Helsinki. I'm also certified in Machine Learning AI from the National Information Society Agency, South Korea.",
+        credentials: [
+          {
+            title: 'Bangladesh University of Engineering and Technology (BUET)',
+            type: 'Professional Certification',
+            status: 'Certified',
+          },
+          {
+            title: 'IAC Certified Full-Stack Web Developer',
+            type: 'Professional Certification',
+            status: 'Certified',
+          },
+          {
+            title: 'University of Helsinki - Modern Web Development',
+            type: 'Specialized Course',
+            status: 'In Progress',
+          },
+          {
+            title: 'Machine Learning AI Certification',
+            type: 'International Certification',
+            status: 'Certified',
+            issuer: 'National Information Society Agency, South Korea',
+          },
+        ],
+      },
+    },
+    {
+      id: 'stats',
+      title: 'My Impact',
+      content: {
+        text: 'Numbers tell a story of dedication, growth, and impact. Each project completed and client satisfied represents not just a milestone, but a step forward in my journey of creating meaningful digital experiences.',
+        stats: [
+          {
+            number: '7+',
+            label: 'Years Experience',
+            description: 'Building web solutions',
+          },
+          {
+            number: '179',
+            label: 'Projects Completed',
+            description: 'Across various industries',
+          },
+          {
+            number: '119',
+            label: 'Happy Clients',
+            description: 'Satisfied with results',
+          },
+          {
+            number: '50+',
+            label: 'Technologies',
+            description: 'Mastered and applied',
+          },
+        ],
+      },
+    },
+  ];
 
-  const typeText = (text, callback) => {
-    setIsTyping(true);
-    let index = 0;
-    const speed = isMobile ? 20 : 30; // Faster on mobile for better UX
-    const interval = setInterval(() => {
-      if (index < text.length) {
-        callback(text.slice(0, index + 1));
-        index++;
-      } else {
-        clearInterval(interval);
-        setIsTyping(false);
-      }
-    }, speed);
+  const toggleSection = (sectionId) => {
+    setActiveSection(activeSection === sectionId ? null : sectionId);
   };
 
-  const executeCommand = (cmd) => {
-    const command = cmd.toLowerCase().trim();
-
-    if (command === 'clear') {
-      setCommandHistory([]);
-      return;
-    }
-
-    const newEntry = {
-      command: cmd,
-      timestamp: new Date().toLocaleTimeString(),
-      output: null,
-    };
-
-    if (commands[command]) {
-      if (command === 'skills') {
-        newEntry.output = { type: 'skills', data: commands[command] };
-      } else {
-        newEntry.output = { type: 'text', data: commands[command] };
-      }
-    } else {
-      newEntry.output = {
-        type: 'error',
-        data: `❌ Command '${cmd}' not found. Type 'help' for available commands.`,
-      };
-    }
-
-    setCommandHistory((prev) => [...prev, newEntry]);
-
-    setTimeout(() => {
-      if (terminalRef.current) {
-        terminalRef.current.scrollTo({
-          top: terminalRef.current.scrollHeight,
-          behavior: 'smooth',
-        });
-      }
-    }, 100);
-  };
-
-  const handleCommandClick = (cmd) => {
-    // Add haptic feedback on touch devices
-    if (isTouchDevice && navigator.vibrate) {
-      navigator.vibrate(50);
-    }
-
-    setCurrentCommand(cmd);
-    executeCommand(cmd);
-    setCurrentCommand('');
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      if (currentCommand.trim()) {
-        executeCommand(currentCommand);
-        setCurrentCommand('');
-      }
-    }
-  };
-
-  const handleTerminalClick = (e) => {
-    // Prevent focus on mobile when clicking command buttons
-    if (
-      e.target.closest('.command-suggestion') ||
-      e.target.closest('.footer-command')
-    ) {
-      return;
-    }
-
-    if (inputRef.current && !isMobile) {
-      inputRef.current.focus({ preventScroll: true });
+  const handleKeyDown = (event, sectionId) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      toggleSection(sectionId);
     }
   };
 
   return (
-    <div className="more-about-section">
+    <div className="more-about-me-accordion">
       <div className="container">
-        <h2 className="section-title">
-          <span className="title-text">More About Me</span>
-        </h2>
-      </div>
-
-      <div className={`terminal-container ${isMinimized ? 'minimized' : ''}`}>
-        <div className="terminal-header">
-          <div className="terminal-controls">
-            <button
-              className="control-dot red"
-              onClick={() => setIsMinimized(!isMinimized)}
-              title={isMinimized ? 'Expand' : 'Minimize'}
-              aria-label={isMinimized ? 'Expand terminal' : 'Minimize terminal'}
-            ></button>
-            <span className="control-dot yellow"></span>
-            <span className="control-dot green"></span>
-          </div>
-          <div className="terminal-title">
-            {isMobile ? "Masum's Terminal" : "Masum Billah's Dev Terminal"}
-          </div>
-          <div className="terminal-status">
-            <span className="status-dot"></span>
-            <span className="status-text">Online</span>
-          </div>
+        <div className="section-header">
+          <h2 className="section-title">More About Me</h2>
+          <p className="section-subtitle">
+            I'm a web enthusiast, dedicated to bringing digital dreams to life.
+            I'll keep learning, growing, and giving my all with every breath to
+            make the impossible possible.
+          </p>
         </div>
 
-        {!isMinimized && (
-          <div
-            className="terminal-body"
-            ref={terminalRef}
-            onClick={handleTerminalClick}
-          >
-            <div className="terminal-welcome">
-              <div className="terminal-info">
-                {isMobile
-                  ? 'Tap commands below to explore:'
-                  : 'Type a command or click on the suggestions below:'}
-              </div>
-            </div>
+        <div className="accordion-container">
+          {accordionSections.map((section, index) => {
+            const isActive = activeSection === section.id;
 
-            <div className="command-suggestions">
-              <div className="suggestions-title">💡 Quick Commands:</div>
-              <div className="suggestions-grid">
-                {Object.keys(commands)
-                  .filter((cmd) => cmd !== 'help' && cmd !== 'clear')
-                  .map((cmd) => (
-                    <button
-                      key={cmd}
-                      className="command-suggestion"
-                      onClick={() => handleCommandClick(cmd)}
-                      title={`Execute ${cmd} command`}
-                      aria-label={`Execute ${cmd} command`}
-                    >
-                      <span className="command-prompt">&gt;</span>
-                      <span className="command-name">{cmd}</span>
-                    </button>
-                  ))}
-              </div>
-            </div>
-
-            <div className="terminal-history">
-              {commandHistory.map((entry, index) => (
-                <div key={index} className="history-entry">
-                  <div className="command-line">
-                    <span className="prompt">masum@dev:~$</span>
-                    <span className="command">{entry.command}</span>
-                    <span className="timestamp">[{entry.timestamp}]</span>
+            return (
+              <div
+                key={section.id}
+                className={`accordion-item ${isActive ? 'active' : ''}`}
+                style={{ '--item-index': index }}
+              >
+                <button
+                  className="accordion-header"
+                  onClick={() => toggleSection(section.id)}
+                  onKeyDown={(e) => handleKeyDown(e, section.id)}
+                  aria-expanded={isActive}
+                  aria-controls={`content-${section.id}`}
+                >
+                  <div className="accordion-header-content">
+                    <h3 className="accordion-title">{section.title}</h3>
                   </div>
+                  <div className="accordion-toggle">
+                    <span className="toggle-line toggle-line-1"></span>
+                    <span className="toggle-line toggle-line-2"></span>
+                  </div>
+                </button>
 
-                  {entry.output && (
-                    <div className="command-output">
-                      {entry.output.type === 'error' ? (
-                        <div className="error-output">{entry.output.data}</div>
-                      ) : entry.output.type === 'skills' ? (
-                        <div className="skills-output">
-                          <div className="skills-grid">
-                            {entry.output.data.map((skill, i) => (
-                              <span key={i} className="skill-tag">
-                                {skill}
-                              </span>
-                            ))}
+                <div
+                  className="accordion-content"
+                  id={`content-${section.id}`}
+                  ref={(el) => (sectionRefs.current[section.id] = el)}
+                >
+                  <div className="accordion-content-inner">
+                    <p className="content-text">{section.content.text}</p>
+
+                    {/* Story highlights */}
+                    {section.content.highlights && (
+                      <div className="content-highlights">
+                        <h4>Key Highlights:</h4>
+                        <ul className="highlights-list">
+                          {section.content.highlights.map((highlight, idx) => (
+                            <li key={idx} className="highlight-item">
+                              <span className="highlight-bullet">→</span>
+                              {highlight}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {/* Skills grid */}
+                    {section.content.skills && (
+                      <div className="skills-categories">
+                        {section.content.skills.map((category, idx) => (
+                          <div key={idx} className="skill-category">
+                            <h4 className="category-title">
+                              {category.category}
+                            </h4>
+                            <div className="skills-grid">
+                              {category.items.map((skill, skillIdx) => (
+                                <span key={skillIdx} className="skill-tag">
+                                  {skill}
+                                </span>
+                              ))}
+                            </div>
                           </div>
-                        </div>
-                      ) : (
-                        <div className="text-output">{entry.output.data}</div>
-                      )}
-                    </div>
-                  )}
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Credentials */}
+                    {section.content.credentials && (
+                      <div className="credentials-list">
+                        {section.content.credentials.map((credential, idx) => (
+                          <div key={idx} className="credential-item">
+                            <div className="credential-header">
+                              <h4 className="credential-title">
+                                {credential.title}
+                              </h4>
+                              <span
+                                className={`credential-status status-${credential.status
+                                  .toLowerCase()
+                                  .replace(' ', '-')}`}
+                              >
+                                {credential.status}
+                              </span>
+                            </div>
+                            <p className="credential-type">{credential.type}</p>
+                            {credential.issuer && (
+                              <p className="credential-issuer">
+                                Issued by: {credential.issuer}
+                              </p>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Stats */}
+                    {section.content.stats && (
+                      <div className="stats-grid">
+                        {section.content.stats.map((stat, idx) => (
+                          <div key={idx} className="stat-card">
+                            <div className="stat-number">{stat.number}</div>
+                            <div className="stat-label">{stat.label}</div>
+                            <div className="stat-description">
+                              {stat.description}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            );
+          })}
+        </div>
 
-            {!isMobile && (
-              <div className="terminal-input-line">
-                <span className="prompt">masum@dev:~$</span>
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={currentCommand}
-                  onChange={(e) => setCurrentCommand(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  className="terminal-input"
-                  placeholder="Type a command..."
-                  disabled={isTyping}
-                  autoComplete="off"
-                  autoCapitalize="off"
-                  autoCorrect="off"
-                  aria-label="Terminal command input"
-                />
-                <span className={`cursor ${showCursor ? 'visible' : ''}`}>
-                  |
-                </span>
-              </div>
-            )}
-
-            <div className="terminal-footer">
-              <div className="footer-commands">
-                <button
-                  className="footer-command help"
-                  onClick={() => handleCommandClick('help')}
-                  aria-label="Show help"
-                >
-                  <span className="command-icon">❓</span>
-                  help
-                </button>
-                <button
-                  className="footer-command clear"
-                  onClick={() => handleCommandClick('clear')}
-                  aria-label="Clear terminal"
-                >
-                  <span className="command-icon">🗑️</span>
-                  clear
-                </button>
-              </div>
-              <div className="footer-info">
-                <span className="footer-text">
-                  {isMobile
-                    ? 'Tap commands to explore'
-                    : 'Press Enter to execute • Click commands to try'}
-                </span>
-              </div>
-            </div>
-          </div>
-        )}
+        <div className="download-section">
+          <a
+            href="/MasumBillah-Resume.pdf"
+            className="btn btn-primary"
+            download
+            aria-label="Download my resume as PDF"
+          >
+            <span className="btn-text">Download Resume</span>
+            <span className="btn-icon" aria-hidden="true">
+              ↓
+            </span>
+          </a>
+        </div>
       </div>
     </div>
   );
