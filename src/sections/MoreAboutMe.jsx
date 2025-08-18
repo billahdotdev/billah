@@ -154,7 +154,6 @@ const MoreAboutMe = () => {
       <div className="container">
         <h2 className="section-title">
           <span className="title-text">More About Me</span>
-          <span className="title-subtitle">Interactive Developer Terminal</span>
         </h2>
       </div>
 
