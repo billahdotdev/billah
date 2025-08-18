@@ -24,7 +24,7 @@ const MoreAboutMe = () => {
       id: 'story',
       title: 'My Story',
       content: {
-        text: "I built 'GARMENTIK' to fly, but needed wings. 'Brandotory' gave me those wings, and now I'm building flight paths for others. My journey in web development started with a simple curiosity about how websites work, and it evolved into a passion for creating digital experiences that make a real impact.",
+        text: 'I used to have a clothing business, which taught me a lot about solving problems. While doing that, I discovered a love for coding. The pandemic gave me the perfect chance to put those two things together.',
         highlights: [
           'Founded GARMENTIK - A fashion-tech startup',
           'Co-founded Brandotory - Digital agency',
