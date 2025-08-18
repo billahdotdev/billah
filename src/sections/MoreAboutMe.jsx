@@ -16,9 +16,9 @@ const MoreAboutMe = () => {
 
   const commands = {
     story:
-      "🚀 I built 'GARMENTIK' to fly, but needed wings. 'Brandotory' gave me those wings, and now I'm building flight paths for others. Every line of code is a step toward making the impossible possible.",
+      'I used to have a clothing business, which taught me a lot about solving problems. While doing that, I discovered a love for coding. The pandemic gave me the perfect chance to put those two things together.',
     journey:
-      "💻 My journey began with curiosity and evolved into passion. From debugging my first 'Hello World' to architecting full-stack applications, I've discovered that the best code tells a story - and I'm here to write the next chapter.",
+      "I discovered the power of creating digital experiences that impact people's lives. Through years of learning, experimenting, and building, I've developed a deep understanding of the web ecosystem.",
     skills: [
       'JavaScript',
       'TypeScript',
@@ -33,20 +33,10 @@ const MoreAboutMe = () => {
       'Figma',
       'Inkscape',
       'Git',
-      'Docker',
-      'AWS',
-      'Firebase',
-      'Next.js',
-      'Vue.js',
-      'Python',
       'More +',
     ],
-    credentials:
-      '🎓 BUET Graduate | IAC Certified Full-Stack Developer | University of Helsinki (Modern Web Development) | ML/AI Certified (National Information Society Agency, South Korea) | Building the future, one commit at a time.',
-    projects:
-      '🛠️ GARMENTIK (E-commerce Platform) | Brandotory (Digital Agency) | Portfolio Websites | Custom Web Applications | Open Source Contributions',
-    contact:
-      "📧 Ready to collaborate? Let's build something amazing together! Email: masum@example.com | LinkedIn: /in/masumbillah",
+    credentials: '',
+    contact: 'Email: billahdotdev@gmail.com | LinkedIn: /in/billahdotdev',
     help: 'Available commands: story, journey, skills, credentials, projects, contact, clear, help',
     clear: 'CLEAR_TERMINAL',
   };
