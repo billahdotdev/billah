@@ -489,29 +489,30 @@
 /* Mobile Responsiveness - Enhanced */
 @media (max-width: 768px) {
   .more-about-section {
-    padding: 4rem 0;
+    padding: 3rem 0;
   }
 
   .section-title {
-    font-size: var(--font-size-3xl);
-    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    margin-bottom: 2.5rem;
+    padding: 0 1rem;
   }
 
   .title-subtitle {
-    font-size: var(--font-size-base);
+    font-size: 1rem;
   }
 
   .terminal-container {
-    margin: 1rem;
+    margin: 1rem 0.5rem;
     border-radius: 8px;
   }
 
   .terminal-header {
-    padding: 10px 15px;
+    padding: 12px 16px;
   }
 
   .terminal-title {
-    font-size: 12px;
+    font-size: 13px;
     position: static;
     transform: none;
   }
@@ -521,39 +522,70 @@
   }
 
   .terminal-body {
-    padding: 15px;
-    min-height: 400px;
-    max-height: 500px;
+    padding: 16px;
+    min-height: 450px;
+    max-height: 70vh;
+    /* Better touch scrolling on mobile */
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
   }
 
   .welcome-text {
     font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .terminal-info {
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+
+  .command-suggestions {
+    margin-bottom: 25px;
+    padding: 12px;
+  }
+
+  .suggestions-title {
+    font-size: 14px;
+    margin-bottom: 12px;
   }
 
   .suggestions-grid {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 8px;
   }
 
   .command-suggestion {
-    padding: 8px 12px;
+    padding: 12px 10px;
     font-size: 13px;
+    /* Better touch targets for mobile */
+    min-height: 44px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+  }
+
+  .command-suggestion:active {
+    transform: scale(0.95);
+    background: rgba(0, 255, 0, 0.15);
   }
 
   .command-line {
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 6px;
+    margin-bottom: 8px;
   }
 
   .timestamp {
     width: 100%;
     margin-left: 0;
-    margin-top: 5px;
+    margin-top: 4px;
+    font-size: 11px;
   }
 
   .command-output {
-    margin-left: 10px;
+    margin-left: 8px;
     padding: 8px;
+    border-radius: 4px;
   }
 
   .skills-grid {
@@ -562,102 +594,146 @@
 
   .skill-tag {
     font-size: 11px;
-    padding: 3px 6px;
+    padding: 4px 8px;
+    /* Better touch targets */
+    min-height: 28px;
+    display: flex;
+    align-items: center;
   }
 
   .terminal-footer {
+    margin-top: 20px;
+    padding-top: 16px;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .footer-commands {
+    gap: 12px;
+  }
+
+  .footer-command {
+    padding: 10px 16px;
+    /* Better touch targets */
+    min-height: 40px;
+    font-size: 13px;
+  }
+
+  .footer-command:active {
+    transform: scale(0.95);
   }
 
   .footer-info {
     width: 100%;
     text-align: center;
+    font-size: 12px;
   }
 }
 
 @media (max-width: 480px) {
   .more-about-section {
-    padding: 3rem 0;
+    padding: 2rem 0;
   }
 
   .section-title {
-    font-size: var(--font-size-2xl);
+    font-size: 2rem;
     margin-bottom: 2rem;
   }
 
   .title-subtitle {
-    font-size: var(--font-size-sm);
+    font-size: 0.9rem;
   }
 
   .terminal-container {
-    margin: 0.5rem;
+    margin: 0.5rem 0.25rem;
   }
 
   .terminal-body {
     padding: 12px;
-    min-height: 350px;
+    min-height: 400px;
+    max-height: 65vh;
+  }
+
+  .welcome-text {
+    font-size: 15px;
+  }
+
+  .terminal-info {
+    font-size: 12px;
   }
 
   .suggestions-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 8px;
+    gap: 6px;
   }
 
   .command-suggestion {
-    padding: 6px 10px;
+    padding: 10px 8px;
     font-size: 12px;
+    min-height: 40px;
   }
 
-  .terminal-input-line {
-    flex-wrap: wrap;
-    gap: 5px;
+  .command-name {
+    font-size: 11px;
   }
 
-  .terminal-input {
-    width: 100%;
-    margin-top: 5px;
+  .skill-tag {
+    font-size: 10px;
+    padding: 3px 6px;
+    min-height: 24px;
+  }
+
+  .footer-command {
+    padding: 8px 12px;
+    font-size: 12px;
+    min-height: 36px;
   }
 }
 
-/* Custom scrollbar for terminal */
-.terminal-body::-webkit-scrollbar {
-  width: 8px;
+/* Enhanced accessibility and touch interactions */
+@media (hover: none) and (pointer: coarse) {
+  /* Touch device specific styles */
+  .command-suggestion:hover {
+    transform: none;
+  }
+
+  .command-suggestion:active {
+    transform: scale(0.95);
+    background: rgba(0, 255, 0, 0.15);
+  }
+
+  .footer-command:hover {
+    transform: none;
+  }
+
+  .footer-command:active {
+    transform: scale(0.95);
+  }
+
+  .skill-tag:hover {
+    transform: none;
+  }
 }
 
-.terminal-body::-webkit-scrollbar-track {
-  background: #1a1a1a;
-  border-radius: 4px;
-}
-
-.terminal-body::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #00ff00, #00cc00);
-  border-radius: 4px;
-}
-
-.terminal-body::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #00cc00, #009900);
-}
-
-/* Focus styles for accessibility */
-.terminal-input:focus,
-.command-suggestion:focus,
-.footer-command:focus,
-.control-dot:focus {
+/* Improved focus styles for better accessibility */
+.command-suggestion:focus-visible,
+.footer-command:focus-visible,
+.control-dot:focus-visible {
   outline: 2px solid #00ff00;
   outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(0, 255, 0, 0.2);
 }
 
-/* Enhanced animations */
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
+/* Better scrollbar for mobile */
+@media (max-width: 768px) {
+  .terminal-body::-webkit-scrollbar {
+    width: 4px;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .terminal-body::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 0, 0.6);
+    border-radius: 2px;
   }
 }
 

@@ -10,6 +10,7 @@ const MoreAboutMe = () => {
   const [showCursor, setShowCursor] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
   const terminalRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -60,21 +61,19 @@ const MoreAboutMe = () => {
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
+      setIsTouchDevice(
+        'ontouchstart' in window || navigator.maxTouchPoints > 0
+      );
     };
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, []);
-
   const typeText = (text, callback) => {
     setIsTyping(true);
     let index = 0;
+    const speed = isMobile ? 20 : 30; // Faster on mobile for better UX
     const interval = setInterval(() => {
       if (index < text.length) {
         callback(text.slice(0, index + 1));
@@ -83,7 +82,7 @@ const MoreAboutMe = () => {
         clearInterval(interval);
         setIsTyping(false);
       }
-    }, 30);
+    }, speed);
   };
 
   const executeCommand = (cmd) => {
@@ -126,6 +125,11 @@ const MoreAboutMe = () => {
   };
 
   const handleCommandClick = (cmd) => {
+    // Add haptic feedback on touch devices
+    if (isTouchDevice && navigator.vibrate) {
+      navigator.vibrate(50);
+    }
+
     setCurrentCommand(cmd);
     executeCommand(cmd);
     setCurrentCommand('');
@@ -140,9 +144,17 @@ const MoreAboutMe = () => {
     }
   };
 
-  const handleTerminalClick = () => {
-    if (inputRef.current) {
-      inputRef.current.focus();
+  const handleTerminalClick = (e) => {
+    // Prevent focus on mobile when clicking command buttons
+    if (
+      e.target.closest('.command-suggestion') ||
+      e.target.closest('.footer-command')
+    ) {
+      return;
+    }
+
+    if (inputRef.current && !isMobile) {
+      inputRef.current.focus({ preventScroll: true });
     }
   };
 
@@ -161,7 +173,8 @@ const MoreAboutMe = () => {
             <button
               className="control-dot red"
               onClick={() => setIsMinimized(!isMinimized)}
-              title="Minimize"
+              title={isMinimized ? 'Expand' : 'Minimize'}
+              aria-label={isMinimized ? 'Expand terminal' : 'Minimize terminal'}
             ></button>
             <span className="control-dot yellow"></span>
             <span className="control-dot green"></span>
@@ -182,14 +195,9 @@ const MoreAboutMe = () => {
             onClick={handleTerminalClick}
           >
             <div className="terminal-welcome">
-              <div className="welcome-text">
-                {isMobile
-                  ? '👋 Welcome!'
-                  : "🚀 Welcome to Masum Billah's Dev Terminal"}
-              </div>
               <div className="terminal-info">
                 {isMobile
-                  ? 'Tap commands below:'
+                  ? 'Tap commands below to explore:'
                   : 'Type a command or click on the suggestions below:'}
               </div>
             </div>
@@ -205,6 +213,7 @@ const MoreAboutMe = () => {
                       className="command-suggestion"
                       onClick={() => handleCommandClick(cmd)}
                       title={`Execute ${cmd} command`}
+                      aria-label={`Execute ${cmd} command`}
                     >
                       <span className="command-prompt">&gt;</span>
                       <span className="command-name">{cmd}</span>
@@ -245,29 +254,35 @@ const MoreAboutMe = () => {
               ))}
             </div>
 
-            <div className="terminal-input-line">
-              <span className="prompt">masum@dev:~$</span>
-              <input
-                ref={inputRef}
-                type="text"
-                value={currentCommand}
-                onChange={(e) => setCurrentCommand(e.target.value)}
-                onKeyPress={handleKeyPress}
-                className="terminal-input"
-                placeholder={isMobile ? 'Type here...' : 'Type a command...'}
-                disabled={isTyping}
-                autoComplete="off"
-                autoCapitalize="off"
-                autoCorrect="off"
-              />
-              <span className={`cursor ${showCursor ? 'visible' : ''}`}>|</span>
-            </div>
+            {!isMobile && (
+              <div className="terminal-input-line">
+                <span className="prompt">masum@dev:~$</span>
+                <input
+                  ref={inputRef}
+                  type="text"
+                  value={currentCommand}
+                  onChange={(e) => setCurrentCommand(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  className="terminal-input"
+                  placeholder="Type a command..."
+                  disabled={isTyping}
+                  autoComplete="off"
+                  autoCapitalize="off"
+                  autoCorrect="off"
+                  aria-label="Terminal command input"
+                />
+                <span className={`cursor ${showCursor ? 'visible' : ''}`}>
+                  |
+                </span>
+              </div>
+            )}
 
             <div className="terminal-footer">
               <div className="footer-commands">
                 <button
                   className="footer-command help"
                   onClick={() => handleCommandClick('help')}
+                  aria-label="Show help"
                 >
                   <span className="command-icon">❓</span>
                   help
@@ -275,6 +290,7 @@ const MoreAboutMe = () => {
                 <button
                   className="footer-command clear"
                   onClick={() => handleCommandClick('clear')}
+                  aria-label="Clear terminal"
                 >
                   <span className="command-icon">🗑️</span>
                   clear
@@ -282,7 +298,9 @@ const MoreAboutMe = () => {
               </div>
               <div className="footer-info">
                 <span className="footer-text">
-                  Press Enter to execute • Click commands to try
+                  {isMobile
+                    ? 'Tap commands to explore'
+                    : 'Press Enter to execute • Click commands to try'}
                 </span>
               </div>
             </div>
