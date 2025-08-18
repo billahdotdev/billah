@@ -35,7 +35,8 @@ const MoreAboutMe = () => {
       'Git',
       'More +',
     ],
-    credentials: '',
+    credentials:
+      "I am a Bangladesh University of Engineering and Technology (BUET), and IAC Certified full-stack web developer on a journey of modern web mastery at the University of Helsinki. I'm also certified in Machine Learning AI from the National Information Society Agency, South Korea.",
     contact: 'Email: billahdotdev@gmail.com | LinkedIn: /in/billahdotdev',
     help: 'Available commands: story, journey, skills, credentials, projects, contact, clear, help',
     clear: 'CLEAR_TERMINAL',
