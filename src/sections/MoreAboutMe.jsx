@@ -27,7 +27,7 @@ const MoreAboutMe = () => {
         text: 'I used to have a clothing business, which taught me a lot about solving problems. While doing that, I discovered a love for coding. The pandemic gave me the perfect chance to put those two things together.',
         highlights: [
           'Founded GARMENTIK - A fashion-tech startup',
-          'Co-founded Brandotory - Digital agency',
+          'Founded Brandotory - Digital agency',
           'Mentoring aspiring developers',
           'Building innovative web solutions',
         ],
