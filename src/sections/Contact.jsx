@@ -1,9 +1,19 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useState } from 'react';
+// import emailjs from '@emailjs/browser';
 import './Contact.css';
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showThankYou, setShowThankYou] = useState(false);
+
   const fadeInUp = {
     hidden: { opacity: 0, y: 60 },
     visible: {
@@ -14,6 +24,72 @@ const Contact = () => {
         ease: [0.22, 1, 0.36, 1],
       },
     },
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      // Option 1: EmailJS Integration (uncomment and configure)
+      /*
+      await emailjs.send(
+        'YOUR_SERVICE_ID',
+        'YOUR_TEMPLATE_ID',
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+        },
+        'YOUR_PUBLIC_KEY'
+      );
+      */
+
+      // Option 2: Custom API endpoint (replace with your own)
+      /*
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+      */
+
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      setShowThankYou(true);
+
+      setFormData({
+        name: '',
+        email: '',
+        message: '',
+      });
+
+      setTimeout(() => {
+        setShowThankYou(false);
+      }, 5000);
+    } catch (error) {
+      console.error('Error sending message:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const resetThankYou = () => {
+    setShowThankYou(false);
   };
 
   return (
@@ -247,7 +323,64 @@ const Contact = () => {
             variants={fadeInUp}
           >
             <h3>Send Me a Message</h3>
-            <form>
+
+            {showThankYou && (
+              <motion.div
+                className="thank-you-message"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+              >
+                <div className="thank-you-content">
+                  <div className="thank-you-icon">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <div className="thank-you-text">
+                    <h4>Thank you for your message!</h4>
+                    <p>I'll get back to you as soon as possible.</p>
+                  </div>
+                  <button
+                    type="button"
+                    className="thank-you-close"
+                    onClick={resetThankYou}
+                    aria-label="Close thank you message"
+                  >
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M18 6L6 18M6 6l12 12"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </motion.div>
+            )}
+
+            <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="name">Name</label>
                 <input
@@ -255,6 +388,8 @@ const Contact = () => {
                   id="name"
                   name="name"
                   placeholder="Your Name"
+                  value={formData.name}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
@@ -266,6 +401,8 @@ const Contact = () => {
                   id="email"
                   name="email"
                   placeholder="Your Email"
+                  value={formData.email}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
@@ -277,6 +414,8 @@ const Contact = () => {
                   name="message"
                   rows="5"
                   placeholder="Your Message"
+                  value={formData.message}
+                  onChange={handleInputChange}
                   required
                 ></textarea>
               </div>
@@ -284,10 +423,11 @@ const Contact = () => {
               <motion.button
                 type="submit"
                 className="btn hover-target"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: isSubmitting ? 1 : 1.05 }}
+                whileTap={{ scale: isSubmitting ? 1 : 0.95 }}
+                disabled={isSubmitting}
               >
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </motion.button>
             </form>
           </motion.div>
