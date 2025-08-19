@@ -107,6 +107,11 @@
   align-items: center;
   transition: var(--transition);
   position: relative;
+  min-height: 60px;
+}
+
+.accordion-header:hover {
+  background: rgba(255, 0, 128, 0.05);
 }
 
 .accordion-header:focus-visible {
@@ -143,33 +148,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--accent-primary);
 }
 
-.toggle-line {
-  position: absolute;
-  width: 1.5rem;
-  height: 2px;
-  background: var(--accent-primary);
-  border-radius: var(--border-radius-full);
+.accordion-toggle::before {
+  content: '+';
   transition: var(--transition);
-  box-shadow: 0 0 10px rgba(255, 0, 128, 0.3);
 }
 
-.toggle-line-1 {
-  transform: rotate(0deg);
-}
-
-.toggle-line-2 {
-  transform: rotate(90deg);
-  opacity: 1;
-}
-
-.accordion-item.active .toggle-line-1 {
-  transform: rotate(45deg);
-}
-
-.accordion-item.active .toggle-line-2 {
-  transform: rotate(-45deg);
+.accordion-item.active .accordion-toggle::before {
+  content: '−';
+  transform: scale(1.1);
 }
 
 .accordion-content {
@@ -207,6 +198,8 @@
   font-weight: 600;
   color: var(--text-primary);
   margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
 }
 
 .highlights-list {
@@ -277,7 +270,6 @@
   border-radius: var(--border-radius);
   transition: var(--transition);
   text-align: center;
-  cursor: pointer;
   position: relative;
   overflow: hidden;
 }
@@ -357,7 +349,7 @@
 
 .status-certified {
   background: var(--accent-tertiary-soft);
-  color: var(--accent-tertiary);
+  color: #0d8043;
   border: 1px solid var(--accent-tertiary-medium);
 }
 
@@ -550,7 +542,8 @@
   }
 
   .accordion-header {
-    padding: 1rem;
+    padding: 1.5rem 1rem;
+    min-height: 70px;
   }
 
   .accordion-content-inner {
@@ -558,13 +551,17 @@
   }
 
   .skills-grid {
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-    gap: 0.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 0.75rem;
   }
 
   .skill-tag {
-    padding: 0.5rem 0.5rem;
-    font-size: 0.75rem;
+    padding: 0.75rem 0.5rem;
+    font-size: 0.8rem;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .stats-grid {
@@ -579,12 +576,6 @@
   .stat-number {
     font-size: 2rem;
   }
-
-  .credential-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
 }
 
 @media (max-width: 767px) {
@@ -598,6 +589,7 @@
 
   .accordion-header {
     padding: 1.5rem;
+    min-height: 65px;
   }
 
   .accordion-content-inner {
