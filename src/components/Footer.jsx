@@ -121,8 +121,8 @@ const Footer = ({ scrollToSection }) => {
           viewport={{ once: true }}
         >
           <p>
-            //Deeply indebted to the individuals who I learned from. No right
-            reserved!
+            //Deeply indebted to the individuals who I learned from. NO RIGHT
+            RESERVED.GIT ADD .
           </p>
         </motion.div>
       </div>
