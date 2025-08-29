@@ -120,7 +120,10 @@ const Footer = ({ scrollToSection }) => {
           transition={{ duration: 0.5, delay: 0.5 }}
           viewport={{ once: true }}
         >
-          <p>//Deeply indebted to the individuals who I learned from.</p>
+          <p>
+            //Deeply indebted to the individuals who I learned from. No right
+            reserved!
+          </p>
         </motion.div>
       </div>
     </footer>
