@@ -25,12 +25,6 @@ const MoreAboutMe = () => {
       title: 'My Story',
       content: {
         text: 'I used to have a clothing business, which taught me a lot about solving problems. While doing that, I discovered a love for coding. The pandemic gave me the perfect chance to put those two things together.',
-        highlights: [
-          'Founded GARMENTIK - A fashion startup',
-          'Founded Brandotory - Digital agency',
-          'Mentoring aspiring developers',
-          'Building innovative web solutions',
-        ],
       },
     },
     {
@@ -38,12 +32,6 @@ const MoreAboutMe = () => {
       title: 'My Learning Odyssey',
       content: {
         text: "I discovered the power of creating digital experiences that impact people's lives. Through years of learning, experimenting, and building, I've developed a deep understanding of the web ecosystem. Every project teaches me something new, and I believe in continuous learning and adaptation.",
-        highlights: [
-          'Self-taught web development fundamentals',
-          'Mastered modern JavaScript frameworks',
-          'Specialized in full-stack development',
-          'Contributed to open-source projects',
-        ],
       },
     },
     {
@@ -81,25 +69,22 @@ const MoreAboutMe = () => {
         text: "I'm a IAC and Bangladesh University of Engineering and Technology (BUET) Certified full-stack web developer on a journey of modern web mastery at the University of Helsinki. I'm also certified in Machine Learning AI from the National Information Society Agency, South Korea.",
         credentials: [
           {
-            title: 'Bangladesh University of Engineering and Technology (BUET)',
+            title:
+              'IAC, and Bangladesh University of Engineering and Technology (BUET)',
             type: 'Professional Certification',
             status: 'Certified',
           },
-          {
-            title: 'IAC Certified Full-Stack Web Developer',
-            type: 'Professional Certification',
-            status: 'Certified',
-          },
-          {
-            title: 'University of Helsinki - Modern Web Development',
-            type: 'Specialized Course',
-            status: 'In Progress',
-          },
+
           {
             title: 'Machine Learning AI Certification',
             type: 'International Certification',
             status: 'Certified',
             issuer: 'National Information Society Agency, South Korea',
+          },
+          {
+            title: 'University of Helsinki - Modern Web Development',
+            type: 'Specialized Course',
+            status: 'In Progress',
           },
         ],
       },
@@ -191,21 +176,6 @@ const MoreAboutMe = () => {
                 >
                   <div className="accordion-content-inner">
                     <p className="content-text">{section.content.text}</p>
-
-                    {/* Story highlights */}
-                    {section.content.highlights && (
-                      <div className="content-highlights">
-                        <h4>Key Highlights:</h4>
-                        <ul className="highlights-list">
-                          {section.content.highlights.map((highlight, idx) => (
-                            <li key={idx} className="highlight-item">
-                              <span className="highlight-bullet">→</span>
-                              {highlight}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
 
                     {/* Skills grid */}
                     {section.content.skills && (
