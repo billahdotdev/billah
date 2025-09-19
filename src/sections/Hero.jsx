@@ -41,7 +41,7 @@ const Hero = ({ scrollToSection }) => {
   };
 
   const headingText = 'MASUM BILLAH';
-  const subheadingText = 'WEB DEVELOPER AND BRAND STRATEGIST';
+  const subheadingText = 'WEB DEVELOPER AND DIGITAL PRODUCTS CREATOR';
 
   return (
     <section id="hero" className="hero">
