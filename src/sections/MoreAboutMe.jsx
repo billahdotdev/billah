@@ -57,7 +57,7 @@ const MoreAboutMe = () => {
           },
           {
             category: 'Tools & Design',
-            items: ['Figma', 'Inkscape', 'Git', 'Material UI'],
+            items: ['Git', 'Inkscape', 'Figma', 'and More +'],
           },
         ],
       },
@@ -69,10 +69,11 @@ const MoreAboutMe = () => {
         text: "I'm a IAC and Bangladesh University of Engineering and Technology (BUET) Certified full-stack web developer on a journey of modern web mastery at the University of Helsinki. I'm also certified in Machine Learning AI from the National Information Society Agency, South Korea.",
         credentials: [
           {
-            title:
-              'IAC, and Bangladesh University of Engineering and Technology (BUET)',
+            title: 'Full Stack Web Development With React and Node JS',
             type: 'Professional Certification',
             status: 'Certified',
+            issuer:
+              'IAC, and Bangladesh University of Engineering and Technology (BUET), Bangladesh',
           },
 
           {
@@ -82,9 +83,10 @@ const MoreAboutMe = () => {
             issuer: 'National Information Society Agency, South Korea',
           },
           {
-            title: 'University of Helsinki - Modern Web Development',
+            title: 'Full Stack open',
             type: 'Specialized Course',
             status: 'In Progress',
+            issuer: 'University of Helsinki, Finland',
           },
         ],
       },
