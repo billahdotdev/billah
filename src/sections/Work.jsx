@@ -53,8 +53,7 @@ const Work = () => {
       category: 'web',
       price: '$10',
       gumroadUrl: 'https://gumroad.com/l/portfolio-website',
-      image:
-        'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1455&q=80',
+      image: 'https://public-files.gumroad.com/hzry94h9yp2zxas6vo8qba525mg5',
       description:
         'Professional portfolio website to showcase your work with elegant design and smooth animations.',
       technologies: [
@@ -79,7 +78,7 @@ const Work = () => {
       details:
         'A stunning portfolio website designed to showcase your work professionally. Features smooth animations, responsive design, and optimized performance. Perfect for freelancers, agencies, and creative professionals looking to make a strong online presence.',
       githubUrl: 'https://github.com/yourusername/portfolio-template',
-      livePreviewUrl: 'https://portfolio-template.vercel.app',
+      livePreviewUrl: 'https://billahdotdev.github.io/Actions/',
     },
     {
       id: 3,
