@@ -26,7 +26,13 @@ const Work = () => {
       image: 'https://public-files.gumroad.com/pi0lb4ic5ayrnkrampmuepl5c2il',
       description:
         'An effective solution to showcase your brand while your main website is under development.',
-      technologies: ['Vite', 'React', 'Pure CSS'],
+      technologies: [
+        'Vite',
+        'React',
+        'Pure CSS',
+        'JavaScript',
+        'Framer Motion',
+      ],
       features: [
         'Responsive design for all devices',
         'Brand-first focused design',
@@ -37,7 +43,7 @@ const Work = () => {
       ],
       deliveryTime: 'Instant Download',
       details:
-        'This comprehensive e-commerce package includes everything you need to start selling online. Built with modern technologies and best practices, featuring a clean, professional design that converts visitors into customers. Includes full source code, documentation, and deployment assistance.',
+        'This coming soon landing page built with modern technologies and best practices, featuring a clean, professional design that converts visitors into customers. Includes full source code, documentation, and deployment assistance.',
       githubUrl: 'https://github.com/yourusername/ecommerce-demo',
       livePreviewUrl: 'https://billahdotdev.github.io/dhakateez',
     },
@@ -45,7 +51,7 @@ const Work = () => {
       id: 2,
       title: 'Portfolio Website',
       category: 'web',
-      price: '$800',
+      price: '$10',
       gumroadUrl: 'https://gumroad.com/l/portfolio-website',
       image:
         'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1455&q=80',
@@ -56,14 +62,14 @@ const Work = () => {
         'Custom responsive design',
         'Project showcase gallery',
         'About & services sections',
-        'Contact form integration',
+        'Contact details',
         'Smooth animations',
         'SEO optimized',
         'Fast loading speed',
         'Mobile-first approach',
-        '1 month free support',
+        '3 month free support',
       ],
-      deliveryTime: '2-3 weeks',
+      deliveryTime: 'Instant Download',
       details:
         'A stunning portfolio website designed to showcase your work professionally. Features smooth animations, responsive design, and optimized performance. Perfect for freelancers, agencies, and creative professionals looking to make a strong online presence.',
       githubUrl: 'https://github.com/yourusername/portfolio-template',
