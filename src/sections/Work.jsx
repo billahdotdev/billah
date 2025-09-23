@@ -35,7 +35,7 @@ const Work = () => {
         'SEO optimization for better search visibility',
         '3 months of free support',
       ],
-      deliveryTime: 'Instant download',
+      deliveryTime: 'Instant Download',
       details:
         'This comprehensive e-commerce package includes everything you need to start selling online. Built with modern technologies and best practices, featuring a clean, professional design that converts visitors into customers. Includes full source code, documentation, and deployment assistance.',
       githubUrl: 'https://github.com/yourusername/ecommerce-demo',
