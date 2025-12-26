@@ -41,7 +41,7 @@ const Hero = ({ scrollToSection }) => {
   };
 
   const headingText = 'MASUM BILLAH';
-  const subheadingText = 'WEB DEVELOPER';
+  const subheadingText = 'WEB DEVELOPER & SMART MARKETER';
 
   return (
     <section id="hero" className="hero">
@@ -104,9 +104,9 @@ const Hero = ({ scrollToSection }) => {
               animate={{ opacity: 1 }}
               transition={{ delay: 1.2, duration: 0.5 }}
             >
-              I build clean, responsive, functional websites that help
-              businesses grow.
-            </motion.p>
+           I build clean, responsive, functional websites and 
+           marketing campaigns that help businesses grow.            
+           </motion.p>
 
             <motion.div
               className="hero-buttons"
